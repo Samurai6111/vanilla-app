@@ -1,0 +1,250 @@
+@charset "UTF-8";
+
+
+/* Vertical rhythm */
+/* ============================================ */
+
+p,
+table,
+blockquote,
+address,
+pre,
+iframe,
+form,
+figure,
+dl {
+  margin: 0;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+/* Headings */
+/* ============================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  margin: 0;
+}
+
+/* 全共通 */
+* {
+  font-size: 62.5%;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+/* テキスト全般 */
+a, p, li, dd, td, pre, strong, em {
+  font-size: 1.6rem;
+}
+
+span {
+	font-size:100%;
+}
+@media only screen and (max-width:480px) {
+  a {
+    font-size: 1.2rem;
+  }
+}
+
+/* 見出し */
+h1 {
+  margin-bottom: .5em;
+  font-size: 3.2rem;
+  font-weight: bold;
+}
+
+@media only screen and (max-width:480px) {
+  h1 {
+    font-size: 2.4rem;
+  }
+}
+
+h2 {
+  position: relative;
+  width: 100%;
+  padding-bottom: .8rem;
+  margin-bottom: .5em;
+  font-size: 3.2rem;
+  font-weight: bold;
+}
+
+@media only screen and (max-width:480px) {
+  h2 {
+    font-size: 2.4rem;
+  }
+}
+
+h2:after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  content: "";
+  background-color: #fc4a1a;
+}
+
+h3 {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: .5em;
+  font-size: 2.8rem;
+  font-weight: bold;
+  line-height: 2;
+}
+
+@media only screen and (max-width:480px) {
+  h3 {
+    font-size: 2rem;
+  }
+}
+
+h3:before {
+  position: absolute;
+  top: calc(50% - 12px);
+  left: 0;
+  width: 8px;
+  height: 24px;
+  content: "";
+  background-color: #fc4a1a;
+}
+
+h4 {
+  position: relative;
+  width: 100%;
+  padding-bottom: .8rem;
+  margin-bottom: .5em;
+  font-size: 2.8rem;
+  font-weight: bold;
+}
+
+@media only screen and (max-width:480px) {
+  h4 {
+    font-size: 2rem;
+  }
+}
+
+h4:after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  content: "";
+  background-color: #fc4a1a;
+}
+
+h5 {
+  margin-bottom: .5em;
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+@media only screen and (max-width:480px) {
+  h5 {
+    font-size: 1.6rem;
+  }
+}
+
+h6 {
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: .5em;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+h6:before {
+  position: absolute;
+  font-size: 1em;
+  top: 0;
+  left: 0;
+  color: #fc4a1a;
+  content: "●";
+}
+@media only screen and (max-width:480px) {
+  h6 {
+    font-size: 1.4rem;
+  }
+}
+
+/* 画像 */
+img {
+  margin: 2.4rem 0;
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: middle;
+  height: auto;
+}
+
+/* 注釈 */
+blockquote {
+  position: relative;
+  padding: 1.3rem 1.5rem 1.3rem 5rem;
+  background-color: #dbdbdb;
+    border-left: 3px solid #fc4a1a;
+    font-style: italic;
+}
+
+blockquote p {
+  padding: 0;
+  margin-top: 10px ;
+  line-height: 1.7;
+}
+
+/* リスト */
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
+ol {
+  margin-bottom: 1em;
+}
+
+ol li , ul li {
+  margin-left: 1.6em;
+  font-size: 1.6rem;
+  list-style-position: outside;
+
+}
+@media only screen and (max-width:480px) {
+  ol li , ul li {
+    font-size: 1.2rem;
+  }
+}
+ol li::marker {
+  color: #fc4a1a;
+}
+ul li::marker {
+  color: #fc4a1a;
+}
+
+/* リンク */
+a {
+  color: #fc4a1a;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* テーブル */
+table * {
+  border-color: #fc4a1a;
+}
+table tr td {
+  padding: .8rem;
+}

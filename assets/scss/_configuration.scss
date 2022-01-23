@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+//____________________________
+// 変数系, mixin, メディはクエリの格納ファイル
+// mixinは無許可に追加厳禁 *必要な場合はディレクターに相談
+//____________________________
+
+// ---------- プライマリーカラー ----------
+$primary:#fc4a1a;
+
+// ---------- 白、黒、グレー系 ----------
+$black_333:#333;
+
+$white＿fcf:#fcfcfc;
+
+$gray_dbd:#dbdbdb;
+
+// ---------- その他 ----------
+$green_4ab:#4abdac;
+
+// ---------- メディアクエリ ----------
+$msp: "only screen and (max-width:374px)";
+$sp: "only screen and (max-width:480px)";
+$tab: "only screen and (max-width:768px)";
+$pc: "only screen and (min-width:769px)";
+
+// ---------- フレックス ----------
+@mixin flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+// ---------- 背景画像 ----------
+@mixin bgi {
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+
+// ---------- フォント（追記変更可能） ----------
+@mixin noto__sans {
+  font-family: "Noto Sans JP", sans-serif;
+}
