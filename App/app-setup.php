@@ -1,14 +1,13 @@
 <?php
-$dir = get_theme_file_path() . '/App/Develop/Setups/';
+$dir = get_theme_file_path() . '/App/Setups/';
 $filelist = glob($dir . '*.php');
 foreach ($filelist as $filepath) {
   $pieces = explode('/', $filepath);
   $count = count($pieces) - 1;
   if (
-    strpos($filepath, '-copy') !== false ||
-    $pieces[$count] == 'Dashboard.php'
+    strpos($filepath, '-copy') !== false
   ) {
     continue;
   }
-  include_once $filepath;
+  include $filepath;
 }

@@ -3,4 +3,4 @@
 //*--------------------------------------------------
 /* ファイルインクルード
 /*------------------------------------------------*/
-include(get_theme_file_path() . "/App/Develop/Develop.php");
+include(get_theme_file_path() . "/App/App.php");
