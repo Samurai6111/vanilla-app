@@ -1,6 +1,6 @@
 <?php
 $slug = 'top';
-if (!the_slug_exists('top')) {
+if (!vanilla_the_slug_exists('top')) {
 
   // ---------- 投稿・固定ページ作成 ----------
   $post_array = array(
@@ -15,7 +15,7 @@ if (!the_slug_exists('top')) {
   );
   $inserted_page_id = wp_insert_post($post_array);
   // ---------- メタ情報追加 ----------
-  $inserted_page_templateFile_path = "templates/front-page.php";
+  $inserted_page_templateFile_path = "templates/page--front.php";
   update_post_meta($inserted_page_id, "_wp_page_template", $inserted_page_templateFile_path);
 
   // ---------- トップページ扱いにする ----------

@@ -1,59 +1,48 @@
-@charset "UTF-8";
+@charset 'UTF-8';
 
-@import "configuration";
+@import 'configuration';
 
+@import 'base';
+
+@import 'modifier';
 
 //____________________________
 // 全ページ共通のスタイル
 // このページには全ページ共通のスタイルを記述して下さい。 コンポーネントなどサイトを通じて2回以上登場するスタイルがあればそちらもこのファイルに記述して下さい。
 //____________________________
-
 // ---------- hhtml ----------
 html {
-  overflow: scroll;
-  color: $black_333;
-  font-size: 62.5%;
-  background-color: $white＿fcf;
+	overflow: scroll;
+	color: $black_333;
+	font-size: 62.5%;
+	background-color: $white_fcf;
 }
 
 body {
-  color: $black_333;
-  font-family: "Noto Sans JP", sans-serif;
-  line-height: 1.5;
-  letter-spacing: .04em;
-  background-color: $white＿fcf;
+	color: $black_333;
+	font-family: 'Noto Sans JP', sans-serif;
+	line-height: 1.5;
+	letter-spacing: 0.04em;
+	background-color: $white_fcf;
 }
 
 #top {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 // ---------- インナー ----------
 .inner {
-  width: 100%;
-  max-width: calc(1024px + 3.2rem);
-  padding-right: 1.6rem;
-  padding-left: 1.6rem;
-  margin: 0 auto;
-}
+	width: 100%;
+	max-width: calc(1024px + 3.2rem);
+	padding-right: 1.6rem;
+	padding-left: 1.6rem;
+	margin: 0 auto;
 
-.inner.-wide {
-  max-width: calc(1200px + 3.2rem);
-}
+	&.-wide {
+		max-width: calc(1200px + 3.2rem);
+	}
 
-.inner.-tight {
-  max-width: calc(960px + 3.2rem);
-}
-
-// ---------- PC SP 表示非表示切り替え ----------
-.-pc-only {
-  @media #{$tab} {
-    display: none;
-  }
-}
-.-sp-only {
-  display: none;
-  @media #{$tab} {
-    display: inline-block;
-  }
+	&.-tight {
+		max-width: calc(960px + 3.2rem);
+	}
 }

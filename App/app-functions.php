@@ -29,7 +29,7 @@ global $wpdb;
  *
  * @param $post_name 投稿スラッグ
  */
-function slug_to_post_id($post_name)
+function vanilla_slug_to_post_id($post_name)
 {
   return get_page_by_path($post_name, "OBJECT", "email")->ID;
 }
@@ -39,16 +39,15 @@ function slug_to_post_id($post_name)
  *
  * @param $length 桁数
  */
-function random($length = 16)
+function vanilla_random($length = 16)
 {
   return substr(str_shuffle('1234567890abcdefghijklmnopqrstuvwxyz'), 0, $length);
 }
-$user_random_pass = random();
 
 /**
  * 現在のURLをパラメータ付きで取得する
  */
-function get_current_link()
+function vanilla_get_current_link()
 {
   return (is_ssl() ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 }
@@ -58,7 +57,7 @@ function get_current_link()
  *
  * @param $post_name 投稿スラッグ
  */
-function the_slug_exists($post_name)
+function vanilla_the_slug_exists($post_name)
 {
   global $wpdb;
   if ($wpdb->get_row(
@@ -79,7 +78,7 @@ function the_slug_exists($post_name)
  * @param $filed ユーザーの情報を参照するフィールド(id, email, user_login, slug)
  * @param $user ユーザーの情報
  */
-function user_exists($field, $user)
+function vanilla_user_exists($field, $user)
 {
   // $field = wp_usersのcolumn名 e.g. user_login, ID, user_emailなど
   // $user = 値
@@ -95,8 +94,8 @@ function user_exists($field, $user)
 /**
  * リダイレクト関数がheaderの下でも動くように
  */
-add_action('init', 'do_output_buffer');
-function do_output_buffer()
+add_action('init', 'vanilla_do_output_buffer');
+function vanilla_do_output_buffer()
 {
   ob_start();
 }
@@ -106,7 +105,7 @@ function do_output_buffer()
  *
  * @param $post_id 投稿id
  */
-function delete_post_link($post_id)
+function vanilla_delete_post_link($post_id)
 {
   $post = get_post($post_id);
   $post_type = get_post_type($post_id);
@@ -130,6 +129,15 @@ function is_developer($login_email = 'kawakatsu6111.work@gmail.com')
   } else {
     return false;
   }
+}
+
+
+/**
+ * ローカル環境のみ
+ */
+function is_local($whitelist = ['127.0.0.1', '::1'])
+{
+  return in_array($_SERVER['REMOTE_ADDR'], $whitelist);
 }
 
 /**
@@ -200,4 +208,38 @@ class co_post
 function num($number)
 {
   return number_format($number);
+}
+
+/**
+ * ページ送りの$pagedを出力する関数
+ *
+ * @param $
+ */
+function vanilla_paged()
+{
+  // ---------- ページネーション ----------
+  if (get_query_var('paged')) {
+    $paged = get_query_var('paged');
+  } elseif (get_query_var('page')) {
+    $paged = get_query_var('page');
+  } else {
+    $paged = 1;
+  }
+
+  return $paged;
+}
+
+/**
+ * サニタイズ
+ *
+ * @param $request $_POSTや＄_GET
+ */
+function vanilla_sanitaize($request)
+{
+  $sanitized = [];
+  foreach ($request as $key => $value) {
+    $sanitized[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+  }
+
+  return $sanitized;
 }

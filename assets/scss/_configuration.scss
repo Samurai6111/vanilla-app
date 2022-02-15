@@ -1,44 +1,49 @@
-@charset "UTF-8";
-
+@charset 'UTF-8';
 //____________________________
 // 変数系, mixin, メディはクエリの格納ファイル
 // mixinは無許可に追加厳禁 *必要な場合はディレクターに相談
 //____________________________
-
 // ---------- プライマリーカラー ----------
-$primary:#fc4a1a;
-
+$primary: #ff0000;
 // ---------- 白、黒、グレー系 ----------
-$black_333:#333;
-
-$white＿fcf:#fcfcfc;
-
-$gray_dbd:#dbdbdb;
-
+$black_333: #333333;
+$white_fcf: #fcfcfc;
+$gray_dbd: #dbdbdb;
 // ---------- その他 ----------
-$green_4ab:#4abdac;
-
+$green_4ab: #4abdac;
 // ---------- メディアクエリ ----------
-$msp: "only screen and (max-width:374px)";
-$sp: "only screen and (max-width:480px)";
-$tab: "only screen and (max-width:768px)";
-$pc: "only screen and (min-width:769px)";
-
+$msp: 'only screen and (max-width:374px)';
+$sp: 'only screen and (max-width:480px)';
+$tab: 'only screen and (max-width:768px)';
+$pc: 'only screen and (min-width:769px)';
 // ---------- フレックス ----------
 @mixin flex {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
 }
 
 // ---------- 背景画像 ----------
 @mixin bgi {
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
 }
 
 // ---------- フォント（追記変更可能） ----------
 @mixin noto__sans {
-  font-family: "Noto Sans JP", sans-serif;
+	font-family: 'Noto Sans JP', sans-serif;
+}
+
+//____________________________
+//引数で指定した色の明るさに応じて白か黒を出力する関数
+//____________________________
+@function set_color($color) {
+	@if (lightness($color) > 50) {
+		@return $black_000;
+	}
+
+	@else {
+		@return $white_fff;
+	}
 }

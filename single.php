@@ -16,7 +16,10 @@ get_header(); ?>
 
   <?php the_content() ?>
 
-  <?php  } } ?>
+  <?php  }
+  } ?>
+
 </div>
+loop
 
 <?php get_footer();

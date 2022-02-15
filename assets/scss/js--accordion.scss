@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+@import "configuration";
+
+//____________________________
+// アコーディオン
+//____________________________
+.js__accordion__header {
+  transition: 0.3s;
+  &:hover {
+    cursor: pointer;
+    transition: 0.3s;
+  }
+}
+
+.js__accordion__header + * {
+  display: none;
+}
