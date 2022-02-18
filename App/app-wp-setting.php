@@ -1,5 +1,44 @@
 <?php
 
+/**
+ *WordPress同梱のjQueryを読み込ませない
+ */
+function vanilla_deregister_script()
+{
+  if (!is_admin()) {
+    wp_deregister_script('jquery');
+  }
+  }
+add_action('init', 'vanilla_deregister_script');
+
+/**
+ * 全ページ共通のcss読み込み(wp-headで読み込まれるもの)
+ */
+function vanilla_load_css()
+{
+  // ---------- font awesome ----------
+  wp_enqueue_style('fontawsome-cdn', 'https://use.fontawesome.com/releases/v5.10.2/css/all.css', [], '1.0.3');
+  wp_enqueue_style('fontawsome-js', 'https://kit.fontawesome.com/f0fc03e17c.js', [], '1.0.3');
+
+
+  /*--------------------------------------------------
+  /* css読み込み
+  /* /assets/css ディレクトリより下のcssを全て読み込む
+  /*------------------------------------------------*/
+  $css_directory = get_stylesheet_directory() . '/assets/css/';
+  $css_file_list = glob($css_directory . '*.css');
+  foreach ($css_file_list as $css_file) {
+    $css_file_name = basename($css_file);
+    $css_name = str_replace(".css", "", $css_file_name);
+    $css_file_path = get_template_directory_uri() . '/assets/css/' . $css_file_name;
+
+    if (strpos($css_name, '_') !== false) {
+      continue;
+    }
+    wp_enqueue_style($css_name, $css_file_path, [], '1.0.3');
+  }
+}
+add_action('wp_enqueue_scripts', 'vanilla_load_css');
 
 
 /**
@@ -17,45 +56,16 @@ function vanilla_load_js()
   foreach ($js_file_list as $js_file) {
     $js_file_name = basename($js_file);
     $js_name = str_replace(".js", "", $js_file_name);
-    $js_file_path = get_stylesheet_directory_uri() . '/assets/js/' . $js_file_name;
+    $js_file_path = get_template_directory_uri() . '/assets/js/' . $js_file_name;
 
     if (strpos($js_name, '_') !== false) {
       continue;
     }
-    wp_enqueue_style($js_name, $js_file_path, [], '1.0.3');
+    wp_enqueue_script($js_name, $js_file_path, [], '1.0.3', true);
   }
 }
 add_action('wp_enqueue_scripts', 'vanilla_load_js');
 
-/**
- * 全ページ共通のcss読み込み(wp-headで読み込まれるもの)
- */
-function vanilla_load_css()
-{
-  wp_enqueue_style('jquery', 'https://code.jquery.com/jquery-3.6.0.min.js', [], '1.0.3');
-  // ---------- font awesome ----------
-  wp_enqueue_style('fontawsome-cdn', 'https://use.fontawesome.com/releases/v5.10.2/css/all.css', [], '1.0.3');
-  wp_enqueue_style('fontawsome-js', 'https://kit.fontawesome.com/f0fc03e17c.js', [], '1.0.3');
-
-
-  /*--------------------------------------------------
-  /* css読み込み
-  /* /assets/css ディレクトリより下のcssを全て読み込む
-  /*------------------------------------------------*/
-  $css_directory = get_stylesheet_directory() . '/assets/css/';
-  $css_file_list = glob($css_directory . '*.css');
-  foreach ($css_file_list as $css_file) {
-    $css_file_name = basename($css_file);
-    $css_name = str_replace(".css", "", $css_file_name);
-    $css_file_path = get_stylesheet_directory_uri() . '/assets/css/' . $css_file_name;
-
-    if (strpos($css_name, '_') !== false) {
-      continue;
-    }
-    wp_enqueue_style($css_name, $css_file_path, [], '1.0.3');
-  }
-}
-add_action('wp_enqueue_scripts', 'vanilla_load_css');
 
 /**
  * 「ダッシュボードページ」のウィジェットを削除

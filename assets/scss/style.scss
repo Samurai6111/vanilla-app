@@ -12,18 +12,17 @@
 //____________________________
 // ---------- hhtml ----------
 html {
-	overflow: scroll;
-	color: $black_333;
+	overflow-y: scroll;
+	color: $black;
 	font-size: 62.5%;
-	background-color: $white_fcf;
+	background-color: $white;
 }
 
 body {
-	color: $black_333;
+	color: $black;
 	font-family: 'Noto Sans JP', sans-serif;
-	line-height: 1.5;
 	letter-spacing: 0.04em;
-	background-color: $white_fcf;
+	background-color: $white;
 }
 
 #top {
@@ -33,9 +32,9 @@ body {
 // ---------- インナー ----------
 .inner {
 	width: 100%;
-	max-width: calc(1024px + 3.2rem);
-	padding-right: 1.6rem;
-	padding-left: 1.6rem;
+	max-width: calc(1180px + 3rem);
+	padding-right: 3rem;
+	padding-left: 3rem;
 	margin: 0 auto;
 
 	&.-wide {
