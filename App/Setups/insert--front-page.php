@@ -1,13 +1,17 @@
 <?php
-$slug = 'top';
-if (!vanilla_the_slug_exists('top')) {
+$post_type = 'page';
+$post_slug = 'top';
+$post_title = 'トップページ';
+$post_content = '';
+
+if (!vanilla_the_slug_exists($post_slug)) {
 
   // ---------- 投稿・固定ページ作成 ----------
   $post_array = array(
-    "post_type"      => "page",
-    "post_name"      => $slug,
-    "post_title"     => "トップページ",
-    "post_content"   => "",
+    "post_type"      => $post_type,
+    "post_name"      => $post_slug,
+    "post_title"     => $post_title,
+    "post_content"   => $post_content,
     "post_status"    => "publish",
     "post_author"    => 1,
     "post_parent"    => 0,
