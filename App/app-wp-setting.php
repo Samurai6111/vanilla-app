@@ -87,6 +87,7 @@ add_action('wp_dashboard_setup', 'remove_dashboard_widgets');
  * 投稿ページにサムネイル追加
  */
 add_theme_support('post-thumbnails');
+add_theme_support('title-tag');
 
 /**
  * 「購読者」が管理画面に入れないようにする
@@ -192,9 +193,42 @@ function vanilla_custom_admin_var($admin_bar)
   $admin_bar->remove_node('updates');
 }
 add_action('admin_bar_menu', 'vanilla_custom_admin_var', 100);
-// echo '<pre>';
-// var_dump(get_option('stylesheet'));
-// echo '</pre>';
 
 
-// http://localhost:10084/wp-admin/theme-editor.php?file=templates%2Fpage--front.php&theme=Vanilla
+/**
+ * 投稿保存直前時に処理を追加する
+ *
+ * @param int  $post_id  投稿 ID。
+ */
+function vanilla_pre_post_update($post_id)
+{
+
+
+  /*--------------------------------------------------
+  /* _wp_page_templateを保存時に引き継ぐ
+  /*------------------------------------------------*/
+  $_wp_page_template = get_post_meta($post_id, '_wp_page_template', true);
+  session_start();
+  $_SESSION['wp_page_template'] = [$post_id => $_wp_page_template];
+}
+add_action('pre_post_update', 'vanilla_pre_post_update');
+
+
+/**
+ * 投稿保存時に処理を追加する
+ *
+ * @param int  $post_id  投稿 ID。
+ */
+function vanilla_edit_post($post_id)
+{
+
+  /*--------------------------------------------------
+  /* _wp_page_templateを保存時に引き継ぐ
+  /*------------------------------------------------*/
+  session_start();
+  foreach ($_SESSION['wp_page_template'] as $key => $value) {
+    update_post_meta($key, '_wp_page_template', $value);
+  }
+  session_unset();
+}
+add_action('edit_post', 'vanilla_edit_post');
