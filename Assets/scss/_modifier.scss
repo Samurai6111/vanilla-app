@@ -1,0 +1,68 @@
+@charset 'UTF-8';
+
+//____________________________
+// 単体のモディファイア
+//____________________________
+// ---------- PC SP 表示非表示切り替え ----------
+.-pc-only {
+	@media #{$tab} {
+		display: none;
+	}
+}
+
+.-sp-only {
+	display: none;
+
+	@media #{$tab} {
+		display: inline-block;
+	}
+}
+
+.-sp-only-block {
+	display: none;
+
+	@media #{$tab} {
+		display: block;
+	}
+}
+
+// ---------- 中央揃え ----------
+.-tac {
+	text-align: center;
+}
+
+// ---------- hover時のポインター ----------
+.-hover-pointer {
+	transition: 0.3s;
+
+	&:hover {
+		transition: 0.3s;
+		cursor: pointer;
+	}
+}
+
+// ---------- 白色 ----------
+.-color-white {
+	color: $white_fff;
+}
+
+// ---------- 背景 プライマリー ----------
+.-bg-primary {
+	background-color: $primary;
+}
+
+// ---------- 背景 白色 ----------
+.-bg-white {
+	background-color: $white_fff;
+}
+
+// ---------- flex ----------
+.-flex {
+	display: flex;
+}
+
+// ---------- 縦書き ----------
+.-tategaki {
+	-ms-writing-mode: tb-rl;
+	    writing-mode: vertical-rl;
+}
