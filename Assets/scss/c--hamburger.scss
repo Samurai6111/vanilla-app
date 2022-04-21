@@ -1,0 +1,119 @@
+@charset 'UTF-8';
+
+@import 'configuration';
+
+@import 'base';
+
+@import 'modifier';
+
+//____________________________
+// ハンバーガー
+//____________________________
+// ---------- ハンバーガーメニュー ----------
+.hamburger_wrap {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 10001;
+	display: none;
+
+	@media screen and (max-width: 960px) {
+		display: inline-block;
+	}
+
+	* {
+		transition: 0.3s;
+	}
+
+	&:hover {
+		transition: 0.3s;
+		cursor: pointer;
+	}
+
+	.hamburger {
+		position: relative;
+		z-index: 10;
+		width: 10rem;
+		height: 10rem;
+
+		.hamburger_wrap {
+			position: absolute;
+			top: 55%;
+			left: 50%;
+			width: 3.6rem;
+			height: 4.2rem;
+			transform: translate(-50%, -50%);
+
+			.hamburger_line {
+				position: absolute;
+				left: 50%;
+				width: 2.4rem;
+				height: 0.2rem;
+				background-color: $black_000;
+				transform: translateX(-50%);
+
+				&.-top {
+					top: 0;
+				}
+
+				&.-middle {
+					top: 0.8rem;
+				}
+
+				&.-bottom {
+					top: 1.6rem;
+				}
+			}
+
+			.hamburger_text {
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				color: $black_000;
+				font-size: 1.2rem;
+				font-weight: 600;
+				letter-spacing: 0.05em;
+				transform: translateX(-50%);
+
+				@media #{$tab} {
+					font-size: 1rem;
+				}
+			}
+		}
+	}
+
+	.hamburger-js-active {
+		background-color: transparent;
+		transition: 0.3s;
+
+		* {
+			transition: 0.3s;
+		}
+
+		.hamburger_wrap {
+			.hamburger_line {
+				background-color: $white_fff;
+
+				&.-top {
+					top: 0.8rem;
+					transform: rotate(-45deg) translateX(-50%) !important;
+					transform-origin: left;
+				}
+
+				&.-middle {
+					width: 0;
+				}
+
+				&.-bottom {
+					top: 0.8rem;
+					transform: rotate(45deg) translateX(-50%) !important;
+					transform-origin: left;
+				}
+			}
+
+			.hamburger_text {
+				color: $white_fff;
+			}
+		}
+	}
+}
