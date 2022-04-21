@@ -1,24 +1,13 @@
 <?php
 /**
- * Template Name: 固定ページテンプレート
+ * Template Name: ベーススタイル
  * @Template Post Type: post, page,
  * @subpackage Vanilla
  */
 get_header(); ?>
-
 <div class="inner">
 
 	<ul>
-		<li>
-			<div>
-				<code>pタグ</code>
-			</div>
-			<div>
-				<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus enim eius alias aperiam pariatur dolore soluta et architecto ad magnam, ducimus tempora at dolor, tempore fuga? Atque culpa accusamus qui.</p>
-			</div>
-			<br>
-		</li>
-
 		<li>
 			<div>
 				<pre>pタグ</pre>
@@ -26,24 +15,9 @@ get_header(); ?>
 			<div>
 				<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus enim eius alias aperiam pariatur dolore soluta et architecto ad magnam, ducimus tempora at dolor, tempore fuga? Atque culpa accusamus qui.</p>
 			</div>
-			<br>
 		</li>
 	</ul>
 
-
-	<div>
-
-		<input type="text">
-	</div>
-	<div>
-		<textarea name=""
-							id=""
-							cols="30"
-							rows="10"></textarea>
-	</div>
-	<div>
-		<button>button</button>
-	</div>
 
 	/* Vertical rhythm */
 	/* ============================================ */
@@ -420,19 +394,6 @@ get_header(); ?>
 	font-weight: bold;
 	}
 
-</div>
-
-<div class="inner">
-	<?php
-  if (have_posts()) {
-    while (have_posts()) {
-      the_post();
-  ?>
-
-	<?php the_content() ?>
-
-	<?php  }
-  } ?>
 </div>
 
 <?php get_footer();
