@@ -1,0 +1,122 @@
+@charset 'UTF-8';
+//____________________________
+// 変数系, mixin, メディはクエリの格納ファイル
+// mixinは無許可に追加厳禁 *必要な場合はディレクターに相談
+//____________________________
+// ---------- プライマリーカラー ----------
+$primary: #ff0000;
+// ---------- 白、黒、グレー系 ----------
+$black_000: #000;
+$black_333: #333333;
+$white_fff: #fff;
+$white_fcf: #fcfcfc;
+$lightgray_F7F : #f7f7f7;
+$gray_dbd: #dbdbdb;
+
+// ---------- その他 ----------
+$green_4ab: #4abdac;
+
+// ---------- メディアクエリ ----------
+$msp: 'only screen and (max-width:374px)';
+$sp: 'only screen and (max-width:480px)';
+$tab: 'only screen and (max-width:768px)';
+$pc: 'only screen and (min-width:769px)';
+
+// ---------- インナー ----------
+$sp_inner: calc(37.5rem + 4rem);
+
+// ---------- フレックス ----------
+@mixin flex {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+// ---------- 背景画像 ----------
+@mixin bgi {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+// ---------- フォント（追記変更可能） ----------
+@mixin noto_sans {
+	font-family: 'Noto Sans JP', sans-serif;
+}
+
+// ---------- 縁取り ----------
+@mixin textShadow($color, $size: 2px) {
+	text-shadow: $color $size 0,  $color calc(#{$size} / 2 * -1) 0,
+	$color 0 calc(#{$size} / 2 * -1), $color 0 $size,
+	$color $size $size , $color calc(#{$size} / 2 * -1) $size,
+	$color $size calc(#{$size} / 2 * -1), $color calc(#{$size} / 2 * -1) calc(#{$size} / 2 * -1),
+	$color calc(#{$size / 2}) $size,  $color calc(#{$size} / 2 * -1) $size,
+	$color calc(#{$size / 2}) calc(#{$size} / 2 * -1), $color calc(#{$size} / 2 * -1) calc(#{$size} / 2 * -1),
+	$color $size calc(#{$size / 2}),  $color calc(#{$size} / 2 * -1) calc(#{$size / 2}),
+	$color $size calc(#{$size} / 2 * -1), $color calc(#{$size} / 2 * -1) calc(#{$size} / 2 * -1);
+}
+
+/** --------------------------------
+* 引数で指定した色の明るさに応じて白か黒を出力する関数
+*
+* @param $color カラーコード
+*/
+@function set_color($color) {
+	@if (lightness($color) > 50) {
+		@return $black_000;
+	}
+
+	@else {
+		@return $white_fff;
+	}
+}
+
+
+/** --------------------------------
+* cssの値を単位を除いて数字だけにしてくれる関数
+*
+* @param 数字と単位を含む値 10ox, 3remなど
+*/
+@function stripUnit($number) {
+	@if type-of($number) == 'number' and not unitless($number) {
+		@return $number / ($number * 0 + 1);
+	}
+
+	@return $number;
+}
+
+/** --------------------------------
+* 値の「単位」を取得する関数
+*
+* @param $value 数字と単位を含む値 10ox, 3remなど
+*/
+@function getUnit($value) {
+	@return str-slice($value * 0 + '', 2, -1);
+}
+
+/** --------------------------------
+* pxやremをvwに変換してくれる関数
+*
+* @param $viewport pcデザインの横幅
+* @param $fontSize フォントサイズ(pxでもremでも)
+*/
+@function vw($fontSize, $base-vw: 1280px) {
+	$unit: getUnit($fontSize);
+
+	@if $unit == px {
+		@return (stripUnit($fontSize) * 100vw) / stripUnit($base-vw);
+	}
+	@else if $unit == rem {
+		@return (stripUnit($fontSize) * 1000vw) / stripUnit($base-vw);
+	}
+}
+
+/** --------------------------------
+* フォントサイズをレスポンシブで調整する関数
+*
+* @param $pc pcのフォントサイズ
+* @param $sp spのフォントサイズ
+*/
+@function responsiveValue($pc, $sp) {
+	@return clamp(#{$sp}, vw($pc) , #{$pc});
+}

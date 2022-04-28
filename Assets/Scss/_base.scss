@@ -1,0 +1,84 @@
+@charset 'UTF-8';
+
+//____________________________
+// 全体
+//____________________________
+* {
+	max-width: 100%;
+}
+
+//____________________________
+// 画像系
+//____________________________
+svg ,
+img ,
+embed ,
+object ,
+iframe {
+	vertical-align: middle;
+}
+
+//____________________________
+// aタグ
+//____________________________
+a {
+	transition: 0.3s;
+	cursor: pointer;
+
+	&:hover {
+		transition: 0.3s;
+		cursor: pointer;
+		opacity: 0.7;
+	}
+}
+
+//____________________________
+// form ・ input系
+//____________________________
+input ,
+textarea ,
+button {
+	padding: 8px 12px;
+	border: 1px solid black;
+
+	&.-reset {
+		padding: 0;
+		border: none;
+	}
+}
+
+button {
+	transition: 0.3s;
+	cursor: pointer;
+
+	&:hover {
+		transition: 0.3s;
+		cursor: pointer;
+		opacity: 0.7;
+	}
+}
+
+//____________________________
+// 検証系
+//____________________________
+pre {
+	padding: 8px 12px;
+	background-color: lightgray;
+}
+
+
+//____________________________
+// 文字系
+//____________________________
+h6 ,
+h5 ,
+h4 ,
+h3 ,
+h2 ,
+h1 ,
+p ,
+li ,
+td ,
+th {
+	font-size: 1.6rem;
+}

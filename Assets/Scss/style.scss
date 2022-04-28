@@ -1,0 +1,51 @@
+@charset 'UTF-8';
+
+@import 'configuration';
+
+@import 'base';
+
+@import 'modifier';
+
+//____________________________
+// 全ページ共通のスタイル
+// このページには全ページ共通のスタイルを記述して下さい。 コンポーネントなどサイトを通じて2回以上登場するスタイルがあればそちらもこのファイルに記述して下さい。
+//____________________________
+// ---------- hhtml ----------
+html {
+	box-sizing: border-box;
+	overflow-y: scroll;
+	color: $black_000;
+	font-size: 62.5%;
+	line-height: 1.65;
+	background-color: $white_fff;
+}
+
+body {
+	box-sizing: border-box;
+	color: $black_000;
+	font-family: 'Noto Sans JP', sans-serif;
+	letter-spacing: 0.04em;
+	background-color: $white_fff;
+}
+
+#top {
+	overflow: hidden;
+}
+
+// ---------- inner ----------
+.inner {
+	width: 100%;
+	max-width: responsiveValue(102rem, #{$sp_inner});
+	padding-right: 2rem;
+	padding-left: 2rem;
+	margin: 0 auto;
+
+	&.-wide {
+		max-width: calc(116rem + 4rem);
+		max-width: responsiveValue(120rem, #{$sp_inner});
+	}
+
+	&.-header {
+		max-width: responsiveValue(132rem, #{$sp_inner});
+	}
+}
