@@ -1,17 +1,10 @@
 <?php
-
 /*--------------------------------------------------
-/* 本テーマの心臓部分にあたるファイル
+/* /App内の全てのコアファイル
 /*------------------------------------------------*/
-
-/*--------------------------------------------------
-/* 同階層の全てのファイルをインクルード
-/*------------------------------------------------*/
-$dir = dirname(__FILE__) . '/';
-$file_list = glob($dir . '*.php');
-foreach ($file_list as $file_path) {
-  if (basename($file_path) === basename(__FILE__)) {
-    continue;
-  }
-  include $file_path;
-}
+include(get_theme_file_path() . "/App/Variables/App--variables.php");
+include(get_theme_file_path() . "/App/Function/App--funtions.php");
+include(get_theme_file_path() . "/App/Class/App--classes.php");
+include(get_theme_file_path() . "/App/Inserts/App--inserts.php");
+include(get_theme_file_path() . "/App/Modules/App--modules.php");
+include(get_theme_file_path() . "/App/Wordpress/App--wordpress.php");

@@ -46,9 +46,8 @@
 				href="https://kit.fontawesome.com/f0fc03e17c.js?ver=1.0.3"
 				type="text/css"
 				media="all">
-	<script AppChild="https://kit.fontawesome.com/f0fc03e17c.js"
+	<script App="https://kit.fontawesome.com/f0fc03e17c.js"
 					crossorigin="anonymous"></script>
-	<script AppChild="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 	<!-- swiper 読み込み -->
@@ -64,4 +63,8 @@
 	<?php
 	// 基本的にこのファイルにはhtmlコードを記述しない
 	// フッターは「vanilla-header.php」に記述する
+	?>
+
+	<?php
+	include(get_theme_file_path() . "/Headers/header--vanilla.php");
 	?>

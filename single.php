@@ -8,16 +8,19 @@
 get_header(); ?>
 
 <div class="inner">
-  <?php
-  if (have_posts()) {
-    while (have_posts()) {
-      the_post();
-  ?>
+	as;dfjka;lsdkjf;l
+	<?php
 
-  <?php the_content() ?>
+	echo get_post_type(get_the_ID());
+	if (have_posts()) {
+		while (have_posts()) {
+			the_post();
+	?>
 
-  <?php  }
-  } ?>
+	<?php the_content() ?>
+
+	<?php  }
+	} ?>
 
 </div>
 loop
