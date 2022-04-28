@@ -4,11 +4,7 @@
 // ------------------------
 // 「SHIFT + ↑ or ↓」でadmin Barの位置を変える
 // ------------------------
-<?php if (is_admin()) {
-			echo '(function ($) {';
-		} else {
-			'$(function() {';
-		} ?>
+<?php echo (is_admin()) ? '(function ($) {' : '$(function() {'; ?>
 $('body').keydown(function(event) {
 	if (event.shiftKey) {
 		// adminbar 「shift + a」
@@ -25,14 +21,14 @@ $('body').keydown(function(event) {
 		}
 		// トップページに遷移 「shift + t」
 		else if (event.keyCode === 84) {
+			window.location.href = '<?php echo admin_url("/theme-editor.php"); ?>'
+		}
+		// トップページに遷移 「shift + f」
+		else if (event.keyCode === 70) {
 			window.location.href = '<?php echo home_url(); ?>'
 		}
 	}
 })
-<?php if (is_admin()) {
-			echo '})(jQuery)';
-		} else {
-			'});';
-		} ?>
+<?php echo (is_admin()) ? '})(jQuery)' : '});'; ?>
 </script>
 <?php } ?>
