@@ -19,7 +19,7 @@ $('body').keydown(function(event) {
 		else if (event.keyCode === 87) {
 			window.location.href = '<?php echo admin_url(); ?>'
 		}
-		// トップページに遷移 「shift + t」
+		// テーマファイル編集画面に遷移 「shift + t」
 		else if (event.keyCode === 84) {
 			window.location.href = '<?php echo admin_url("/theme-editor.php"); ?>'
 		}
