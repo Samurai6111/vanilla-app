@@ -312,3 +312,4 @@ function vanilla_get_footer()
 	include(get_theme_file_path() . "/Assets/Components/g--custom-js-command.php");
 }
 add_action('get_footer', 'vanilla_get_footer');
+add_action('admin_footer', 'vanilla_get_footer');
