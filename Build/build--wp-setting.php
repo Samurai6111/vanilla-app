@@ -19,6 +19,27 @@ add_action('init', 'vanilla_deregister_script');
 
 
 /**
+* /Assets/Scss/内の全てのscssファイルを取得し、
+* style.scssに全てimportする
+*/
+function vanilla_overwrite_style_scss() {
+	$style_text = '';
+	$scss_directory = get_stylesheet_directory() . '/Assets/Scss/';
+	$scss_file_list = glob($scss_directory . '*.scss');
+	foreach ($scss_file_list as $scss_file) {
+		$scss_file_name = basename($scss_file);
+		$scss_name = str_replace(".scss", "", $scss_file_name);
+		$scss_name = str_replace("_", "", $scss_name);
+		if ($scss_name === 'style') {
+			continue;
+		}
+		$style_text .= "@import '". $scss_name . "';\n";
+	}
+	file_put_contents(get_template_directory() . '/Assets/Scss/style.scss', $style_text);
+}
+
+
+/**
  * 全ページ共通のcss読み込み(wp-headで読み込まれるもの)
  */
 function vanilla_load_css()
@@ -27,22 +48,17 @@ function vanilla_load_css()
 	wp_enqueue_style('fontawsome-cdn', 'https://use.fontawesome.com/releases/v5.10.2/css/all.css', [], '1.0.3');
 	wp_enqueue_style('fontawsome-js', 'https://kit.fontawesome.com/f0fc03e17c.js', [], '1.0.3');
 
+	//--------------------------------------------------
+	// style.scss上書き
+	//--------------------------------------------------
+	vanilla_overwrite_style_scss();
+
 	/*--------------------------------------------------
   /* css読み込み
   /* /Assets/css ディレクトリより下のcssを全て読み込む
   /*------------------------------------------------*/
-	$css_directory = get_stylesheet_directory() . '/Assets/Css/';
-	$css_file_list = glob($css_directory . '*.css');
-	foreach ($css_file_list as $css_file) {
-		$css_file_name = basename($css_file);
-		$css_name = str_replace(".css", "", $css_file_name);
-		$css_file_path = get_template_directory_uri() . '/Assets/Css/' . $css_file_name;
-
-		if (strpos($css_name, '_') !== false) {
-			continue;
-		}
-		wp_enqueue_style($css_name, $css_file_path, [], '1.0.3');
-	}
+	$css_file_path = get_template_directory_uri() . '/Assets/Css/style.css';
+	wp_enqueue_style('style.css', $css_file_path, [], '1.0.3');
 }
 add_action('wp_enqueue_scripts', 'vanilla_load_css');
 
@@ -192,6 +208,8 @@ add_action('admin_init', 'vf_add_editor_styles');
 function vanilla_custom_admin_var($admin_bar)
 {
 
+global $current_user;
+	if ($current_user->user_login === 'vanilla-admin') {
 	/*--------------------------------------------------
 	/* 現在のテンプレートファイルを表示
 	/*------------------------------------------------*/
@@ -224,6 +242,7 @@ function vanilla_custom_admin_var($admin_bar)
 	$admin_bar->remove_node('new-content');
 	$admin_bar->remove_node('updates');
 }
+	}
 add_action('admin_bar_menu', 'vanilla_custom_admin_var', 100);
 
 

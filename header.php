@@ -10,7 +10,8 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>
 			<?php body_class() ?>
-			dir="ltr">
+			dir="ltr"
+	  style="margin-top: 0 !important;">
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
 	<!-- Basic information -->

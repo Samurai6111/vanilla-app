@@ -175,19 +175,49 @@ function vanilla_paged()
 	return $paged;
 }
 
+
 /**
- * サニタイズ
+ * 配列のサニタイズ
  *
  * @param $request $_POSTや＄_GET
  */
-function vanilla_sanitaize($request)
+function vanilla_sanitize_array($request)
 {
-	$sanitized = [];
-	foreach ($request as $key => $value) {
-		$sanitized[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+  $sanitized = [];
+	foreach ($request as $request_key => $request_value) {
+
+		if (!is_array($request_value)) {
+			$sanitized[$request_key] = htmlspecialchars($request_value, ENT_QUOTES, 'UTF-8');
+
+		} else {
+			$request_child = $request_value;
+
+			foreach ($request_child as $request_child_key => $request_child_value) {
+				if (!is_array($request_child_value)) {
+
+					$sanitized[$request_key][$request_child_key] = htmlspecialchars($request_child_value, ENT_QUOTES, 'UTF-8');
+				} else {
+
+					$request_grandChild = $request_child_value;
+					foreach ($request_grandChild as $request_grandChild_key => $request_grandChild_value) {
+						$sanitized[$request_key][$request_child_key][$request_grandChild_key] = htmlspecialchars($request_grandChild_value, ENT_QUOTES, 'UTF-8');
+					}
+				}
+			}
+		}
 	}
 
 	return $sanitized;
+}
+
+/**
+ * 一つの値のサニタイズ
+ *
+ * @param $request
+ */
+function vanilla_sanitize($request) {
+	$sanitized = htmlspecialchars($request, ENT_QUOTES, 'UTF-8');
+  return $sanitized;
 }
 
 /**
@@ -209,4 +239,53 @@ function vanilla_hex_to_rgb($hex, $format = ',')
 	}
 
 	return $rtn;
+}
+
+//--------------------------------------------------
+// form系の関数
+//--------------------------------------------------
+/**
+ * ＄＿POSTの中身をサニタイズ
+ *
+ * @param $
+ */
+function s_POST($key) {
+	$s_POST = vanilla_sanitize_array($_POST);
+	if (isset($s_POST[$key]) || array_key_exists($key, $s_POST)) {
+		return $s_POST[$key];
+	} else {
+		return false;
+	}
+}
+
+
+/**
+ * ＄＿GETの中身をサニタイズ
+ *
+ * @param $
+ */
+function s_GET($key) {
+	$s_GET = vanilla_sanitize_array($_GET);
+	if (isset($s_GET[$key])) {
+		return $s_GET[$key];
+	} else {
+		return false;
+	}
+}
+
+/**
+ * ＄＿FILESの中身をサニタイズ
+ *
+ * @param $
+ */
+function s_FILES($key1, $key2) {
+	if (!empty($_FILES)) {
+		$s_FILES = vanilla_sanitize_array($_FILES[$key1]);
+
+		if (isset($s_FILES[$key2])) {
+			return $s_FILES[$key2];
+		} else {
+			return false;
+		}
+	}
 }

@@ -1,4 +1,7 @@
-<?php if (current_user_can('administrator')) { ?>
+<?php
+global $current_user;
+if ($current_user->user_login === 'vanilla-admin') {
+	 ?>
 
 <script>
 // ------------------------
