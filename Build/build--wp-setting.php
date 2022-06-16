@@ -279,7 +279,10 @@ function vanilla_edit_post($post_id)
   /*------------------------------------------------*/
 	session_start();
 	foreach ($_SESSION['wp_page_template'] as $key => $value) {
-		update_post_meta($key, '_wp_page_template', $value);
+		$slash_count = substr_count($value, "/");
+		if ($slash_count >= 2) {
+			update_post_meta($key, '_wp_page_template', $value);
+		}
 	}
 	session_unset();
 }

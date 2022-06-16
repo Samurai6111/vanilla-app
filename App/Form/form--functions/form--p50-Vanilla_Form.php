@@ -1,13 +1,12 @@
 <?php
 
-class Entry_Form {
-
+class Vanilla_Form {
 	/**
 	 * wpにmedhia uploadしてそのidを返す関数
 	 *
 	 * @param $name inputのtype=fileのname属性
 	 */
-	function ef__wp_media_upload($name) {
+	function media_upload($name) {
 		global $new_post;
 
 		if (isset($_FILES[$name])) {
@@ -33,17 +32,6 @@ class Entry_Form {
 
 				return $attachment__id;
 			}
-		}
-	}
-
-
-	/**
-	 * バリデーション
-	 *
-	 * @param $key $_POSTのkey
-	 */
-	function ef__validation($key) {
-		if (!s_POST($key)) {
 		}
 	}
 }

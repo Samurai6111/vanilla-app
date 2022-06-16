@@ -11,7 +11,7 @@ class Vanilla_Form_Mail {
 	/**
 	 * クライアント宛のメールの件名
 	 */
-	function ef__email_subject_to_client() {
+	function register_email_subject_to_client() {
 		global $ef__branch_variable_array;
 
 		$email_subject = $ef__branch_variable_array[s_GET('type')]['email_subject'];
@@ -22,7 +22,7 @@ class Vanilla_Form_Mail {
 	/**
 	 * ユーザー宛のメールの件名
 	 */
-	function ef__email_subject_to_user() {
+	function register_email_subject_to_user() {
 		global $ef__branch_variable_array;
 
 		$email_subject = '【奉優会｜採用サイト】'
@@ -78,11 +78,11 @@ class Vanilla_Form_Mail {
 			} else {
 				// ---------- 氏名 ----------
 				if ($ef__mail_key === 'ef__full_name') {
-					$ef__mail_value = vanilla_array($submitted_array, 'ef__last_name') . vanilla_array($submitted_array, 'ef__first_name');
+					$ef__mail_value = vanilla_array($submitted_array, 'register_last_name') . vanilla_array($submitted_array, 'register_first_name');
 				}
 				// ---------- カナ ----------
 				elseif ($ef__mail_key === 'ef__full_name_kana') {
-					$ef__mail_value = vanilla_array($submitted_array, 'ef__last_name_kana') . vanilla_array($submitted_array, 'ef__first_name_kana');
+					$ef__mail_value = vanilla_array($submitted_array, 'register_last_name_kana') . vanilla_array($submitted_array, 'register_first_name_kana');
 				}
 				// ---------- 学部・学科 ----------
 				elseif ($ef__mail_key === 'ef__full_department') {
@@ -98,7 +98,7 @@ class Vanilla_Form_Mail {
 				}
 				// ---------- 生年月日 ----------
 				elseif ($ef__mail_key === 'ef__dob') {
-					$ef__mail_value = vanilla_array($submitted_array, 'ef__dob_year') . vanilla_array($submitted_array, 'ef__dob_month') . vanilla_array($submitted_array, 'ef__dob_date');
+					$ef__mail_value = vanilla_array($submitted_array, 'register_dob_year') . vanilla_array($submitted_array, 'register_dob_month') . vanilla_array($submitted_array, 'register_dob_date');
 				}
 				// ---------- サイト訪問のきっかけ ----------
 				elseif ($ef__mail_key === 'ef__opportunities') {
@@ -108,11 +108,11 @@ class Vanilla_Form_Mail {
 				}
 				// // ---------- 氏名 ----------
 				// if ($ef__mail_key === 'ef__full_name') {
-				// 	$ef__mail_value = $submitted_array['ef__last_name'] . $submitted_array['ef__first_name'];
+				// 	$ef__mail_value = $submitted_array['register_last_name'] . $submitted_array['register_first_name'];
 				// }
 				// // ---------- カナ ----------
 				// elseif ($ef__mail_key === 'ef__full_name_kana') {
-				// 	$ef__mail_value = $submitted_array['ef__last_name_kana'] . $submitted_array['ef__first_name_kana'];
+				// 	$ef__mail_value = $submitted_array['register_last_name_kana'] . $submitted_array['register_first_name_kana'];
 				// }
 				// // ---------- 学部・学科 ----------
 				// elseif ($ef__mail_key === 'ef__full_department') {
@@ -128,7 +128,7 @@ class Vanilla_Form_Mail {
 				// }
 				// // ---------- 生年月日 ----------
 				// elseif ($ef__mail_key === 'ef__dob') {
-				// 	$ef__mail_value = $submitted_array['ef__dob_year'] . $submitted_array['ef__dob_month'] . $submitted_array['ef__dob_date'];
+				// 	$ef__mail_value = $submitted_array['register_dob_year'] . $submitted_array['register_dob_month'] . $submitted_array['register_dob_date'];
 				// }
 				// // ---------- サイト訪問のきっかけ ----------
 				// elseif ($ef__mail_key === 'ef__opportunities') {
@@ -153,7 +153,7 @@ class Vanilla_Form_Mail {
 	 * フォームの送信内容を取得する
 	 */
 	private function ef__get_email_submitted_contents($array) {
-		global $ef__input_key_array;
+		global $vanilla_form_input_key_array;
 		$wrap = "=========================================\n";
 
 		$submitted_contents = $wrap;
@@ -172,7 +172,7 @@ class Vanilla_Form_Mail {
 				$submitted_contents .= $submitted_content;
 			}
 
-			// if (isset($ef__input_key_array[$key])) {
+			// if (isset($vanilla_form_input_key_array[$key])) {
 			// 	$ef__variable_ja = $value['name'];
 			// 	$submitted_content = $ef__variable_ja
 			// 		. ' : '
@@ -194,7 +194,7 @@ class Vanilla_Form_Mail {
 	 *
 	 * @param $submitted_array $_POSTの中身
 	 */
-	function ef__email_message_to_client($submitted_array) {
+	function register_email_message_to_client($submitted_array) {
 		global $email_signature;
 		$email_message_head
 			= "HPからお問い合わせがありました\n"
@@ -225,7 +225,7 @@ class Vanilla_Form_Mail {
 	 *
 	 * @param $submitted_array $_POSTの中身
 	 */
-	function ef__email_message_to_user($submitted_array) {
+	function register_email_message_to_user($submitted_array) {
 		global $email_signature;
 		$email_message_head
 			= "お問い合わせいただきありがとうございました。\n"

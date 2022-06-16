@@ -1,6 +1,6 @@
 <?php
 /*--------------------------------------------------
-/* /AppChild/EntryForm/ef--functions/内のファイルを全てインクルード
+/* /AppChild/form/ef--functions/内のファイルを全てインクルード
 /*------------------------------------------------*/
 $dir = get_theme_file_path() . '/App/Form/form--functions/';
 $filelist = glob($dir . '*.php');

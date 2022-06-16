@@ -20,7 +20,7 @@ add_action('init', function () {
 		);
 		$inserted_page_id = wp_insert_post($post_array);
 		// ---------- メタ情報追加 ----------
-		$inserted_page_templateFile_path = "Pages/page--front.php";
+		$inserted_page_templateFile_path = "Pages/page-front.php";
 		update_post_meta($inserted_page_id, "_wp_page_template", $inserted_page_templateFile_path);
 
 		// ---------- トップページ扱いにする ----------

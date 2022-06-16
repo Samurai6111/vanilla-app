@@ -7,14 +7,14 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 	$s_POST = vanilla_sanitize_array($_POST);
 
 	if ($is_verified) {
-		$Entry_Form = new Entry_Form();
+		$Vanilla_Form = new Vanilla_Form();
 		//--------------------------------------------------
 		// 確認ページ
 		//--------------------------------------------------
 		if (s_GET('form-action') === 'confirm') {
 			// ---------- 添付ファイルをメディアアップロード ----------
 			if (!isset($_POST['ef__file_name'])) {
-				$attachment__id = $Entry_Form->ef__wp_media_upload('ef__file_cv');
+				$attachment__id = $Vanilla_Form->media_upload('ef__file_cv');
 				$attachment__link = get_attached_file($attachment__id);
 			}
 
@@ -44,20 +44,19 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 			//--------------------------------------------------
 			$is_client_email_sent = $Vanilla_Form_Mail->send_mail(
 				$client_email,
-				$Vanilla_Form_Mail->ef__email_subject_to_client(),
-				$Vanilla_Form_Mail->ef__email_message_to_client($ef_formated_submittion),
+				$Vanilla_Form_Mail->register_email_subject_to_client(),
+				$Vanilla_Form_Mail->register_email_message_to_client($ef_formated_submittion),
 				$Vanilla_Form_Mail->headers,
 				$attachments
 			);
-			ovd($is_client_email_sent);
 
 			//--------------------------------------------------
 			// ユーザー宛にメールを送信
 			//--------------------------------------------------
 			$is_user_email_sent = $Vanilla_Form_Mail->send_mail(
-				s_POST('ef__email'),
-				$Vanilla_Form_Mail->ef__email_subject_to_user(),
-				$Vanilla_Form_Mail->ef__email_message_to_user($ef_formated_submittion),
+				s_POST('register_email'),
+				$Vanilla_Form_Mail->register_email_subject_to_user(),
+				$Vanilla_Form_Mail->register_email_message_to_user($ef_formated_submittion),
 				$Vanilla_Form_Mail->headers,
 				$attachments
 			);

@@ -289,3 +289,17 @@ function s_FILES($key1, $key2) {
 		}
 	}
 }
+
+
+/**
+ * 特定のテーブルのデータの行数を取得する
+ *
+ * @param $table_name prefixを除いたテーブルの名前
+ */
+function vanilla_db_table_rows($table_name) {
+	global $wpdb;
+	$table_name = $wpdb->prefix . $table_name;
+	$count_query = "select count(*) from $table_name";
+	$num = $wpdb->get_var($count_query);
+	return $num;
+}
