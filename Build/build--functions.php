@@ -6,13 +6,14 @@
 /*------------------------------------------------*/
 global $wpdb;
 
+
 /**
  * carbonで出力した値をフォーマット化する（composerが必要）
  *
  * @param $date 日付
- * @param $hours 時間部分の指定
+ * @param $format フォーマット文章
  */
-// function carbon_formatting($date, $hours = "H:i", $year = '')
+// function carbon_formatting($date, $format = 'Y-n-j H:i:s')
 // {
 // 	$weekday_jap = [
 // 		'日',
@@ -25,7 +26,13 @@ global $wpdb;
 // 	];
 // 	$carbon_formatting_date = new Carbon($date);
 // 	$carbon_formatting_weekday = $weekday_jap[$carbon_formatting_date->dayOfWeek];
-// 	$carbon_formated_data = $carbon_formatting_date->copy()->format($year . "n月j日($carbon_formatting_weekday) $hours");
+
+
+// 	if(strpos($format,'weekday') !== false){
+// 		$format = str_replace("weekday", $carbon_formatting_weekday, $format);
+// 	}
+
+// 	$carbon_formated_data = $carbon_formatting_date->copy()->format($format);
 // 	return $carbon_formated_data;
 // }
 

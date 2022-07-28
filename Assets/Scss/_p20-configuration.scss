@@ -120,3 +120,31 @@ $sp_inner: calc(37.5rem + 4rem);
 @function responsiveValue($pc, $sp) {
 	@return clamp(#{$sp}, vw($pc) , #{$pc});
 }
+
+
+/** --------------------------------
+* 画像の縦横比を指定する関数  figureタグに付与
+*
+* @param $height 横幅100の時の縦の割合 *「%」で指定
+*/
+@mixin img_aspect_ratio($height) {
+	position: relative;
+	width: 100%;
+	&::before {
+		display: block;
+		padding-top: $height;
+		content: '';
+	}
+
+	& > img {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		margin: auto;
+	}
+}

@@ -1,0 +1,190 @@
+@charset 'UTF-8';
+
+//____________________________
+// フォーム
+//____________________________
+.vanillaForm {
+	max-width: 101rem;
+	margin: 0 auto;
+
+	.vanillaForm__rowList {
+		@include flex;
+		flex-direction: column;
+		gap: responsiveValue(4rem, 3rem);
+		margin-bottom: responsiveValue(15rem, 10rem);
+
+		.vanillaForm__rowItem {
+			@include flex;
+			gap: 1rem;
+
+			@media #{$tab}{
+				flex-direction: column;
+
+			}
+
+			.vanillaForm__label {
+				min-width: 26rem;
+			}
+
+			.vanillaForm__inputWrap {
+				width: 100%;
+
+				.vanillaForm__inputs {
+					@include flex;
+					width: 100%;
+
+					input ,
+					select ,
+					textarea {
+						padding: 0.4rem 0.8rem;
+					}
+				}
+
+				.vanillaForm__inputCaption {
+					display: inline-block;
+					width: 100%;
+				}
+			}
+
+			//____________________________
+			// モディファイア
+			//____________________________
+			&.-required {
+				.vanillaForm__labelText {
+					@include flex;
+					justify-content: space-between;
+
+					@media #{$tab}{
+						justify-content: flex-end;
+						gap: 1.6rem;
+						flex-direction: row-reverse;
+
+					}
+
+					&::after {
+						@include flex;
+						align-items: center;
+						justify-content: center;
+						width: 5.1rem;
+						height: 2.6rem;
+						content: '必須';
+						line-height: 1;
+						background-color: lightgray;
+						border-radius: 0.4rem;
+					}
+				}
+			}
+
+			&.-input-width-full {
+				.vanillaForm__inputs {
+					& > * ,
+					input ,
+					select ,
+					textarea {
+						width: 100%;
+					}
+				}
+			}
+
+			&.-input-col2 {
+				.vanillaForm__inputWrap {
+					.vanillaForm__inputs {
+						gap: 1.6rem;
+
+						& > * {
+							width: 50%;
+						}
+					}
+				}
+			}
+
+			&.-input-vertical {
+				.vanillaForm__inputs {
+					flex-direction: column;
+				}
+			}
+
+			&.-gap-10 {
+				.vanillaForm__inputs {
+					gap: 1rem;
+				}
+			}
+		}
+	}
+
+	.vanillaForm__buttonWrap {
+		@include flex;
+		justify-content: center;
+	}
+
+	.vanillaFormPrivacy {
+		border: 1px solid #000;
+		padding: 3.2rem 3rem;
+
+		.vanillaFormPrivacy__title {
+			text-align: center;
+			font-weight: 600;
+			font-size: responsiveValue(1.8rem, 1.4rem);
+			margin-bottom: responsiveValue(3.6rem, 2.2rem);
+		}
+
+		.vanillaFormPrivacy__text {
+			font-weight: 500;
+			font-size: responsiveValue(1.4rem, 1.2rem);
+		}
+	}
+
+	//____________________________
+	// モディファイア
+	//____________________________
+	&.-confirm {
+		max-width: 79rem;
+
+		.vanillaForm__rowList {
+			gap: 0 ;
+			border-top: 1px solid #000000;
+
+			.vanillaForm__rowItem {
+				padding: 0 3rem;
+				margin-bottom: 0;
+				border-bottom: 1px solid #000000;
+
+				.vanillaForm__label {
+					padding: 2.2rem 0;
+					margin-right: 0.5rem;
+					border-right: 1px solid #000000;
+
+					.vanillaForm__labelText {
+						&::after {
+							display: none;
+						}
+					}
+				}
+
+				.vanillaForm__inputWrap {
+					padding: 2.2rem 5rem;
+					border-left: 1px solid #000000;
+					position: relative;
+
+					input,
+					select,
+					textarea {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: auto !important;
+						pointer-events: none;
+						border: none;
+						opacity: 0;
+						height: 0;
+						width: 0;
+					}
+
+					.vanillaForm__input {
+						width: auto;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,6 +1,6 @@
 <?php
 
-class Vanilla_Form {
+class Vanilla_Form_Media {
 	/**
 	 * wpにmedhia uploadしてそのidを返す関数
 	 *
@@ -25,12 +25,12 @@ class Vanilla_Form {
 				}
 
 				// ---------- アップロード実行 ----------
-				$attachment__id = media_handle_upload($file, $new_post);
+				$attachment_id = media_handle_upload($file, $new_post);
 
 				// ---------- メタ追加 ----------
-				update_post_meta($attachment__id, 'ef__temoprary_upload', 'true');
+				update_post_meta($attachment_id, 'temoprary_upload', 'true');
 
-				return $attachment__id;
+				return $attachment_id;
 			}
 		}
 	}
