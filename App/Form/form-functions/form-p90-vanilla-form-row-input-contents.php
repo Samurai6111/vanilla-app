@@ -31,7 +31,7 @@ class Vanilla_Form_Row_Input_Contents {
 				Vanilla_Form_Row_Input::text(
 					[
 						'name' => 'family_name',
-					],
+					]
 				);
 
 				Vanilla_Form_Row_Input::caption('例）山田');
