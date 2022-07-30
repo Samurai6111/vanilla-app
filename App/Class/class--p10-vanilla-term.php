@@ -12,6 +12,7 @@ class Vanilla_Terms {
 	}
 
 
+
 	/**
 	 * ターム一覧を取得
 	 *
