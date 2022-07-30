@@ -1,0 +1,42 @@
+07/28/22 11:05:27: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 2:29:11: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 3:00:15: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 3:00:15: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 3:00:30: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 3:00:35: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 3:00:35: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 3:00:40: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 3:00:46: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 3:01:02: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 3:01:27: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 3:01:32: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 3:01:40: style.scss - Undefined mixin mincho: _p50-button-type1.scss on line 20, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6
+07/29/22 3:01:50: style.scss - Undefined variable $lightgray_ddd: _p50-button-type1.scss on line 84, at column 3
+Call Stack:
+#0 import _p50-button-type1.scss style.scss on line 6

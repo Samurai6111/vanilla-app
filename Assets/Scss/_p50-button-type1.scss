@@ -1,0 +1,143 @@
+@charset 'UTF-8';
+
+//____________________________
+// buttonType1のスタイル
+//____________________________
+.buttonType1 {
+	@include flex;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 5rem;
+	max-width: 32rem;
+	text-align: center;
+	background-color: $black_000;
+	border: 0.1rem solid $black_000;
+	border-radius: 0.4rem;
+
+	.buttonType1__text {
+		color: $white_fff;
+		font-size: responsiveValue(1.6rem, 1.4rem);
+		font-weight: 500;
+		letter-spacing: 0.01em;
+		text-align: center;
+		pointer-events: none;
+
+		@media #{$tab} {
+			letter-spacing: 0.1em;
+		}
+	}
+
+	.buttonType1__figure {
+		@include flex;
+		position: absolute;
+		top: 50%;
+		right: 2rem;
+		align-items: center;
+		justify-content: center;
+		transform: translate(0,-50%);
+
+		@media #{$tab}{
+			width: 1.6rem;
+			right: 1rem;
+		}
+	}
+
+	//____________________________
+	// モディファイア
+	//____________________________
+	&.-back {
+		.buttonType1__figure {
+			position: absolute;
+			top: 50%;
+			right: auto;
+			left: 2rem;
+			transform: translate(0,-50%) rotate(-180deg);
+
+			@media #{$tab}{
+				left: 1rem;
+
+			}
+		}
+	}
+
+	&.-p0 {
+		padding: 0;
+	}
+
+	&.-bg-white {
+		background-color: $white_fff;
+	}
+
+	&.-border-none {
+		border: none;
+	}
+
+	&.-color-black {
+		.buttonType1__text {
+			color: $black_000;
+		}
+	}
+
+	&.-border-lightgray {
+		border-color: lightgray;
+	}
+
+	&.-align-left {
+		justify-content: flex-start;
+		padding-left: 0;
+
+		.buttonType1__figure {
+			right: 0;
+		}
+	}
+
+	&.-border-none {
+		border: none;
+	}
+
+	&.-bold {
+		.buttonType1__text {
+			font-weight: 600;
+		}
+	}
+
+	&.-nowrap {
+		.buttonType1__text {
+			white-space: nowrap;
+		}
+	}
+
+	&.-text-align-right {
+		.buttonType1__text {
+			padding-left: 1rem;
+		}
+	}
+
+	&.-text-align-left {
+		.buttonType1__text {
+			padding-right: 1rem;
+		}
+	}
+
+	&.-sp-align-center {
+		.buttonType1__text {
+			padding-right: 0;
+			padding-left: 0;
+		}
+
+	}
+
+	&.-arrow-down {
+		.buttonType1__figure {
+			transform: translate(0,-50%) rotate(90deg);
+		}
+	}
+
+	&.-arrow-up {
+		.buttonType1__figure {
+			transform: translate(0,-50%) rotate(-90deg);
+		}
+	}
+}

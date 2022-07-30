@@ -9,6 +9,7 @@
 	box-sizing: border-box;
 	border-style: solid;
 	border-width: 0;
+	outline: none !important;
 }
 
 /* Document */
@@ -120,6 +121,7 @@ hr {
  */
 
 pre {
+	overflow: scroll;
 	font-family: monospace, monospace; /* 1 */
 	font-size: inherit; /* 2 */
 }
@@ -240,6 +242,7 @@ textarea {
 	        appearance: none;
 	background: transparent;
 	border-radius: 0;
+	outline: none;
 }
 
 /**
@@ -419,4 +422,20 @@ th {
 th {
 	font-weight: bold;
 	text-align: left;
+}
+
+//____________________________
+// swiperの
+//____________________________
+.swiper-button-next ,
+.swiper-button-prev {
+	top: auto;
+	right: auto;
+	bottom: auto;
+	left: auto;
+	margin: 0;
+
+	&::after {
+		display: none;
+	}
 }
