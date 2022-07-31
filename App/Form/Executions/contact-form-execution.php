@@ -4,7 +4,6 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 	$s_POST = vanilla_sanitize_array($_POST);
 
 
-
 	if (vanilla_is_nonce_verified('contact_form')) {
 		$Vanilla_Form = new Vanilla_Form();
 
@@ -30,7 +29,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 
 			// ---------- メール送信 ----------
 			$Vanilla_Form_Mail = new Vanilla_Form_Mail();
-			$formated_submittion = $Vanilla_Form_Mail->format_form_submittion($s_POST);
+			$formated_submittion = $Vanilla_Form_Mail->format_form_submittion($s_POST, $form_submittion_key_array);
 
 			//--------------------------------------------------
 			// ユーザー宛にメールを送信
@@ -44,9 +43,9 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 			);
 
 			// ---------- 送信が成功したらサンクスページにリダイレクト ----------
-			if ($is_client_email_sent) {
-				// wp_safe_redirect(home_url('/thanks/'));
-				// exit;
+			if ($is_user_email_sent) {
+				wp_safe_redirect(home_url('/thanks/'));
+				exit;
 			}
 		}
 	} else {

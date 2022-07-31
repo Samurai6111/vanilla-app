@@ -4,10 +4,13 @@ $email_signature =
 	. "署名が入ります\n"
 	. "----------------------------------------------------------------\n";
 
-$client_email = 'example@gmail.com';
+$client_email = 'kawakatsu.work6111@gmail.com';
 $domain_email =  'info@' . $_SERVER['HTTP_HOST'];
 
-$form_submission_key_array = [
+$form_submittion_key_array = [
+	'studio_list' => [
+		'name' => 'ご希望スタジオ',
+	],
 	'company_name' => [
 		'name' => 'イベント名',
 	],
@@ -58,9 +61,49 @@ function form_action_url($action = '') {
 			'?form-action='
 			. $action;
 	}
-	$form_action_url .= '#form';
+	$form_action_url .= '#vanillaForm';
 
 	return $form_action_url;
+}
+
+
+
+/**
+ * フォームの送信処理を実行するかどうか関数
+ */
+function is_ready_to_excute() {
+	//--------------------------------------------------
+	// フォームが送信された時
+	//--------------------------------------------------
+	if ('POST' === $_SERVER['REQUEST_METHOD']) {
+		$nonce = isset($_POST['user_register_form_nonce_field']) ? $_POST['user_register_form_nonce_field'] : null;
+		$is_verified = $nonce && wp_verify_nonce($nonce, 'user_register_form_nonce_action');
+
+		//--------------------------------------------------
+		// nonceを通過した時
+		//--------------------------------------------------
+		if ($is_verified) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	//--------------------------------------------------
+	// フォームを送信しないで確認ページに遷移してきた時
+	//--------------------------------------------------
+	elseif (
+		'POST' !== $_SERVER['REQUEST_METHOD'] &&
+		s_GET('form-action') === 'confirm'
+	) {
+		return false;
+	}
+	//--------------------------------------------------
+	// それ以外
+	//--------------------------------------------------
+	else {
+
+		return true;
+	}
 }
 
 
@@ -115,19 +158,26 @@ function vanilla_array($array, $key) {
 	}
 }
 
+
 /**
-* バリデーションがOKだった時に送信するフォーム
-*
-* @param $s_POST
-* @param $validations
-*/
+ * バリデーションチェック後エラーがなかった場合に送信するhiddenのフォーム
+ *
+ * @param $s_POST サニタイズされた$_POSTデータ
+ * @param $validations バリデーションの結果
+ */
 function vanilla_the_hidden_form($s_POST, $validations) {
-?>
+	?>
 	<form id="vanillaHiddenForm" method="POST" name="vanillaHiddenForm" action="<?php echo esc_url(form_action_url('confirm')); ?>">
 		<?php if (is_array($s_POST) && !empty($s_POST)) {
 			foreach ($s_POST as $key => $value) {
+				if (!is_array($value)) {
 		?>
-				<input type="hidden" name="<?= esc_attr($key) ?>" value="<?= esc_attr($value) ?>">
+					<input type="hidden" name="<?= esc_attr($key) ?>" value="<?= esc_attr($value) ?>">
+					<?php } else {
+					foreach ($value as $array_value) { ?>
+						<input type="hidden" name="<?= esc_attr($key) ?>[]" value="<?= esc_attr($array_value) ?>">
+					<?php } ?>
+				<?php } ?>
 		<?php
 			}
 		} ?>

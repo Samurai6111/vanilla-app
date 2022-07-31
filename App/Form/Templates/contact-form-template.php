@@ -68,27 +68,20 @@
 	</div>
 </form>
 
+<?php vanilla_the_hidden_form($s_POST, $validations) ?>
 
 
-<?php
-
-
-
-echo '<pre>';
-var_dump($_POST);
-echo '</pre>';
-?>
 <script>
 	let form = $('#vanillaForm')
-	form.click(function() {
-		// form.find('*').removeAttr('required')
-		// form.find('input[name="company_name"]').val('株式会社test')
-		// form.find('input[name="family_name"]').val('山田')
-		// form.find('input[name="first_name"]').val('太郎')
-		// form.find('input[name="email"]').val('s.kawakatsu@roseaupensant.jp')
-		// form.find('input[name="email_confirm"]').val('s.kawakatsu@roseaupensant.jp')
-		// form.find('input[name="tel"]').val('000-0000-0000')
-		// form.find('input[name="address"]').val('東京都○○○○○○○○○○○○○○1-1-1○○○○ビル101号室')
-		// form.find('textarea[name="notes"]').val('テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります')
+	form.find('.vanillaForm__labelText').click(function() {
+		form.find('*').removeAttr('required')
+		form.find('input[name="company_name"]').val('株式会社test')
+		form.find('input[name="family_name"]').val('山田')
+		form.find('input[name="first_name"]').val('太郎')
+		form.find('input[name="email"]').val('s.kawakatsu@roseaupensant.jp')
+		form.find('input[name="email_confirm"]').val('s.kawakatsu@roseaupensant.jp')
+		form.find('input[name="tel"]').val('000-0000-0000')
+		form.find('input[name="address"]').val('東京都○○○○○○○○○○○○○○1-1-1○○○○ビル101号室')
+		form.find('textarea[name="notes"]').val('テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります')
 	})
 </script>

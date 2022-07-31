@@ -156,11 +156,6 @@
 		.vanillaForm__inputs {
 			position: relative;
 
-			input[type=radio] {
-				position: absolute;
-				opacity: 0;
-			}
-
 			.vanillaForm__inputLabel {
 				@include flex;
 				align-items: center;
