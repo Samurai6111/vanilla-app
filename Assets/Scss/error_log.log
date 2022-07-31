@@ -40,3 +40,6 @@ Call Stack:
 07/29/22 3:01:50: style.scss - Undefined variable $lightgray_ddd: _p50-button-type1.scss on line 84, at column 3
 Call Stack:
 #0 import _p50-button-type1.scss style.scss on line 6
+07/31/22 8:46:39: style.scss - Undefined variable $lightgray_ddd: _p50-vanilla-form.scss on line 58, at column 8
+Call Stack:
+#0 import _p50-vanilla-form.scss style.scss on line 15

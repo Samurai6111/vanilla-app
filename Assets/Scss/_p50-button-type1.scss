@@ -12,12 +12,11 @@
 	height: 5rem;
 	max-width: 32rem;
 	text-align: center;
-	background-color: $black_000;
 	border: 0.1rem solid $black_000;
 	border-radius: 0.4rem;
 
 	.buttonType1__text {
-		color: $white_fff;
+		color: $black_000;
 		font-size: responsiveValue(1.6rem, 1.4rem);
 		font-weight: 500;
 		letter-spacing: 0.01em;

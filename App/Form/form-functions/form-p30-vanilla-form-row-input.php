@@ -254,18 +254,46 @@ function vanilla_form_input($input) {
 
 /**
  * formの確認ボタンや送信ボタンなどのボタン系を出力する関数
- *
- * @param $input_template
  */
 function vanilla_form_buttons() {
-	?>
-	<?php if (current_form_action('confirm')) { ?>
-		<button class="form__button -bg-lightgray" type="submit" formaction="<?php echo esc_url(s_POST('_wp_http_referer')) ?>">修正する</button>
+	//--------------------------------------------------
+	// 確認ページ
+	//--------------------------------------------------
+	if (current_form_action('confirm')) {
 
-		<button class="form__button" type="submit" formaction="<?php echo esc_url(form_action_url('send')) ?>">送信する</button>
-	<?php } else { ?>
-		<button class="form__button" type="submit" formaction="<?php echo esc_url(form_action_url()); ?>">確認する</button>
+		button_type1([
+			'text' => '修正する',
+			'class' => '-bg-lightgray  -color-black',
+			'img' => 'none',
+			'attr' => 'formaction="' . esc_url(form_action_url('input')) . '" type="submit"',
+		]);
 
-	<?php } ?>
+		button_type1([
+			'text' => '送信する',
+			'class' => '-bg-beige  -color-black',
+			'img' => 'none',
+			'attr' => 'formaction="' . esc_url(form_action_url('send')) . '" type="submit"',
+		]);
+	}
+
+	//--------------------------------------------------
+	// 入力ページ
+	//--------------------------------------------------
+	else {
+
+		button_type1([
+			'text' => '内容を確認',
+			'class' => '-bg-beige  -color-black -large',
+			'img' => 'none',
+			'attr' => 'formaction="' . esc_url(form_action_url()) . '" type="submit"',
+		]);
+
+		button_type1([
+			'text' => '内容をクリア',
+			'class' => '-bg-lightgray   -color-black -clear-inputs',
+			'img' => 'none',
+			'attr' => 'onclick="clear_form_inputs(event)" type="button"',
+		]);
+	} ?>
 <?php
 }

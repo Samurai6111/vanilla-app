@@ -17,13 +17,23 @@
 			@include flex;
 			gap: 1rem;
 
-			@media #{$tab}{
+			@media #{$tab} {
 				flex-direction: column;
-
 			}
 
 			.vanillaForm__label {
 				min-width: 26rem;
+				padding-top: 0.5rem;
+
+				@media #{$tab} {
+					padding-top: 0;
+				}
+
+				.vanillaForm__labelText {
+					font-size: responsiveValue(1.5rem, 1.4rem);
+					font-weight: 600;
+					letter-spacing: 0.05em;
+				}
 			}
 
 			.vanillaForm__inputWrap {
@@ -37,12 +47,19 @@
 					select ,
 					textarea {
 						padding: 0.4rem 0.8rem;
+						border: 0.1rem solid $lightgray_ddd;
+						border-radius: 0.4rem;
 					}
 				}
 
 				.vanillaForm__inputCaption {
 					display: inline-block;
 					width: 100%;
+					margin-top: 0.9rem;
+					font-size: responsiveValue(1.5rem, 1.4rem);
+					font-weight: 500;
+					line-height: 1;
+					letter-spacing: 0;
 				}
 			}
 
@@ -54,11 +71,10 @@
 					@include flex;
 					justify-content: space-between;
 
-					@media #{$tab}{
+					@media #{$tab} {
+						flex-direction: row-reverse;
 						justify-content: flex-end;
 						gap: 1.6rem;
-						flex-direction: row-reverse;
-
 					}
 
 					&::after {
@@ -112,25 +128,71 @@
 		}
 	}
 
-	.vanillaForm__buttonWrap {
-		@include flex;
-		justify-content: center;
-	}
-
 	.vanillaFormPrivacy {
-		border: 1px solid #000;
 		padding: 3.2rem 3rem;
+		border: 0.15rem solid $lightgray_ddd;
+		border-radius: 0.4rem;
 
 		.vanillaFormPrivacy__title {
-			text-align: center;
-			font-weight: 600;
-			font-size: responsiveValue(1.8rem, 1.4rem);
 			margin-bottom: responsiveValue(3.6rem, 2.2rem);
+			font-size: responsiveValue(1.8rem, 1.4rem);
+			font-weight: 600;
+			text-align: center;
 		}
 
 		.vanillaFormPrivacy__text {
-			font-weight: 500;
 			font-size: responsiveValue(1.4rem, 1.2rem);
+			font-weight: 500;
+		}
+	}
+
+	.vanillaForm__privacyCheckboxWrap {
+		@include flex;
+		align-items: center;
+		flex-direction: column;
+		margin-top: 2rem;
+		margin-bottom: responsiveValue(8rem, 5.4rem);
+
+		.vanillaForm__inputs {
+			position: relative;
+
+			input[type=radio] {
+				position: absolute;
+				opacity: 0;
+			}
+
+			.vanillaForm__inputLabel {
+				@include flex;
+				align-items: center;
+				font-size: responsiveValue(1.5rem, 1.2rem);
+				font-weight: 600;
+				letter-spacing: 0.04em;
+			}
+		}
+	}
+
+	.vanillaForm__buttonWrap {
+		@include flex;
+		align-items: center;
+		flex-direction: column;
+		gap: responsiveValue(2rem, 1.5rem);
+
+		& > .buttonType1 {
+			height: 5rem;
+			max-width: 20rem;
+
+			.buttonType1__text {
+				font-size: 1.4rem;
+			}
+
+			&.-large {
+				height: 8rem;
+				max-width: 50rem;
+
+				.buttonType1__text {
+					font-size: responsiveValue(2rem, 1.4rem);
+				}
+			}
 		}
 	}
 
@@ -140,19 +202,25 @@
 	&.-confirm {
 		max-width: 79rem;
 
+		.vanillaForm__rowListCaption {
+			margin-bottom: responsiveValue(10rem, 7rem);
+			font-size: responsiveValue(1.8rem, 1.4rem);
+		}
+
 		.vanillaForm__rowList {
 			gap: 0 ;
-			border-top: 1px solid #000000;
+			margin-bottom: responsiveValue(9rem, 7rem);
+			border-top: 0.1rem solid $lightgray_ddd;
 
 			.vanillaForm__rowItem {
 				padding: 0 3rem;
 				margin-bottom: 0;
-				border-bottom: 1px solid #000000;
+				border-bottom: 1px solid $lightgray_ddd;
 
 				.vanillaForm__label {
 					padding: 2.2rem 0;
 					margin-right: 0.5rem;
-					border-right: 1px solid #000000;
+					border-right: 1px solid $lightgray_ddd;
 
 					.vanillaForm__labelText {
 						&::after {
@@ -162,22 +230,28 @@
 				}
 
 				.vanillaForm__inputWrap {
-					padding: 2.2rem 5rem;
-					border-left: 1px solid #000000;
 					position: relative;
+					padding: 2.2rem 5rem;
+					border-left: 1px solid $lightgray_ddd;
 
-					input,
-					select,
+					.vanillaForm__output {
+						font-size: responsiveValue(1.5rem, 1.4rem);
+						font-weight: 500;
+						letter-spacing: 0.05em;
+					}
+
+					input ,
+					select ,
 					textarea {
 						position: absolute;
 						top: 0;
 						left: 0;
 						width: auto !important;
-						pointer-events: none;
+						width: 0;
+						height: 0;
 						border: none;
 						opacity: 0;
-						height: 0;
-						width: 0;
+						pointer-events: none;
 					}
 
 					.vanillaForm__input {
@@ -185,6 +259,30 @@
 					}
 				}
 			}
+		}
+
+		.vanillaForm__privacyCheckboxWrap {
+			display: none;
+		}
+
+		.vanillaFormPrivacy {
+			display: none;
+		}
+
+		.vanillaForm__confirmText {
+			margin-bottom: 3rem;
+			font-size: responsiveValue(1.5rem, 1.4rem);
+			font-weight: 500;
+			letter-spacing: 0.03em;
+
+			@media #{$tab} {
+				margin-bottom: 4rem;
+			}
+		}
+
+		.vanillaForm__buttonWrap {
+			flex-direction: row;
+			justify-content: center;
 		}
 	}
 }

@@ -68,7 +68,7 @@ class Vanilla_Form_Row_Input_Contents {
 			);
 			?>
 		</div>
-		<?php Vanilla_Form_Row_Input::caption('例）xxxx@hutec.jp'); ?>
+		<?php Vanilla_Form_Row_Input::caption('例）xxxx@example.jp'); ?>
 	<?php
 	}
 
@@ -87,7 +87,7 @@ class Vanilla_Form_Row_Input_Contents {
 			);
 			?>
 		</div>
-		<?php Vanilla_Form_Row_Input::caption('例）xxxx@hutec.jp'); ?>
+		<?php Vanilla_Form_Row_Input::caption('例）xxxx@example.jp'); ?>
 	<?php
 	}
 
