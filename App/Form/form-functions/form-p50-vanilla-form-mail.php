@@ -5,7 +5,7 @@ class Vanilla_Form_Mail {
 	function __construct() {
 		global $domain_email;
 		$this->headers[] = 'From: ' . get_option('blogname') . ' <' . $domain_email . '>';
-		$this->form_submission_key_array = [
+		$this->form_submittion_key_array = [
 			'company_name' => '会社名',
 			'family_name' => 'お名前',
 		];
@@ -41,11 +41,11 @@ class Vanilla_Form_Mail {
 	 *
 	 * @param $_POST のフォームの送信内容
 	 */
-	function format_form_submittion($submitted_array) {
-		global $form_submission_key_array;
+	function format_form_submittion($submitted_array, $form_submittion_key_array) {
+		// global $form_submittion_key_array;
 
 
-		foreach ($form_submission_key_array as $form_submittion_key => $form_submition_value_array) {
+		foreach ($form_submittion_key_array as $form_submittion_key => $form_submition_value_array) {
 			//--------------------------------------------------
 			// $submitted_array[$form_submittion_key]が存在する場合
 			// 言い換えると$_POSTの値をそのまま使用する場合
