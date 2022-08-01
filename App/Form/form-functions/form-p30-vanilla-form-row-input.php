@@ -11,10 +11,14 @@ class Vanilla_Form_Row_Input {
 		$this->Vanilla_User = new Vanilla_User($user_id);
 	}
 
-	//--------------------------------------------------
-	// テキスト,メール、telとか
-	//--------------------------------------------------
-	function basic_input($type = 'radio', $args = []) {
+
+	/**
+	 * テキスト,メール、telなどのベーシックなinputタグ
+	 *
+	 * @param string $type inputのタイプ text, email, numberのいずれか
+	 * @param array $args inputのargument
+	 */
+	function basic_input($type, $args = []) {
 		//--------------------------------------------------
 		// 初期値
 		//--------------------------------------------------
@@ -22,6 +26,7 @@ class Vanilla_Form_Row_Input {
 			'name' => '',
 			'placeholder' => '',
 			'value' => '',
+			'attr' => '',
 		];
 		//--------------------------------------------------
 		// 変数の変更
@@ -34,7 +39,7 @@ class Vanilla_Form_Row_Input {
 		$name = $args['name'];
 		$value = isset($_POST[$name]) ? sanitize_text_field($_POST[$name]) : $args['value'];
 ?>
-		<input type="<?php echo esc_attr($type) ?>" placeholder="<?php echo esc_attr($args['placeholder']) ?>" name="<?php echo esc_attr($args['name']) ?>" value="<?php echo esc_attr($value) ?>">
+		<input type="<?php echo esc_attr($type) ?>" placeholder="<?php echo esc_attr($args['placeholder']) ?>" name="<?php echo esc_attr($args['name']) ?>" value="<?php echo esc_attr($value) ?>" <?php echo esc_attr($args['attr']) ?>>
 
 		<?php
 		//--------------------------------------------------
@@ -49,25 +54,43 @@ class Vanilla_Form_Row_Input {
 	}
 
 
-	//--------------------------------------------------
-	// テキスト
-	//--------------------------------------------------
+	/**
+	 * テキストのinput
+	 *
+	 * @param array $args inputのargument
+	 */
 	static function text($args = []) {
 		return self::basic_input('text', $args);
 	}
 
 
-	//--------------------------------------------------
-	// メール
-	//--------------------------------------------------
+	/**
+	 * メールのinput
+	 *
+	 * @param array $args inputのargument
+	 */
 	static function email($args = []) {
 		return self::basic_input('email', $args);
 	}
 
 
-	//--------------------------------------------------
-	// ラジオボタンとチェックボックス
-	//--------------------------------------------------
+	/**
+	 * 数字のinput
+	 *
+	 * @param array $args inputのargument
+	 */
+	static function number($args = []) {
+		return self::basic_input('number', $args);
+	}
+
+
+
+	/**
+	 * ラジオボタンとチェックボックスなどのinputタグ
+	 *
+	 * @param string $type inputのタイプ radio, checkboxのいずれか
+	 * @param array $args inputのargument
+	 */
 	function radio_and_checkbox($type = 'radio', $args = []) {
 		//--------------------------------------------------
 		// 初期値
@@ -108,14 +131,13 @@ class Vanilla_Form_Row_Input {
 		$value = $args['value'];
 	?>
 
+		<input id="<?php echo esc_attr($args['id']) ?>" <?php echo esc_attr($args['attr']) ?> type="<?php echo esc_attr($type) ?>" placeholder="<?php echo esc_attr($args['placeholder']) ?>" name="<?php echo esc_attr($name) ?>" value="<?php echo esc_attr($value) ?>" <?php echo esc_attr($checked) ?>>
+
+
 		<label for="<?php echo esc_attr($args['id']) ?>" class="vanillaForm__inputLabel">
-			<input id="<?php echo esc_attr($args['id']) ?>" <?php echo esc_attr($args['attr']) ?> type="<?php echo esc_attr($type) ?>" placeholder="<?php echo esc_attr($args['placeholder']) ?>" name="<?php echo esc_attr($name) ?>" value="<?php echo esc_attr($value) ?>" <?php echo esc_attr($checked) ?>>
-
-
-			<span class="vanillaForm__inputLabelText">
-				<?php echo wp_kses_post($args['text']) ?>
-			</span>
+			<?php echo wp_kses_post($args['text']) ?>
 		</label>
+
 
 		<?php
 		//--------------------------------------------------
@@ -130,25 +152,31 @@ class Vanilla_Form_Row_Input {
 	}
 
 
-	//--------------------------------------------------
-	// ラジオボタン
-	//--------------------------------------------------
+	/**
+	 * ラジオボタンのinput
+	 *
+	 * @param array $args inputのargument
+	 */
 	static function radio($args = []) {
 		return self::radio_and_checkbox('radio', $args);
 	}
 
 
-	//--------------------------------------------------
-	// チェックボックス
-	//--------------------------------------------------
+	/**
+	 * チェックボックスのinput
+	 *
+	 * @param array $args inputのargument
+	 */
 	static function checkbox($args = []) {
 		return self::radio_and_checkbox('checkbox', $args);
 	}
 
 
-	//--------------------------------------------------
-	// テキストエリア
-	//--------------------------------------------------
+	/**
+	 * テキストエリア
+	 *
+	 * @param array $args inputのargument
+	 */
 	static function textarea($args = []) {
 		//--------------------------------------------------
 		// 初期値
@@ -184,9 +212,11 @@ class Vanilla_Form_Row_Input {
 	}
 
 
-	//--------------------------------------------------
-	// セレクトボックス
-	//--------------------------------------------------
+	/**
+	 * セレクトボックス
+	 *
+	 * @param array $args inputのargument
+	 */
 	static function selectbox($args = []) {
 		//--------------------------------------------------
 		// 配列の例
@@ -263,14 +293,14 @@ function vanilla_form_buttons() {
 
 		button_type1([
 			'text' => '修正する',
-			'class' => '-bg-lightgray  -color-black',
+			'class' => '-bg-lightgray -color-black',
 			'img' => 'none',
 			'attr' => 'formaction="' . esc_url(form_action_url('input')) . '" type="submit"',
 		]);
 
 		button_type1([
 			'text' => '送信する',
-			'class' => '-bg-beige  -color-black',
+			'class' => '-bg-beige -color-black',
 			'img' => 'none',
 			'attr' => 'formaction="' . esc_url(form_action_url('send')) . '" type="submit"',
 		]);
@@ -283,14 +313,14 @@ function vanilla_form_buttons() {
 
 		button_type1([
 			'text' => '内容を確認',
-			'class' => '-bg-beige  -color-black -large',
+			'class' => '-bg-beige -color-black -large',
 			'img' => 'none',
 			'attr' => 'formaction="' . esc_url(form_action_url()) . '" type="submit"',
 		]);
 
 		button_type1([
 			'text' => '内容をクリア',
-			'class' => '-bg-lightgray   -color-black -clear-inputs',
+			'class' => '-bg-lightgray  -color-black -clear-inputs',
 			'img' => 'none',
 			'attr' => 'onclick="clear_form_inputs(event)" type="button"',
 		]);
