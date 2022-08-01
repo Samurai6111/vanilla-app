@@ -35,63 +35,26 @@ class Vanilla_Form_Mail {
 		return $email_subject;
 	}
 
-
 	/**
-	 * フォームから送信された内容をメール文の形にフォーマットする
-	 *
-	 * @param $_POST のフォームの送信内容
-	 */
-	function format_form_submittion($submitted_array, $form_submittion_key_array) {
-		// global $form_submittion_key_array;
-
-
-		foreach ($form_submittion_key_array as $form_submittion_key => $form_submition_value_array) {
-			//--------------------------------------------------
-			// $submitted_array[$form_submittion_key]が存在する場合
-			// 言い換えると$_POSTの値をそのまま使用する場合
-			//--------------------------------------------------
-			if (isset($submitted_array[$form_submittion_key])) {
-				$form_submition_value = $submitted_array[$form_submittion_key];
-			}
-			//--------------------------------------------------
-			// $_POSTの値を加工する必要があるもの
-			//--------------------------------------------------
-			else {
-				// ---------- 氏名 ----------
-				if ($form_submittion_key === 'full_name') {
-					$form_submition_value =
-						vanilla_array($submitted_array, 'last_name') .
-						vanilla_array($submitted_array, 'first_name');
-				}
-			}
-
-			if ($form_submition_value) {
-				$form_submition_value_array['value'] = $form_submition_value;
-				$format_submittion_array[$form_submittion_key] = $form_submition_value_array;
-			}
-		}
-
-		return $format_submittion_array;
-	}
-
-
-	/**
-	 * フォームの送信内容を取得する
-	 */
-	private function email_submitted_contents($array) {
+	* フォームの送信内容を取得する
+	*
+	* @param array $form_submitted_values post送信の中身($_POST)
+	* @param array $form_key_jap_array post送信のキーと日本語訳の配列
+	*/
+	static function get_form_values_to_string($form_submitted_values, $form_key_jap_array) {
 		$wrap = "=========================================\n";
 
 		$submitted_contents = $wrap;
 
-		foreach ($array as $key => $value) {
-			if (!isset($value['value'])) {
+		foreach ($form_submitted_values as $key => $value) {
+			if (!isset($form_key_jap_array[$key])) {
 				continue;
 			} else {
-				$ef__variable_ja = $value['name'];
-				$ef__variable_value = $value['value'];
-				$submitted_content = $ef__variable_ja
+				$jap_label = $form_key_jap_array[$key];
+				$submitted_content =
+					$jap_label
 					. ' : '
-					. $ef__variable_value
+					. $value
 					. "\n";
 
 				$submitted_contents .= $submitted_content;
@@ -109,7 +72,7 @@ class Vanilla_Form_Mail {
 	 *
 	 * @param $submitted_array $_POSTの中身
 	 */
-	function register_email_message_to_client($submitted_array) {
+	function email_message_to_client($email_submitted_contents) {
 		global $email_signature;
 		$email_message_head
 			= "HPからお問い合わせがありました\n"
@@ -118,7 +81,7 @@ class Vanilla_Form_Mail {
 		$email_message_body =
 			"以下お客様のご入力内容です。\n"
 			. "\n"
-			. $this->email_submitted_contents($submitted_array)
+			. $email_submitted_contents
 			. "\n";
 
 		$email_message_footer
@@ -136,37 +99,6 @@ class Vanilla_Form_Mail {
 
 
 	/**
-	 * メールの本文（ユーザー宛）
-	 *
-	 * @param $submitted_array $_POSTの中身
-	 */
-	function register_email_message_to_user($submitted_array) {
-		global $email_signature;
-		$email_message_head
-			= "お問い合わせいただきありがとうございました。\n"
-			. "\n";
-
-		$email_message_body =
-			"以下お客様のご入力内容です。\n"
-			. "\n"
-			. $this->email_submitted_contents($submitted_array)
-			. "\n";
-
-		$email_message_footer
-			= "担当のものから3営業日以内にお返事いたします。 \n"
-			. "\n"
-			. $email_signature
-			. "\n";
-
-		$email_message
-			= $email_message_head
-			. $email_message_body
-			. $email_message_footer;
-
-		return $email_message;
-	}
-
-	/**
 	 * メールを送る関数
 	 *
 	 */
@@ -176,7 +108,7 @@ class Vanilla_Form_Mail {
 			$subject,
 			$message,
 			$headers,
-			$attachments,
+			$attachments
 		);
 
 		return $wp_mail;
