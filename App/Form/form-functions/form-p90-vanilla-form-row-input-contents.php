@@ -43,13 +43,20 @@ class Vanilla_Form_Row_Input_Contents {
 				Vanilla_Form_Row_Input::text(
 					[
 						'name' => 'first_name',
-					],
+					]
 				);
-
 				Vanilla_Form_Row_Input::caption('例）太郎');
 				?>
 			</div>
 		</div>
+
+		<?php if (vanilla_is_current_form_action('confirm')) {
+				$family_name = s_POST('family_name');
+				$first_name = s_POST('first_name');
+				$full_name = $family_name . $first_name;
+				?>
+				<input type="hidden" name="full_name" value="<?php echo esc_attr($full_name) ?>">
+				<?php } ?>
 	<?php
 	}
 
@@ -131,18 +138,18 @@ class Vanilla_Form_Row_Input_Contents {
 	// お問い合わせ内容
 	//--------------------------------------------------
 	function notes() {
-		?>
-			<div class="vanillaForm__inputs">
-				<?php
-				Vanilla_Form_Row_Input::textarea(
-					[
-						'name' => 'notes',
-					]
-				)
-				?>
-			</div>
-		<?php
-		}
+	?>
+		<div class="vanillaForm__inputs">
+			<?php
+			Vanilla_Form_Row_Input::textarea(
+				[
+					'name' => 'notes',
+				]
+			)
+			?>
+		</div>
+	<?php
+	}
 
 	//--------------------------------------------------
 	// プライバシーポリシー 同意
