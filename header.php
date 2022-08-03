@@ -67,5 +67,5 @@
 	?>
 
 	<?php
-	include(get_theme_file_path() . "/Headers/header--vanilla.php");
+	include(get_theme_file_path() . "/Headers/header-vanilla.php");
 	?>

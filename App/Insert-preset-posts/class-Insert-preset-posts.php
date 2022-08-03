@@ -14,7 +14,7 @@ class Insert_Preset_Posts {
 	/*------------------------------------------------*/
 	static function vanilla_register_taxonomies() {
 		// ---------- ファイルインクルード ----------
-		require dirname(__FILE__) . '/Variables/variable-p10-studio-taxonomies.php';
+		require dirname(__FILE__) . '/Variables/variable-p10-taxonomies.php';
 
 		// ---------- 処理実行 ----------
 		foreach ($taxonomies as $taxonomy_slug => $taxonomy_name) {
@@ -44,7 +44,7 @@ class Insert_Preset_Posts {
 	/*------------------------------------------------*/
 	static function vanilla_insert_parent_terms() {
 		// ---------- ファイルインクルード ----------
-		require_once dirname(__FILE__) . '/Variables/variable-p20-studio-parent-terms.php';
+		require_once dirname(__FILE__) . '/Variables/variable-p20-parent-terms.php';
 
 		// ---------- 親term登録実行 ----------
 		foreach ($parent_terms_list as $taxonomy_slug => $parent_terms) {
@@ -69,7 +69,7 @@ class Insert_Preset_Posts {
 	/*------------------------------------------------*/
 	static function vanilla_insert_child_terms() {
 		// ---------- ファイルインクルード ----------
-		require_once dirname(__FILE__) . '/Variables/variable-p30-studio-child-terms.php';
+		require_once dirname(__FILE__) . '/Variables/variable-p30-child-terms.php';
 
 		$taxonomy_slug = 'group';
 
@@ -99,7 +99,7 @@ class Insert_Preset_Posts {
 	//--------------------------------------------------
 	static function vanilla_register_acf_to_terms() {
 		// ---------- ファイルインクルード ----------
-		require_once dirname(__FILE__) . '/Variables/variable-p40-studio-terms-acf.php';
+		require_once dirname(__FILE__) . '/Variables/variable-p40-terms-acf.php';
 
 		foreach ($terms_acf_fields as $terms_acf_field) {
 
@@ -126,7 +126,7 @@ class Insert_Preset_Posts {
 	//--------------------------------------------------
 	static function vanilla_insert_meta_value_to_terms() {
 		// ---------- ファイルインクルード ----------
-		require_once dirname(__FILE__) . '/Variables/variable-p50-studio-terms-meta.php';
+		require_once dirname(__FILE__) . '/Variables/variable-p50-terms-meta.php';
 
 		foreach ($terms_meta_array as $taxonomy_name => $terms_meta) {
 			//--------------------------------------------------
@@ -149,7 +149,7 @@ class Insert_Preset_Posts {
 	//--------------------------------------------------
 	static function vanilla_insert_posts() {
 		// ---------- ファイルインクルード ----------
-		require_once dirname(__FILE__) . '/Variables/variable-p60-studio-posts.php';
+		require_once dirname(__FILE__) . '/Variables/variable-p60-posts.php';
 		foreach ($posts as $post) {
 
 			if (!vanilla_the_slug_exists($post['post_slug'])) {
@@ -175,7 +175,7 @@ class Insert_Preset_Posts {
 	//--------------------------------------------------
 	static function vanilla_set_post_terms() {
 		// ---------- ファイルインクルード ----------
-		require_once dirname(__FILE__) . '/Variables/variable-p70-studio-post-terms.php';
+		require_once dirname(__FILE__) . '/Variables/variable-p70-post-terms.php';
 
 		foreach ($post_terms as $post_slug => $post_term_list) {
 			$post = get_page_by_path($post_slug, OBJECT, 'post');
@@ -206,7 +206,7 @@ class Insert_Preset_Posts {
 	//--------------------------------------------------
 	static function vanilla_register_acf_to_posts() {
 		// ---------- ファイルインクルード ----------
-		require_once dirname(__FILE__) . '/Variables/variable-p80-studio-post-acf.php';
+		require_once dirname(__FILE__) . '/Variables/variable-p80-post-acf.php';
 
 		if (function_exists('acf_add_local_field_group')) {
 			acf_add_local_field_group([
@@ -230,7 +230,7 @@ class Insert_Preset_Posts {
 	//--------------------------------------------------
 	static function vanilla_insert_meta_value_to_posts() {
 		// ---------- ファイルインクルード ----------
-		require_once dirname(__FILE__) . '/Variables/variable-p90-studio-post-meta.php';
+		require_once dirname(__FILE__) . '/Variables/variable-p90-post-meta.php';
 
 		foreach ($pos_meta_array as $slug => $meta_array) {
 			$post_id = get_page_by_path($slug, OBJECT, 'post')->ID;
@@ -246,16 +246,16 @@ class Insert_Preset_Posts {
 //--------------------------------------------------
 // 実行
 //--------------------------------------------------
-add_action('admin_head', 'Insert_Posts::vanilla_unregister_default_taxonomy');
-add_action('init', 'Insert_Posts::vanilla_register_taxonomies');
-add_action('init', 'Insert_Posts::vanilla_insert_parent_terms');
-add_action('init', 'Insert_Posts::vanilla_insert_child_terms');
-add_action('init', 'Insert_Posts::vanilla_register_acf_to_terms');
-add_action('init', 'Insert_Posts::vanilla_insert_meta_value_to_terms');
-add_action('init', 'Insert_Posts::vanilla_insert_posts');
-add_action('init', 'Insert_Posts::vanilla_set_post_terms');
-add_action('init', 'Insert_Posts::vanilla_register_acf_to_posts');
-add_action('init', 'Insert_Posts::vanilla_insert_meta_value_to_posts');
+add_action('admin_head', 'Insert_Preset_Posts::vanilla_unregister_default_taxonomy');
+add_action('init', 'Insert_Preset_Posts::vanilla_register_taxonomies');
+add_action('init', 'Insert_Preset_Posts::vanilla_insert_parent_terms');
+add_action('init', 'Insert_Preset_Posts::vanilla_insert_child_terms');
+add_action('init', 'Insert_Preset_Posts::vanilla_register_acf_to_terms');
+add_action('init', 'Insert_Preset_Posts::vanilla_insert_meta_value_to_terms');
+add_action('init', 'Insert_Preset_Posts::vanilla_insert_posts');
+add_action('init', 'Insert_Preset_Posts::vanilla_set_post_terms');
+add_action('init', 'Insert_Preset_Posts::vanilla_register_acf_to_posts');
+add_action('init', 'Insert_Preset_Posts::vanilla_insert_meta_value_to_posts');
 
 
 
@@ -283,7 +283,7 @@ function vanilla_reset_posts() {
 	// taxonomy削除
 	//--------------------------------------------------
 	// ---------- ファイルインクルード ----------
-	require dirname(__FILE__) . '/Variables/variable-p10-studio-taxonomies.php';
+	require dirname(__FILE__) . '/Variables/variable-p10-taxonomies.php';
 
 	foreach ($taxonomies as $taxonomy_slug => $taxonomy_name) {
 		register_taxonomy($taxonomy_slug, array());
@@ -297,7 +297,7 @@ function vanilla_reset_posts() {
 	// 親ターム削除
 	//--------------------------------------------------
 	// ---------- ファイルインクルード ----------
-	require dirname(__FILE__) . '/Variables/variable-p20-studio-parent-terms.php';
+	require dirname(__FILE__) . '/Variables/variable-p20-parent-terms.php';
 	foreach ($parent_terms_list as $taxnonmy_name => $parent_terms) {
 		foreach ($parent_terms as $parent_term_slug => $parent_term_name) {
 			$term_id = get_term_by('slug', $parent_term_slug, $taxnonmy_name)->term_id;
@@ -309,7 +309,7 @@ function vanilla_reset_posts() {
 	// 子ターム削除
 	//--------------------------------------------------
 	// ---------- ファイルインクルード ----------
-	require dirname(__FILE__) . '/Variables/variable-p30-studio-child-terms.php';
+	require dirname(__FILE__) . '/Variables/variable-p30-child-terms.php';
 	$taxonomy_slug = 'group';
 	// ---------- 親term登録実行 ----------
 	foreach ($child_terms_list as $parent_term_slug => $child_terms) {
@@ -323,7 +323,7 @@ function vanilla_reset_posts() {
 	// studio削除
 	//--------------------------------------------------
 	// ---------- ファイルインクルード ----------
-	require dirname(__FILE__) . '/Variables/variable-p60-studio-posts.php';
+	require dirname(__FILE__) . '/Variables/variable-p60-posts.php';
 	foreach ($posts as $post) {
 		$post_id = get_page_by_path($post['post_slug'], OBJECT, 'post')->ID;
 		wp_delete_post($post_id, true);

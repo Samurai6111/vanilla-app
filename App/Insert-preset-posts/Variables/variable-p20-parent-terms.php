@@ -1,5 +1,5 @@
 <?php
-$studio_parent_terms_list = [
+$parent_terms_list = [
 	'group' => [
 		'basil-group' => 'バジルグループ',
 		'pastis-group' => 'パスティスグループ',

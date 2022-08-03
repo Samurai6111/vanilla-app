@@ -1,5 +1,5 @@
 <?php
-$studio_child_terms_list = [
+$child_terms_list = [
 	'basil-group' => [
 		'studio-basil' => 'スタジオバジル',
 		'studio-lemon-lime' => 'スタジオレモンライム',

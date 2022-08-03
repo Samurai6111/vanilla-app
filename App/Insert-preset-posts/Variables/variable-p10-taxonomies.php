@@ -1,5 +1,5 @@
 <?php
-$studio_taxonomies = [
+$taxonomies = [
 	// 'slug' => 'name',
 	'group' => 'GROUP',
 	'taste' => 'TASTE',
