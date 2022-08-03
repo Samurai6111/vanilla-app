@@ -18,6 +18,14 @@
 	}
 }
 
+table.-sp-only {
+	display: none;
+
+	@media #{$tab} {
+		display: table;
+	}
+}
+
 .-sp-only-block {
 	display: none;
 
@@ -31,6 +39,10 @@
 	text-align: center;
 }
 
+.-tar {
+	text-align: right;
+}
+
 // ---------- hover時のポインター ----------
 .-hover-pointer {
 	transition: 0.3s;
@@ -40,6 +52,7 @@
 		cursor: pointer;
 	}
 }
+
 
 .-color-red {
 	color: red;
@@ -60,6 +73,7 @@
 	background-color: $white_fff;
 }
 
+
 // ---------- flex ----------
 .-flex {
 	display: flex;
@@ -69,4 +83,18 @@
 .-tategaki {
 	-ms-writing-mode: tb-rl;
 	    writing-mode: vertical-rl;
+}
+
+.-position-sticky {
+	position: -webkit-sticky;
+	position:         sticky;
+	top: 0;
+}
+
+.-mh-100vh {
+	min-height: 100vh;
+}
+
+.-ws-nowrap {
+	white-space: nowrap;
 }
