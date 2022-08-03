@@ -232,7 +232,7 @@ class Insert_Preset_Posts {
 		// ---------- ファイルインクルード ----------
 		require_once dirname(__FILE__) . '/Variables/variable-p90-post-meta.php';
 
-		foreach ($pos_meta_array as $slug => $meta_array) {
+		foreach ($post_meta_array as $slug => $meta_array) {
 			$post_id = get_page_by_path($slug, OBJECT, 'post')->ID;
 			foreach ($meta_array as $meta_key => $meta_value) {
 				if (function_exists('update_field')) {

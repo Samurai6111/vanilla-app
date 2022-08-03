@@ -1,5 +1,5 @@
 <?php
-$studio_posts = [
+$posts = [
 	[
 		'post_slug' => 	'test',
 		'post_title' => 	'テスト',

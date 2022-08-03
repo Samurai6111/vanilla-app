@@ -1,5 +1,5 @@
 <?php
-$studio_post_terms = [
+$post_terms = [
 	'uehara-1f' => [
 		'group' => 'pastis-uehara',
 		'taste' => ['natural'],

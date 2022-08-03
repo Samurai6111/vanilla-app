@@ -19,14 +19,6 @@ $studio_posts_acf_fields = [
 			'layout' => 'block',
 			'sub_fields' => [
 				[
-					'key' => 'studio_topic_slug',
-					'label' => 'トピックのターム',
-					'name' => 'studio_topic_slug',
-					'type' => 'select',
-					'choices' => vanilla_get_topics(),
-					'return_format' => ''
-				],
-				[
 					'key' => 'studio_topic_text',
 					'label' => 'トピックのリード文章',
 					'name' => 'studio_topic_text',
