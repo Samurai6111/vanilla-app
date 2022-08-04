@@ -200,10 +200,15 @@ add_action('manage_event_posts_custom_column', 'display_event_posts_custom_colum
 function vanilla_custom_admin_style() {
 	?>
 	<style>
-    body, td, textarea, input, select {
-      font-family: "Lucida Grande";
-      font-size: 12px;
-    }
+		.acf-field.acf-field-checkbox .acf-checkbox-list {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		.acf-field.acf-field-checkbox .acf-checkbox-list > li {
+			width: 33%;
+			margin: 0;
+		}
   </style>
 	<?php
 }
