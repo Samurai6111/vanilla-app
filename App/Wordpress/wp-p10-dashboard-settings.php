@@ -193,3 +193,18 @@ function display_event_posts_custom_column($column, $post_id)
 	}
 }
 add_action('manage_event_posts_custom_column', 'display_event_posts_custom_column', 10, 2);
+
+/**
+* 管理画面に独自のスタイルを挿入する
+*/
+function vanilla_custom_admin_style() {
+	?>
+	<style>
+    body, td, textarea, input, select {
+      font-family: "Lucida Grande";
+      font-size: 12px;
+    }
+  </style>
+	<?php
+}
+add_action('admin_head', 'vanilla_custom_admin_style');
