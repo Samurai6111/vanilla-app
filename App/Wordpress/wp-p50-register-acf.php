@@ -60,12 +60,14 @@ if (function_exists('acf_add_local_field_group')) {
 				'key' => 'price',
 				'label' => 'price',
 				'name' => 'price',
-				'type' => 'text',
+				'type' => 'select',
 				'choices' => [
 					'デフォルトあり, 数字:960, 単位:並' => [
-						'default' => true,
-						'number' => 960,
-						'unit' => '並',
+						[
+							'default' => true,
+							'number' => 960,
+							'unit' => '並',
+						]
 					],
 					'デフォルトなし, 数字:1000, 単位:並' => [
 						'default' => false,
@@ -99,15 +101,20 @@ if (function_exists('acf_add_local_field_group')) {
 				'key' => 'takeoutAvailability',
 				'label' => 'takeoutAvailability',
 				'name' => 'takeoutAvailability',
-				'type' => 'text',
+				'type' => 'select',
+				'choices' => [
+					'お持ち帰り可',
+					'お持ち帰り不可',
+				],
 			],
 			[
 				'key' => 'takeoutOnly',
 				'label' => 'takeoutOnly',
 				'name' => 'takeoutOnly',
+				'type' => 'select',
 				'choices' => [
-					'可' => true,
-					'不可' => false
+					'可',
+					'不可',
 				],
 			],
 		],
