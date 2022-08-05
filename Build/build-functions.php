@@ -12,6 +12,7 @@ global $wpdb;
  *
  * @param $date 日付
  * @param $format フォーマット文章
+ * @return $carbon_formated_data フォーマット化された日付のデータ
  */
 // function carbon_formatting($date, $format = 'Y-n-j H:i:s')
 // {
@@ -37,9 +38,10 @@ global $wpdb;
 // }
 
 /**
- * ランダムな数を出力
+ * 「1234567890abcdefghijklmnopqrstuvwxyz」の中からランダムな文字列を出力する関数
  *
  * @param $length 桁数
+ * @return ランダムな文字列
  */
 function vanilla_random($length = 16)
 {
@@ -48,6 +50,8 @@ function vanilla_random($length = 16)
 
 /**
  * 現在のURLをパラメータ付きで取得する
+ *
+ * @return パラメータ含む現在のURL
  */
 function vanilla_get_current_link()
 {
@@ -58,6 +62,7 @@ function vanilla_get_current_link()
  * 特定のスラッグを持つ投稿がデータベース上に存在する場合の関数
  *
  * @param $post_name 投稿スラッグ
+ * @return boolean
  */
 function vanilla_the_slug_exists($post_name)
 {
@@ -78,6 +83,7 @@ function vanilla_the_slug_exists($post_name)
  *
  * @param $filed ユーザーの情報を参照するフィールド(id, email, user_login, slug)
  * @param $user ユーザーの情報
+ * @return boolean
  */
 function vanilla_user_exists($field, $user)
 {
