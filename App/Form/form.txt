@@ -1,4 +1,4 @@
-/form-functions.phpについて
+/Functions.phpについて
 ・概要
 →フォームに関する処理がまとめられているフォルダ
 

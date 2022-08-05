@@ -3,7 +3,7 @@
 /*--------------------------------------------------
 /* /AppChild/form/ef--functions/内のファイルを全てインクルード
 /*------------------------------------------------*/
-$dir = get_theme_file_path() . '/App/Form/form-functions/';
+$dir = get_theme_file_path() . '/App/Form/Functions/';
 $filelist = glob($dir . '*.php');
 foreach ($filelist as $filepath) {
 	$pieces = explode('/', $filepath);
