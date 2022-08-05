@@ -39,9 +39,18 @@ get_header(); ?>
 				$json = json_encode($array);
 
 
-				// echo '<pre>';
-				// var_dump($json);
-				// echo '</pre>';
+				echo '<pre>';
+				var_dump('zxdfkajsd;lfj');
+				var_dump('zxdfkajsd;lfj');
+				var_dump('zxdfkajsd;lfj');
+				var_dump('zxdfkajsd;lfj');
+				var_dump('zxdfkajsd;lfj');
+				var_dump('zxdfkajsd;lfj');
+				var_dump('zxdfkajsd;lfj');
+				var_dump('zxdfkajsd;lfj');
+				var_dump('zxdfkajsd;lfj');
+				echo '</pre>';
+				echo $json;
 				 ?>
 			</ul>
 
