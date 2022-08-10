@@ -166,7 +166,7 @@ function ovd($var_dump)
  */
 function num($number) {
 
-	if (is_int($number)) {
+	if (is_int((int)$number)) {
 		$return = number_format($number);
 
 		return $return;
