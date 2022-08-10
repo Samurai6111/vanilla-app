@@ -1,16 +1,28 @@
 // ---------- アコーディオン ----------
 $(function () {
-	var target = $(".js__accordion__header");
+	let target = $(".js__accordion__header");
 	if (target) {
-		// target.next().hide();
+		target.each(function () {
+			if ($(this).hasClass('-accourdion-header-active')) {
+				$(this).next().show()
+			} else {
+				$(this).next().hide()
+			}
+
+		})
+
 		target.on("click", function () {
 			$(this).toggleClass("-accourdion-header-active");
-			$(this)
-				.next()
-				.css({
-					height: "100%",
-				})
-				.slideToggle();
+
+			if ($(this).hasClass('-accourdion-header-active')) {
+				$(this)
+					.next()
+					.slideDown();
+			} else {
+				$(this)
+					.next()
+					.slideUp();
+			}
 		});
 	}
 });
