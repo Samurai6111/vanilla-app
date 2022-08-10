@@ -164,9 +164,13 @@ function ovd($var_dump)
  *
  * @param $num 数字
  */
-function num($number)
-{
-	return number_format($number);
+function num($number) {
+
+	if (is_int($number)) {
+		$return = number_format($number);
+
+		return $return;
+	}
 }
 
 /**
