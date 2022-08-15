@@ -338,3 +338,17 @@ function vanilla_get_attachment_post_id($slug) {
 
 	return $thumbnail_id;
 }
+
+/**
+* カスタムフィールドのinstrcutions用に使う画像を出力する関数
+*
+* @param string $img_path 画像のパス
+*/
+function vanilla_acf_instruction_img($img_path) {
+	$return =
+	'<img src="'
+	. get_theme_file_path() . '/Img/Dashboard/Acf' .
+	$img_path .'">';
+
+	return $return;
+}
