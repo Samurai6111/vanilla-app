@@ -43,8 +43,7 @@ global $wpdb;
  * @param $length 桁数
  * @return ランダムな文字列
  */
-function vanilla_random($length = 16)
-{
+function vanilla_random($length = 16) {
 	return substr(str_shuffle('1234567890abcdefghijklmnopqrstuvwxyz'), 0, $length);
 }
 
@@ -53,8 +52,7 @@ function vanilla_random($length = 16)
  *
  * @return パラメータ含む現在のURL
  */
-function vanilla_get_current_link()
-{
+function vanilla_get_current_link() {
 	return (is_ssl() ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 }
 
@@ -64,8 +62,7 @@ function vanilla_get_current_link()
  * @param $post_name 投稿スラッグ
  * @return boolean
  */
-function vanilla_the_slug_exists($post_name)
-{
+function vanilla_the_slug_exists($post_name) {
 	global $wpdb;
 	if ($wpdb->get_row(
 		"SELECT post_name FROM wp_posts
@@ -85,8 +82,7 @@ function vanilla_the_slug_exists($post_name)
  * @param $user ユーザーの情報
  * @return boolean
  */
-function vanilla_user_exists($field, $user)
-{
+function vanilla_user_exists($field, $user) {
 	global $wpdb;
 	$count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $wpdb->users WHERE $field =  %s", $user));
 	if ($count == 1) {
@@ -100,8 +96,7 @@ function vanilla_user_exists($field, $user)
  * リダイレクト関数がheaderの下でも動くように
  */
 add_action('init', 'vanilla_do_output_buffer');
-function vanilla_do_output_buffer()
-{
+function vanilla_do_output_buffer() {
 	ob_start();
 }
 
@@ -110,8 +105,7 @@ function vanilla_do_output_buffer()
  *
  * @param $post_id 投稿id
  */
-function vanilla_delete_post_link($post_id)
-{
+function vanilla_delete_post_link($post_id) {
 	$post = get_post($post_id);
 	$post_type = get_post_type($post_id);
 	$delete_link = wp_nonce_url(admin_url() . "post.php", "post=" . $post_id . "&action=delete");
@@ -122,8 +116,7 @@ function vanilla_delete_post_link($post_id)
  * 開発者用の条件分岐関数
  * wp_optionsのadmin_emailでログインしていた場合にtrueを返す
  */
-function is_developer()
-{
+function is_developer() {
 	$login_email = get_option('admin_email');
 	$user_id = get_current_user_id();
 	$user_info_array = get_user_by('id', $user_id);
@@ -140,8 +133,7 @@ function is_developer()
 /**
  * ローカル環境の条件分岐
  */
-function is_local($whitelist = ['127.0.0.1', '::1'])
-{
+function is_local($whitelist = ['127.0.0.1', '::1']) {
 	return in_array($_SERVER['REMOTE_ADDR'], $whitelist);
 }
 
@@ -150,8 +142,7 @@ function is_local($whitelist = ['127.0.0.1', '::1'])
  *
  * @param $var_dump dumpしたい値
  */
-function ovd($var_dump)
-{
+function ovd($var_dump) {
 	ob_start();
 	var_dump($var_dump);
 	$dump = ob_get_contents();
@@ -166,11 +157,21 @@ function ovd($var_dump)
  */
 function num($number) {
 
-	if (is_int((int)$number)) {
-		$return = number_format($number);
+	// エラー時に例外をスローするように登録
+	set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+		if (!(error_reporting() & $errno)) {
+			return;
+		}
+		throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
+	});
 
-		return $return;
+	try {
+		$return = number_format($number);
+	} catch (Exception $e) {
+		$return = '';
 	}
+
+	return $return;
 }
 
 /**
@@ -178,8 +179,7 @@ function num($number) {
  *
  * @param $
  */
-function vanilla_paged()
-{
+function vanilla_paged() {
 	// ---------- ページネーション ----------
 	if (get_query_var('paged')) {
 		$paged = get_query_var('paged');
@@ -198,14 +198,12 @@ function vanilla_paged()
  *
  * @param $request $_POSTや＄_GET
  */
-function vanilla_sanitize_array($request)
-{
-  $sanitized = [];
+function vanilla_sanitize_array($request) {
+	$sanitized = [];
 	foreach ($request as $request_key => $request_value) {
 
 		if (!is_array($request_value)) {
 			$sanitized[$request_key] = htmlspecialchars($request_value, ENT_QUOTES, 'UTF-8');
-
 		} else {
 			$request_child = $request_value;
 
@@ -234,7 +232,7 @@ function vanilla_sanitize_array($request)
  */
 function vanilla_sanitize($request) {
 	$sanitized = htmlspecialchars($request, ENT_QUOTES, 'UTF-8');
-  return $sanitized;
+	return $sanitized;
 }
 
 /**
@@ -242,8 +240,7 @@ function vanilla_sanitize($request) {
  *
  * @param $hex カラーコード
  */
-function vanilla_hex_to_rgb($hex, $format = ',')
-{
+function vanilla_hex_to_rgb($hex, $format = ',') {
 	$hex      = str_replace('#', '', $hex);
 	$length   = strlen($hex);
 	$rgb['r'] = hexdec($length == 6 ? substr($hex, 0, 2) : ($length == 3 ? str_repeat(substr($hex, 0, 1), 2) : 0));
@@ -339,16 +336,22 @@ function vanilla_get_attachment_post_id($slug) {
 	return $thumbnail_id;
 }
 
-/**
-* カスタムフィールドのinstrcutions用に使う画像を出力する関数
-*
-* @param string $img_path 画像のパス
-*/
-function vanilla_acf_instruction_img($img_path) {
-	$return =
-	'<img src="'
-	. get_theme_file_path() . '/Img/Dashboard/Acf' .
-	$img_path .'">';
 
-	return $return;
+/**
+ * カスタムフィールドのinstrcutions用に使う画像をアコーディオンで出力する関数
+ *
+ * @param string $img_path 画像のパス
+ */
+function vanilla_acf_fields_accordion($img_file) {
+	$html =
+		'<div class="acfAccordion -img">'
+		. '<p class="acfAccordion__header button tagadd js__accordion__header">説明を見る</p>'
+		. '<figure class="acfAccordion__body">'
+		. '	<img src="'
+		. get_template_directory_uri() . '/Img/Dashboard/Acf/' . $img_file
+		. '" alt="説明文">'
+		. '</figure>'
+		. '</div>'
+		. '<p>＊「説明を見る」をクリックしても説明が表示されない場合は、一度投稿を保存して再度お試しください</p>';
+	return $html;
 }
