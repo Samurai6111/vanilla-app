@@ -21,10 +21,13 @@ $green_4ab: #4abdac;
 $msp: 'only screen and (max-width:374px)';
 $sp: 'only screen and (max-width:480px)';
 $tab: 'only screen and (max-width:768px)';
-$pc: 'only screen and (min-width:769px)';
+$pc: 'only screen and (max-width:1280px)';
 
 // ---------- インナー ----------
-$sp_inner: calc(37.5rem + 4rem);
+$inner_padding: 2rem;
+$sp_inner: calc(37.5rem + #{$inner_padding * 2});
+$inner: 1356px;
+$one_margin: calc(calc(100vw - #{$inner}) / 2);
 
 // ---------- フレックス ----------
 @mixin flex {
