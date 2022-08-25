@@ -6,15 +6,14 @@ $terms_acf_fields = [
 	// グループ
 	//--------------------------------------------------
 	'group' => [
-		'key' => 'group_taxonomy_acf_fields',
-		'title' => 'グループのカスタムフィールド',
+		'key' => 'category_acf_fields',
+		'title' => 'カテゴリのカスタムフィールド',
 		'fields' => [
 			[
-				'key' => 'group_phone_number',
-				'label' => 'グループの電話番号',
-				'name' => 'group_phone_number',
-				'type' => 'text',
-				'placeholder' => '000-0000-0000',
+				'key' => 'category_theme_color',
+				'label' => 'カテゴリのカラー',
+				'name' => 'category_theme_color',
+				'type' => 'color_picker',
 			],
 		],
 		'location' => [
@@ -22,7 +21,7 @@ $terms_acf_fields = [
 				[
 					'param' => 'taxonomy',
 					'operator' => '==',
-					'value' => 'group',
+					'value' => 'category',
 				]
 			]
 		]

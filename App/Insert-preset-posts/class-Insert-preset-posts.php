@@ -267,7 +267,6 @@ class Insert_Preset_Posts {
 //--------------------------------------------------
 // 実行
 //--------------------------------------------------
-add_action('admin_head', 'Insert_Preset_Posts::vanilla_unregister_default_taxonomy');
 add_action('init', 'Insert_Preset_Posts::vanilla_register_taxonomies');
 add_action('init', 'Insert_Preset_Posts::vanilla_insert_parent_terms');
 add_action('init', 'Insert_Preset_Posts::vanilla_insert_child_terms');
@@ -289,7 +288,6 @@ function vanilla_reset_posts() {
 	///--------------------------------------------------
 	// アクションの削除
 	//--------------------------------------------------
-	remove_action('admin_head', 'Insert_Posts::vanilla_unregister_default_taxonomy', 20);
 	remove_action('init', 'Insert_Posts::vanilla_register_taxonomies', 20);
 	remove_action('init', 'Insert_Posts::vanilla_insert_parent_terms', 20);
 	remove_action('init', 'Insert_Posts::vanilla_insert_child_terms', 20);
