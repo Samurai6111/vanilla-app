@@ -1,13 +1,7 @@
 <?php
 
 class Insert_Preset_Posts {
-	//--------------------------------------------------
-	// デフォルトのタグとカテゴリをサイドバーから削除
-	//--------------------------------------------------
-	static function vanilla_unregister_default_taxonomy() {
-		remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=category');
-		remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=post_tag');
-	}
+
 
 	/*--------------------------------------------------
 	/* taxonomy追加
@@ -17,24 +11,26 @@ class Insert_Preset_Posts {
 		require dirname(__FILE__) . '/Variables/variable-p10-taxonomies.php';
 
 		// ---------- 処理実行 ----------
-		foreach ($taxonomies as $taxonomy_slug => $taxonomy_name) {
-			register_taxonomy(
-				$taxonomy_slug,
-				'post',
-				[
-					'hierarchical'          => true,
-					'labels'                => [
-						'name'         =>  $taxonomy_name,
-						'menu_name'         =>  $taxonomy_name,
-						'edit_item'         =>  $taxonomy_name . 'を編集',
-						'search_items'      =>  $taxonomy_name . 'を検索',
-						'add_new_item'      =>  $taxonomy_name . 'を新規作成',
-					],
-					'show_ui'               => true,
-					'show_admin_column'     => true,
-					'query_var'             => true,
-				]
-			);
+		if (!empty($taxonomies)) {
+			foreach ($taxonomies as $taxonomy_slug => $taxonomy_name) {
+				register_taxonomy(
+					$taxonomy_slug,
+					'post',
+					[
+						'hierarchical'          => true,
+						'labels'                => [
+							'name'         =>  $taxonomy_name,
+							'menu_name'         =>  $taxonomy_name,
+							'edit_item'         =>  $taxonomy_name . 'を編集',
+							'search_items'      =>  $taxonomy_name . 'を検索',
+							'add_new_item'      =>  $taxonomy_name . 'を新規作成',
+						],
+						'show_ui'               => true,
+						'show_admin_column'     => true,
+						'query_var'             => true,
+					]
+				);
+			}
 		}
 	}
 
@@ -47,17 +43,19 @@ class Insert_Preset_Posts {
 		require_once dirname(__FILE__) . '/Variables/variable-p20-parent-terms.php';
 
 		// ---------- 親term登録実行 ----------
-		foreach ($parent_terms_list as $taxonomy_slug => $parent_terms) {
-			foreach ($parent_terms as $parent_term_slug => $parent_term_name) {
-				if (!term_exists($parent_term_slug, $taxonomy_slug)) {
-					wp_insert_term(
-						$parent_term_name, // 日本語名
-						$taxonomy_slug, // taxonomy名
-						[
-							'slug' => $parent_term_slug, // スラッグ
-							'parent' => 0, // 親
-						]
-					);
+		if (!empty($parent_terms_list)) {
+			foreach ($parent_terms_list as $taxonomy_slug => $parent_terms) {
+				foreach ($parent_terms as $parent_term_slug => $parent_term_name) {
+					if (!term_exists($parent_term_slug, $taxonomy_slug)) {
+						wp_insert_term(
+							$parent_term_name, // 日本語名
+							$taxonomy_slug, // taxonomy名
+							[
+								'slug' => $parent_term_slug, // スラッグ
+								'parent' => 0, // 親
+							]
+						);
+					}
 				}
 			}
 		}
@@ -73,21 +71,24 @@ class Insert_Preset_Posts {
 
 		$taxonomy_slug = 'group';
 
-		// ---------- 親term登録実行 ----------
-		foreach ($child_terms_list as $parent_term_slug => $child_terms) {
-			$child_term_id = get_term_by('slug', $parent_term_slug, $taxonomy_slug)->term_id;
+		if (!empty($child_terms_list)) {
 
-			foreach ($child_terms as $child_term_slug => $child_term_name) {
+			// ---------- 親term登録実行 ----------
+			foreach ($child_terms_list as $parent_term_slug => $child_terms) {
+				$child_term_id = get_term_by('slug', $parent_term_slug, $taxonomy_slug)->term_id;
 
-				if (!term_exists($child_term_slug, $taxonomy_slug)) {
-					wp_insert_term(
-						$child_term_name, // 日本語名
-						$taxonomy_slug, // taxonomy名
-						[
-							'slug' => $child_term_slug, // スラッグ
-							'parent' => $child_term_id, // 親
-						]
-					);
+				foreach ($child_terms as $child_term_slug => $child_term_name) {
+
+					if (!term_exists($child_term_slug, $taxonomy_slug)) {
+						wp_insert_term(
+							$child_term_name, // 日本語名
+							$taxonomy_slug, // taxonomy名
+							[
+								'slug' => $child_term_slug, // スラッグ
+								'parent' => $child_term_id, // 親
+							]
+						);
+					}
 				}
 			}
 		}
@@ -101,21 +102,24 @@ class Insert_Preset_Posts {
 		// ---------- ファイルインクルード ----------
 		require_once dirname(__FILE__) . '/Variables/variable-p40-terms-acf.php';
 
-		foreach ($terms_acf_fields as $terms_acf_field) {
+		if (!empty($terms_acf_fields)) {
 
-			if (function_exists('acf_add_local_field_group')) {
-				acf_add_local_field_group([
-					'key' => $terms_acf_field['key'],
-					'title' => $terms_acf_field['title'],
-					'fields' => $terms_acf_field['fields'],
-					'location' => $terms_acf_field['location'],
-					'menu_order' => 0,
-					'position' => 'normal',
-					'style' => 'default',
-					'label_placement' => 'top',
-					'instruction_placement' => 'label',
-					'hide_on_screen' => '',
-				]);
+			foreach ($terms_acf_fields as $terms_acf_field) {
+
+				if (function_exists('acf_add_local_field_group')) {
+					acf_add_local_field_group([
+						'key' => $terms_acf_field['key'],
+						'title' => $terms_acf_field['title'],
+						'fields' => $terms_acf_field['fields'],
+						'location' => $terms_acf_field['location'],
+						'menu_order' => 0,
+						'position' => 'normal',
+						'style' => 'default',
+						'label_placement' => 'top',
+						'instruction_placement' => 'label',
+						'hide_on_screen' => '',
+					]);
+				}
 			}
 		}
 	}
@@ -128,15 +132,22 @@ class Insert_Preset_Posts {
 		// ---------- ファイルインクルード ----------
 		require_once dirname(__FILE__) . '/Variables/variable-p50-terms-meta.php';
 
-		foreach ($terms_meta_array as $taxonomy_name => $terms_meta) {
-			//--------------------------------------------------
-			// シーンの処理
-			//--------------------------------------------------
-			foreach ($terms_meta as $term_slug => $acf_array) {
-				$term_id = get_term_by('slug', $term_slug, $taxonomy_name)->term_id;
-				foreach ($acf_array as $acf_key => $acf_value) {
-					if (function_exists('update_field')) {
-						update_field($acf_key, $acf_value, $taxonomy_name . '_' . $term_id);
+		if (!empty($terms_meta_array)) {
+
+			foreach ($terms_meta_array as $taxonomy_name => $terms_meta) {
+				//--------------------------------------------------
+				// シーンの処理
+				//--------------------------------------------------
+				foreach ($terms_meta as $term_slug => $acf_array) {
+					$term_id = get_term_by('slug', $term_slug, $taxonomy_name)->term_id;
+
+
+					if  (!empty($acf_array) && $acf_array) {
+						foreach ($acf_array as $acf_key => $acf_value) {
+							if (function_exists('update_field')) {
+								update_field($acf_key, $acf_value, $taxonomy_name . '_' . $term_id);
+							}
+						}
 					}
 				}
 			}
@@ -150,22 +161,25 @@ class Insert_Preset_Posts {
 	static function vanilla_insert_posts() {
 		// ---------- ファイルインクルード ----------
 		require_once dirname(__FILE__) . '/Variables/variable-p60-posts.php';
-		foreach ($posts as $post) {
+		if (!empty($posts)) {
+			foreach ($posts as $post) {
 
-			if (!vanilla_the_slug_exists($post['post_slug'])) {
-				// ---------- 投稿・固定ページ作成 ----------
-				$post_array = array(
-					"post_type"      => 'post',
-					"post_name"      => $post['post_slug'],
-					"post_title"     => $post['post_title'],
-					"post_content"   => '',
-					"post_status"    => "publish",
-					"post_author"    => 1,
-					"post_parent"    => 0,
-					"comment_status" => "closed"
-				);
-				$inserted_page_id = wp_insert_post($post_array);
+				if (!vanilla_the_slug_exists($post['post_slug'])) {
+					// ---------- 投稿・固定ページ作成 ----------
+					$post_array = array(
+						"post_type"      => 'post',
+						"post_name"      => $post['post_slug'],
+						"post_title"     => $post['post_title'],
+						"post_content"   => '',
+						"post_status"    => "publish",
+						"post_author"    => 1,
+						"post_parent"    => 0,
+						"comment_status" => "closed"
+					);
+					$inserted_page_id = wp_insert_post($post_array);
+				}
 			}
+
 		}
 	}
 
@@ -177,25 +191,27 @@ class Insert_Preset_Posts {
 		// ---------- ファイルインクルード ----------
 		require_once dirname(__FILE__) . '/Variables/variable-p70-post-terms.php';
 
-		foreach ($post_terms as $post_slug => $post_term_list) {
-			$post = get_page_by_path($post_slug, OBJECT, 'post');
-			foreach ($post_term_list as $taxonomy_name => $post_term_name) {
-				if (is_array($post_term_name)) {
-					$post_term_name_formatted = [];
-					foreach ($post_term_name as $post_term_name_each) {
-						$post_term_id = get_term_by('slug', $post_term_name_each, $taxonomy_name)->term_id;
-						$post_term_name_formatted[] = $post_term_id;
+		if (!empty($post_terms)) {
+			foreach ($post_terms as $post_slug => $post_term_list) {
+				$post = get_page_by_path($post_slug, OBJECT, 'post');
+				foreach ($post_term_list as $taxonomy_name => $post_term_name) {
+					if (is_array($post_term_name)) {
+						$post_term_name_formatted = [];
+						foreach ($post_term_name as $post_term_name_each) {
+							$post_term_id = get_term_by('slug', $post_term_name_each, $taxonomy_name)->term_id;
+							$post_term_name_formatted[] = $post_term_id;
+						}
+					} else {
+						$post_term_name_formatted = get_term_by('slug', $post_term_name, $taxonomy_name)->term_id;
 					}
-				} else {
-					$post_term_name_formatted = get_term_by('slug', $post_term_name, $taxonomy_name)->term_id;
+
+					// echo '<pre>';
+					// var_dump($post_term_name_formatted);
+					// echo '</pre>';
+
+
+					wp_set_post_terms($post->ID, $post_term_name_formatted, $taxonomy_name);
 				}
-
-				// echo '<pre>';
-				// var_dump($post_term_name_formatted);
-				// echo '</pre>';
-
-
-				wp_set_post_terms($post->ID, $post_term_name_formatted, $taxonomy_name);
 			}
 		}
 	}
@@ -208,19 +224,22 @@ class Insert_Preset_Posts {
 		// ---------- ファイルインクルード ----------
 		require_once dirname(__FILE__) . '/Variables/variable-p80-post-acf.php';
 
-		if (function_exists('acf_add_local_field_group')) {
-			acf_add_local_field_group([
-				'key' => $posts_acf_fields['key'],
-				'title' => $posts_acf_fields['title'],
-				'fields' => $posts_acf_fields['fields'],
-				'location' => $posts_acf_fields['location'],
-				'menu_order' => 0,
-				'position' => 'normal',
-				'style' => 'default',
-				'label_placement' => 'top',
-				'instruction_placement' => 'label',
-				'hide_on_screen' => '',
-			]);
+		if (!empty($posts_acf_fields)) {
+
+			if (function_exists('acf_add_local_field_group')) {
+				acf_add_local_field_group([
+					'key' => $posts_acf_fields['key'],
+					'title' => $posts_acf_fields['title'],
+					'fields' => $posts_acf_fields['fields'],
+					'location' => $posts_acf_fields['location'],
+					'menu_order' => 0,
+					'position' => 'normal',
+					'style' => 'default',
+					'label_placement' => 'top',
+					'instruction_placement' => 'label',
+					'hide_on_screen' => '',
+				]);
+			}
 		}
 	}
 
@@ -232,11 +251,13 @@ class Insert_Preset_Posts {
 		// ---------- ファイルインクルード ----------
 		require_once dirname(__FILE__) . '/Variables/variable-p90-post-meta.php';
 
-		foreach ($post_meta_array as $slug => $meta_array) {
-			$post_id = get_page_by_path($slug, OBJECT, 'post')->ID;
-			foreach ($meta_array as $meta_key => $meta_value) {
-				if (function_exists('update_field')) {
-					update_field($meta_key, $meta_value, $post_id);
+		if (!empty($post_meta_array)) {
+			foreach ($post_meta_array as $slug => $meta_array) {
+				$post_id = get_page_by_path($slug, OBJECT, 'post')->ID;
+				foreach ($meta_array as $meta_key => $meta_value) {
+					if (function_exists('update_field')) {
+						update_field($meta_key, $meta_value, $post_id);
+					}
 				}
 			}
 		}
