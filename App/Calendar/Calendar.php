@@ -80,8 +80,9 @@ for ($i = 0; $i < $startOfCalendar_dayOfWeek; $i++) {
 
 							$startOfCalendar_month = $startOfCalendar->month;
 							$day_of_week = '-dayofweek-' . $startOfCalendar->dayOfWeek;
+							$other_month = ($startOfCalendar_month !== $target_date->month) ? '-other-month' : '';
 						?>
-							<td class="calendarTable__td <?php echo esc_attr($day_of_week) ?>">
+							<td class="calendarTable__td <?php echo esc_attr($day_of_week) ?> <?php echo esc_attr($other_month) ?>">
 								<span class="calendarTable__day">
 									<?php echo esc_html($startOfCalendar->day) ?>
 								</span>

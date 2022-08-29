@@ -72,6 +72,15 @@
 					.calendarTable__td {
 						padding: 1.2rem;
 
+
+						//____________________________
+						// モディファイア
+						//____________________________
+						&.-other-month {
+							.calendarTable__day {
+								opacity: .5;
+							}
+						}
 					}
 				}
 			}
