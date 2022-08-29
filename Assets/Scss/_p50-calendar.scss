@@ -81,6 +81,17 @@
 								opacity: .5;
 							}
 						}
+
+						&.-is-today {
+							background-color: $primary;
+							.calendarTable__day {
+								color: $white_fff;
+							}
+						}
+
+						&.-is-holiday {
+							background-color: rgba(red, .5);
+						}
 					}
 				}
 			}

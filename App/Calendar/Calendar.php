@@ -1,6 +1,8 @@
 <?php
 
 use Carbon\Carbon;
+use Yasumi\Yasumi; //  composer require azuyalabs/yasumi
+
 $dayofweek_array = [
 	'sun' => '日',
 	'mon' => '月',
@@ -16,6 +18,9 @@ $today = new Carbon('today');
 $start_of_month = $today->startOfMonth();
 $target_date_GET = new Carbon(s_GET('target_date'));
 $target_date = ($target_date_GET) ? $target_date_GET : $start_of_month;
+
+// ---------- 休みを取得 ----------
+$holidays = Yasumi::create('Japan', $target_date->year, 'ja_JP');
 
 // ---------- 前の月を取得 ----------
 $target_date_prev = new Carbon($target_date);
@@ -77,12 +82,22 @@ for ($i = 0; $i < $startOfCalendar_dayOfWeek; $i++) {
 						$i = 0;
 						while ($i < 7) {
 							++$i;
-
+							// ---------- 変数 ----------
 							$startOfCalendar_month = $startOfCalendar->month;
-							$day_of_week = '-dayofweek-' . $startOfCalendar->dayOfWeek;
 							$other_month = ($startOfCalendar_month !== $target_date->month) ? '-other-month' : '';
+							$today = new Carbon('today');
+
+							// ---------- 特別な日を定義 ----------
+							$day_of_week = '-dayofweek-' . $startOfCalendar->dayOfWeek;
+							$is_today = ($startOfCalendar == $today) ? '-is-today' : '';
+							$is_holiday = ($holidays->isHoliday($startOfCalendar)) ? '-is-holiday' : '';
 						?>
-							<td class="calendarTable__td <?php echo esc_attr($day_of_week) ?> <?php echo esc_attr($other_month) ?>">
+							<td class="calendarTable__td
+							<?php echo esc_attr($day_of_week) ?>
+							<?php echo esc_attr($is_today) ?>
+							<?php echo esc_attr($is_holiday) ?>
+							<?php echo esc_attr($other_month) ?>
+							">
 								<span class="calendarTable__day">
 									<?php echo esc_html($startOfCalendar->day) ?>
 								</span>
