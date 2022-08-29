@@ -1,12 +1,11 @@
 <?php
+/**
+* 管理画面→「外観」→「メニュー」のナビメニューを追加
+*/
 function vanilla_register_nav_menus()
 {
-	register_nav_menus(
-		[
-			'vanilla-nav-menu-pc' => __('PCメニュー'),
-			'vanilla-nav-menu-sp' => __('SPメニュー'),
-		]
-	);
+	register_nav_menu('vanilla-nav-menu-pc', 'PCメニュー');
+	register_nav_menu('vanilla-nav-menu-sp', 'SPメニュー');
 }
 add_action('init', 'vanilla_register_nav_menus', 10);
 
@@ -72,7 +71,7 @@ function vanilla_update_nav_menu_item_action()
 					'class' => '-career-step',
 					'url' => home_url('/career-step/'),
 				],
-			]
+			],
 		],
 		[
 			'title' => 'メニュー',
