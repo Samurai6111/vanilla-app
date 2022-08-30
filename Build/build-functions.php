@@ -57,6 +57,18 @@ function vanilla_get_current_link() {
 }
 
 /**
+ * 現在のURLを取得する
+ *
+ * @return 現在のページのURL
+ */
+function vanilla_get_current_page_url() {
+	global  $wp;
+	$current_link = home_url( $wp->request );
+	return $current_link;
+}
+
+
+/**
  * 特定のスラッグを持つ投稿がデータベース上に存在する場合の関数
  *
  * @param $post_name 投稿スラッグ
