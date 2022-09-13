@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+//____________________________
+// パンクズ
+//____________________________
+.breadcrumb {
+	margin-top: 1rem;
+	margin-bottom: responsiveValue(5rem, 3rem);
+	overflow-x: scroll;
+
+	.breadcrumb__list {
+		@include flex;
+		align-items: center;
+
+		.breadcrumb__item {
+			@include flex;
+			align-items: center;
+
+			&::after {
+				display: inline-block;
+				width: 0.4rem;
+				height: 0.7rem;
+				margin: 0 1rem;
+				content: '';
+				font-weight: 300;
+				background-image: url(../../Img/Common/icon_right_arrow_black_2.svg);
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: contain;
+			}
+
+			&:last-of-type {
+				&::after {
+					display: none;
+				}
+			}
+
+			.breadcrumb__link {
+				font-size: 1.2rem;
+				font-weight: 300;
+				letter-spacing: 0;
+				white-space: nowrap;
+			}
+		}
+	}
+}
