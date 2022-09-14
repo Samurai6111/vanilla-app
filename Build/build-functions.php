@@ -37,6 +37,24 @@ global $wpdb;
 // 	return $carbon_formated_data;
 // }
 
+
+
+// use Yasumi\Yasumi;
+// /**
+// * 引数で指定した日付が日本の休みかどうかを判定する関数
+// *
+// * @param $target_date 休みかどうかを判定したい日付 carbonに対応するフォーマットである必要がある
+// * @return boolean
+// */
+// function vanilla_is_holiday($target_date) {
+// 	$date = new Carbon($target_date);
+
+// 	$holidays = Yasumi::create('Japan', $date->year, 'ja_JP');
+// 	$is_holiday = $holidays->isHoliday($date);
+
+// 	return $is_holiday;
+// }
+
 /**
  * 「1234567890abcdefghijklmnopqrstuvwxyz」の中からランダムな文字列を出力する関数
  *
