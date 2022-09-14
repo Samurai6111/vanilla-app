@@ -194,6 +194,26 @@
 	//____________________________
 	// モディファイア
 	//____________________________
+	&.-error {
+		.vanillaForm__rowList {
+			.vanillaForm__inputWrap {
+				.vanillaForm__inputs {
+					@include flex;
+					flex-direction: column;
+
+					.vanillaForm__inputError {
+						margin-top: .4rem;
+
+						.vanillaForm__inputErrorText {
+							color: red;
+						}
+					}
+				}
+
+			}
+		}
+
+	}
 	&.-confirm {
 		max-width: 79rem;
 

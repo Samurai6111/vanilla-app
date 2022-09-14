@@ -3,21 +3,35 @@
 class Vanilla_Form_Row_Input_Contents {
 
 	//--------------------------------------------------
-	// 会社名
+	// ユーザーログイン
 	//--------------------------------------------------
-	function company_name() {
+	function user_login() {
 ?>
 		<div class="vanillaForm__inputs">
 			<?php Vanilla_Form_Row_Input::text(
 				[
-					'name' => 'company_name',
+					'name' => 'user_login',
 				],
-				'-class'
+				'-user-login'
 			); ?>
 		</div>
-		<?php Vanilla_Form_Row_Input::caption('例）○○○○株式会社') ?>
 	<?php
+	}
 
+	//--------------------------------------------------
+	// ユーザーパスワード
+	//--------------------------------------------------
+	function user_password() {
+?>
+		<div class="vanillaForm__inputs">
+			<?php Vanilla_Form_Row_Input::text(
+				[
+					'name' => 'user_password',
+				],
+				'-user-password'
+			); ?>
+		</div>
+	<?php
 	}
 
 	//--------------------------------------------------

@@ -9,9 +9,6 @@ get_header(); ?>
 
 <main class="pageFront" id="pageFront">
 	<div class="inner">
-		<div class="inner">
-
-		</div>
 	</div>
 </main>
 
