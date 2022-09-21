@@ -24,19 +24,43 @@ add_action('init', 'vanilla_deregister_script');
 */
 function vanilla_overwrite_style_scss() {
 	$style_text = '';
+	$import = '@import';
 	$scss_directory = get_stylesheet_directory() . '/Assets/Scss/';
-	$scss_file_list = glob($scss_directory . '*.scss');
+	$style_scss_uri = get_template_directory_uri() . '/Assets/Scss/style.scss';
+	$style_scss_directory = $scss_directory . '/style.scss';
+
+	//= style.scssの中身を取得 ====
+	$style_scss_contents = file_get_contents($style_scss_uri);
+	//= style.scssの「@import」を数 ====
+	$style_scss_import_count = substr_count($style_scss_contents, $import);
+//= 「/Assets/Scss/」ディレクトリのstyle.scssを除いたscssファイルのパスを取得 ====
+	$scss_file_list = array_filter(
+		glob($scss_directory . '*.scss'),
+		function ($scss) {
+			return false === strpos($scss, 'style.scss');
+		}
+	);
+
+	//= ディレクトリのscssファイルと「@import」の数が一致していなかったら ====
+	//= style.scsの中身を空にする ====
+	if ($style_scss_import_count !== count($scss_file_list)) {
+		file_put_contents($style_scss_directory, '');
+	}
+
+	//= 「/Assets/Scss/」ディレクトリ内の全てのscssファイル分の ====
+	//= 「@import」の文字列を作る ====
 	foreach ($scss_file_list as $scss_file) {
 		$scss_file_name = basename($scss_file);
 		$scss_name = str_replace(".scss", "", $scss_file_name);
 		$scss_name = str_replace("_", "", $scss_name);
-		if ($scss_name === 'style') {
-			continue;
-		}
-		$style_text .= "@import '". $scss_name . "';\n";
+
+		$style_text .= "$import'" . $scss_name . "';";
 	}
-	file_put_contents(get_template_directory() . '/Assets/Scss/style.scss', $style_text);
+
+	//= style.scssに「@import」の文字列を追加 ====
+	file_put_contents($style_scss_directory, $style_text);
 }
+
 
 
 /**
