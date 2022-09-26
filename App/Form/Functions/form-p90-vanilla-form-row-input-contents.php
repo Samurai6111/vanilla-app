@@ -8,12 +8,14 @@ class Vanilla_Form_Row_Input_Contents {
 	function user_login() {
 ?>
 		<div class="vanillaForm__inputs">
-			<?php Vanilla_Form_Row_Input::text(
-				[
-					'name' => 'user_login',
-				],
-				'-user-login'
-			); ?>
+			<div class="vanillaForm__input">
+				<?php Vanilla_Form_Row_Input::text(
+					[
+						'name' => 'user_login',
+					],
+					'-user-login'
+				); ?>
+			</div>
 		</div>
 	<?php
 	}
@@ -22,14 +24,36 @@ class Vanilla_Form_Row_Input_Contents {
 	// ユーザーパスワード
 	//--------------------------------------------------
 	function user_password() {
-?>
+	?>
 		<div class="vanillaForm__inputs">
-			<?php Vanilla_Form_Row_Input::text(
-				[
-					'name' => 'user_password',
-				],
-				'-user-password'
-			); ?>
+			<div class="vanillaForm__input">
+				<?php Vanilla_Form_Row_Input::password(
+					[
+						'name' => 'user_password',
+					],
+					'-user-password'
+				); ?>
+			</div>
+		</div>
+	<?php
+	}
+
+	//--------------------------------------------------
+	// 会社名
+	//--------------------------------------------------
+	function company_name() {
+	?>
+		<div class="vanillaForm__inputs">
+			<div class="vanillaForm__input">
+				<?php
+				Vanilla_Form_Row_Input::text(
+					[
+						'name' => 'company_name',
+						'placeholder' => '株式会社○○○○、○○○○協会',
+					]
+				);
+				?>
+			</div>
 		</div>
 	<?php
 	}
@@ -45,10 +69,9 @@ class Vanilla_Form_Row_Input_Contents {
 				Vanilla_Form_Row_Input::text(
 					[
 						'name' => 'family_name',
+						'placeholder' => '山田',
 					]
 				);
-
-				Vanilla_Form_Row_Input::caption('例）山田');
 				?>
 			</div>
 
@@ -57,20 +80,59 @@ class Vanilla_Form_Row_Input_Contents {
 				Vanilla_Form_Row_Input::text(
 					[
 						'name' => 'first_name',
+						'placeholder' => '太郎',
 					]
-				);
-				Vanilla_Form_Row_Input::caption('例）太郎');
+				)
 				?>
 			</div>
 		</div>
 
 		<?php if (vanilla_is_current_form_action('confirm')) {
-				$family_name = s_POST('family_name');
-				$first_name = s_POST('first_name');
-				$full_name = $family_name . $first_name;
+			$family_name = s_POST('family_name');
+			$first_name = s_POST('first_name');
+			$full_name = $family_name . $first_name;
+		?>
+			<input type="hidden" name="full_name" value="<?php echo esc_attr($full_name) ?>">
+		<?php } ?>
+	<?php
+	}
+
+	//--------------------------------------------------
+	// お名前（カナ）
+	//--------------------------------------------------
+	function name_kana() {
+	?>
+		<div class="vanillaForm__inputs">
+			<div class="vanillaForm__input">
+				<?php
+				Vanilla_Form_Row_Input::text(
+					[
+						'name' => 'family_name_kana',
+						'placeholder' => 'ヤマダ',
+					]
+				);
 				?>
-				<input type="hidden" name="full_name" value="<?php echo esc_attr($full_name) ?>">
-				<?php } ?>
+			</div>
+
+			<div class="vanillaForm__input">
+				<?php
+				Vanilla_Form_Row_Input::text(
+					[
+						'name' => 'first_name_kana',
+						'placeholder' => 'タロウ',
+					]
+				)
+				?>
+			</div>
+		</div>
+
+		<?php if (vanilla_is_current_form_action('confirm')) {
+			$family_name_kana = s_POST('family_name_kana');
+			$first_name_kana = s_POST('first_name_kana');
+			$full_name_kana = $family_name_kana . $first_name_kana;
+		?>
+			<input type="hidden" name="full_name_kana" value="<?php echo esc_attr($full_name_kana) ?>">
+		<?php } ?>
 	<?php
 	}
 
@@ -80,16 +142,17 @@ class Vanilla_Form_Row_Input_Contents {
 	function email() {
 	?>
 		<div class="vanillaForm__inputs">
-
-			<?php
-			Vanilla_Form_Row_Input::email(
-				[
-					'name' => 'email',
-				],
-			);
-			?>
+			<div class="vanillaForm__input">
+				<?php
+				Vanilla_Form_Row_Input::email(
+					[
+						'name' => 'email',
+						'placeholder' => 'info-hkjcca@docon.jp',
+					],
+				);
+				?>
+			</div>
 		</div>
-		<?php Vanilla_Form_Row_Input::caption('例）xxxx@example.jp'); ?>
 	<?php
 	}
 
@@ -99,16 +162,17 @@ class Vanilla_Form_Row_Input_Contents {
 	function email_confirm() {
 	?>
 		<div class="vanillaForm__inputs">
-
-			<?php
-			Vanilla_Form_Row_Input::email(
-				[
-					'name' => 'email_confirm',
-				],
-			);
-			?>
+			<div class="vanillaForm__input">
+				<?php
+				Vanilla_Form_Row_Input::email(
+					[
+						'name' => 'email_confirm',
+						'placeholder' => 'info-hkjcca@docon.jp',
+					],
+				);
+				?>
+			</div>
 		</div>
-		<?php Vanilla_Form_Row_Input::caption('例）xxxx@example.jp'); ?>
 	<?php
 	}
 
@@ -118,15 +182,17 @@ class Vanilla_Form_Row_Input_Contents {
 	function tel() {
 	?>
 		<div class="vanillaForm__inputs">
-			<?php
-			Vanilla_Form_Row_Input::text(
-				[
-					'name' => 'tel',
-				],
-			);
-			?>
+			<div class="vanillaForm__input">
+				<?php
+				Vanilla_Form_Row_Input::text(
+					[
+						'name' => 'tel',
+						'placeholder' => '011-801-1596',
+					],
+				);
+				?>
+			</div>
 		</div>
-		<?php Vanilla_Form_Row_Input::caption('例）00-0000-0000　※半角で入力してください'); ?>
 	<?php
 	}
 
@@ -136,15 +202,16 @@ class Vanilla_Form_Row_Input_Contents {
 	function address() {
 	?>
 		<div class="vanillaForm__inputs">
-			<?php
-			Vanilla_Form_Row_Input::text(
-				[
-					'name' => 'address',
-				],
-			);
-			?>
+			<div class="vanillaForm__input">
+				<?php
+				Vanilla_Form_Row_Input::text(
+					[
+						'name' => 'address',
+					],
+				);
+				?>
+			</div>
 		</div>
-		<?php Vanilla_Form_Row_Input::caption('例）東京都○○○○○○○○○○○○○○1-1-1○○○○ビル101号室'); ?>
 	<?php
 	}
 
@@ -154,13 +221,16 @@ class Vanilla_Form_Row_Input_Contents {
 	function notes() {
 	?>
 		<div class="vanillaForm__inputs">
-			<?php
-			Vanilla_Form_Row_Input::textarea(
-				[
-					'name' => 'notes',
-				]
-			)
-			?>
+			<div class="vanillaForm__input">
+				<?php
+				Vanilla_Form_Row_Input::textarea(
+					[
+						'name' => 'notes',
+						'placeholder' => 'お問合せ内容をご記載ください。',
+					]
+				)
+				?>
+			</div>
 		</div>
 	<?php
 	}
@@ -171,16 +241,18 @@ class Vanilla_Form_Row_Input_Contents {
 	static function privacy_policy_confirm() {
 	?>
 		<div class="vanillaForm__inputs">
-			<?php
-			Vanilla_Form_Row_Input::radio(
-				[
-					'name' => 'privacy_policy_confirm',
-					'value' => 'confirmed',
-					'text' => '上記内容に同意する',
-					'id' => 'privacy_policy_confirm',
-				],
-			);
-			?>
+			<div class="vanillaForm__input">
+				<?php
+				Vanilla_Form_Row_Input::radio(
+					[
+						'name' => 'privacy_policy_confirm',
+						'value' => 'confirmed',
+						'text' => '上記内容に同意する',
+						'id' => 'privacy_policy_confirm',
+					],
+				);
+				?>
+			</div>
 		</div>
 	<?php
 	}

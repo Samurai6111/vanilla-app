@@ -198,8 +198,6 @@
 		.vanillaForm__rowList {
 			.vanillaForm__inputWrap {
 				.vanillaForm__inputs {
-					@include flex;
-					flex-direction: column;
 
 					.vanillaForm__inputError {
 						margin-top: .4rem;
