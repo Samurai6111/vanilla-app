@@ -416,6 +416,7 @@ function vanilla_update_post_menu_order($post_array) {
 	}
 }
 
+
 /**
 * タームのterm_orderを引数の配列の順番に変更する関数
 *
