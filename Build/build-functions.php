@@ -385,3 +385,66 @@ function vanilla_acf_fields_accordion($img_file) {
 		. '<p>＊「説明を見る」をクリックしても説明が表示されない場合は、一度投稿を保存して再度お試しください</p>';
 	return $html;
 }
+
+
+/**
+* 投稿のmenu_orderを引数の配列の順番に変更する関数
+*
+* @param $post_slug_array 対象の投稿のスラッグの配列
+*/
+function vanilla_update_post_menu_order($post_array) {
+	//= 引数の例 ====
+	// $post_array = [
+	// 	['post_slug' => 	'slug1',],
+	// 	['post_slug' => 	'slug2',],
+	// ];
+
+	global $wpdb;
+	$i = 0;
+	$wp_posts = $wpdb->prefix . 'posts';
+	foreach ($post_array as $post) {
+		++$i;
+		$post_slug = $post['post_slug'];
+		$post_id = get_page_by_path( $post_slug, OBJECT, 'post' )->ID;
+		$result = $wpdb->update(
+			$wp_posts,
+			['menu_order' => $i],
+			['ID' => $post_id],
+			['%d'],
+			['%d']
+		);
+	}
+}
+
+/**
+* タームのterm_orderを引数の配列の順番に変更する関数
+*
+* @param $term_slug_array 対象の投稿のスラッグの配列
+*/
+function vanilla_update_term_order($term_slug_array) {
+	//= 引数の例 ====
+	// $term_slug_array = [
+	// 	'taxonomyname' => [
+	// 		'term1' => 'ターム1',
+	// 		'term2' => 'ターム2',
+	// 	],
+	// ];
+	global $wpdb;
+	$i = 0;
+	$wp_terms = $wpdb->prefix . 'terms';
+	//== 親タームの並び替え ========
+	foreach ($term_slug_array as $taxonomy => $studio_parent_terms) {
+		$i = 0;
+		foreach ($studio_parent_terms as $studio_parent_term_slug => $studio_parent_term_name) {
+			++$i;
+			$term_id = get_term_by('slug', $studio_parent_term_slug, $taxonomy)->term_id;
+			$result = $wpdb->update(
+				$wp_terms,
+				['term_order' => $i],
+				['term_id' => $term_id],
+				['%d'],
+				['%d']
+			);
+		}
+	}
+}
