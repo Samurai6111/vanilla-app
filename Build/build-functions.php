@@ -449,3 +449,25 @@ function vanilla_update_term_order($term_slug_array) {
 		}
 	}
 }
+
+
+/**
+ * 管理画面のfooterにコードを追記する
+ */
+function vanilla_acf_floating_banner() {
+	global $pagenow;
+
+	// ---------- 投稿タイプ「投稿」だったら ----------
+	$post_type = get_post_type($_GET['post']);
+	if ($pagenow === 'post.php' && $post_type === 'post') {
+?>
+		<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/Assets/Css/admin-post.css">
+		<script src="<?php echo get_template_directory_uri(); ?>/Assets/Js/Custom/admin-post.js"></script>
+	<?php
+	}
+
+	?>
+	<script src="<?php echo get_template_directory_uri(); ?>/Assets/Js/Custom/admin-custom.js"></script>
+<?php
+}
+add_action('admin_footer', 'vanilla_acf_floating_banner');
