@@ -1,5 +1,4 @@
-// ---------- モーダル ----------
-
+(function ($) {
 $(".js__modal__trigger").on("click", function() {
     $(".modalWrap").fadeIn();
     var modalContentsHeight = $(".js__modal__contentHeight").height();
@@ -16,3 +15,4 @@ $(".modalWrap").on("click", function(e) {
         // ターゲット要素をクリックした時の操作
     }
 });
+})( jQuery );

@@ -6,16 +6,16 @@
 /* 優先度は「10」
 /*------------------------------------------------*/
 
-/**
- *WordPress同梱のjQueryを読み込ませない
- */
-function vanilla_deregister_script()
-{
-	if (!is_admin()) {
-		wp_deregister_script('jquery');
-	}
-}
-add_action('init', 'vanilla_deregister_script');
+// /**
+//  *WordPress同梱のjQueryを読み込ませない
+//  */
+// function vanilla_deregister_script()
+// {
+// 	if (!is_admin()) {
+// 		wp_deregister_script('jquery');
+// 	}
+// }
+// add_action('init', 'vanilla_deregister_script');
 
 
 /**

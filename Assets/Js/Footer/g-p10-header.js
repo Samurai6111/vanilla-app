@@ -1,3 +1,6 @@
+(function ($) {
+	//ここに記述する
+
 let headerBP = 960
 let windowWidth = $(window).width();
 function is_pc() {
@@ -32,3 +35,4 @@ $('.header__navWrap .menu-item-has-children').hover(
 		}
 	}
 );
+})( jQuery );

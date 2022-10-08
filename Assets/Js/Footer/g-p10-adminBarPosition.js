@@ -1,7 +1,7 @@
 // ------------------------
 // 「SHIFT + ↑ or ↓」でadmin Barの位置を変える
 // ------------------------
-$(function () {
+(function ($) {
 	$('body').keydown(function (event) {
 		if (event.shiftKey) {
 			//↓key
@@ -20,4 +20,5 @@ $(function () {
 			}
 		}
 	});
-});
+	//ここに記述する
+})( jQuery );
