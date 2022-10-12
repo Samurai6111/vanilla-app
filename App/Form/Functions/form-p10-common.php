@@ -1,11 +1,18 @@
 <?php
+
+$client_email = 's.kawakatsu@roseaupensant.jp';
+$client_email = 's.kawakatsu@roseaupensant.jp';
+$email_header_name = get_option('blogname');
+
 $email_signature =
 	"----------------------------------------------------------------\n"
-	. "署名が入ります\n"
+	. $email_header_name .  " \n"
 	. "----------------------------------------------------------------\n";
-
-$client_email = 'kawakatsu.work6111@gmail.com';
 $domain_email =  'info@' . $_SERVER['HTTP_HOST'];
+$email_from = 'From: ' . $email_header_name . ' <' . $domain_email . '>';
+$email_reply_to = 'Reply-To: ' . $email_header_name . ' <' . $client_email . '>';
+$email_subject =  '件名サンプル';
+$break = ', ';
 
 $form_submittion_key_array = [
 	'studio_list' => [

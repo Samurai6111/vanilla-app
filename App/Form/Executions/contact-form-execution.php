@@ -32,12 +32,22 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 			//--------------------------------------------------
 			// ユーザー宛にメールを送信
 			//--------------------------------------------------
-			$is_user_email_sent = $Vanilla_Form_Mail->send_mail(
+			$is_user_email_sent = wp_mail(
 				s_POST('email'),
-				'件名 : お問合せがありがとうございます',
+				$email_subject .'お問合せがありがとうございます',
 				$Vanilla_Form_Mail->email_message_to_client($email_submitted_contents),
-				$Vanilla_Form_Mail->headers,
+				[$email_from, $email_reply_to],
 				$attachments
+			);
+
+			//--------------------------------------------------
+			// 管理者宛にメールを送信
+			//--------------------------------------------------
+			$is_client_email_sent = wp_mail(
+				$client_email,
+				$email_subject . '（その他お問合せ）',
+				$Vanilla_Form_Mail->email_message_to_client($email_submitted_contents),
+				[$email_from, $email_reply_to]
 			);
 
 			// ---------- 送信が成功したらサンクスページにリダイレクト ----------
