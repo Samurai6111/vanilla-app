@@ -90,12 +90,11 @@ function vanilla_get_current_page_url() {
  * 特定のスラッグを持つ投稿がデータベース上に存在する場合の関数
  *
  * @param $post_name 投稿スラッグ
- * @return boolean
  */
 function vanilla_the_slug_exists($post_name) {
 	global $wpdb;
 	if ($wpdb->get_row(
-		"SELECT post_name FROM wp_posts
+		"SELECT post_name FROM " . $wpdb->prefix . "posts
         WHERE post_name = '" . $post_name . "'",
 		'ARRAY_A'
 	)) {
