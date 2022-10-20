@@ -7,7 +7,6 @@ date_default_timezone_set('Asia/Tokyo');
 include(get_theme_file_path() . "/Build/Build.php");
 include(get_theme_file_path() . "/App/App.php");
 
-
 /*--------------------------------------------------
 /* カスタム投稿追加
 /*------------------------------------------------*/
