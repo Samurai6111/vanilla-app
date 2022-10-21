@@ -359,3 +359,19 @@ function vanilla_get_footer()
 }
 add_action('get_footer', 'vanilla_get_footer');
 add_action('admin_footer', 'vanilla_get_footer');
+
+//== wordpressから送られるメールを停止 ========
+// ユーザー登録時に登録者へ送信されるメール
+add_filter( 'wp_new_user_notification_email', '__return_false' );
+
+// ユーザー登録時に管理者へ送信されるメール
+add_filter( 'wp_new_user_notification_email_admin', '__return_false' );
+
+// メールアドレス変更時に登録者へ送信されるメール
+add_filter( 'send_email_change_email', '__return_false' );
+
+// パスワード変更時に登録者へ送信されるメール
+add_filter( 'send_password_change_email', '__return_false' );
+
+// パスワードリセット時に管理者へ送信されるメール
+add_filter( 'wp_password_change_notification_email', '__return_false' );
