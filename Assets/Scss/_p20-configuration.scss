@@ -140,7 +140,7 @@ $one_margin: calc(calc(100vw - #{$inner}) / 2);
 		content: '';
 	}
 
-	& > img {
+	& > * {
 		position: absolute;
 		top: 0;
 		right: 0;
