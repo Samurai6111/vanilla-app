@@ -70,7 +70,8 @@
 
 <?php vanilla_the_hidden_form($s_POST, $validations) ?>
 
-
+<?php
+if (wp_get_current_user()->user_login === 'vanilla-admin') { ?>
 <script>
 	let form = $('#vanillaForm')
 	form.find('.vanillaForm__labelText').click(function() {
@@ -85,3 +86,4 @@
 		form.find('textarea[name="notes"]').val('テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります')
 	})
 </script>
+<?php } ?>

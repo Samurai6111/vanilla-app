@@ -209,6 +209,13 @@ class Vanilla_Form_Row_Input {
 
 		<?php
 		//--------------------------------------------------
+		// エラーを表示
+		//--------------------------------------------------
+		Vanilla_Form_Validation::echo_validation_result($name);
+		?>
+
+		<?php
+		//--------------------------------------------------
 		// 確認画面
 		//--------------------------------------------------
 		if (vanilla_is_current_form_action('confirm')) { ?>
@@ -231,17 +238,18 @@ class Vanilla_Form_Row_Input {
 		//--------------------------------------------------
 		$example = [
 			'name' => '',
+			'attr' => '',
 			'values' => [
 				'value' => 'text',
 			],
 		];
 
-
 		$name = $args['name'];
 		$values = $args['values'];
+		$attr = $args['attr'];
 	?>
 		<div class="vanillaForm__inputSelectboxWrap">
-			<select name="<?php echo esc_attr($name) ?>">
+			<select name="<?php echo esc_attr($name) ?>" <?php echo esc_attr($attr) ?>>
 				<?php
 				foreach ($values as $value => $text) {
 					$selected = (s_post($name) == $value) ? 'selected' : '';
@@ -253,6 +261,13 @@ class Vanilla_Form_Row_Input {
 				<?php } ?>
 			</select>
 		</div>
+
+		<?php
+		//--------------------------------------------------
+		// エラーを表示
+		//--------------------------------------------------
+		Vanilla_Form_Validation::echo_validation_result($name);
+		?>
 
 		<?php
 		//--------------------------------------------------
