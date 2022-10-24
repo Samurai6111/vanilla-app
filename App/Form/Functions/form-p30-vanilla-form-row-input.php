@@ -240,17 +240,19 @@ class Vanilla_Form_Row_Input {
 		$name = $args['name'];
 		$values = $args['values'];
 	?>
-		<select name="<?php echo esc_attr($name) ?>">
-			<?php
-			foreach ($values as $value => $text) {
-				$selected = (s_post($name) == $value) ? 'selected' : '';
-			?>
-				<option value="<?php echo esc_attr($value) ?>" <?php echo esc_attr($selected) ?>>
-					<?php echo esc_html($text) ?>
-				</option>
+		<div class="vanillaForm__inputSelectboxWrap">
+			<select name="<?php echo esc_attr($name) ?>">
+				<?php
+				foreach ($values as $value => $text) {
+					$selected = (s_post($name) == $value) ? 'selected' : '';
+				?>
+					<option value="<?php echo esc_attr($value) ?>" <?php echo esc_attr($selected) ?>>
+						<?php echo esc_html($text) ?>
+					</option>
 
-			<?php } ?>
-		</select>
+				<?php } ?>
+			</select>
+		</div>
 
 		<?php
 		//--------------------------------------------------

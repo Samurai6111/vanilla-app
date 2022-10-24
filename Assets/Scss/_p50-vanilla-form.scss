@@ -50,6 +50,25 @@
 						border: 0.1rem solid $lightgray_ddd;
 						border-radius: 0.4rem;
 					}
+
+					.vanillaForm__inputSelectboxWrap {
+						position: relative;
+
+						&::after {
+							position: absolute;
+							top: 50%;
+							right: 1rem;
+							transform: translate(0, -50%);
+							width: .5rem;
+							height: 1rem;
+							display: inline-block;
+							content: "";
+							background-position:center;
+							background-size:contain;
+							background-repeat:no-repeat;
+							background-image:url(../../Img/Common/icon_arrow_right_black_1.svg);
+						}
+					}
 				}
 
 				.vanillaForm__inputCaption {
