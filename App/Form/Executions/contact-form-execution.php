@@ -32,28 +32,30 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 			//--------------------------------------------------
 			// ユーザー宛にメールを送信
 			//--------------------------------------------------
-			$is_user_email_sent = wp_mail(
+			$is_user_email_sent = $Vanilla_Form_Mail->send_mail(
 				s_POST('email'),
-				$email_subject .'お問合せがありがとうございます',
-				$Vanilla_Form_Mail->email_message_to_client($email_submitted_contents),
-				[$email_from, $email_reply_to],
+				'件名 : お問合せがありがとうございます',
+				$Vanilla_Form_Mail->email_message_to_user($email_submitted_contents),
+				$Vanilla_Form_Mail->headers,
 				$attachments
 			);
 
+
 			//--------------------------------------------------
-			// 管理者宛にメールを送信
+			// クライアント宛にメールを送信
 			//--------------------------------------------------
-			$is_client_email_sent = wp_mail(
-				$client_email,
-				$email_subject . '（その他お問合せ）',
+			$is_client_email_sent = $Vanilla_Form_Mail->send_mail(
+				s_POST('email'),
+				'件名 : HPからお問合せが来てます',
 				$Vanilla_Form_Mail->email_message_to_client($email_submitted_contents),
-				[$email_from, $email_reply_to]
+				$Vanilla_Form_Mail->headers,
+				$attachments
 			);
 
 			// ---------- 送信が成功したらサンクスページにリダイレクト ----------
-			if ($is_user_email_sent) {
-				wp_safe_redirect(home_url('/thanks/'));
-				exit;
+			if ($is_user_email_sent && $is_client_email_sent) {
+				// wp_safe_redirect(home_url('/thanks/'));
+				// exit;
 			}
 		}
 	} else {

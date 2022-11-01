@@ -3,8 +3,8 @@
 /**
  * Template header
  * @package WordPress
- * @subpackage I'LL
- * @since I'LL 1.0
+ * @subpackage Vanilla
+ * @since Vanilla 1.0
  */
 ?>
 <!DOCTYPE html>

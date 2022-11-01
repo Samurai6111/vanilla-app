@@ -67,6 +67,39 @@ class Vanilla_Form_Mail {
 	}
 
 
+
+	/**
+	 * メールの本文（ユーザー宛）
+	 *
+	 * @param $submitted_array $_POSTの中身
+	 */
+	function email_message_to_user($email_submitted_contents) {
+		global $email_signature;
+		$email_message_head
+			= "お問合せありがとうございます\n"
+			. "\n";
+
+		$email_message_body =
+			"以下お客様のご入力内容です。\n"
+			. "\n"
+			. $email_submitted_contents
+			. "\n";
+
+		$email_message_footer
+			= "\n"
+			. $email_signature
+			. "\n";
+
+		$email_message
+			= $email_message_head
+			. $email_message_body
+			. $email_message_footer;
+
+		return $email_message;
+	}
+
+
+
 	/**
 	 * メールの本文（管理者宛）
 	 *
