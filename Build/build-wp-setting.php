@@ -375,3 +375,16 @@ add_filter( 'send_password_change_email', '__return_false' );
 
 // パスワードリセット時に管理者へ送信されるメール
 add_filter( 'wp_password_change_notification_email', '__return_false' );
+
+/**
+ * 管理画面のfooterにコードを追記する
+ */
+function vanilla_admin_footer() {
+	global $pagenow;
+	if ($pagenow === 'post.php') {
+?>
+		<script src="<?php echo get_template_directory_uri(); ?>/Assets/Js/Custom/admin-custom.js"></script>
+	<?php } ?>
+<?php
+}
+add_action('admin_footer', 'vanilla_admin_footer');
