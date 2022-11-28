@@ -19,9 +19,9 @@
 
 
 /**
-* /Assets/Scss/内の全てのscssファイルを取得し、
-* style.scssに全てimportする
-*/
+ * /Assets/Scss/内の全てのscssファイルを取得し、
+ * style.scssに全てimportする
+ */
 function vanilla_overwrite_style_scss() {
 	$style_text = '';
 	$import = '@import';
@@ -33,7 +33,7 @@ function vanilla_overwrite_style_scss() {
 	$style_scss_contents = file_get_contents($style_scss_uri);
 	//= style.scssの「@import」を数 ====
 	$style_scss_import_count = substr_count($style_scss_contents, $import);
-//= 「/Assets/Scss/」ディレクトリのstyle.scssを除いたscssファイルのパスを取得 ====
+	//= 「/Assets/Scss/」ディレクトリのstyle.scssを除いたscssファイルのパスを取得 ====
 	$scss_file_list = array_filter(
 		glob($scss_directory . '*.scss'),
 		function ($scss) {
@@ -66,8 +66,7 @@ function vanilla_overwrite_style_scss() {
 /**
  * 全ページ共通のcss読み込み(wp-headで読み込まれるもの)
  */
-function vanilla_load_css()
-{
+function vanilla_load_css() {
 	// ---------- font awesome ----------
 	wp_enqueue_style('fontawsome-cdn', 'https://use.fontawesome.com/releases/v5.10.2/css/all.css', [], '1.0.3');
 	wp_enqueue_style('fontawsome-js', 'https://kit.fontawesome.com/f0fc03e17c.js', [], '1.0.3');
@@ -90,8 +89,7 @@ add_action('wp_enqueue_scripts', 'vanilla_load_css');
 /**
  * 全ページ共通のjs読み込み
  */
-function vanilla_load_js()
-{
+function vanilla_load_js() {
 
 	/*--------------------------------------------------
 	/* jQuery読み込み
@@ -144,8 +142,7 @@ add_action('wp_enqueue_scripts', 'vanilla_load_js');
 /**
  * 「ダッシュボードページ」のウィジェットを削除
  */
-function remove_dashboard_widgets()
-{
+function remove_dashboard_widgets() {
 	global $wp_meta_boxes;
 	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments']); // 最近のコメント
 	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']); // 被リンク
@@ -169,8 +166,7 @@ add_theme_support('title-tag');
  * 「購読者」が管理画面に入れないようにする
  */
 add_action('auth_redirect', 'subscriber_auth_redirect');
-function subscriber_auth_redirect($user_id)
-{
+function subscriber_auth_redirect($user_id) {
 	$user = get_userdata($user_id);
 	if (!$user->has_cap('edit_posts')) {
 		wp_redirect(get_home_url());
@@ -183,8 +179,7 @@ function subscriber_auth_redirect($user_id)
  * 「購読者」の時ツールバーを非表示にする
  */
 add_action('after_setup_theme', 'subscriber_hide_admin_bar');
-function subscriber_hide_admin_bar()
-{
+function subscriber_hide_admin_bar() {
 	$user = wp_get_current_user();
 	if (isset($user->data) && !$user->has_cap('edit_posts')) {
 		show_admin_bar(false);
@@ -197,8 +192,7 @@ function subscriber_hide_admin_bar()
  */
 add_filter('big_image_size_threshold', '__return_false');
 add_filter('intermediate_image_sizes_advanced', 'disable_image_sizes');
-function disable_image_sizes($new_sizes)
-{
+function disable_image_sizes($new_sizes) {
 	unset($new_sizes['thumbnail']);
 	unset($new_sizes['medium']);
 	unset($new_sizes['large']);
@@ -219,8 +213,7 @@ add_theme_support("editor-style");
 /**
  * WPのテキストエディタにもfontAwesomeを表示させる
  */
-function vf_add_editor_styles()
-{
+function vf_add_editor_styles() {
 	add_editor_style('asset/fonts/fontawesome.min.css');
 }
 add_action('admin_init', 'vf_add_editor_styles');
@@ -229,44 +222,43 @@ add_action('admin_init', 'vf_add_editor_styles');
 /**
  * admin barのカスタマイズ
  */
-function vanilla_custom_admin_var($admin_bar)
-{
+function vanilla_custom_admin_var($admin_bar) {
 
-global $current_user;
+	global $current_user;
 	if ($current_user->user_login === 'vanilla-admin') {
-	/*--------------------------------------------------
+		/*--------------------------------------------------
 	/* 現在のテンプレートファイルを表示
 	/*------------------------------------------------*/
-	global $template;
-	$themre_path = get_stylesheet_directory() . '/';
-	$current_template_file_name = basename($template);
-	$current_template_file = str_replace($themre_path, "", $template);
-	$current_theme_slug = get_option('stylesheet');
+		global $template;
+		$themre_path = get_stylesheet_directory() . '/';
+		$current_template_file_name = basename($template);
+		$current_template_file = str_replace($themre_path, "", $template);
+		$current_theme_slug = get_option('stylesheet');
 
-	$current_template_link = admin_url() . '/theme-editor.php?file=' . $current_template_file . '&theme=' . $current_theme_slug;
+		$current_template_link = admin_url() . '/theme-editor.php?file=' . $current_template_file . '&theme=' . $current_theme_slug;
 
-	if (!is_admin()) {
+		if (!is_admin()) {
 
-		$admin_bar->add_menu(array(
-			'id'    => 'current_template_link',
-			'title' => 'current template : ' . $current_template_file_name, // Your menu title
-			'href'  => $current_template_link, // URL
-			'meta'  => array(
-				'target' => '_blank',
-			),
-		));
-	}
+			$admin_bar->add_menu(array(
+				'id'    => 'current_template_link',
+				'title' => 'current template : ' . $current_template_file_name, // Your menu title
+				'href'  => $current_template_link, // URL
+				'meta'  => array(
+					'target' => '_blank',
+				),
+			));
+		}
 
-	/*--------------------------------------------------
+		/*--------------------------------------------------
 	/* メニューの削除
 	/*------------------------------------------------*/
-	$admin_bar->remove_node('wp-logo');
-	$admin_bar->remove_node('customize');
-	$admin_bar->remove_node('comments');
-	$admin_bar->remove_node('new-content');
-	$admin_bar->remove_node('updates');
-}
+		$admin_bar->remove_node('wp-logo');
+		$admin_bar->remove_node('customize');
+		$admin_bar->remove_node('comments');
+		$admin_bar->remove_node('new-content');
+		$admin_bar->remove_node('updates');
 	}
+}
 add_action('admin_bar_menu', 'vanilla_custom_admin_var', 100);
 
 
@@ -275,8 +267,7 @@ add_action('admin_bar_menu', 'vanilla_custom_admin_var', 100);
  *
  * @param int  $post_id  投稿 ID。
  */
-function vanilla_pre_post_update($post_id)
-{
+function vanilla_pre_post_update($post_id) {
 
 	/*--------------------------------------------------
   /* 管理画面で固定ページを編集した時に
@@ -294,8 +285,7 @@ add_action('pre_post_update', 'vanilla_pre_post_update');
  *
  * @param int  $post_id  投稿 ID。
  */
-function vanilla_edit_post($post_id)
-{
+function vanilla_edit_post($post_id) {
 
 	/*--------------------------------------------------
   /* 管理画面で固定ページを編集した時に
@@ -353,8 +343,7 @@ add_theme_support('customize-selective-refresh-widgets');
 /**
  * vanilla_get_footer
  */
-function vanilla_get_footer()
-{
+function vanilla_get_footer() {
 	include(get_theme_file_path() . "/Assets/Components/g-custom-js-command.php");
 }
 add_action('get_footer', 'vanilla_get_footer');
@@ -362,19 +351,19 @@ add_action('admin_footer', 'vanilla_get_footer');
 
 //== wordpressから送られるメールを停止 ========
 // ユーザー登録時に登録者へ送信されるメール
-add_filter( 'wp_new_user_notification_email', '__return_false' );
+add_filter('wp_new_user_notification_email', '__return_false');
 
 // ユーザー登録時に管理者へ送信されるメール
-add_filter( 'wp_new_user_notification_email_admin', '__return_false' );
+add_filter('wp_new_user_notification_email_admin', '__return_false');
 
 // メールアドレス変更時に登録者へ送信されるメール
-add_filter( 'send_email_change_email', '__return_false' );
+add_filter('send_email_change_email', '__return_false');
 
 // パスワード変更時に登録者へ送信されるメール
-add_filter( 'send_password_change_email', '__return_false' );
+add_filter('send_password_change_email', '__return_false');
 
 // パスワードリセット時に管理者へ送信されるメール
-add_filter( 'wp_password_change_notification_email', '__return_false' );
+add_filter('wp_password_change_notification_email', '__return_false');
 
 /**
  * 管理画面のfooterにコードを追記する
@@ -388,3 +377,21 @@ function vanilla_admin_footer() {
 <?php
 }
 add_action('admin_footer', 'vanilla_admin_footer');
+
+
+/**
+ * ローカル環境かどうかを判定する関数
+ */
+function is_local() {
+	$whitelist = array(
+		'127.0.0.1',
+		'::1'
+	);
+
+	if (in_array($_SERVER['REMOTE_ADDR'], $whitelist)) {
+		// not val
+		return true;
+	} else {
+		return false;
+	}
+}
