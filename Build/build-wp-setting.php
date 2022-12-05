@@ -377,21 +377,3 @@ function vanilla_admin_footer() {
 <?php
 }
 add_action('admin_footer', 'vanilla_admin_footer');
-
-
-/**
- * ローカル環境かどうかを判定する関数
- */
-function is_local() {
-	$whitelist = array(
-		'127.0.0.1',
-		'::1'
-	);
-
-	if (in_array($_SERVER['REMOTE_ADDR'], $whitelist)) {
-		// not val
-		return true;
-	} else {
-		return false;
-	}
-}
