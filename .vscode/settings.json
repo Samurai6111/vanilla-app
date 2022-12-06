@@ -1,3 +1,10 @@
 {
-	"search.useIgnoreFiles": true
+	"search.useIgnoreFiles": true,
+	"liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "/Assets/Css"
+    }
+  ],
 }
