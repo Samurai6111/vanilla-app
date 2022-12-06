@@ -10,4 +10,4 @@ include(get_theme_file_path() . "/App/Modules/App-modules.php");
 include(get_theme_file_path() . "/App/Wordpress/App-wordpress.php");
 include(get_theme_file_path() . "/App/Form/App-form.php");
 include(get_theme_file_path() . "/App/Insert-preset-posts/class-Insert-preset-posts.php");
-include(get_theme_file_path() . "/Suumo/App-suumo.php");
+include(get_theme_file_path() . "/App/Suumo/App-suumo.php");
