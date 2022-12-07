@@ -65,7 +65,3 @@
 	// 基本的にこのファイルにはhtmlコードを記述しない
 	// フッターは「vanilla-header.php」に記述する
 	?>
-
-	<?php
-	include(get_theme_file_path() . "/Headers/header-vanilla.php");
-	?>
