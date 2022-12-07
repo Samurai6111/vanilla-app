@@ -106,56 +106,60 @@ class Suumo_Table {
 		$values_row = Self::get_table_values();
 
 	?>
-		<div class="suumoTableContainer">
-			<table class="suumoTable">
-				<thead>
-					<tr>
-						<th class="">
-							編集
-						</th>
-
-						<?php foreach ($columns as $key => $name) { ?>
-							<th class="<?php echo esc_attr('-' . $key) ?>">
-								<?php echo esc_html($name) ?>
-							</th>
-						<?php } ?>
-					</tr>
-				</thead>
-
-				<tbody>
-					<?php foreach ($values_row as $values) { ?>
+		<form action="<?php echo get_permalink(); ?>" method="POST">
+			<?php vanilla_wp_nonce_field('suumo_table') ?>
+			<div class="suumoTableContainer">
+				<table class="suumoTable">
+					<thead>
 						<tr>
+							<th class="">
+								編集
+							</th>
 
-
-							<?php
-							$i = -1;
-							foreach ($values as $value) {
-								++$i;
-								$column_key = $column_keys[$i];
-							?>
-
-								<?php if ($i === 0) { ?>
-									<td>
-										<form action="<?php echo get_permalink(); ?>" method="POST">
-											<button class="-reset" type="submit" name="suumo_id" value="<?php echo esc_attr($value) ?>">削除</button>
-										</form>
-									</td>
-								<?php } ?>
-
-
-								<td class="<?php echo esc_attr('-' . $column_key) ?>">
-									<?php if ($column_key === 'link') { ?>
-										<a href="<?php echo esc_url($value) ?>" target="_blank" rel="noopener">物件URL</a>
-									<?php } else { ?>
-										<?php echo esc_html($value) ?>
-									<?php } ?>
-								</td>
+							<?php foreach ($columns as $key => $name) { ?>
+								<th class="<?php echo esc_attr('-' . $key) ?>">
+									<?php echo esc_html($name) ?>
+								</th>
 							<?php } ?>
 						</tr>
-					<?php } ?>
-				</tbody>
-			</table>
-		</div>
+					</thead>
+
+					<tbody>
+						<?php foreach ($values_row as $values) { ?>
+							<tr class="">
+								<?php
+								$i = -1;
+								foreach ($values as $value) {
+									++$i;
+									$column_key = $column_keys[$i];
+								?>
+
+									<?php if ($i === 0) { ?>
+										<td>
+											<button class="-reset" type="submit" name="suumo_table_form_action" value="delete">削除</button>
+
+											<button class="-reset" type="button" onclick="suumo_data_edit_mode(event)">編集</button>
+
+
+										</td>
+									<?php } ?>
+
+
+									<td class="<?php echo esc_attr('-' . $column_key) ?>">
+										<input type="hidden" name="<?php echo esc_attr($column_key) ?>" value="<?php echo esc_attr($value) ?> ">
+										<?php if ($column_key === 'link') { ?>
+											<a href="<?php echo esc_url($value) ?>" target="_blank" rel="noopener">物件URL</a>
+										<?php } else { ?>
+											<?php echo esc_html($value) ?>
+										<?php } ?>
+									</td>
+								<?php } ?>
+							</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+			</div>
+		</form>
 <?php
 	}
 }

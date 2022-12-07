@@ -13,9 +13,13 @@ class Suumo_Form {
 	 */
 	function delete_suumo_data($data) {
 		global $wpdb, $suumo_table_name;
-		$suumo_id = $data['suumo_id'];
-		if ($suumo_id) {
-			$result = $wpdb->delete( $suumo_table_name, ['ID' => $suumo_id] );
+		$suumo_id = $data['ID'];
+
+		if (
+			$data['suumo_table_form_action']  === 'delete'
+			&& $suumo_id
+		) {
+			$result = $wpdb->delete($suumo_table_name, ['ID' => $suumo_id]);
 		} else {
 			$result = false;
 		}
@@ -36,7 +40,7 @@ class Suumo_Form {
 
 		global $suumo_xpath_array;
 		$suumo_url = $data['suumo_url'];
-		$suumo_url_type = $data['suumo_url_type'];
+		$suumo_url_type = 'suumo_surroundings';
 		$suumo_data_array = [];
 
 		// ---------- URLからスクレイピング ----------
@@ -118,18 +122,17 @@ class Suumo_Form {
 	 * URL入力用のフォーム
 	 */
 	static function suumo_url_form() {
+		global $insert_suumo_data_validation;
 ?>
 
 		<div class="suumoUrlFormContainer">
 			<form action="<?php echo get_permalink(); ?>" class="suumoUrlForm" id="suumoUrlForm" method="POST">
 
+				<?php vanilla_wp_nonce_field('insert_suumo_data') ?>
 				<input class="suumoUrlForm__urlInput" type="text" name="suumo_url">
-
-				<select name="suumo_url_type" class="suumoUrlForm__urlType">
-					<option value="suumo_surroundings">周辺環境</option>
-					<option value="suumo_default">デフォルト</option>
-					<option value="suumo_printout">印刷用</option>
-				</select>
+				<p class="-color-red">
+					<?php echo esc_html($insert_suumo_data_validation['suumo_url']); ?>
+				</p>
 
 				<button type="submit">登録</button>
 			</form>
