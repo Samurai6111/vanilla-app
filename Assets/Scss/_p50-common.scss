@@ -34,12 +34,22 @@ body {
 	padding-left: 2rem;
 	margin: 0 auto;
 
+	&.-tight {
+		max-width: calc(104.8rem + 4rem);
+		max-width: responsiveValue(120rem, #{$sp_inner});
+	}
+
 	&.-wide {
 		max-width: calc(116rem + 4rem);
-		max-width: responsiveValue(120rem, #{$sp_inner});
+		max-width: responsiveValue(128rem, #{$sp_inner});
 	}
 
 	&.-header {
 		max-width: responsiveValue(132rem, #{$sp_inner});
+	}
+
+	&.-no-padding {
+		padding-right: 0;
+		padding-left: 0;
 	}
 }
