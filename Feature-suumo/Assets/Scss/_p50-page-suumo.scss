@@ -98,7 +98,33 @@
 				th {
 					padding: 0.6rem 1.2rem;
 					color: $navy_000;
+					vertical-align: middle;
 					border-bottom-width: 0.2rem;
+
+					.suumoTable__sortButtonWrap {
+						button {
+							position: relative;
+							padding-right: 3rem;
+
+							&::after {
+								position: absolute;
+								top: 50%;
+								right: 1rem;
+								display: inline-block;
+								content: '▲';
+								font-size: 60%;
+								line-height: 1;
+								transform: translate(0, -50%);
+								opacity: 0.7;
+							}
+						}
+
+						&.-desc {
+							button::after {
+								content: '▼';
+							}
+						}
+					}
 				}
 			}
 		}

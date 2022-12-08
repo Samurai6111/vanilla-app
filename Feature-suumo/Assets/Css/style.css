@@ -169,7 +169,27 @@ a {
 .pageSuumo .suumoTable thead tr th {
   padding: 0.6rem 1.2rem;
   color: #00072b;
+  vertical-align: middle;
   border-bottom-width: 0.2rem;
+}
+.pageSuumo .suumoTable thead tr th .suumoTable__sortButtonWrap button {
+  position: relative;
+  padding-right: 3rem;
+}
+.pageSuumo .suumoTable thead tr th .suumoTable__sortButtonWrap button::after {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  display: inline-block;
+  content: "▲";
+  font-size: 60%;
+  line-height: 1;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  opacity: 0.7;
+}
+.pageSuumo .suumoTable thead tr th .suumoTable__sortButtonWrap.-desc button::after {
+  content: "▼";
 }
 .pageSuumo .suumoTable tbody tr {
   -webkit-transition: 0.3s;

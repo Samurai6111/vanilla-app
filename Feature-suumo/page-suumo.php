@@ -1,7 +1,6 @@
 <?php
 require_once(get_theme_file_path() . "/Feature-suumo/suumo-form-execution.php");
 
-
 /**
  * Template Name: suumo
  * @Template Post Type: post, page,

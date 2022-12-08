@@ -110,9 +110,54 @@ class Suumo_Table {
 	 */
 	function get_table_values() {
 		global $wpdb;
-		$table_values = $wpdb->get_results("SELECT * FROM $this->table_name", OBJECT);
+
+		$column_name = @array_keys($_GET['sort'])[0];
+		$order = strtoupper(@array_values($_GET['sort'])[0]);
+		$sort = "ORDER BY `{$column_name}` $order";
+		$sql = ($column_name && $order) ? "SELECT * FROM {$this->table_name} {$sort}" : "SELECT * FROM {$this->table_name}";
+		$table_values = $wpdb->get_results($sql, OBJECT);
 
 		return $table_values;
+	}
+
+
+	/**
+	 * カラムを出力するときにフォーマットする
+	 *
+	 * @param $value 値
+	 * @param $key キー
+	 */
+	function format_suumo_column($key) {
+		$columns = Self::get_table_columns();
+
+
+		if (
+			$key === 'rent' ||
+			$key === 'management_fee' ||
+			$key === 'deposit' ||
+			$key === 'retainer_fee' ||
+			$key === 'room_arragement' ||
+			$key === 'initial_fee'
+		) {
+			$column_name = @array_keys($_GET['sort'])[0];
+			if (
+				$column_name === $key &&
+				@array_values($_GET['sort'])[0] === 'asc'
+				) {
+					$order = 'desc';
+				} else {
+					$order = 'asc';
+
+				}
+			$return =
+				'<form action="' . get_permalink() . '" type="GET" class="suumoTable__sortButtonWrap ' . esc_attr('-'.$order) .'">' .
+				'<button type="submit" class="-reset" name="sort[' . $key . ']" value="' . $order . '">' . $columns[$key] . '</button>' .
+				'</form>';
+		} else {
+			$return = $columns[$key];
+		}
+
+		return $return;
 	}
 
 
@@ -152,57 +197,54 @@ class Suumo_Table {
 		$values_row = Self::get_table_values();
 
 	?>
-		<form action="<?php echo get_permalink(); ?>" method="POST">
-			<?php vanilla_wp_nonce_field('suumo_table') ?>
-			<div class="suumoTableContainer">
-				<table class="suumoTable">
-					<thead>
-						<tr>
-							<th class="">
-								編集
+		<div class="suumoTableContainer">
+			<table class="suumoTable">
+				<thead>
+					<tr>
+						<th class="">
+							編集
+						</th>
+
+						<?php foreach ($columns as $key => $name) { ?>
+							<th class="<?php echo esc_attr('-' . $key) ?>">
+								<?php echo Self::format_suumo_column($key) ?>
 							</th>
+						<?php } ?>
+					</tr>
+				</thead>
 
-							<?php foreach ($columns as $key => $name) { ?>
-								<th class="<?php echo esc_attr('-' . $key) ?>">
-									<?php echo esc_html($name) ?>
-								</th>
-							<?php } ?>
-						</tr>
-					</thead>
+				<tbody>
+					<?php foreach ($values_row as $values) { ?>
+						<tr class="">
+							<?php
+							$i = -1;
+							foreach ($values as $value) {
+								++$i;
+								$column_key = $column_keys[$i];
+							?>
 
-					<tbody>
-						<?php foreach ($values_row as $values) { ?>
-							<tr class="">
-								<?php
-								$i = -1;
-								foreach ($values as $value) {
-									++$i;
-									$column_key = $column_keys[$i];
-								?>
-
-									<?php if ($i === 0) { ?>
-										<td>
+								<?php if ($i === 0) { ?>
+									<td>
+										<form action="<?php echo get_permalink(); ?>" method="POST">
+											<?php vanilla_wp_nonce_field('suumo_table') ?>
+											<input type="hidden" name="<?php echo esc_attr($column_key) ?>" value="<?php echo esc_attr($value) ?> ">
 											<button class="-reset -color-red" type="submit" name="suumo_table_form_action" value="delete">削除</button>
-
-											<!-- <button class="-reset" type="button" onclick="suumo_data_edit_mode(event)">編集</button> -->
-
-
-										</td>
-									<?php } ?>
-
-
-									<td class="<?php echo esc_attr('-' . $column_key) ?>">
-										<input type="hidden" name="<?php echo esc_attr($column_key) ?>" value="<?php echo esc_attr($value) ?> ">
-										<?php $result = Self::format_suumo_value($value, $column_key) ?>
-										<?php echo wp_kses_post($result) ?>
+										</form>
 									</td>
 								<?php } ?>
-							</tr>
-						<?php } ?>
-					</tbody>
-				</table>
-			</div>
-		</form>
+
+
+								<td class="<?php echo esc_attr('-' . $column_key) ?>">
+									<?php $result = Self::format_suumo_value($value, $column_key) ?>
+									<?php echo wp_kses_post($result) ?>
+								</td>
+							<?php } ?>
+						</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+		</div>
+
 <?php
 	}
 }

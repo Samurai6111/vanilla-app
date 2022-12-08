@@ -19,6 +19,11 @@ function suumo_create_db_table() {
 }
 add_action('init', 'suumo_create_db_table');
 
+?>
+
+
+<?php
+
 /**
 * suumo用のデータベーステーブルにカラムを追加する
 */

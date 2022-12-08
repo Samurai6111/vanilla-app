@@ -5,6 +5,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 	$Suumo_Validation = new Suumo_Validation();
 	$Suumo_Form = new Suumo_Form();
 
+
 	/*--------------------------------------------------
 	/* suumo tableの処理
 	/*------------------------------------------------*/
@@ -36,9 +37,9 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 	}
 
 	if ($result) {
-		$param = ($param) ? "?param=" . $param : '';
-		wp_safe_redirect(home_url('/suumo/' . $param));
-		exit;
+		// $param = ($param) ? "?param=" . $param : '';
+		// wp_safe_redirect(home_url('/suumo/' . $param));
+		// exit;
 	}
 
 }
