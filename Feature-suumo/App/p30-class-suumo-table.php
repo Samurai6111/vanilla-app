@@ -31,6 +31,7 @@ class Suumo_Table {
 		if (is_admin() && current_user_can('administrator')) {
 			// メニュー追加
 			add_action('admin_menu', [$this, 'set_plugin_menu']);
+			add_action('admin_init', [$this, 'save_config']);
 		}
 	}
 
@@ -46,12 +47,20 @@ class Suumo_Table {
 		);
 	}
 
-	function insert_suumo_table_data_form() {
-?>
-		<form action="" method="GET">
-			<input type="text" name="suumo_url">
-		</form>
-	<?php
+	//========================
+	//設定画面の項目データベースに保存する
+	//========================
+	function save_config() {
+
+		//== nonceで設定したcredentialのチェック ========
+		if (isset($_POST[self::CREDENTIAL_NAME]) && $_POST[self::CREDENTIAL_NAME]) {
+			if (check_admin_referer(self::CREDENTIAL_ACTION, self::CREDENTIAL_NAME)) {
+
+				update_option('google_api_key', $_POST['google_api_key']);
+
+				wp_safe_redirect(menu_page_url(self::MENU_SLUG));
+			}
+		}
 	}
 
 	function suumo_setting_page() { ?>
@@ -64,6 +73,14 @@ class Suumo_Table {
 
 				<h2>Suumo</h2>
 				<table class="form-table">
+					<tr>
+						<th>
+							<label for="google_api_key">Google Api Key</label>
+						</th>
+						<td>
+							<input type="text" name="google_api_key" id="google_api_key" value="<?php echo esc_attr(get_option('google_api_key')) ?>">
+						</td>
+					</tr>
 				</table>
 				<input type='submit' value='保存' class='button button-primary button-large'>
 				</p>
@@ -107,7 +124,7 @@ class Suumo_Table {
 	 */
 	function format_suumo_value($value, $key) {
 		if ($key === 'link') {
-			$return = '<a href="' . esc_url($value) . '" target="_blank" rel="noopener">物件URL</a>';
+			$return = '<a href="' . esc_url($value) . '" target="_blank" rel="noopener">掲載サイトへ</a>';
 		} elseif (
 			$key ===  'rent' ||
 			$key ===  'management_fee' ||

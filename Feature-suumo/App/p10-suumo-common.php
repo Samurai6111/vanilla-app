@@ -107,5 +107,3 @@ function vanilla_get_googlemap_url($address){
   $zoom = 15;
   return "http://maps.google.co.jp/maps?q={$address}&z={$zoom}";
 }
-
-// function vanilla_get_

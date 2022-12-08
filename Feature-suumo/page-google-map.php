@@ -108,6 +108,7 @@ $Suumo_Table = new Suumo_Table()
 		});
 	}
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYPh_8YfpapP_jLOagZApdWeLDyL88DWM&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr(get_option('google_api_key')) ?>&callback=initMap" async defer></script>
+
 
 <?php get_footer();
