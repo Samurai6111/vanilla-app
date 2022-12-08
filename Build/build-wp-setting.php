@@ -67,9 +67,6 @@ function vanilla_overwrite_style_scss() {
  * 全ページ共通のcss読み込み(wp-headで読み込まれるもの)
  */
 function vanilla_load_css() {
-	// ---------- font awesome ----------
-	wp_enqueue_style('fontawsome-cdn', 'https://use.fontawesome.com/releases/v5.10.2/css/all.css', [], '1.0.3');
-	wp_enqueue_style('fontawsome-js', 'https://kit.fontawesome.com/f0fc03e17c.js', [], '1.0.3');
 
 	//--------------------------------------------------
 	// style.scss上書き
