@@ -1,26 +1,16 @@
 <?php
-// $Suumo_Form = new Suumo_Form();
 require_once(get_theme_file_path() . "/Feature-suumo/suumo-form-execution.php");
 
 
-// if (isset($_POST['suumo_id'])) {
-
-// 	$delete = $Suumo_Form->delete_suumo_data($_POST);
-// } else {
-
-// 	$result = $Suumo_Form->insert_suumo_data($_POST);
-// 	echo '<pre>';
-// 	var_dump($result);
-// 	echo '</pre>';
-// }
-
 /**
- * Template Name: スーモ
+ * Template Name: suumo
  * @Template Post Type: post, page,
  * @subpackage Vanilla
  */
 
 get_header(); ?>
+
+<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/Feature-suumo/Assets/Css/style.css">
 
 <main class="pageSuumo" id="pageSuumo" style="background-image:url(<?php echo get_template_directory_uri() ?>/Feature-suumo/Image/img_suumo_mv_1.jpg);">
 	<div class="inner -wide">
@@ -42,9 +32,11 @@ get_header(); ?>
 						$suumo_table->echo_suumo_table(); ?>
 					</div>
 
-					<div class="pageSuumo__buttonWrap js__modal__trigger">
-						<button class="pageSuumo__button" type="button">物件情報を登録する</button>
+					<div class="pageSuumo__buttonWrap">
+						<button class="pageSuumo__button js__modal__trigger" type="button">物件情報を登録する</button>
+						<a href="<?php echo home_url('/suumo/google-map/'); ?>" target="_blank" rel="noopener" class="-tac">Google Mapで見る</a>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -63,6 +55,10 @@ get_header(); ?>
 		</div>
 	</div>
 </main>
+
+
+
+
 
 <script>
 	const current_url = window.location;
@@ -94,8 +90,9 @@ get_header(); ?>
 		$('#modalWrap').fadeIn()
 	}
 
-
 	$('#wpadminbar').hide()
 </script>
+
+
 
 <?php get_footer();

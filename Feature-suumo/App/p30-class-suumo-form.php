@@ -78,6 +78,37 @@ class Suumo_Form {
 		return $suumo_data_array;
 	}
 
+	/**
+	 * 住所から緯度と軽度を取得
+	 *
+	 * @param $address 住所
+	 */
+	function get_lat_long_by_address($address) {
+		$latlon_array = array();
+		$google_maps_key = 'AIzaSyAYPh_8YfpapP_jLOagZApdWeLDyL88DWM'; // Remember to have a valid API key
+		$region = 'DK';
+		$url =    'https://maps.google.com/maps/api/geocode/json?address=' . $address . '&sensor=false&region=' . $region . '&key=' . $google_maps_key;
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+		$response = curl_exec($ch);
+		curl_close($ch);
+		$response_a = json_decode($response);
+
+		$lat = $response_a->results[0]->geometry->location->lat;
+		$long = $response_a->results[0]->geometry->location->lng;
+
+		$latlon_array['latitude'] = $lat;
+		$latlon_array['longitude'] = $long;
+
+		return $latlon_array;
+	}
+
 
 	/**
 	 * suumo_url_formの送信処理
@@ -88,6 +119,7 @@ class Suumo_Form {
 		global $wpdb, $suumo_table_name;
 		$suumo_url = $data['suumo_url'];
 		$suumo_data = Self::get_suumo_data_by_url($data);
+		$lad_lng = self::get_lat_long_by_address($suumo_data['address']);
 
 		if (
 			$suumo_url &&
@@ -95,6 +127,8 @@ class Suumo_Form {
 			!vanilla_suumo_url_exists($suumo_url)
 		) {
 			$suumo_data['link'] = $suumo_url;
+			$suumo_data['longitude'] = $lad_lng['longitude'];
+			$suumo_data['latitude'] = $lad_lng['latitude'];
 			$result = $wpdb->insert(
 				$suumo_table_name,
 				$suumo_data,
@@ -108,6 +142,8 @@ class Suumo_Form {
 					'%s',
 					'%s',
 					'%s',
+					'%f',
+					'%f',
 				]
 			);
 

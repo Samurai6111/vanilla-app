@@ -11,15 +11,6 @@ function suumo_create_db_table() {
 
 	$sql = "CREATE TABLE IF NOT EXISTS $table_name (
 	ID mediumint(9) NOT NULL AUTO_INCREMENT,
-  link varchar(255),
-  rent bigint(20),
-  management_fee bigint(20),
-  deposit bigint(20),
-  retainer_fee bigint(20),
-  room_arragement varchar(20),
-  initial_fee bigint(20) DEFAULT 0,
-  construction varchar(20),
-  address varchar(20),
 	UNIQUE KEY ID (ID)
 ) $charset_collate;";
 
@@ -27,6 +18,39 @@ function suumo_create_db_table() {
 	$result = dbDelta($sql);
 }
 add_action('init', 'suumo_create_db_table');
+
+/**
+* suumo用のデータベーステーブルにカラムを追加する
+*/
+function suumo_add_table_columns() {
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . 'suumo';
+	$wpdb->query("ALTER TABLE {$table_name} ADD link varchar(255)");
+	$wpdb->query("ALTER TABLE {$table_name} ADD rent bigint(20)");
+	$wpdb->query("ALTER TABLE {$table_name} ADD management_fee bigint(20)");
+	$wpdb->query("ALTER TABLE {$table_name} ADD deposit bigint(20)");
+	$wpdb->query("ALTER TABLE {$table_name} ADD retainer_fee bigint(20)");
+	$wpdb->query("ALTER TABLE {$table_name} ADD room_arragement varchar(20)");
+	$wpdb->query("ALTER TABLE {$table_name} ADD initial_fee bigint(20) DEFAULT 0");
+	$wpdb->query("ALTER TABLE {$table_name} ADD construction varchar(20)");
+	$wpdb->query("ALTER TABLE {$table_name} ADD address varchar(20)");
+	$wpdb->query("ALTER TABLE {$table_name} ADD longitude float(50)");
+	$wpdb->query("ALTER TABLE {$table_name} ADD latitude float(50)");
+}
+add_action('init', 'suumo_add_table_columns');
+
+/**
+* suumo用のデータベーステーブルにカラムを削除する
+*/
+function suumo_drop_table_columns() {
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . 'suumo';
+	$wpdb->query("ALTER TABLE {$table_name} DROP longitude ");
+	$wpdb->query("ALTER TABLE {$table_name} DROP latitude ");
+}
+// add_action('init', 'suumo_drop_table_columns');
 
 /**
 * テストの値を入れる

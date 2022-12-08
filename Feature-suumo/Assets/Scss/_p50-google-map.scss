@@ -1,0 +1,27 @@
+@charset 'UTF-8';
+
+#map {
+	width: 100vw;
+	height: 100vh;
+}
+
+.pinInfo {
+	width: 100%;
+	max-width: 30rem;
+	max-height: 15rem;
+	overflow: scroll;
+
+	table {
+		tr {
+			td {
+				padding: 0.4rem;
+				white-space: nowrap;
+				border: 0.1rem solid $black_000;
+
+				&:first-child {
+					font-weight: 600;
+				}
+			}
+		}
+	}
+}

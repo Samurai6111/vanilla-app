@@ -24,6 +24,8 @@ class Suumo_Table {
 			'初期費用(概算)',
 			'構造',
 			'住所',
+			'緯度',
+			'軽度',
 		];
 
 		if (is_admin() && current_user_can('administrator')) {

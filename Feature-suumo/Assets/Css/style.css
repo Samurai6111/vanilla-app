@@ -1,0 +1,254 @@
+@charset "UTF-8";
+/** --------------------------------
+* 引数で指定した色の明るさに応じて白か黒を出力する関数
+*
+* @param $color カラーコード
+*/
+/** --------------------------------
+* cssの値を単位を除いて数字だけにしてくれる関数
+*
+* @param 数字と単位を含む値 10ox, 3remなど
+*/
+/** --------------------------------
+* 値の「単位」を取得する関数
+*
+* @param $value 数字と単位を含む値 10ox, 3remなど
+*/
+/** --------------------------------
+* pxやremをvwに変換してくれる関数
+*
+* @param $viewport pcデザインの横幅
+* @param $fontSize フォントサイズ(pxでもremでも)
+*/
+/** --------------------------------
+* フォントサイズをレスポンシブで調整する関数
+*
+* @param $pc pcのフォントサイズ
+* @param $sp spのフォントサイズ
+*/
+/** --------------------------------
+* 画像の縦横比を指定する関数  figureタグに付与
+*
+* @param $height 横幅100の時の縦の割合 *「%」で指定
+*/
+a {
+  text-decoration: underline;
+}
+
+.pageSuumo__button {
+  display: inline-block;
+  width: 100%;
+  max-width: 32rem;
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
+  background-color: #0c0033;
+  -webkit-box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.4);
+  border: none;
+  border-radius: 0.4rem;
+}
+@media only screen and (max-width:768px) {
+  .pageSuumo__button {
+    font-size: 1.4rem;
+  }
+}
+
+.pageSuumo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  padding: 10% 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.pageSuumo::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.pageSuumo .pageSuumoContainer {
+  position: relative;
+  padding: 4rem 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  -webkit-box-shadow: 0 0 1.6rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 1.6rem rgba(0, 0, 0, 0.2);
+}
+.pageSuumo .pageSuumoContainer .pageSuumoHead {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  margin-bottom: clamp(6rem, vw($pc), 10rem);
+}
+.pageSuumo .pageSuumoContainer .pageSuumoHead .pageSuumoHead__title {
+  color: #0c0033;
+  font-size: clamp(3.2rem, vw($pc), 6rem);
+  font-weight: bold;
+  line-height: 1.3;
+}
+.pageSuumo .pageSuumoContainer .pageSuumoHead .pageSuumoHead__author {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-left: 1.6rem;
+  margin-top: 1.6rem;
+  margin-left: auto;
+  color: #0c0033;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.pageSuumo .pageSuumoContainer .pageSuumoHead .pageSuumoHead__author span {
+  color: #ea4c89;
+}
+.pageSuumo .pageSuumoContainer .pageSuumoBody .pageSuumo__tableWrap {
+  margin-bottom: 8rem;
+}
+@media only screen and (max-width:768px) {
+  .pageSuumo .pageSuumoContainer .pageSuumoBody .pageSuumo__tableWrap {
+    margin-bottom: 4rem;
+  }
+}
+.pageSuumo .pageSuumoContainer .pageSuumoBody .pageSuumo__buttonWrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 2rem;
+}
+.pageSuumo .suumoTableContainer {
+  width: 100%;
+  max-width: 100%;
+  overflow: scroll;
+}
+.pageSuumo .suumoTable {
+  width: 100%;
+}
+.pageSuumo .suumoTable thead tr th {
+  padding: 0.6rem 1.2rem;
+  color: #00072b;
+  border-bottom-width: 0.2rem;
+}
+.pageSuumo .suumoTable tbody tr {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.pageSuumo .suumoTable tbody tr:first-child td {
+  padding-top: 4rem;
+}
+.pageSuumo .suumoTable tbody tr.-data-inserted {
+  background-color: rgba(127, 192, 8, 0.3);
+}
+.pageSuumo .suumoTable tbody tr td {
+  padding: 0.6rem 2rem 0.6rem 1.4rem;
+}
+.pageSuumo .suumoTable tbody tr td a {
+  text-decoration: underline;
+}
+.pageSuumo .suumoTable td,
+.pageSuumo .suumoTable th {
+  font-size: clamp(1.2rem, vw($pc), 1.6rem);
+  white-space: nowrap;
+  border-bottom: 0.1rem solid #c9cfda;
+}
+.pageSuumo .suumoUrlFormContainer {
+  padding: 2rem;
+}
+.pageSuumo .suumoUrlFormContainer .suumoUrlForm__title {
+  margin-bottom: 2rem;
+  color: #0c0033;
+  font-size: clamp(1.6rem, vw($pc), 2.4rem);
+  font-weight: 600;
+  text-align: center;
+}
+.pageSuumo .suumoUrlFormContainer .suumoUrlForm .suumoUrlForm__urlInput {
+  width: 100%;
+  font-size: clamp(1.2rem, vw($pc), 1.6rem);
+}
+.pageSuumo .suumoUrlFormContainer .suumoUrlForm .suumoUrlForm__errorText {
+  margin-top: 0.4rem;
+  font-size: clamp(1.2rem, vw($pc), 1.6rem);
+}
+.pageSuumo .suumoUrlFormContainer .suumoUrlForm .suumoUrlForm__buttonWrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  margin-top: clamp(2.4rem, vw($pc), 4rem);
+}
+.pageSuumo .suumoUrlFormContainer .suumoUrlForm.-cancel .suumoUrlForm__buttonWrap {
+  margin-top: clamp(1.2rem, vw($pc), 1.6rem);
+  color: rgba(0, 0, 0, 0.5);
+  font-size: clamp(1rem, vw($pc), 1.2rem);
+}
+
+#map {
+  width: 100vw;
+  height: 100vh;
+}
+
+.pinInfo {
+  width: 100%;
+  max-width: 30rem;
+  max-height: 15rem;
+  overflow: scroll;
+}
+.pinInfo table tr td {
+  padding: 0.4rem;
+  white-space: nowrap;
+  border: 0.1rem solid #000000;
+}
+.pinInfo table tr td:first-child {
+  font-weight: 600;
+}
