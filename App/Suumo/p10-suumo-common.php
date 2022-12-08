@@ -76,6 +76,11 @@ function vanilla_get_approximate_initial_fee(
 	return $initial_fee;
 }
 
+/**
+* データベース内に同じURLが存在するか
+*
+* @param $suumo_url
+*/
 function vanilla_suumo_url_exists($suumo_url) {
 	global $wpdb, $suumo_table_name;
 
@@ -90,3 +95,17 @@ function vanilla_suumo_url_exists($suumo_url) {
 		return false;
 	}
 }
+
+/**
+* １行で処理の内容を記述
+*
+* @param $address = 住所 or 場所の名前
+* @param $zoom = サイズ
+*/
+function vanilla_get_googlemap_url($address){
+  $address = urlencode($address);
+  $zoom = 15;
+  return "http://maps.google.co.jp/maps?q={$address}&z={$zoom}";
+}
+
+// function vanilla_get_
