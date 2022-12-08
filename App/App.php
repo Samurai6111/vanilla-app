@@ -2,12 +2,9 @@
 /*--------------------------------------------------
 /* /App内の全てのコアファイル
 /*------------------------------------------------*/
-include(get_theme_file_path() . "/App/Variables/App-variables.php");
-include(get_theme_file_path() . "/App/Function/App-funtions.php");
-include(get_theme_file_path() . "/App/Class/App-classes.php");
-include(get_theme_file_path() . "/App/Inserts/App-inserts.php");
-include(get_theme_file_path() . "/App/Modules/App-modules.php");
-include(get_theme_file_path() . "/App/Wordpress/App-wordpress.php");
-include(get_theme_file_path() . "/App/Form/App-form.php");
-include(get_theme_file_path() . "/App/Insert-preset-posts/class-Insert-preset-posts.php");
-include(get_theme_file_path() . "/App/Suumo/App-suumo.php");
+require_once(get_theme_file_path() . "/App/Function/App-funtions.php");
+require_once(get_theme_file_path() . "/App/Wordpress/App-wordpress.php");
+require_once(get_theme_file_path() . "/App/Form/App-form.php");
+
+// ---------- feature機能 ----------
+require_once(get_theme_file_path() . "/Feature-suumo/App-suumo.php");

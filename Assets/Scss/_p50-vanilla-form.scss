@@ -10,11 +10,13 @@
 	.vanillaForm__rowList {
 		@include flex;
 		flex-direction: column;
-		gap: responsiveValue(4rem, 3rem);
 		margin-bottom: responsiveValue(15rem, 10rem);
+
+		gap: responsiveValue(4rem, 3rem);
 
 		.vanillaForm__rowItem {
 			@include flex;
+
 			gap: 1rem;
 
 			@media #{$tab} {
@@ -58,15 +60,15 @@
 							position: absolute;
 							top: 50%;
 							right: 1rem;
-							transform: translate(0, -50%);
-							width: .5rem;
-							height: 1rem;
 							display: inline-block;
-							content: "";
-							background-position:center;
-							background-size:contain;
-							background-repeat:no-repeat;
-							background-image:url(../../Img/Common/icon_arrow_right_black_1.svg);
+							width: 0.5rem;
+							height: 1rem;
+							content: '';
+							background-image: url(../../Img/Common/icon_arrow_right_black_1.svg);
+							background-repeat: no-repeat;
+							background-position: center;
+							background-size: contain;
+							transform: translate(0, -50%);
 						}
 					}
 				}
@@ -93,6 +95,7 @@
 					@media #{$tab} {
 						flex-direction: row-reverse;
 						justify-content: flex-end;
+
 						gap: 1.6rem;
 					}
 
@@ -189,6 +192,7 @@
 		@include flex;
 		align-items: center;
 		flex-direction: column;
+
 		gap: responsiveValue(2rem, 1.5rem);
 
 		& > .buttonType1 {
@@ -220,18 +224,17 @@
 					flex-direction: column;
 
 					.vanillaForm__inputError {
-						margin-top: .4rem;
+						margin-top: 0.4rem;
 
 						.vanillaForm__inputErrorText {
 							color: red;
 						}
 					}
 				}
-
 			}
 		}
-
 	}
+
 	&.-confirm {
 		max-width: 79rem;
 
@@ -241,9 +244,10 @@
 		}
 
 		.vanillaForm__rowList {
-			gap: 0 ;
 			margin-bottom: responsiveValue(9rem, 7rem);
 			border-top: 0.1rem solid $lightgray_ddd;
+
+			gap: 0;
 
 			.vanillaForm__rowItem {
 				padding: 0 3rem;

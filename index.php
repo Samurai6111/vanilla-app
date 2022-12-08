@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: 投稿アーカイブテンプレート
+ * Template Name: index.php
  * @package WordPress
  * @Template Post Type: post, page,
  * @subpackage Vanilla
