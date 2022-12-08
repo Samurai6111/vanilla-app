@@ -21,9 +21,9 @@ class Suumo_Table {
 			'敷金',
 			'礼金',
 			'間取り',
-			'初期費用',
+			'初期費用(概算)',
 			'構造',
-			'家賃',
+			'住所',
 		];
 
 		if (is_admin() && current_user_can('administrator')) {
@@ -98,6 +98,33 @@ class Suumo_Table {
 
 
 	/**
+	 * データを出力するときにフォーマットする
+	 *
+	 * @param $value 値
+	 * @param $key キー
+	 */
+	function format_suumo_value($value, $key) {
+		if ($key === 'link') {
+			$return = '<a href="' . esc_url($value) . '" target="_blank" rel="noopener">物件URL</a>';
+		} elseif (
+			$key ===  'rent' ||
+			$key ===  'management_fee' ||
+			$key ===  'deposit' ||
+			$key ===  'retainer_fee' ||
+			$key ===  'initial_fee'
+		) {
+			$return = '¥' . num($value);
+		} elseif ($key === 'address') {
+			$return = '<a href="' . vanilla_get_googlemap_url($value) . '" target="_blank" rel="noopener">' . $value . '</a>';
+		} else {
+			$return = $value;
+		}
+
+		return $return;
+	}
+
+
+	/**
 	 * テーブルをHTMLで出力する
 	 */
 	function echo_suumo_table() {
@@ -136,9 +163,9 @@ class Suumo_Table {
 
 									<?php if ($i === 0) { ?>
 										<td>
-											<button class="-reset" type="submit" name="suumo_table_form_action" value="delete">削除</button>
+											<button class="-reset -color-red" type="submit" name="suumo_table_form_action" value="delete">削除</button>
 
-											<button class="-reset" type="button" onclick="suumo_data_edit_mode(event)">編集</button>
+											<!-- <button class="-reset" type="button" onclick="suumo_data_edit_mode(event)">編集</button> -->
 
 
 										</td>
@@ -147,11 +174,8 @@ class Suumo_Table {
 
 									<td class="<?php echo esc_attr('-' . $column_key) ?>">
 										<input type="hidden" name="<?php echo esc_attr($column_key) ?>" value="<?php echo esc_attr($value) ?> ">
-										<?php if ($column_key === 'link') { ?>
-											<a href="<?php echo esc_url($value) ?>" target="_blank" rel="noopener">物件URL</a>
-										<?php } else { ?>
-											<?php echo esc_html($value) ?>
-										<?php } ?>
+										<?php $result = Self::format_suumo_value($value, $column_key) ?>
+										<?php echo wp_kses_post($result) ?>
 									</td>
 								<?php } ?>
 							</tr>

@@ -25,7 +25,14 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 			$param = 'suumo-data-inserted';
 		} else {
 			$result = false;
+			$param = 'insert-fail';
 		}
+	}
+
+	// ---------- suumo dataの挿入のキャンセル ----------
+	if ($Suumo_Validation->is_suumo_nonce_verified('insert_suumo_data_cancel')) {
+		$insert_suumo_data_validation = [];
+		$result = true;
 	}
 
 	if ($result) {

@@ -30,49 +30,72 @@ get_header(); ?>
 
 				<p class="pageSuumoHead__author">
 					Made by <br>
-					<span>Shota Kawakatsu</span>
+					<span><a href="https://github.com/Samurai6111" target="_blank" rel="noopener">Shota Kawakatsu</a></span>
 				</p>
 			</div>
-			<div class="inner -tight -no-padding">
 
-				<?php
-				$suumo_table = new Suumo_Table();
-				$suumo_table->echo_suumo_table(); ?>
+			<div class="pageSuumoBody">
+				<div class="inner -tight -no-padding">
+					<div class="pageSuumo__tableWrap">
+						<?php
+						$suumo_table = new Suumo_Table();
+						$suumo_table->echo_suumo_table(); ?>
+					</div>
 
-
-				<br><br><br><br>
-				<?php
-				Suumo_Form::suumo_url_form();
-
-
-				?>
+					<div class="pageSuumo__buttonWrap js__modal__trigger">
+						<button class="pageSuumo__button" type="button">物件情報を登録する</button>
+					</div>
+				</div>
 			</div>
 		</div>
 
 	</div>
+
+	<div class="modalWrap" id="modalWrap">
+		<div class="modal__scroll js__modal__scroll">
+			<div class="modal__contentWrap ">
+				<div class="js__modal__contentHeight">
+					<div class="modal__content js__modal__content">
+						<?php Suumo_Form::suumo_url_form(); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </main>
 
 <script>
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-	const param = urlParams.get('param')
+	const current_url = window.location;
+	const query_string = current_url.search;
+	const url_param = new URLSearchParams(query_string);
+	const param = url_param.get('param')
+
+	// ---------- データーが挿入された時 ----------
 	if (param === 'suumo-data-inserted') {
 
-		setTimeout(function(){
+		setTimeout(function() {
 			$('.suumoTable tbody tr:last-child').addClass('-data-inserted')
-		},500);
+		}, 500);
 
-		setTimeout(function(){
+		setTimeout(function() {
 			$('.suumoTable tbody tr:last-child').removeClass('-data-inserted')
-		},3000);
 
+			current_url.search = '';
+			const newUrl = url_param.toString();
+			window.hsitory.pushState({
+				path: new_url
+			}, '', new_url)
+		}, 3000);
+	}
+
+	// ---------- データが挿入のバリデーションに引っかかった時 ----------
+	let form_error_text = $('.suumoUrlFormContainer .suumoUrlForm__errorText')
+	if (form_error_text.length > 0) {
+		$('#modalWrap').fadeIn()
 	}
 
 
 	$('#wpadminbar').hide()
-
-
-
 </script>
 
 <?php get_footer();

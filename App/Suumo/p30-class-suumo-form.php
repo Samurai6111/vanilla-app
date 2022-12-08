@@ -126,15 +126,29 @@ class Suumo_Form {
 ?>
 
 		<div class="suumoUrlFormContainer">
+			<h2 class="suumoUrlForm__title">物件URL入力フォーム</h2>
+
 			<form action="<?php echo get_permalink(); ?>" class="suumoUrlForm" id="suumoUrlForm" method="POST">
 
 				<?php vanilla_wp_nonce_field('insert_suumo_data') ?>
-				<input class="suumoUrlForm__urlInput" type="text" name="suumo_url">
-				<p class="-color-red">
-					<?php echo esc_html($insert_suumo_data_validation['suumo_url']); ?>
-				</p>
+				<input class="suumoUrlForm__urlInput" type="text" name="suumo_url" placeholder="物件のURLを入力してください">
 
-				<button type="submit">登録</button>
+				<?php if (!empty($insert_suumo_data_validation)) { ?>
+					<p class="suumoUrlForm__errorText -color-red">
+						<?php echo esc_html($insert_suumo_data_validation['suumo_url']); ?>
+					</p>
+				<?php } ?>
+
+				<div class="suumoUrlForm__buttonWrap">
+					<button class="pageSuumo__button" type="submit">登録</button>
+				</div>
+			</form>
+
+			<form action="<?php echo get_permalink(); ?>" class="suumoUrlForm -cancel" id="suumoUrlForm" method="POST">
+				<?php vanilla_wp_nonce_field('insert_suumo_data_cancel') ?>
+				<div class="suumoUrlForm__buttonWrap">
+					<button class="-reset" type="submit">入力のキャンセル</button>
+				</div>
 			</form>
 
 

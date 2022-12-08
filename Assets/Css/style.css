@@ -1360,7 +1360,6 @@ body {
   overflow-x: hidden;
   overflow-y: scroll;
   background-color: #ffffff;
-  border-radius: 1.6rem;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
@@ -1426,6 +1425,26 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+.pageSuumo .pageSuumo__button {
+  width: 100%;
+  max-width: 32rem;
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
+  background-color: #0c0033;
+  -webkit-box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.4);
+  border: none;
+  border-radius: 0.4rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .pageSuumo .pageSuumo__button {
+    font-size: 1.4rem;
+  }
+}
+
 .pageSuumo .pageSuumoContainer {
   position: relative;
   padding: 4rem 2rem;
@@ -1486,56 +1505,118 @@ body {
   color: #ea4c89;
 }
 
+.pageSuumo .pageSuumoContainer .pageSuumoBody .pageSuumo__tableWrap {
+  margin-bottom: 8rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .pageSuumo .pageSuumoContainer .pageSuumoBody .pageSuumo__tableWrap {
+    margin-bottom: 4rem;
+  }
+}
+
+.pageSuumo .pageSuumoContainer .pageSuumoBody .pageSuumo__buttonWrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .pageSuumo .suumoTableContainer {
   width: 100%;
   max-width: 100%;
   overflow: scroll;
 }
 
-.pageSuumo .suumoTableContainer .suumoTable {
+.pageSuumo .suumoTable {
   width: 100%;
 }
 
-.pageSuumo .suumoTableContainer .suumoTable thead tr th {
+.pageSuumo .suumoTable thead tr th {
   padding: 0.6rem 1.2rem;
   color: #00072b;
   border-bottom-width: 0.2rem;
 }
 
-.pageSuumo .suumoTableContainer .suumoTable tbody tr {
+.pageSuumo .suumoTable tbody tr {
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
-.pageSuumo .suumoTableContainer .suumoTable tbody tr:first-child td {
+.pageSuumo .suumoTable tbody tr:first-child td {
   padding-top: 4rem;
 }
 
-.pageSuumo .suumoTableContainer .suumoTable tbody tr.-data-inserted {
+.pageSuumo .suumoTable tbody tr.-data-inserted {
   background-color: rgba(127, 192, 8, 0.3);
 }
 
-.pageSuumo .suumoTableContainer .suumoTable tbody tr td {
+.pageSuumo .suumoTable tbody tr td {
   padding: 0.6rem 2rem 0.6rem 1.4rem;
 }
 
-.pageSuumo .suumoTableContainer .suumoTable tbody tr td.-link {
+.pageSuumo .suumoTable tbody tr td a {
   text-decoration: underline;
 }
 
-.pageSuumo .suumoTableContainer .suumoTable td,
-.pageSuumo .suumoTableContainer .suumoTable th {
+.pageSuumo .suumoTable td,
+.pageSuumo .suumoTable th {
   font-size: clamp(1.2rem, 1.25vw, 1.6rem);
   white-space: nowrap;
   border-bottom: 0.1rem solid #c9cfda;
 }
 
-.pageSuumo .suumoUrlFormContainer .suumoUrlForm .suumoUrlForm__urlInput {
-  width: 100%;
+.pageSuumo .suumoUrlFormContainer {
+  padding: 2rem;
 }
 
-.pageSuumo .suumoUrlFormContainer .suumoUrlForm .suumoUrlForm__urlType {
-  border: 1px solid #000000;
+.pageSuumo .suumoUrlFormContainer .suumoUrlForm__title {
+  margin-bottom: 2rem;
+  color: #0c0033;
+  font-size: clamp(1.6rem, 1.875vw, 2.4rem);
+  font-weight: 600;
+  text-align: center;
+}
+
+.pageSuumo .suumoUrlFormContainer .suumoUrlForm .suumoUrlForm__urlInput {
+  width: 100%;
+  font-size: clamp(1.2rem, 1.25vw, 1.6rem);
+}
+
+.pageSuumo .suumoUrlFormContainer .suumoUrlForm .suumoUrlForm__errorText {
+  margin-top: 0.4rem;
+  font-size: clamp(1.2rem, 1.25vw, 1.6rem);
+}
+
+.pageSuumo .suumoUrlFormContainer .suumoUrlForm .suumoUrlForm__buttonWrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  margin-top: clamp(2.4rem, 3.125vw, 4rem);
+}
+
+.pageSuumo .suumoUrlFormContainer .suumoUrlForm.-cancel .suumoUrlForm__buttonWrap {
+  margin-top: clamp(1.2rem, 1.25vw, 1.6rem);
+  color: rgba(0, 0, 0, 0.5);
+  font-size: clamp(1rem, 0.9375vw, 1.2rem);
 }
 
 .pageThanks {

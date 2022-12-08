@@ -21,6 +21,23 @@
 		background-color: rgba($black_000, 0.7);
 	}
 
+	.pageSuumo__button {
+		width: 100%;
+		max-width: 32rem;
+		color: $white_fff;
+		font-size: 1.6rem;
+		font-weight: 600;
+		text-align: center;
+		background-color: $navy_0C0;
+		box-shadow: 0 0 0.4rem rgba($black_000, 0.4);
+		border: none;
+		border-radius: 0.4rem;
+
+		@media #{$tab} {
+			font-size: 1.4rem;
+		}
+	}
+
 	.pageSuumoContainer {
 		position: relative;
 		padding: 4rem 2rem;
@@ -60,67 +77,122 @@
 				}
 			}
 		}
+
+		.pageSuumoBody {
+			.pageSuumo__tableWrap {
+				margin-bottom: 8rem;
+
+				@media #{$tab} {
+					margin-bottom: 4rem;
+				}
+			}
+
+			.pageSuumo__buttonWrap {
+				@include flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
 	}
 
 	.suumoTableContainer {
 		width: 100%;
 		max-width: 100%;
 		overflow: scroll;
+	}
 
-		.suumoTable {
-			width: 100%;
+	//____________________________
+	// suumo table
+	//____________________________
+	.suumoTable {
+		width: 100%;
 
-			thead {
-				tr {
-					th {
-						padding: 0.6rem 1.2rem;
-						color: $navy_000;
-						border-bottom-width: 0.2rem;
-					}
+		thead {
+			tr {
+				th {
+					padding: 0.6rem 1.2rem;
+					color: $navy_000;
+					border-bottom-width: 0.2rem;
 				}
 			}
+		}
 
-			tbody {
-				tr {
-					transition: 0.3s;
+		tbody {
+			tr {
+				transition: 0.3s;
 
-					&:first-child {
-						td {
-							padding-top: 4rem;
-						}
-					}
-
-					&.-data-inserted {
-						background-color: rgba($green_7fc, 0.3);
-					}
-
+				&:first-child {
 					td {
-						padding: 0.6rem 2rem 0.6rem 1.4rem;
+						padding-top: 4rem;
+					}
+				}
 
-						&.-link {
-							text-decoration: underline;
-						}
+				&.-data-inserted {
+					background-color: rgba($green_7fc, 0.3);
+				}
+
+				td {
+					padding: 0.6rem 2rem 0.6rem 1.4rem;
+
+					a {
+						text-decoration: underline;
 					}
 				}
 			}
+		}
 
-			td ,
-			th {
-				font-size: responsiveValue(1.6rem, 1.2rem);
-				white-space: nowrap;
-				border-bottom: 0.1rem solid $lihtgray_c9c;
-			}
+		td ,
+		th {
+			font-size: responsiveValue(1.6rem, 1.2rem);
+			white-space: nowrap;
+			border-bottom: 0.1rem solid $lihtgray_c9c;
 		}
 	}
 
+	//____________________________
+	// suumo form
+	//____________________________
 	.suumoUrlFormContainer {
+		padding: 2rem;
+
+		.suumoUrlForm__title {
+			margin-bottom: 2rem;
+			color: $navy_0C0;
+			font-size: responsiveValue(2.4rem, 1.6rem);
+			font-weight: 600;
+			text-align: center;
+			;
+		}
+
 		.suumoUrlForm {
 			.suumoUrlForm__urlInput {
 				width: 100%;
+				font-size: responsiveValue(1.6rem, 1.2rem);
 			}
 
-			.suumoUrlForm__urlType {
-				border: 1px solid #000000;
+			.suumoUrlForm__errorText {
+				margin-top: 0.4rem;
+				font-size: responsiveValue(1.6rem, 1.2rem);
+			}
+
+			.suumoUrlForm__buttonWrap {
+				@include flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				margin-top: responsiveValue(4rem, 2.4rem);
+			}
+
+			//____________________________
+			// モディファイア
+			//____________________________
+			&.-cancel {
+				.suumoUrlForm__buttonWrap {
+					margin-top: responsiveValue(1.6rem, 1.2rem);
+					color: rgba($black_000, 0.5);
+					font-size: responsiveValue(1.2rem, 1rem);
+					;
+				}
 			}
 		}
 	}
