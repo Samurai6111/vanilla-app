@@ -1,0 +1,176 @@
+@charset 'UTF-8';
+
+//____________________________
+// 単体のモディファイア
+//____________________________
+.pageFront {
+	position: relative;
+	padding: 8rem 0;
+	background-color: $lightgray;
+
+	.pageFront__titleWrap {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 2.4rem;
+		padding-right: 4.8rem;
+
+		@media #{$tab} {
+			padding: 1.6rem;
+			padding-right: 2.4rem;
+		}
+
+		&::after {
+			position: absolute;
+			top: 0;
+			right: 0;
+			display: inline-block;
+			width: 100vw;
+			height: 0.8rem;
+			max-width: 100vw;
+			content: '';
+			background-color: $navy_0C0;
+		}
+
+		&::before {
+			position: absolute;
+			top: -10%;
+			right: -10%;
+			display: inline-block;
+			width: 100%;
+			height: 100%;
+			content: '';
+			background-color: $navy_0C0;
+			border-radius: 50%;
+			transform: scale(1.5);
+		}
+
+		.pageFront__titleFigure {
+			@include flex;
+			position: relative;
+			justify-content: flex-end;
+			margin-bottom: 2.4rem;
+
+			@media #{$tab} {
+				margin-bottom: 1.2rem;
+			}
+
+			.pageFront__titleImg {
+				display: inline-block;
+				width: 6rem;
+
+				@media #{$tab} {
+					width: 4rem;
+				}
+			}
+		}
+
+		.pageFront__title {
+			position: relative;
+			color: $white_fff;
+			font-size: 3.2rem;
+			line-height: 1.2;
+			text-align: right;
+
+			@media #{$tab} {
+				font-size: 1.8rem;
+			}
+
+			& > span {
+				font-size: 80%;
+			}
+		}
+	}
+
+	.pageFrontContents {
+		overflow: scroll;
+
+		.pageFront__posts {
+			@include flex;
+			position: relative;
+			align-items: flex-start;
+			z-index: 10;
+
+			.sitemapCard {
+				margin-bottom: 4rem;
+			}
+
+			.pageFront__post {
+				position: relative;
+				display: inline-block;
+			}
+
+			&.-level1 {
+				flex-direction: column;
+				z-index: 10;
+
+				& > .pageFront__post {
+					z-index: 10;
+
+					&:first-child {
+						&::before {
+							position: absolute;
+							top: 100%;
+							left: 50%;
+							z-index: -1;
+							display: inline-block;
+							width: 0.1rem;
+							height: 8rem;
+							content: '';
+							background-color: black;
+							transform: translate(0, -50%);
+						}
+					}
+				}
+			}
+
+			&.-level2 {
+				gap: 4rem;
+
+				& > .pageFront__post {
+					z-index: 20;
+
+					& > .sitemapCard {
+						&::before {
+							position: absolute;
+							top: 50%;
+							right: 100%;
+							z-index: -1;
+							display: inline-block;
+							width: 4rem;
+							height: 0.1rem;
+							content: '';
+							background-color: black;
+							transform: translate(0%, -50%);
+						}
+					}
+				}
+			}
+
+			&.-level3 {
+				flex-direction: column;
+
+				& > .pageFront__post {
+					z-index: 30;
+
+					&::before {
+						position: absolute;
+						bottom: 100%;
+						left: 50%;
+						z-index: -1;
+						display: inline-block;
+						width: 0.1rem;
+						height: 4rem;
+						content: '';
+						background-color: black;
+						transform: translate(-50%, 0%);
+
+						a {
+							position: relative;
+						}
+					}
+				}
+			}
+		}
+	}
+}

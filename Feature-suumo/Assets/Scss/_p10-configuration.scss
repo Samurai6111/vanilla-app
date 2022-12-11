@@ -1,23 +1,14 @@
 @charset 'UTF-8';
+//____________________________
+// カラーコード
+//____________________________
+$suumo_primary: #0c0033;
 
-a {
-	text-decoration: underline;
-}
+/** --------------------------------
+* グラデーション
+*/
 
-.pageSuumo__button {
-	display: inline-block;
-	width: 100%;
-	max-width: 32rem;
-	color: $white_fff;
-	font-size: 1.6rem;
-	font-weight: 600;
-	text-align: center;
-	background-color: $navy_0C0;
-	box-shadow: 0 0 0.4rem rgba($black_000, 0.4);
-	border: none;
-	border-radius: 0.4rem;
-
-	@media #{$tab} {
-		font-size: 1.4rem;
-	}
+@mixin suumo_grd {
+	background-color: $suumo_primary;
+	background-image: linear-gradient(135deg, $suumo_primary 0%, #9599e2 50%, #8bc6ec 100%);
 }

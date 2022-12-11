@@ -1,0 +1,98 @@
+@charset 'UTF-8';
+
+// ---------- ハンバーガーメニュー ----------
+.hamburger_wrap {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 10001;
+
+	* {
+		transition: 0.3s;
+	}
+
+	&:hover {
+		transition: 0.3s;
+		cursor: pointer;
+	}
+
+	.hamburger {
+		position: relative;
+		z-index: 10;
+		width: 5rem;
+		height: 5rem;
+		background-color: black;
+
+		.hamburger_wrap {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			height: 1.8rem;
+			transform: translate(-50%, -50%);
+
+			.hamburger_line {
+				position: absolute;
+				left: 50%;
+				width: 2.4rem;
+				height: 0.2rem;
+				background-color: white;
+				transform: translateX(-50%);
+
+				&.-top {
+					top: 0;
+				}
+
+				&.-middle {
+					top: 0.8rem;
+				}
+
+				&.-bottom {
+					top: 1.6rem;
+				}
+			}
+
+			.hamburger_text {
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				color: white;
+				font-size: 1.2rem;
+				font-weight: 600;
+				letter-spacing: 0.05em;
+				transform: translateX(-50%);
+
+				@media #{$tab} {
+					font-size: 1rem;
+				}
+			}
+		}
+	}
+
+	.hamburger-js-active {
+		transition: 0.3s;
+
+		* {
+			transition: 0.3s;
+		}
+
+		.hamburger_wrap {
+			.hamburger_line {
+				&.-top {
+					top: 0.8rem;
+					transform: rotate(-45deg) translateX(-50%) !important;
+					transform-origin: left;
+				}
+
+				&.-middle {
+					width: 0;
+				}
+
+				&.-bottom {
+					top: 0.8rem;
+					transform: rotate(45deg) translateX(-50%) !important;
+					transform-origin: left;
+				}
+			}
+		}
+	}
+}

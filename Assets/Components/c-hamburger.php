@@ -1,10 +1,19 @@
 <div class="hamburger_wrap">
-	<nav class="hamburger hamburger-js js__modal__trigger">
+	<nav class="hamburger hamburger-js">
 		<div class="hamburger_wrap">
 			<span class="hamburger_line -top"></span>
 			<span class="hamburger_line -middle"></span>
 			<span class="hamburger_line -bottom"></span>
-			<p class="hamburger_text">MENU</p>
 		</div>
 	</nav>
 </div>
+
+<script>
+
+	$('.hamburger-js').click(function() {
+			$(this).toggleClass('hamburger-js-active');
+			$('#gnav').fadeToggle()
+	})
+
+
+</script>

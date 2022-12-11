@@ -9,38 +9,32 @@ require_once(get_theme_file_path() . "/Feature-suumo/suumo-form-execution.php");
 
 get_header(); ?>
 
+<?php require_once(dirname(__FILE__) . "/header-suumo.php") ?>
+
+
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/Feature-suumo/Assets/Css/style.css">
 
-<main class="pageSuumo" id="pageSuumo" style="background-image:url(<?php echo get_template_directory_uri() ?>/Feature-suumo/Image/img_suumo_mv_1.jpg);">
-	<div class="inner -wide">
-		<div class="pageSuumoContainer">
-			<div class="pageSuumoHead">
-				<h1 class="pageSuumoHead__title">SUUMO Info Generator</h1>
+<main class="pageSuumo -moving-bgc" id="pageSuumo">
+	<?php suumo_frame(function () { ?>
+		<?php suumo_head('Property Info Generator') ?>
 
-				<p class="pageSuumoHead__author">
-					Made by <br>
-					<span><a href="https://github.com/Samurai6111" target="_blank" rel="noopener">Shota Kawakatsu</a></span>
-				</p>
-			</div>
-
-			<div class="pageSuumoBody">
-				<div class="inner -tight -no-padding">
-					<div class="pageSuumo__tableWrap">
-						<?php
-						$suumo_table = new Suumo_Table();
-						$suumo_table->echo_suumo_table(); ?>
-					</div>
-
-					<div class="pageSuumo__buttonWrap">
-						<button class="pageSuumo__button js__modal__trigger" type="button">物件情報を登録する</button>
-						<a href="<?php echo home_url('/suumo/google-map/'); ?>" target="_blank" rel="noopener" class="-tac">Google Mapで見る</a>
-					</div>
-
+		<div class="pageSuumoBody">
+			<div class="inner -tight -no-padding">
+				<div class="pageSuumo__tableWrap">
+					<?php
+					$suumo_table = new Suumo_Table();
+					$suumo_table->echo_suumo_table(); ?>
 				</div>
+
+				<div class="pageSuumo__buttonWrap">
+					<button class="pageSuumo__button js__modal__trigger" type="button">物件情報を登録する</button>
+					<a href="<?php echo home_url('/suumo/google-map/'); ?>" target="_blank" rel="noopener" class="-tac">Google Mapで見る</a>
+				</div>
+
 			</div>
 		</div>
+	<?php }) ?>
 
-	</div>
 
 	<div class="modalWrap" id="modalWrap">
 		<div class="modal__scroll js__modal__scroll">

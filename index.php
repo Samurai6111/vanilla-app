@@ -8,30 +8,55 @@
  */
 get_header(); ?>
 
-<ul>
-  <?php
-  $args = array(
-    'post_type' => 'post',
-    'paged' => get_query_var('page'),
-    'order' => 'DESC',
-    'posts_per_page' => 6,
-  );
-  $WP_post = new WP_Query($args);
-  if ($WP_post->have_posts()) {
-    while ($WP_post->have_posts()) {
-      $WP_post->the_post(); ?>
-  <li>
-    <a href="<?php echo get_permalink(); ?>">
-      <?php if (has_post_thumbnail()) { ?>
-      <figure style="background-image: url(<?php echo wp_get_attachment_url(get_post_thumbnail_id()); ?>)"></figure>
-      <?php } ?>
-    </a>
-  </li>
-  <?php }
-  }
-  wp_reset_postdata();
-  ?>
-</ul>
+<main class="pageFront" id="pageFront">
+	<div class="pageFront__titleWrap">
+		<figure class="pageFront__titleFigure">
+			<img src="<?php echo get_template_directory_uri() . '/Image/icon_sitemap_white_1.svg' ?>" alt="サイトマップ" class="pageFront__titleImg">
+		</figure>
+
+		<h1 class="pageFront__title">
+			SITEMAP<br>
+			<span>サイトマップ</span>
+		</h1>
+	</div>
+
+	<div class="inner">
+		<div class="pageFrontContents">
+
+			<ul class="pageFront__posts -level1">
+				<li class="pageFront__post">
+					<?php sitemap_card(home_url(), 'サイトトップ', 'sitemap_index_1.png') ?>
+				</li>
+
+				<li class="pageFront__post">
+					<ul class="pageFront__posts -level2">
+						<?php //== 親ページ ========
+						?>
+						<li class="pageFront__post">
+							<?php sitemap_card(home_url('/login/'), 'ログイン', 'sitemap_login_1.png') ?>
+						</li>
+
+						<?php //== 親ページ ========
+						?>
+						<li class="pageFront__post">
+							<?php sitemap_card(home_url('/suumo/'), '物件一覧', 'sitemap_suuumo_1.png') ?>
+							<ul class="pageFront__posts -level3">
+								<?php //== 子ページ ========
+								?>
+								<li class="pageFront__post">
+									<?php sitemap_card(home_url('/suumo/google-map/'), '物件 Google Map', 'sitemap_suumo_google_map_1.png') ?>
+								</li>
+								<li class="pageFront__post">
+									<?php sitemap_card(home_url('/suumo/mypage/'), '物件 マイページ', 'sitemap_suumo_mypage_1.png') ?>
+								</li>
+							</ul>
+						</li>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+</main>
 
 
 

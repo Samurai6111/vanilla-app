@@ -31,6 +31,13 @@
 *
 * @param $height 横幅100の時の縦の割合 *「%」で指定
 */
+/** --------------------------------
+* グラデーション
+*/
+button {
+  display: block;
+}
+
 a {
   text-decoration: underline;
 }
@@ -55,34 +62,31 @@ a {
   }
 }
 
-.pageSuumo {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  padding: 10% 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+.hamburger_wrap .hamburger {
+  background-color: #0c0033;
 }
-.pageSuumo::before {
-  position: absolute;
-  top: 0;
-  left: 0;
+
+.suumoButtonType1 {
   display: inline-block;
   width: 100%;
-  height: 100%;
-  content: "";
-  background-color: rgba(0, 0, 0, 0.7);
+  max-width: 32rem;
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
+  background-color: #0c0033;
+  -webkit-box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.4);
+  border: none;
+  border-radius: 0.4rem;
 }
-.pageSuumo .pageSuumoContainer {
-  position: relative;
-  padding: 4rem 2rem;
-  background-color: rgba(255, 255, 255, 0.9);
-  -webkit-box-shadow: 0 0 1.6rem rgba(0, 0, 0, 0.2);
-          box-shadow: 0 0 1.6rem rgba(0, 0, 0, 0.2);
+@media only screen and (max-width:768px) {
+  .suumoButtonType1 {
+    font-size: 1.4rem;
+  }
 }
-.pageSuumo .pageSuumoContainer .pageSuumoHead {
+
+.suumoHead {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -90,15 +94,25 @@ a {
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
-  margin-bottom: clamp(6rem, vw($pc), 10rem);
+  margin-bottom: 10rem;
 }
-.pageSuumo .pageSuumoContainer .pageSuumoHead .pageSuumoHead__title {
+@media only screen and (max-width:768px) {
+  .suumoHead {
+    margin-bottom: 6rem;
+  }
+}
+.suumoHead .suumoHead__title {
   color: #0c0033;
-  font-size: clamp(3.2rem, vw($pc), 6rem);
+  font-size: 5.6rem;
   font-weight: bold;
   line-height: 1.3;
 }
-.pageSuumo .pageSuumoContainer .pageSuumoHead .pageSuumoHead__author {
+@media only screen and (max-width:768px) {
+  .suumoHead .suumoHead__title {
+    font-size: 3.2rem;
+  }
+}
+.suumoHead .suumoHead__author {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -127,18 +141,33 @@ a {
   font-size: 1rem;
   font-weight: bold;
 }
-.pageSuumo .pageSuumoContainer .pageSuumoHead .pageSuumoHead__author span {
+.suumoHead .suumoHead__author span {
   color: #ea4c89;
 }
-.pageSuumo .pageSuumoContainer .pageSuumoBody .pageSuumo__tableWrap {
+
+.suumoFrame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  padding: 10% 0;
+}
+.suumoFrame .suumoFrameContainer {
+  position: relative;
+  padding: 4rem 2rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-box-shadow: 0 0 1.6rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 1.6rem rgba(0, 0, 0, 0.2);
+}
+.suumoFrame .suumoFrameContainer .pageSuumoBody .pageSuumo__tableWrap {
   margin-bottom: 8rem;
 }
 @media only screen and (max-width:768px) {
-  .pageSuumo .pageSuumoContainer .pageSuumoBody .pageSuumo__tableWrap {
+  .suumoFrame .suumoFrameContainer .pageSuumoBody .pageSuumo__tableWrap {
     margin-bottom: 4rem;
   }
 }
-.pageSuumo .pageSuumoContainer .pageSuumoBody .pageSuumo__buttonWrap {
+.suumoFrame .suumoFrameContainer .pageSuumoBody .pageSuumo__buttonWrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -157,6 +186,24 @@ a {
       -ms-flex-pack: center;
           justify-content: center;
   gap: 2rem;
+}
+
+.suumoMypageTitle {
+  margin-bottom: 3.2rem;
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+@media only screen and (max-width:768px) {
+  .suumoMypageTitle {
+    margin-bottom: 1.8rem;
+    font-size: 1.8rem;
+  }
+}
+
+.pageSuumo {
+  background-color: #0c0033;
+  background-image: -webkit-linear-gradient(315deg, #0c0033 0%, #9599e2 50%, #8bc6ec 100%);
+  background-image: linear-gradient(135deg, #0c0033 0%, #9599e2 50%, #8bc6ec 100%);
 }
 .pageSuumo .suumoTableContainer {
   width: 100%;
@@ -181,7 +228,7 @@ a {
   top: 50%;
   right: 1rem;
   display: inline-block;
-  content: "▲";
+  content: "▼";
   font-size: 60%;
   line-height: 1;
   -webkit-transform: translate(0, -50%);
@@ -189,7 +236,7 @@ a {
   opacity: 0.7;
 }
 .pageSuumo .suumoTable thead tr th .suumoTable__sortButtonWrap.-desc button::after {
-  content: "▼";
+  content: "▲";
 }
 .pageSuumo .suumoTable tbody tr {
   -webkit-transition: 0.3s;
@@ -271,4 +318,84 @@ a {
 }
 .pinInfo table tr td:first-child {
   font-weight: 600;
+}
+
+.pageMypage {
+  background-color: #0c0033;
+  background-image: -webkit-linear-gradient(315deg, #0c0033 0%, #9599e2 50%, #8bc6ec 100%);
+  background-image: linear-gradient(135deg, #0c0033 0%, #9599e2 50%, #8bc6ec 100%);
+}
+.pageMypage .tabSwitch {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+.pageMypage .tabSwitch .tabSwitch__labels {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 18rem;
+  border-right: 0.1rem solid #c9cfda;
+}
+.pageMypage .tabSwitch .tabSwitch__labels .tabSwitch__labelItem {
+  width: 100%;
+}
+.pageMypage .tabSwitch .tabSwitch__labels .tabSwitch__labelItem.-active {
+  background-color: #c9cfda;
+}
+.pageMypage .tabSwitch .tabSwitch__labels .tabSwitch__labelItem .tabSwitch__labelText {
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: left;
+}
+@media only screen and (max-width:768px) {
+  .pageMypage .tabSwitch .tabSwitch__labels .tabSwitch__labelItem .tabSwitch__labelText {
+    font-size: 1.4rem;
+  }
+}
+.pageMypage .tabSwitch .tabSwitch__contents {
+  width: 100%;
+  padding: 2.4rem;
+}
+.pageMypage .pageMypageTable tr td,
+.pageMypage .pageMypageTable tr th {
+  font-size: 1.6rem;
+}
+@media only screen and (max-width:768px) {
+  .pageMypage .pageMypageTable tr td,
+.pageMypage .pageMypageTable tr th {
+    font-size: 1.4rem;
+  }
+}
+.pageMypage .pageMypageTable tr th {
+  padding-right: 2.4rem;
+  font-weight: 600;
+}
+.pageMypage .pageMypageTable tr:not(:last-child) td,
+.pageMypage .pageMypageTable tr:not(:last-child) th {
+  padding-bottom: 2.4rem;
+}
+.pageMypage .pageMypageBreak {
+  position: relative;
+  width: 100%;
+  padding: 6.4rem 0;
+}
+.pageMypage .pageMypageBreak::after {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: inline-block;
+  width: 100%;
+  height: 0.1rem;
+  content: "";
+  border-bottom: 0.1rem dashed #c9cfda;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
 }

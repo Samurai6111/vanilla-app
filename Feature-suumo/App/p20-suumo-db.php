@@ -93,4 +93,4 @@ function suumo_insert_table_value() {
 		)
 	);
 }
-add_action('init', 'suumo_insert_table_value');
+// add_action('init', 'suumo_insert_table_value');

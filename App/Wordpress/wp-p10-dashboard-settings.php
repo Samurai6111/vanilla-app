@@ -1,16 +1,15 @@
 <?php
+
 /**
-* 管理画面→「外観」→「メニュー」のナビメニューを追加
-*/
-function vanilla_register_nav_menus()
-{
+ * 管理画面→「外観」→「メニュー」のナビメニューを追加
+ */
+function vanilla_register_nav_menus() {
 	register_nav_menu('vanilla-nav-menu-pc', 'PCメニュー');
 	register_nav_menu('vanilla-nav-menu-sp', 'SPメニュー');
 }
 add_action('init', 'vanilla_register_nav_menus', 10);
 
-function vanilla_register_nav_menu($menu_slug, $menu_id)
-{
+function vanilla_register_nav_menu($menu_slug, $menu_id) {
 	if (!has_nav_menu($menu_slug)) {
 		$locations = get_theme_mod('nav_menu_locations');
 		$locations[$menu_slug] = $menu_id;
@@ -21,8 +20,7 @@ function vanilla_register_nav_menu($menu_slug, $menu_id)
 /*--------------------------------------------------
 /* 「メニュー」の初期値を設定
 /*------------------------------------------------*/
-function vanilla_update_nav_menu_item($menuname, $menu_array)
-{
+function vanilla_update_nav_menu_item($menuname, $menu_array) {
 	$menu_exists = wp_get_nav_menu_object($menuname);
 	if (empty($menu_exists)) {
 		$menu_id = wp_create_nav_menu($menuname);
@@ -53,8 +51,7 @@ function vanilla_update_nav_menu_item($menuname, $menu_array)
 	}
 }
 
-function vanilla_update_nav_menu_item_action()
-{
+function vanilla_update_nav_menu_item_action() {
 	$menu_array = [
 		[
 			'title' => '親メニュー',
@@ -108,8 +105,7 @@ add_action('init', 'vanilla_update_nav_menu_item_action', 20);
 //--------------------------------------------------
 // ユーザーごとに管理者のサイドバーを変更
 //--------------------------------------------------
-function vanilla_hide_admin_menu()
-{
+function vanilla_hide_admin_menu() {
 	global $current_user;
 
 	if ($current_user->user_login === 'クライアントのユーザー名が入ります' && is_admin()) {
@@ -158,8 +154,7 @@ function vanilla_hide_admin_menu()
 /*--------------------------------------------------
 /* カスタム投稿「イベント」の管理画面の投稿一覧にカラムを増やす
 /*------------------------------------------------*/
-function vanilla_custom_event_posts_columns($columns)
-{
+function vanilla_custom_event_posts_columns($columns) {
 	unset($columns['date']);
 	unset($columns['category']);
 	return array_merge(
@@ -174,8 +169,7 @@ add_filter('manage_event_posts_columns', 'vanilla_custom_event_posts_columns');
 /*--------------------------------------------------
 /* カスタム投稿「イベント」の管理画面の投稿一覧のカラムに値を出力する
 /*------------------------------------------------*/
-function display_event_posts_custom_column($column, $post_id)
-{
+function display_event_posts_custom_column($column, $post_id) {
 	$post__type = get_post_type($post_id);
 	if ($post__type === 'event') {
 
@@ -194,21 +188,21 @@ function display_event_posts_custom_column($column, $post_id)
 add_action('manage_event_posts_custom_column', 'display_event_posts_custom_column', 10, 2);
 
 /**
-* 管理画面に独自のスタイルを挿入する
-*/
+ * 管理画面に独自のスタイルを挿入する
+ */
 function vanilla_custom_admin_style() {
-	?>
+?>
 	<style>
 		.acf-field.acf-field-checkbox .acf-checkbox-list {
 			display: flex;
 			flex-wrap: wrap;
 		}
 
-		.acf-field.acf-field-checkbox .acf-checkbox-list > li {
+		.acf-field.acf-field-checkbox .acf-checkbox-list>li {
 			width: 33%;
 			margin: 0;
 		}
-  </style>
-	<?php
+	</style>
+<?php
 }
 add_action('admin_head', 'vanilla_custom_admin_style');

@@ -4,6 +4,12 @@
 
 @import 'p10-configuration';
 
+@import 'p20-common';
+
+@import 'p30-modules';
+
 @import 'p50-page-suumo';
 
-@import 'p50-google-map';
+@import 'p50-page-google-map';
+
+@import 'p50-page-mypage';

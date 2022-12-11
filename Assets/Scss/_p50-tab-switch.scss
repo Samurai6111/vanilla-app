@@ -1,0 +1,37 @@
+@charset 'UTF-8';
+
+//____________________________
+// tab switch
+//____________________________
+.tabSwitch {
+	.tabSwitch__labels {
+		@include flex;
+		width: 100%;
+	}
+
+	.tabSwitch__labelItem {
+		width: 33%;
+		padding: 1.6rem;
+		background-color: white;
+		cursor: pointer;
+
+		* {
+			pointer-events: none;
+		}
+	}
+
+	.tabSwitch__labelText {
+		text-align: center;
+	}
+
+	.tabSwitch__contents {
+	}
+
+	.tabSwitch__content {
+		display: none;
+	}
+
+	.tabSwitch__content[tab-content='tab1'] {
+		display: block;
+	}
+}

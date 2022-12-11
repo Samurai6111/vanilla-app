@@ -150,7 +150,7 @@ class Suumo_Table {
 
 				}
 			$return =
-				'<form action="' . get_permalink() . '" type="GET" class="suumoTable__sortButtonWrap ' . esc_attr('-'.$order) .'">' .
+				'<form action="' . get_permalink() . '#suumoTable" type="GET" class="suumoTable__sortButtonWrap ' . esc_attr('-'.$order) .'">' .
 				'<button type="submit" class="-reset" name="sort[' . $key . ']" value="' . $order . '">' . $columns[$key] . '</button>' .
 				'</form>';
 		} else {
@@ -198,7 +198,7 @@ class Suumo_Table {
 
 	?>
 		<div class="suumoTableContainer">
-			<table class="suumoTable">
+			<table class="suumoTable" id="suumoTable">
 				<thead>
 					<tr>
 						<th class="">

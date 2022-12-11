@@ -1,6 +1,9 @@
 /*! destyle.css v3.0.2 | MIT License | https://github.com/nicolas-cusan/destyle.css */
 
+
 /* Reset box-model and set borders */
+
+
 /* ============================================ */
 
 * ,
@@ -13,7 +16,10 @@
 }
 
 /* Document */
+
+
 /* ============================================ */
+
 
 /**
  * 1. Correct the line height in all browsers.
@@ -22,14 +28,20 @@
  */
 
 html {
-	line-height: 1.15; /* 1 */
+	line-height: 1.15;
+	/* 1 */
 
-	-webkit-tap-highlight-color: transparent; /* 3*/
-	-webkit-text-size-adjust: 100%; /* 2 */
+	-webkit-tap-highlight-color: transparent;
+	/* 3*/
+	-webkit-text-size-adjust: 100%;
+	/* 2 */
 }
 
 /* Sections */
+
+
 /* ============================================ */
+
 
 /**
  * Remove the margin in all browsers.
@@ -48,6 +60,8 @@ main {
 }
 
 /* Vertical rhythm */
+
+
 /* ============================================ */
 
 p ,
@@ -63,6 +77,8 @@ dl {
 }
 
 /* Headings */
+
+
 /* ============================================ */
 
 h1 ,
@@ -77,6 +93,8 @@ h6 {
 }
 
 /* Lists (enumeration) */
+
+
 /* ============================================ */
 
 ul ,
@@ -87,6 +105,8 @@ ol {
 }
 
 /* Lists (definition) */
+
+
 /* ============================================ */
 
 dt {
@@ -98,7 +118,10 @@ dd {
 }
 
 /* Grouping content */
+
+
 /* ============================================ */
+
 
 /**
  * 1. Add the correct box sizing in Firefox.
@@ -106,10 +129,13 @@ dd {
  */
 
 hr {
-	box-sizing: content-box; /* 1 */
-	height: 0; /* 1 */
+	box-sizing: content-box;
+	/* 1 */
+	height: 0;
+	/* 1 */
 	margin: 0;
-	overflow: visible; /* 2 */
+	overflow: visible;
+	/* 2 */
 	clear: both;
 	color: inherit;
 	border-top-width: 1px;
@@ -122,8 +148,10 @@ hr {
 
 pre {
 	overflow: scroll;
-	font-family: monospace, monospace; /* 1 */
-	font-size: inherit; /* 2 */
+	font-family: monospace, monospace;
+	/* 1 */
+	font-size: inherit;
+	/* 2 */
 }
 
 address {
@@ -131,7 +159,10 @@ address {
 }
 
 /* Text-level semantics */
+
+
 /* ============================================ */
+
 
 /**
  * Remove the gray background on active links in IE 10.
@@ -149,7 +180,8 @@ a {
  */
 
 abbr[title] {
-	text-decoration: underline dotted; /* 2 */
+	text-decoration: underline dotted;
+	/* 2 */
 }
 
 /**
@@ -169,8 +201,10 @@ strong {
 code ,
 kbd ,
 samp {
-	font-family: monospace, monospace; /* 1 */
-	font-size: inherit; /* 2 */
+	font-family: monospace, monospace;
+	/* 1 */
+	font-size: inherit;
+	/* 2 */
 }
 
 /**
@@ -203,7 +237,10 @@ sup {
 }
 
 /* Replaced content */
+
+
 /* ============================================ */
+
 
 /**
  * Prevent vertical alignment issues.
@@ -218,7 +255,10 @@ iframe {
 }
 
 /* Forms */
+
+
 /* ============================================ */
+
 
 /**
  * Reset form fields to make them styleable.
@@ -236,9 +276,11 @@ textarea {
 	color: inherit;
 	font: inherit;
 	text-align: inherit;
-	text-transform: inherit; /* 2 */
+	text-transform: inherit;
+	/* 2 */
 	vertical-align: middle;
-	-webkit-appearance: none; /* 1 */
+	-webkit-appearance: none;
+	/* 1 */
 	        appearance: none;
 	background: transparent;
 	border-radius: 0;
@@ -341,7 +383,8 @@ textarea {
  */
 
 [type='search'] {
-	outline-offset: -2px; /* 1 */
+	outline-offset: -2px;
+	/* 1 */
 }
 
 /**
@@ -358,8 +401,10 @@ textarea {
  */
 
 ::-webkit-file-upload-button {
-	font: inherit; /* 2 */
-	-webkit-appearance: button; /* 1 */
+	font: inherit;
+	/* 2 */
+	-webkit-appearance: button;
+	/* 1 */
 }
 
 /**
@@ -371,7 +416,10 @@ label[for] {
 }
 
 /* Interactive */
+
+
 /* ============================================ */
+
 
 /*
  * Add the correct display in Edge, IE 10+, and Firefox.
@@ -398,7 +446,10 @@ summary {
 }
 
 /* Tables */
+
+
 /* ============================================ */
+
 
 /**
 1. Correct table border color inheritance in all Chrome and Safari.
@@ -406,7 +457,8 @@ summary {
 
 table {
 	border-collapse: collapse;
-	border-color: inherit; /* 1 */
+	border-color: inherit;
+	/* 1 */
 }
 
 caption {
