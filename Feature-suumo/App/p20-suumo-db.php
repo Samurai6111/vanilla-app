@@ -1,8 +1,8 @@
 <?php
 
 /**
-* suumo用のデータベーステーブルを作成
-*/
+ * suumo用のデータベーステーブルを作成
+ */
 function suumo_create_db_table() {
 	global $wpdb;
 
@@ -10,23 +10,44 @@ function suumo_create_db_table() {
 	$charset_collate = $wpdb->get_charset_collate();
 
 	$sql = "CREATE TABLE IF NOT EXISTS $table_name (
-	ID mediumint(9) NOT NULL AUTO_INCREMENT,
+	ID bigint(20) NOT NULL AUTO_INCREMENT,
 	UNIQUE KEY ID (ID)
 ) $charset_collate;";
 
-	require(ABSPATH . 'wp-admin/includes/upgrade.php');
-	$result = dbDelta($sql);
+	return $sql;
 }
-add_action('init', 'suumo_create_db_table');
-
-?>
-
-
-<?php
 
 /**
-* suumo用のデータベーステーブルにカラムを追加する
-*/
+ * suumoのメタデータ用のデータベーステーブルを作成
+ */
+function suumo_create_db_meta_table() {
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . 'suumometa';
+	$charset_collate = $wpdb->get_charset_collate();
+
+	$sql = "CREATE TABLE IF NOT EXISTS $table_name (
+	meta_id bigint(20) NOT NULL AUTO_INCREMENT,
+	UNIQUE KEY meta_id (meta_id)
+) $charset_collate;";
+
+	return $sql;
+}
+
+
+function execute_db_creation() {
+
+	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+	dbDelta(suumo_create_db_table());
+	dbDelta(suumo_create_db_meta_table());
+}
+
+add_action('init', 'execute_db_creation');
+
+
+/**
+ * suumo用のデータベーステーブルにカラムを追加する
+ */
 function suumo_add_table_columns() {
 	global $wpdb;
 
@@ -45,21 +66,12 @@ function suumo_add_table_columns() {
 }
 add_action('init', 'suumo_add_table_columns');
 
-/**
-* suumo用のデータベーステーブルにカラムを削除する
-*/
-function suumo_drop_table_columns() {
-	global $wpdb;
 
-	$table_name = $wpdb->prefix . 'suumo';
-	$wpdb->query("ALTER TABLE {$table_name} DROP longitude ");
-	$wpdb->query("ALTER TABLE {$table_name} DROP latitude ");
-}
-// add_action('init', 'suumo_drop_table_columns');
+
 
 /**
-* テストの値を入れる
-*/
+ * テストの値を入れる
+ */
 function suumo_insert_table_value() {
 	global $wpdb;
 
@@ -94,3 +106,67 @@ function suumo_insert_table_value() {
 	);
 }
 // add_action('init', 'suumo_insert_table_value');
+
+
+
+//========================
+//メタテーブル
+//========================
+
+/**
+ * suumoのメタデータ用のデータベーステーブルにカラムを追加する
+ */
+function suumo_add_meta_table_columns() {
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . 'suumometa';
+	$wpdb->query("ALTER TABLE {$table_name} ADD suumo_id bigint(20)");
+	$wpdb->query("ALTER TABLE {$table_name} ADD meta_key varchar(255) NULL");
+	$wpdb->query("ALTER TABLE {$table_name} ADD meta_value varchar(255) NULL");
+}
+add_action('init', 'suumo_add_meta_table_columns');
+
+function get_suumo_meta($suumo_id, $meta_key) {
+	global $wpdb;
+	$suumometa_table = $wpdb->prefix . 'suumometa';
+
+	// $sql = "SELECT meta_value
+	// FROM `{$suumometa_table}`
+	// WHERE `suumo_id` = '{$suumo_id}' AND `meta_key` = '{$meta_key}'";
+	$sql = "SELECT meta_value
+	FROM `{$suumometa_table}`
+	WHERE `suumo_id` = %d AND `meta_key` = %s";
+	$query = $wpdb->prepare( $sql, $suumo_id, $meta_key );
+	$meta_value = $wpdb->get_row($query);
+
+	return $meta_value;
+}
+
+function update_suumo_meta($suumo_id, $meta_key, $meta_value) {
+	global $wpdb;
+	$suumometa_table = $wpdb->prefix . 'suumometa';
+
+	$sql = "SELECT meta_id
+	FROM `{$suumometa_table}`
+	WHERE `suumo_id` = %d AND `meta_key` = %s";
+	$query = $wpdb->prepare( $sql, $suumo_id, $meta_key );
+	$meta_id = $wpdb->get_row($query)->meta_id;
+
+	$wpdb->replace(
+		$suumometa_table,
+		[
+			'meta_id' => $meta_id,
+			'suumo_id' => $suumo_id,
+			'meta_key' => $meta_key,
+			'meta_value' => $meta_value,
+		],
+		[
+			'%d',
+			'%d',
+			'%s',
+			'%s',
+		]
+	);
+
+	return $wpdb->insert_id;
+}
