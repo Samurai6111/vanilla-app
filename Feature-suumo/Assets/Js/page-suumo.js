@@ -35,3 +35,14 @@ function checkbox_first_turned_checked(e) {
     let checkbox = target.parents('tr').find('td:first-child input[type="checkbox"]')
     checkbox.prop('checked', 'true')
 }
+
+// input numberの矢印キーの増減を無しにする
+$(function() {
+    $('input[type=number]').keydown(function(event) {
+        switch (event.key) {
+            case 'ArrowUp':
+            case 'ArrowDown':
+                return false;
+        }
+    });
+});

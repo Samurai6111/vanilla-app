@@ -65,7 +65,7 @@ function my_suumo_table_custom_column_values($suumo_id) {
 			$meta_key = "suumo_table_meta_{$i}";
 	?>
 			<td>
-				<input type="number" name="<?php echo esc_attr("{$meta_key}__{$suumo_id}") ?>" size="5" value="<?php echo esc_attr(get_suumo_meta($suumo_id, $meta_key)) ?>" onchange="checkbox_first_turned_checked(event)"> 分
+				<input type="number" name="<?php echo esc_attr("{$meta_key}__{$suumo_id}") ?>" size="5" value="<?php echo esc_attr(get_suumo_meta($suumo_id, $meta_key)) ?>" onchange="checkbox_first_turned_checked(event)" inputmode="numeric"> 分
 			</td>
 		<?php } ?>
 	<?php } ?>
