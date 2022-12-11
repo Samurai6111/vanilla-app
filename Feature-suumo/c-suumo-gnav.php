@@ -7,7 +7,7 @@
 											<a href="<?php echo home_url(); ?>" aria-current="page">サイトトップ</a>
 										</li>
 										<li class="menu-item">
-											<a href="<?php echo home_url('/suumo/'); ?>" aria-current="page">Suumo物件一覧</a>
+											<a href="<?php echo home_url('/suumo/'); ?>" aria-current="page">物件一覧</a>
 										</li>
 										<li class="menu-item">
 											<a href="<?php echo home_url('/suumo/google-map/'); ?>" aria-current="page">Google Map</a>

@@ -46,3 +46,10 @@ $(function() {
         }
     });
 });
+
+
+$('.pageSuumo__button.js__modal__trigger').on('click', function() {
+    setTimeout(function() {
+        $('input.suumoUrlForm__urlInput').focus()
+    }, 300);
+})

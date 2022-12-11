@@ -135,7 +135,7 @@ class Suumo_Form {
 	 * *  @param $data $_POSTを代入
 	 */
 	function insert_suumo_data($data) {
-		global $wpdb, $suumo_table_name;
+		global $wpdb, $suumo_table_name, $current_user;
 		$suumo_url = $data['suumo_url'];
 		$suumo_data = Self::get_suumo_data_by_url($data);
 		$lad_lng = self::get_lat_long_by_address($suumo_data['address']);
@@ -148,6 +148,7 @@ class Suumo_Form {
 			$suumo_data['link'] = $suumo_url;
 			$suumo_data['longitude'] = $lad_lng['longitude'];
 			$suumo_data['latitude'] = $lad_lng['latitude'];
+			$suumo_data['user_id'] = $current_user->ID;
 			$result = $wpdb->insert(
 				$suumo_table_name,
 				$suumo_data,
@@ -163,6 +164,7 @@ class Suumo_Form {
 					'%s',
 					'%f',
 					'%f',
+					'%d',
 				]
 			);
 
@@ -187,6 +189,7 @@ class Suumo_Form {
 
 				<?php vanilla_wp_nonce_field('insert_suumo_data') ?>
 				<input class="suumoUrlForm__urlInput" type="text" name="suumo_url" placeholder="物件のURLを入力してください">
+				<br><br><br>
 
 				<?php if (!empty($insert_suumo_data_validation)) { ?>
 					<p class="suumoUrlForm__errorText -color-red">
@@ -201,6 +204,7 @@ class Suumo_Form {
 
 			<form action="<?php echo get_permalink(); ?>" class="suumoUrlForm -cancel" id="suumoUrlForm" method="POST">
 				<?php vanilla_wp_nonce_field('insert_suumo_data_cancel') ?>
+				<br>
 				<div class="suumoUrlForm__buttonWrap">
 					<button class="-reset" type="submit">入力のキャンセル</button>
 				</div>

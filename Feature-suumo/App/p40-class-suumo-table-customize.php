@@ -14,27 +14,28 @@ function my_suumo_table_custom_column_lables() {
 	$suumo_table_custom_lables = json_decode($suumo_table_custom_lable_json);
 
 
-	if (
-		@array_values($_GET['sort'])[0] === 'asc'
-	) {
-		$order = 'desc';
-	} else {
-		$order = 'asc';
-	}
-
-
 	if (!empty($suumo_table_custom_lables)) {
 		$i = 0;
 		foreach ($suumo_table_custom_lables as $lable) {
 			++$i;
 			$key = "suumo_table_meta_{$i}";
+			$key_GET = (isset($_GET['sort'])) ? array_keys($_GET['sort'])[0] : '';
+
+			if (
+				$key === $key_GET &&
+				@array_values($_GET['sort'])[0] === 'asc'
+			) {
+				$order = 'desc';
+			} else {
+				$order = 'asc';
+			}
 
 			$return =
 				'<form action="' . get_permalink() . '#suumoTable" type="GET" class="suumoTable__sortButtonWrap ' . esc_attr('-' . $order) . '">' .
 				'<button type="submit" class="-reset" name="sort[' . $key . ']" value="' . $order . '">' . $lable . '</button>' .
 				'</form>';
 ?>
-			<th>
+			<th class="<?php echo esc_attr('-' . $key) ?>">
 				<?php echo ($return) ?>
 			</th>
 		<?php } ?>

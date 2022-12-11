@@ -26,7 +26,7 @@ class Suumo_Table {
 			'構造',
 			'住所',
 			'緯度',
-			'軽度',
+			'経度',
 		];
 
 		if (is_admin() && current_user_can('administrator')) {
@@ -100,6 +100,7 @@ class Suumo_Table {
 	function get_table_columns($columns_added = []) {
 		global $wpdb;
 		$colummn_slugs = $wpdb->get_col("DESC {$this->table_name}", 0);
+		$colummn_slugs = array_splice($colummn_slugs, 0, 12);
 		$table_columns = array_combine($colummn_slugs, $this->column_names);
 		$table_columns = array_merge($table_columns, $columns_added);
 
@@ -110,30 +111,51 @@ class Suumo_Table {
 	 * テーブルの値取得
 	 */
 	function get_table_values() {
-		global $wpdb;
+		global $wpdb, $current_user;
 
 		$column_name = @array_keys($_GET['sort'])[0];
 		$order = strtoupper(@array_values($_GET['sort'])[0]);
 		$sort = "ORDER BY `{$column_name}` $order";
+		$select_array = [
+			"ID",
+			"link",
+			"rent",
+			"management_fee",
+			"deposit",
+			"retainer_fee",
+			"room_arragement",
+			"initial_fee",
+			"construction",
+			"address",
+			"latitude",
+			"longitude",
+		];
+
+		$select_str1 = implode(',', $select_array);
+		$select_sql = array_map(function ($value) {
+			return "{$this->table_name}.$value";
+		}, $select_array);
+		$select_str2 = implode(',', $select_sql);
 
 		//= メタデータを含めたソート ====
 		if (strpos($column_name, 'suumo_table_meta_') !== false) {
-			$sql = "SELECT {$this->table_name}.*
+			$sql = "SELECT {$select_str2}
 			FROM {$this->table_name}
 			INNER JOIN {$this->meta_table_name} ON ( {$this->table_name}.ID = {$this->meta_table_name}.suumo_id )
 			WHERE 1=1 AND
-			{$this->meta_table_name}.meta_key = '{$column_name}'
+			{$this->meta_table_name}.meta_key = '{$column_name}' AND
+			user_id = {$current_user->ID}
 			GROUP BY {$this->table_name}.ID
 			ORDER BY {$this->meta_table_name}.meta_value+0 {$order}
 			";
 		}
 		//= wp_suumoのソート ====
 		elseif ($column_name && $order) {
-			$sql =  "SELECT * FROM {$this->table_name} {$sort}";
+			$sql =  "SELECT $select_str1 FROM {$this->table_name} WHERE user_id = {$current_user->ID} {$sort}";
 		}
 		//= デフォルト ====
 		else {
-			$sql =  "SELECT * FROM {$this->table_name}";
+			$sql =  "SELECT $select_str1 FROM {$this->table_name} WHERE user_id = {$current_user->ID}";
 		}
 		$table_values = $wpdb->get_results($sql, OBJECT);
 
@@ -289,5 +311,16 @@ class Suumo_Table {
 		</form>
 
 <?php
+	}
+
+	function get_suumo_urls() {
+		global $wpdb;
+		$results = $wpdb->get_results("SELECT link FROM {$this->table_name}", OBJECT );
+		$results = array_map(function ($value) {
+			return $value->link;
+		}, $results);
+
+		return $results;
+
 	}
 }

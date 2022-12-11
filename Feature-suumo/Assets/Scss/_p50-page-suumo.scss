@@ -7,7 +7,8 @@
 	.suumoTableContainer {
 		width: 100%;
 		max-width: 100%;
-		overflow-x: scroll;
+		max-height: 60rem;
+		overflow: scroll;
 
 		&::-webkit-scrollbar {
 			height: 0.8rem;
@@ -52,10 +53,27 @@
 		thead {
 			tr {
 				th {
+					position: sticky;
+					top: 0;
 					padding: 0.6rem 1.2rem;
 					color: $navy_000;
 					vertical-align: middle;
-					border-bottom-width: 0.2rem;
+					background-color: $white_fff;
+					border-bottom: none;
+
+					&::before {
+						position: absolute;
+						top: 0.4rem;
+						left: 0;
+						display: inline-block;
+						width: calc(100% + 0.4rem);
+						height: 100%;
+						max-width: calc(100% + 0.4rem);
+						content: '';
+						background-color: $white_fff;
+						// box-shadow: 0 0 0.8rem rgba($black_000, 0.2);
+						border-bottom: 0.2rem solid $lightgray;
+					}
 
 					.suumoTable__sortButtonWrap {
 						button {

@@ -63,6 +63,7 @@ function suumo_add_table_columns() {
 	$wpdb->query("ALTER TABLE {$table_name} ADD address varchar(20)");
 	$wpdb->query("ALTER TABLE {$table_name} ADD longitude float(50)");
 	$wpdb->query("ALTER TABLE {$table_name} ADD latitude float(50)");
+	$wpdb->query("ALTER TABLE {$table_name} ADD user_id bigint(20)");
 }
 add_action('init', 'suumo_add_table_columns');
 
