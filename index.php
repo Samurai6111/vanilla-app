@@ -21,6 +21,7 @@ get_header(); ?>
 	</div>
 
 	<div class="inner">
+
 		<div class="pageFrontContents">
 
 			<ul class="pageFront__posts -level1">

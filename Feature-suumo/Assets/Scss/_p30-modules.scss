@@ -32,6 +32,17 @@
 		padding: 0.4rem;
 		font-weight: normal;
 	}
+
+	&.-smallest {
+		width: auto;
+		max-width: auto;
+		padding: 0rem 0.8rem;
+		font-weight: normal;
+	}
+
+	&.-no-shadow {
+		box-shadow: none;
+	}
 }
 
 //____________________________

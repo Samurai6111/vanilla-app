@@ -13,18 +13,36 @@ class Suumo_Form {
 	 */
 	function delete_suumo_data($data) {
 		global $wpdb, $suumo_table_name;
-		$suumo_id = $data['ID'];
 
-		if (
-			$data['suumo_table_form_action']  === 'delete'
-			&& $suumo_id
-		) {
-			$result = $wpdb->delete($suumo_table_name, ['ID' => $suumo_id]);
+		if (!empty($data['ID'])) {
+			foreach ($data['ID'] as $suumo_id) {
+				$result = $wpdb->delete($suumo_table_name, ['ID' => $suumo_id]);
+			}
 		} else {
 			$result = false;
 		}
 
 		return $result;
+	}
+
+	/**
+	 *  テーブルを丸ごとアップデート
+	 *
+	 *  @param $data $_POSTを代入
+	 */
+	function update_table_meta($data) {
+		global $wpdb, $suumo_table_name;
+
+		foreach ($data as $key => $value) {
+			if(strpos($key,'suumo_table_meta_') !== false){
+				$pieces = explode("__", $key);
+				$suumo_id = $pieces[1];
+				$meta_key = $pieces[0];
+				update_suumo_meta($suumo_id, $meta_key, $value);
+			}
+		}
+
+		return true;
 	}
 
 	/**

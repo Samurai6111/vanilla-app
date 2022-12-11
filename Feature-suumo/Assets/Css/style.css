@@ -93,6 +93,16 @@ a {
   padding: 0.4rem;
   font-weight: normal;
 }
+.suumoButtonType1.-smallest {
+  width: auto;
+  max-width: auto;
+  padding: 0rem 0.8rem;
+  font-weight: normal;
+}
+.suumoButtonType1.-no-shadow {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
 
 .suumoHead {
   display: -webkit-box;
@@ -217,6 +227,30 @@ a {
   max-width: 100%;
   overflow: scroll;
 }
+.pageSuumo .classsuumoTable__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1.6rem;
+}
+.pageSuumo .classsuumoTable__actions select {
+  padding: 0.2rem 0.8rem;
+  color: #0c0033;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border: 0.1rem solid #0c0033;
+  border-radius: 0.4rem;
+}
+@media only screen and (max-width:768px) {
+  .pageSuumo .classsuumoTable__actions select {
+    font-size: 1.4rem;
+  }
+}
 .pageSuumo .suumoTable {
   width: 100%;
 }
@@ -257,9 +291,24 @@ a {
 }
 .pageSuumo .suumoTable tbody tr td {
   padding: 0.6rem 2rem 0.6rem 1.4rem;
+  vertical-align: middle;
 }
 .pageSuumo .suumoTable tbody tr td a {
   text-decoration: underline;
+}
+.pageSuumo .suumoTable tbody tr td .suumoTable__checkboxFirst {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 .pageSuumo .suumoTable td,
 .pageSuumo .suumoTable th {

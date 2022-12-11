@@ -126,22 +126,32 @@ function suumo_add_meta_table_columns() {
 }
 add_action('init', 'suumo_add_meta_table_columns');
 
+/**
+* suumoのmetaデータを取得する関数
+*
+* @param $suumo_id
+* @param $meta_key
+*/
 function get_suumo_meta($suumo_id, $meta_key) {
 	global $wpdb;
 	$suumometa_table = $wpdb->prefix . 'suumometa';
 
-	// $sql = "SELECT meta_value
-	// FROM `{$suumometa_table}`
-	// WHERE `suumo_id` = '{$suumo_id}' AND `meta_key` = '{$meta_key}'";
 	$sql = "SELECT meta_value
 	FROM `{$suumometa_table}`
 	WHERE `suumo_id` = %d AND `meta_key` = %s";
 	$query = $wpdb->prepare( $sql, $suumo_id, $meta_key );
-	$meta_value = $wpdb->get_row($query);
+	$meta_value = $wpdb->get_row($query)->meta_value;
 
 	return $meta_value;
 }
 
+/**
+* suumoのmetaデータを更新する関数
+*
+* @param $suumo_id
+* @param $meta_key
+* @param $meta_value
+*/
 function update_suumo_meta($suumo_id, $meta_key, $meta_value) {
 	global $wpdb;
 	$suumometa_table = $wpdb->prefix . 'suumometa';

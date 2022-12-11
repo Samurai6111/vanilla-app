@@ -13,6 +13,7 @@ class Suumo_Table {
 	function __construct() {
 		global $wpdb;
 		$this->table_name = $wpdb->prefix . 'suumo';
+		$this->meta_table_name = $wpdb->prefix . 'suumometa';
 		$this->column_names = [
 			'ID',
 			'URL',
@@ -114,7 +115,26 @@ class Suumo_Table {
 		$column_name = @array_keys($_GET['sort'])[0];
 		$order = strtoupper(@array_values($_GET['sort'])[0]);
 		$sort = "ORDER BY `{$column_name}` $order";
-		$sql = ($column_name && $order) ? "SELECT * FROM {$this->table_name} {$sort}" : "SELECT * FROM {$this->table_name}";
+
+		//= メタデータを含めたソート ====
+		if (strpos($column_name, 'suumo_table_meta_') !== false) {
+			$sql = "SELECT {$this->table_name}.*
+			FROM {$this->table_name}
+			INNER JOIN {$this->meta_table_name} ON ( {$this->table_name}.ID = {$this->meta_table_name}.suumo_id )
+			WHERE 1=1 AND
+			{$this->meta_table_name}.meta_key = '{$column_name}'
+			GROUP BY {$this->table_name}.ID
+			ORDER BY {$this->meta_table_name}.meta_value+0 {$order}
+			";
+		}
+		//= wp_suumoのソート ====
+		elseif ($column_name && $order) {
+			$sql =  "SELECT * FROM {$this->table_name} {$sort}";
+		}
+		//= デフォルト ====
+		else {
+			$sql =  "SELECT * FROM {$this->table_name}";
+		}
 		$table_values = $wpdb->get_results($sql, OBJECT);
 
 		return $table_values;
@@ -143,14 +163,13 @@ class Suumo_Table {
 			if (
 				$column_name === $key &&
 				@array_values($_GET['sort'])[0] === 'asc'
-				) {
-					$order = 'desc';
-				} else {
-					$order = 'asc';
-
-				}
+			) {
+				$order = 'desc';
+			} else {
+				$order = 'asc';
+			}
 			$return =
-				'<form action="' . get_permalink() . '#suumoTable" type="GET" class="suumoTable__sortButtonWrap ' . esc_attr('-'.$order) .'">' .
+				'<form action="' . get_permalink() . '#suumoTable" type="GET" class="suumoTable__sortButtonWrap ' . esc_attr('-' . $order) . '">' .
 				'<button type="submit" class="-reset" name="sort[' . $key . ']" value="' . $order . '">' . $columns[$key] . '</button>' .
 				'</form>';
 		} else {
@@ -197,57 +216,77 @@ class Suumo_Table {
 		$values_row = Self::get_table_values();
 
 	?>
-		<div class="suumoTableContainer">
-			<table class="suumoTable" id="suumoTable">
-				<thead>
-					<tr>
-						<th class="">
-							編集
-						</th>
+		<form action="<?php echo get_permalink(); ?>" method="POST">
+			<?php vanilla_wp_nonce_field('suumo_table') ?>
 
-						<?php foreach ($columns as $key => $name) { ?>
-							<th class="<?php echo esc_attr('-' . $key) ?>">
-								<?php echo Self::format_suumo_column($key) ?>
+			<div class="classsuumoTable__actions">
+				<select name="suumo_table_form_action">
+					<option value="" disabled selected>編集 ▼</option>
+					<option value="update">更新</option>
+					<option value="delete">削除</option>
+				</select>
+
+				<?php
+				suumo_button_type1([
+					'text' => '適用',
+					'class' => '-smallest -no-shadow',
+				])
+				?>
+			</div>
+			<div class="suumoTableContainer">
+
+				<table class="suumoTable" id="suumoTable">
+					<thead>
+						<tr>
+							<th class="suumoTable__firstTh">
+
 							</th>
-						<?php } ?>
 
-						<?php do_action('suumo_table_custom_column_lables') ?>
-					</tr>
-				</thead>
+							<?php foreach ($columns as $key => $name) { ?>
+								<th class="<?php echo esc_attr('-' . $key) ?>">
+									<?php echo Self::format_suumo_column($key) ?>
+								</th>
+							<?php } ?>
 
-				<tbody>
-					<?php foreach ($values_row as $values) { ?>
-						<tr class="">
-							<?php
-							$i = -1;
-							foreach ($values as $value) {
-								++$i;
-								$column_key = $column_keys[$i];
-							?>
+							<?php do_action('suumo_table_custom_column_lables') ?>
+						</tr>
+					</thead>
 
-								<?php if ($i === 0) { ?>
-									<td>
-										<form action="<?php echo get_permalink(); ?>" method="POST">
-											<?php vanilla_wp_nonce_field('suumo_table') ?>
-											<input type="hidden" name="<?php echo esc_attr($column_key) ?>" value="<?php echo esc_attr($value) ?> ">
-											<button class="-reset -color-red" type="submit" name="suumo_table_form_action" value="delete">削除</button>
-										</form>
+					<tbody>
+						<?php foreach ($values_row as $values) { ?>
+							<tr class="">
+								<?php
+								$i = -1;
+								foreach ($values as $value) {
+									++$i;
+									$column_key = $column_keys[$i];
+								?>
+
+									<?php if ($i === 0) { ?>
+										<td>
+											<div class="suumoTable__checkboxFirst">
+												<input type="checkbox" name="<?php echo esc_attr($column_key) ?>[]" value="<?php echo esc_attr($value) ?> ">
+											</div>
+										</td>
+									<?php } ?>
+
+
+									<td class="<?php echo esc_attr('-' . $column_key) ?>">
+										<?php $result = Self::format_suumo_value($value, $column_key) ?>
+										<?php echo wp_kses_post($result) ?>
 									</td>
 								<?php } ?>
 
+								<?php
 
-								<td class="<?php echo esc_attr('-' . $column_key) ?>">
-									<?php $result = Self::format_suumo_value($value, $column_key) ?>
-									<?php echo wp_kses_post($result) ?>
-								</td>
-							<?php } ?>
-
-							<?php do_action('suumo_table_custom_column_values') ?>
-						</tr>
-					<?php } ?>
-				</tbody>
-			</table>
-		</div>
+								$suumo_id = $values->ID;
+								do_action('suumo_table_custom_column_values', $suumo_id) ?>
+							</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+			</div>
+		</form>
 
 <?php
 	}

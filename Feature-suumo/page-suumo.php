@@ -53,39 +53,7 @@ get_header(); ?>
 
 
 
-<script>
-	const current_url = window.location;
-	const query_string = current_url.search;
-	const url_param = new URLSearchParams(query_string);
-	const param = url_param.get('param')
-
-	// ---------- データーが挿入された時 ----------
-	if (param === 'suumo-data-inserted') {
-
-		setTimeout(function() {
-			$('.suumoTable tbody tr:last-child').addClass('-data-inserted')
-		}, 500);
-
-		setTimeout(function() {
-			$('.suumoTable tbody tr:last-child').removeClass('-data-inserted')
-
-			current_url.search = '';
-			const newUrl = url_param.toString();
-			window.hsitory.pushState({
-				path: new_url
-			}, '', new_url)
-		}, 3000);
-	}
-
-	// ---------- データが挿入のバリデーションに引っかかった時 ----------
-	let form_error_text = $('.suumoUrlFormContainer .suumoUrlForm__errorText')
-	if (form_error_text.length > 0) {
-		$('#modalWrap').fadeIn()
-	}
-
-	$('#wpadminbar').hide()
-</script>
 
 
-
+<script src="<?php echo get_template_directory_uri(); ?>/Feature-suumo/Assets/Js/page-suumo.js"></script>
 <?php get_footer();

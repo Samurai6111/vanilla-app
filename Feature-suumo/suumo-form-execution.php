@@ -11,7 +11,15 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 	/*------------------------------------------------*/
 	// ---------- suumo data削除の処理 ----------
 	if ($Suumo_Validation->is_suumo_nonce_verified('suumo_table')) {
-		$result = $Suumo_Form->delete_suumo_data($s_POST);
+		if ($s_POST['suumo_table_form_action'] === 'update') {
+			$result = $Suumo_Form->update_table_meta($s_POST);
+		}
+		elseif ($s_POST['suumo_table_form_action'] === 'delete') {
+			$result = $Suumo_Form->delete_suumo_data($s_POST);
+		}
+
+
+		// $result = $Suumo_Form->delete_suumo_data($s_POST);
 	}
 
 	/*--------------------------------------------------
@@ -37,9 +45,9 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 	}
 
 	if ($result) {
-		// $param = ($param) ? "?param=" . $param : '';
-		// wp_safe_redirect(home_url('/suumo/' . $param));
-		// exit;
+		$param = ($param) ? "?param=" . $param : '';
+		wp_safe_redirect(home_url('/suumo/' . $param));
+		exit;
 	}
 
 }
