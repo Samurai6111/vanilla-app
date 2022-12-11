@@ -195,7 +195,7 @@ class Suumo_Table {
 				'<button type="submit" class="-reset" name="sort[' . $key . ']" value="' . $order . '">' . $columns[$key] . '</button>' .
 				'</form>';
 		} else {
-			$return = $columns[$key];
+			$return = "<p class='suumoTable__thText'>{$columns[$key]}</p>";
 		}
 
 		return $return;

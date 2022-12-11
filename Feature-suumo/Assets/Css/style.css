@@ -307,6 +307,9 @@ a {
 .pageSuumo .suumoTable thead tr th .suumoTable__sortButtonWrap.-desc button::after {
   content: "▲";
 }
+.pageSuumo .suumoTable thead tr th .suumoTable__thText {
+  position: relative;
+}
 .pageSuumo .suumoTable tbody tr {
   -webkit-transition: 0.3s;
   transition: 0.3s;
