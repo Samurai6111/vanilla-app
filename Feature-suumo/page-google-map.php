@@ -108,7 +108,11 @@ $Suumo_Table = new Suumo_Table()
 		});
 	}
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr(get_option('google_api_key')) ?>&callback=initMap" async defer></script>
+<?php
+global $current_user;
+$suumo_user_google_api_key = get_user_meta($current_user->ID, 'suumo_user_google_api_key', true);
+ ?>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr($suumo_user_google_api_key) ?>&callback=initMap" async defer></script>
 
 
 <?php get_footer();

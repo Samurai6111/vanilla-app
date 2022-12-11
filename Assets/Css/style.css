@@ -756,8 +756,8 @@ body {
 
 .-moving-bgc {
   background-size: 200% 200%;
-  -webkit-animation: bggradient 10s ease infinite;
-          animation: bggradient 10s ease infinite;
+  -webkit-animation: bggradient 20s ease infinite;
+          animation: bggradient 20s ease infinite;
   /*サイズを大きくひきのばす*/
 }
 @-webkit-keyframes bggradient {

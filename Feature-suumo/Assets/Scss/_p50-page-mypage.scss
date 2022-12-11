@@ -14,6 +14,7 @@
 
 			.tabSwitch__labelItem {
 				width: 100%;
+				background-color: transparent;
 
 				&.-active {
 					background-color: $lightgray;
@@ -42,6 +43,7 @@
 			td ,
 			th {
 				font-size: 1.6rem;
+				vertical-align: middle;
 
 				@media #{$tab} {
 					font-size: 1.4rem;
@@ -54,6 +56,18 @@
 			}
 
 			td {
+				input {
+					display: inline-block;
+					width: 100%;
+					max-width: 32rem;
+					padding: 0.4rem 0.8rem;
+					font-size: 1.6rem;
+					border: 0.1rem solid $lightgray;
+
+					@media #{$tab} {
+						font-size: 1.4rem;
+					}
+				}
 			}
 
 			&:not(:last-child) {
@@ -61,6 +75,22 @@
 				th {
 					padding-bottom: 2.4rem;
 				}
+			}
+		}
+	}
+
+	.pageMypageForm {
+		.pageMypageForm__buttonWrap {
+			@include flex;
+			justify-content: flex-end;
+			margin-top: 8rem;
+
+			@media #{$tab} {
+				margin-top: 5.4rem;
+			}
+
+			.suumoButtonType1 {
+				max-width: 8rem;
 			}
 		}
 	}

@@ -346,6 +346,7 @@ a {
 }
 .pageMypage .tabSwitch .tabSwitch__labels .tabSwitch__labelItem {
   width: 100%;
+  background-color: transparent;
 }
 .pageMypage .tabSwitch .tabSwitch__labels .tabSwitch__labelItem.-active {
   background-color: #c9cfda;
@@ -367,6 +368,7 @@ a {
 .pageMypage .pageMypageTable tr td,
 .pageMypage .pageMypageTable tr th {
   font-size: 1.6rem;
+  vertical-align: middle;
 }
 @media only screen and (max-width:768px) {
   .pageMypage .pageMypageTable tr td,
@@ -378,9 +380,41 @@ a {
   padding-right: 2.4rem;
   font-weight: 600;
 }
+.pageMypage .pageMypageTable tr td input {
+  display: inline-block;
+  width: 100%;
+  max-width: 32rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.6rem;
+  border: 0.1rem solid #c9cfda;
+}
+@media only screen and (max-width:768px) {
+  .pageMypage .pageMypageTable tr td input {
+    font-size: 1.4rem;
+  }
+}
 .pageMypage .pageMypageTable tr:not(:last-child) td,
 .pageMypage .pageMypageTable tr:not(:last-child) th {
   padding-bottom: 2.4rem;
+}
+.pageMypage .pageMypageForm .pageMypageForm__buttonWrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin-top: 8rem;
+}
+@media only screen and (max-width:768px) {
+  .pageMypage .pageMypageForm .pageMypageForm__buttonWrap {
+    margin-top: 5.4rem;
+  }
+}
+.pageMypage .pageMypageForm .pageMypageForm__buttonWrap .suumoButtonType1 {
+  max-width: 8rem;
 }
 .pageMypage .pageMypageBreak {
   position: relative;
