@@ -4,7 +4,7 @@
 						<div class="gnav__listWrap -sp">
 								<ul id="menu-%e3%83%a1%e3%83%8b%e3%83%a5%e3%83%bc-1" class="gnav__list">
 										<li class="menu-item">
-											<a href="<?php echo home_url('/__TBD__/'); ?>" aria-current="page">サイトトップ</a>
+											<a href="<?php echo home_url(); ?>" aria-current="page">サイトトップ</a>
 										</li>
 										<li class="menu-item">
 											<a href="<?php echo home_url('/suumo/'); ?>" aria-current="page">Suumo物件一覧</a>
