@@ -84,8 +84,10 @@ class Suumo_Form {
 	 * @param $address 住所
 	 */
 	function get_lat_long_by_address($address) {
+		global $current_user;
+
+		$google_maps_key = get_user_meta($current_user->ID, 'suumo_user_google_api_key', true);
 		$latlon_array = array();
-		$google_maps_key = 'AIzaSyAYPh_8YfpapP_jLOagZApdWeLDyL88DWM'; // Remember to have a valid API key
 		$region = 'DK';
 		$url =    'https://maps.google.com/maps/api/geocode/json?address=' . $address . '&sensor=false&region=' . $region . '&key=' . $google_maps_key;
 		$ch = curl_init();
@@ -108,7 +110,6 @@ class Suumo_Form {
 
 		return $latlon_array;
 	}
-
 
 	/**
 	 * suumo_url_formの送信処理

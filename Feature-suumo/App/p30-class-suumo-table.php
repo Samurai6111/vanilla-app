@@ -210,6 +210,8 @@ class Suumo_Table {
 								<?php echo Self::format_suumo_column($key) ?>
 							</th>
 						<?php } ?>
+
+						<?php do_action('suumo_table_custom_column_lables') ?>
 					</tr>
 				</thead>
 
@@ -239,6 +241,8 @@ class Suumo_Table {
 									<?php echo wp_kses_post($result) ?>
 								</td>
 							<?php } ?>
+
+							<?php do_action('suumo_table_custom_column_values') ?>
 						</tr>
 					<?php } ?>
 				</tbody>

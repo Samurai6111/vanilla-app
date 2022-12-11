@@ -62,10 +62,28 @@
 					max-width: 32rem;
 					padding: 0.4rem 0.8rem;
 					font-size: 1.6rem;
+					background-color: rgba($white_fff, 0.9);
 					border: 0.1rem solid $lightgray;
 
 					@media #{$tab} {
 						font-size: 1.4rem;
+					}
+				}
+
+				.pageMypageTable__tdText {
+					padding: 0.4rem 0.8rem;
+				}
+
+				.pageMypageTable__tdHasButton {
+					position: relative;
+
+					.suumoButtonType1 {
+						position: absolute;
+						left: calc(100% + 0.8rem);
+						max-width: 3.2rem;
+						background-color: transparent;
+						box-shadow: none;
+						border: none;
 					}
 				}
 			}
@@ -74,6 +92,21 @@
 				td ,
 				th {
 					padding-bottom: 2.4rem;
+				}
+			}
+		}
+
+		//____________________________
+		// モディファイア
+		//____________________________
+		&.-suumo-table-customize {
+			tr {
+				&:not(:last-child) {
+					td ,
+					th {
+						padding-bottom: 0;
+						vertical-align: baseline;
+					}
 				}
 			}
 		}

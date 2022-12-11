@@ -85,4 +85,33 @@ class Suumo_Validation {
 
 		return $validations;
 	}
+
+
+	/**
+	 * customize_tableのバリデーション
+	 *
+	 * @param $data $_POSTの値
+	 */
+	function customize_table($data) {
+		$validations_strings = [
+			'suumo_table_custom_lables' => 'カラム名',
+			'suumo_table_custom_values' => '住所',
+		];
+
+		$validations = [];
+
+		foreach ($data as $key => $array ) {
+			if (is_array($array)) {
+
+				foreach ($array as $i => $value) {
+					if (!$value) {
+						$validations[$key][$i] = $validations_strings[$key] . 'を入力してください';
+					}
+				}
+			}
+		}
+
+		return $validations;
+	}
+
 }

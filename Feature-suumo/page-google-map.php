@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-
+<?php require_once(dirname(__FILE__) . "/header-suumo.php") ?>
 
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/Feature-suumo/Assets/Css/style.css">
 

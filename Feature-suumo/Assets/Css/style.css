@@ -77,13 +77,21 @@ a {
   background-color: #0c0033;
   -webkit-box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.4);
           box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.4);
-  border: none;
+  border: 0.1rem solid #0c0033;
   border-radius: 0.4rem;
 }
 @media only screen and (max-width:768px) {
   .suumoButtonType1 {
     font-size: 1.4rem;
   }
+}
+.suumoButtonType1.-color-reverse {
+  color: #0c0033;
+  background-color: #ffffff;
+}
+.suumoButtonType1.-small {
+  padding: 0.4rem;
+  font-weight: normal;
 }
 
 .suumoHead {
@@ -148,7 +156,6 @@ a {
 .suumoFrame {
   position: relative;
   width: 100%;
-  height: 100%;
   min-height: 100vh;
   padding: 10% 0;
 }
@@ -386,6 +393,7 @@ a {
   max-width: 32rem;
   padding: 0.4rem 0.8rem;
   font-size: 1.6rem;
+  background-color: rgba(255, 255, 255, 0.9);
   border: 0.1rem solid #c9cfda;
 }
 @media only screen and (max-width:768px) {
@@ -393,9 +401,29 @@ a {
     font-size: 1.4rem;
   }
 }
+.pageMypage .pageMypageTable tr td .pageMypageTable__tdText {
+  padding: 0.4rem 0.8rem;
+}
+.pageMypage .pageMypageTable tr td .pageMypageTable__tdHasButton {
+  position: relative;
+}
+.pageMypage .pageMypageTable tr td .pageMypageTable__tdHasButton .suumoButtonType1 {
+  position: absolute;
+  left: calc(100% + 0.8rem);
+  max-width: 3.2rem;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border: none;
+}
 .pageMypage .pageMypageTable tr:not(:last-child) td,
 .pageMypage .pageMypageTable tr:not(:last-child) th {
   padding-bottom: 2.4rem;
+}
+.pageMypage .pageMypageTable.-suumo-table-customize tr:not(:last-child) td,
+.pageMypage .pageMypageTable.-suumo-table-customize tr:not(:last-child) th {
+  padding-bottom: 0;
+  vertical-align: baseline;
 }
 .pageMypage .pageMypageForm .pageMypageForm__buttonWrap {
   display: -webkit-box;

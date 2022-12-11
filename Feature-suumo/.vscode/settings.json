@@ -5,6 +5,7 @@
       "extensionName": ".css",
       "savePath": "/Assets/Css"
     }
-  ],
+	],
+	"editor.unfoldOnClickAfterEndOfLine": false,
 
 }

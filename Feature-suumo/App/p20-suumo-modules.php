@@ -19,7 +19,9 @@ function suumo_button_type1($args) {
 
 	$args = wp_parse_args($args, $defaults);
 ?>
-	<<?php echo esc_attr($args['tag']) ?> class="suumoButtonType1 <?php echo esc_attr($args['class']) ?>" <?php echo esc_attr($args['attr']) ?>><?php echo esc_attr($args['text']) ?></>
+	<<?php echo esc_attr($args['tag']) ?> class="suumoButtonType1 <?php echo esc_attr($args['class']) ?>" <?php echo esc_attr($args['attr']) ?>>
+	<?php echo esc_attr($args['text']) ?>
+	</<?php echo esc_attr($args['tag']) ?>>
 
 	<?php
 }
