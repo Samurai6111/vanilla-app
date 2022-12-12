@@ -1230,13 +1230,12 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(100vw - 4.8rem);
+  width: auto;
   height: auto;
-  max-width: 480px;
+  max-width: 100%;
   max-height: calc(100vh - 4.8rem);
   overflow-x: hidden;
   overflow-y: scroll;
-  background-color: #ffffff;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
@@ -1260,10 +1259,6 @@ body {
   cursor: pointer;
   opacity: 0.7;
 }
-.modalWrap .modal__contentWrap .modal__content {
-  padding: 1.6rem;
-}
-
 .modal__trigger {
   -webkit-transition: 0.3s;
   transition: 0.3s;

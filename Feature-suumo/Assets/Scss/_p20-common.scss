@@ -29,3 +29,60 @@ a {
 .hamburger_wrap .hamburger {
 	background-color: $suumo_primary;
 }
+
+.modalWrap {
+	.modal__targetContent {
+		display: none;
+		padding: 1.6rem;
+
+		&[data-target-modal='suumo__form'] {
+			width: min(48rem, 90vw);
+			margin: 0 auto;
+			background-color: $white_fff;
+		}
+
+		&[data-target-modal='suumotable__swiper'] {
+			max-width: 80rem;
+			max-height: 60rem;
+			margin: auto;
+
+			.suumotable__swiperWrap {
+				$modal_swiper_width_pc: 100%;
+				$modal_swiper_width_sp: 100%;
+				max-width: $modal_swiper_width_pc;
+
+				@media #{$tab} {
+					max-width: $modal_swiper_width_sp;
+				}
+
+				.suumotable__swiperMagnifiy {
+					display: none;
+				}
+
+				.swiper-wrapper {
+					align-items: center;
+				}
+
+				.suumotable__swiperFigure {
+					width: calc(#{$modal_swiper_width_pc} - 4rem);
+					height: calc(#{$modal_swiper_width_pc} - 4rem);
+
+					@media #{$tab} {
+						width: calc(#{$modal_swiper_width_sp} - 4rem);
+						height: calc(#{$modal_swiper_width_sp} - 4rem);
+					}
+				}
+
+				.suumotable__swiperButton {
+					&::before {
+						font-size: 3.2rem;
+
+						@media #{$tab} {
+							font-size: 1.8rem;
+						}
+					}
+				}
+			}
+		}
+	}
+}

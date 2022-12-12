@@ -55,6 +55,7 @@
 				th {
 					position: sticky;
 					top: 0;
+					z-index: 100;
 					padding: 0.6rem 1.2rem;
 					color: $navy_000;
 					vertical-align: middle;
@@ -150,6 +151,81 @@
 			font-size: responsiveValue(1.6rem, 1.2rem);
 			white-space: nowrap;
 			border-bottom: 0.1rem solid $lihtgray_c9c;
+		}
+	}
+
+	.suumotable__swiperWrap {
+		$swiper_width_pc: 30rem;
+		$swiper_width_sp: 18rem;
+		position: relative;
+		max-width: $swiper_width_pc;
+		overflow: hidden;
+
+		@media #{$tab} {
+			max-width: $swiper_width_sp;
+		}
+
+		.suumotable__swiperMagnifiy {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			z-index: 10;
+			width: 3rem;
+			transition: 0.3s;
+			opacity: 0.7;
+
+			&:hover {
+				cursor: pointer;
+				opacity: 1;
+			}
+		}
+
+		.swiper-slide {
+			@include flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.suumotable__swiperFigure {
+			@include flex;
+			align-items: center;
+			justify-content: center;
+			width: calc(#{$swiper_width_pc} - 4rem);
+			height: calc(#{$swiper_width_pc} - 4rem);
+
+			@media #{$tab} {
+				width: calc(#{$swiper_width_sp} - 4rem);
+				height: calc(#{$swiper_width_sp} - 4rem);
+			}
+
+			& > img {
+				max-width: 100%;
+				max-height: 100%;
+			}
+		}
+
+		.suumotable__swiperButton {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			width: auto;
+			height: auto;
+			transform: translateY(-50%);
+
+			&::before {
+				display: inline-block;
+				color: $suumo_primary;
+				content: '◀︎';
+			}
+
+			&.swiper-button-next {
+				right: 0;
+				left: auto;
+
+				&::before {
+					content: '▶︎';
+				}
+			}
 		}
 	}
 

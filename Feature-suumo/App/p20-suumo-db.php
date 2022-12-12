@@ -48,10 +48,12 @@ add_action('init', 'execute_db_creation');
 /**
  * suumo用のデータベーステーブルにカラムを追加する
  */
-function suumo_add_table_columns() {
+function suumo_update_table_columns() {
 	global $wpdb;
 
+	//= カラムの追加 ====
 	$table_name = $wpdb->prefix . 'suumo';
+	$wpdb->query("ALTER TABLE {$table_name} ADD images longtext null");
 	$wpdb->query("ALTER TABLE {$table_name} ADD link varchar(255)");
 	$wpdb->query("ALTER TABLE {$table_name} ADD rent bigint(20)");
 	$wpdb->query("ALTER TABLE {$table_name} ADD management_fee bigint(20)");
@@ -64,8 +66,11 @@ function suumo_add_table_columns() {
 	$wpdb->query("ALTER TABLE {$table_name} ADD longitude float(50)");
 	$wpdb->query("ALTER TABLE {$table_name} ADD latitude float(50)");
 	$wpdb->query("ALTER TABLE {$table_name} ADD user_id bigint(20)");
+
+	//= 順番の変更 ====
+	$wpdb->query("ALTER TABLE {$table_name} MODIFY user_id bigint(20) after ID");
 }
-add_action('init', 'suumo_add_table_columns');
+// add_action('init', 'suumo_update_table_columns');
 
 
 

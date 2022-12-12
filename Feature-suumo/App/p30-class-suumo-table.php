@@ -14,8 +14,11 @@ class Suumo_Table {
 		global $wpdb;
 		$this->table_name = $wpdb->prefix . 'suumo';
 		$this->meta_table_name = $wpdb->prefix . 'suumometa';
+		$this->colummn_all_slugs = $wpdb->get_col("DESC {$this->table_name}", 0);
+		$this->colummn_slugs =array_diff($this->colummn_all_slugs, ['user_id']);
 		$this->column_names = [
 			'ID',
+			'画像',
 			'URL',
 			'家賃',
 			'管理費',
@@ -99,9 +102,8 @@ class Suumo_Table {
 	 */
 	function get_table_columns($columns_added = []) {
 		global $wpdb;
-		$colummn_slugs = $wpdb->get_col("DESC {$this->table_name}", 0);
-		$colummn_slugs = array_splice($colummn_slugs, 0, 12);
-		$table_columns = array_combine($colummn_slugs, $this->column_names);
+
+		$table_columns = array_combine($this->colummn_slugs, $this->column_names);
 		$table_columns = array_merge($table_columns, $columns_added);
 
 		return $table_columns;
@@ -116,20 +118,7 @@ class Suumo_Table {
 		$column_name = @array_keys($_GET['sort'])[0];
 		$order = strtoupper(@array_values($_GET['sort'])[0]);
 		$sort = "ORDER BY `{$column_name}` $order";
-		$select_array = [
-			"ID",
-			"link",
-			"rent",
-			"management_fee",
-			"deposit",
-			"retainer_fee",
-			"room_arragement",
-			"initial_fee",
-			"construction",
-			"address",
-			"latitude",
-			"longitude",
-		];
+		$select_array = $this->colummn_slugs;
 
 		$select_str1 = implode(',', $select_array);
 		$select_sql = array_map(function ($value) {
@@ -155,7 +144,7 @@ class Suumo_Table {
 		}
 		//= デフォルト ====
 		else {
-			$sql =  "SELECT $select_str1 FROM {$this->table_name} WHERE user_id = {$current_user->ID}";
+			$sql =  "SELECT $select_str1 FROM {$this->table_name} WHERE user_id = {$current_user->ID} ORDER BY `ID` DESC";
 		}
 		$table_values = $wpdb->get_results($sql, OBJECT);
 
@@ -171,7 +160,6 @@ class Suumo_Table {
 	 */
 	function format_suumo_column($key) {
 		$columns = Self::get_table_columns();
-
 
 		if (
 			$key === 'rent' ||
@@ -201,6 +189,38 @@ class Suumo_Table {
 	}
 
 
+	function get_suumo_slider($image_json) {
+
+		$image_array = json_decode($image_json);
+
+		$slides = '';
+		if ($image_array && !empty($image_array)) {
+			foreach ($image_array as $image) {
+				$slide = "<div class='swiper-slide'><figure class='suumotable__swiperFigure'><img src='{$image}'></figure></div>";
+				$slides .= $slide;
+			}
+
+			$magnifying_glass_img = get_template_directory_uri() . '/Feature-suumo/Image/icon_magnifying_glass_navy_1.svg';
+			$slider =
+			"<div class='suumotable__swiperWrap'>" .
+			"<img class=\"suumotable__swiperMagnifiy js__modal__trigger\" src=\"{$magnifying_glass_img}\" alt=\"虫眼鏡\"
+			 data-modal-target=\"suumotable__swiper\">" .
+			"<div class='suumotable__swiper'>" .
+			"<div class='swiper-wrapper'>" .
+			$slides .
+			"</div>" .
+			"<div class='suumotable__swiperButton swiper-button-prev'></div>" .
+			"<div class='suumotable__swiperButton swiper-button-next'></div>" .
+			"</div>" .
+			"</div>";
+
+			return $slider;
+		} else {
+			return false;
+		}
+	}
+
+
 	/**
 	 * データを出力するときにフォーマットする
 	 *
@@ -208,7 +228,9 @@ class Suumo_Table {
 	 * @param $key キー
 	 */
 	function format_suumo_value($value, $key) {
-		if ($key === 'link') {
+		if ($key === 'images') {
+			$return = Self::get_suumo_slider($value);
+		} elseif ($key === 'link') {
 			$return = '<a href="' . esc_url($value) . '" target="_blank" rel="noopener">掲載サイトへ</a>';
 		} elseif (
 			$key ===  'rent' ||

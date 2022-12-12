@@ -33,7 +33,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 		$insert_suumo_data_validation = $Suumo_Validation->insert_suumo_data($s_POST);
 
 		if (empty($insert_suumo_data_validation)) {
-			$result = $Suumo_Form->insert_suumo_data($s_POST);
+			$result = $Suumo_Form->insert_suumo_data($s_POST['suumo_url']);
 			$param = 'suumo-data-inserted';
 		} else {
 			$result = false;
