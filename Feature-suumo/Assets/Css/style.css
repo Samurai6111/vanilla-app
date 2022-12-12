@@ -290,9 +290,14 @@ a {
 }
 .pageSuumo .suumoTable thead tr th .suumoTable__sortButtonWrap button {
   position: relative;
+}
+.pageSuumo .suumoTable thead tr th .suumoTable__thText {
+  position: relative;
+}
+.pageSuumo .suumoTable thead tr th .suumoTable__thText.-sort {
   padding-right: 3rem;
 }
-.pageSuumo .suumoTable thead tr th .suumoTable__sortButtonWrap button::after {
+.pageSuumo .suumoTable thead tr th .suumoTable__thText.-sort::after {
   position: absolute;
   top: 50%;
   right: 1rem;
@@ -304,11 +309,8 @@ a {
           transform: translate(0, -50%);
   opacity: 0.7;
 }
-.pageSuumo .suumoTable thead tr th .suumoTable__sortButtonWrap.-desc button::after {
+.pageSuumo .suumoTable thead tr th .suumoTable__thText.-sort.-desc::after {
   content: "▲";
-}
-.pageSuumo .suumoTable thead tr th .suumoTable__thText {
-  position: relative;
 }
 .pageSuumo .suumoTable tbody tr {
   -webkit-transition: 0.3s;
@@ -340,6 +342,9 @@ a {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+.pageSuumo .suumoTable tbody tr.-is-favorite {
+  background-color: rgba(219, 140, 40, 0.2);
 }
 .pageSuumo .suumoTable td,
 .pageSuumo .suumoTable th {

@@ -190,10 +190,9 @@ class Suumo_Table {
 			} else {
 				$order = 'asc';
 			}
-			$return =
-				'<form action="' . get_permalink() . '#suumoTable" type="GET" class="suumoTable__sortButtonWrap ' . esc_attr('-' . $order) . '">' .
-				'<button type="submit" class="-reset" name="sort[' . $key . ']" value="' . $order . '">' . $columns[$key] . '</button>' .
-				'</form>';
+			$href = get_permalink() . "/?sort[{$key}]={$order}#suumoTable";
+			$href = esc_url($href);
+			$return = "<a class='suumoTable__thText -sort -{$order}' href='{$href}'>{$columns[$key]}</a>";
 		} else {
 			$return = "<p class='suumoTable__thText'>{$columns[$key]}</p>";
 		}
@@ -246,6 +245,7 @@ class Suumo_Table {
 					<option value="" disabled selected>編集 ▼</option>
 					<option value="update">更新</option>
 					<option value="delete">削除</option>
+					<option value="favorite">お気に入り</option>
 				</select>
 
 				<?php
@@ -275,8 +275,13 @@ class Suumo_Table {
 					</thead>
 
 					<tbody>
-						<?php foreach ($values_row as $values) { ?>
-							<tr class="">
+						<?php foreach ($values_row as $values) {
+							$suumo_id = $values->ID;
+
+							$meta_is_favorite = get_suumo_meta($suumo_id, 'is_favorite');
+							$is_favorite = ($meta_is_favorite === 'is_favorite') ? '-is-favorite' : '';
+						?>
+							<tr class="<?php echo esc_attr($is_favorite) ?>">
 								<?php
 								$i = -1;
 								foreach ($values as $value) {
@@ -301,7 +306,6 @@ class Suumo_Table {
 
 								<?php
 
-								$suumo_id = $values->ID;
 								do_action('suumo_table_custom_column_values', $suumo_id) ?>
 							</tr>
 						<?php } ?>
@@ -315,12 +319,11 @@ class Suumo_Table {
 
 	function get_suumo_urls() {
 		global $wpdb;
-		$results = $wpdb->get_results("SELECT link FROM {$this->table_name}", OBJECT );
+		$results = $wpdb->get_results("SELECT link FROM {$this->table_name}", OBJECT);
 		$results = array_map(function ($value) {
 			return $value->link;
 		}, $results);
 
 		return $results;
-
 	}
 }

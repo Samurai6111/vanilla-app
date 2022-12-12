@@ -17,6 +17,9 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 		elseif ($s_POST['suumo_table_form_action'] === 'delete') {
 			$result = $Suumo_Form->delete_suumo_data($s_POST);
 		}
+		elseif ($s_POST['suumo_table_form_action'] === 'favorite') {
+			$result = $Suumo_Form->update_favorite($s_POST);
+		}
 
 
 		// $result = $Suumo_Form->delete_suumo_data($s_POST);

@@ -78,6 +78,13 @@
 					.suumoTable__sortButtonWrap {
 						button {
 							position: relative;
+						}
+					}
+
+					.suumoTable__thText {
+						position: relative;
+
+						&.-sort {
 							padding-right: 3rem;
 
 							&::after {
@@ -91,17 +98,13 @@
 								transform: translate(0, -50%);
 								opacity: 0.7;
 							}
-						}
 
-						&.-desc {
-							button::after {
-								content: '▲';
+							&.-desc {
+								&::after {
+									content: '▲';
+								}
 							}
 						}
-					}
-
-					.suumoTable__thText {
-						position: relative;
 					}
 				}
 			}
@@ -134,6 +137,10 @@
 						align-items: center;
 						justify-content: center;
 					}
+				}
+
+				&.-is-favorite {
+					background-color: rgba($yellow, 0.2);
 				}
 			}
 		}

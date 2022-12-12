@@ -46,6 +46,32 @@ class Suumo_Form {
 	}
 
 	/**
+	 *  お気に入りのアップデート
+	 *
+	 *  @param $data $_POSTを代入
+	 */
+	function update_favorite($data) {
+		global $wpdb, $suumo_table_name;
+		if (!empty($data['ID'])) {
+			foreach ($data['ID'] as $suumo_id) {
+				$is_favarite = get_suumo_meta($suumo_id, 'is_favorite');
+				if ($is_favarite === 'is_favorite') {
+					update_suumo_meta($suumo_id, 'is_favorite', '');
+				} else {
+					update_suumo_meta($suumo_id, 'is_favorite', 'is_favorite');
+				}
+				$result = true;
+			}
+		} else {
+			$result = false;
+		}
+
+		return $result;
+
+
+	}
+
+	/**
 	 *  URLから物件情報を取得する
 	 *
 	 *  @param $data $_POSTを代入

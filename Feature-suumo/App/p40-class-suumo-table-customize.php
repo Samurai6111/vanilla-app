@@ -30,10 +30,9 @@ function my_suumo_table_custom_column_lables() {
 				$order = 'asc';
 			}
 
-			$return =
-				'<form action="' . get_permalink() . '#suumoTable" type="GET" class="suumoTable__sortButtonWrap ' . esc_attr('-' . $order) . '">' .
-				'<button type="submit" class="-reset" name="sort[' . $key . ']" value="' . $order . '">' . $lable . '</button>' .
-				'</form>';
+				$href = get_permalink() . "/?sort[{$key}]={$order}#suumoTable";
+				$href = esc_url($href);
+				$return = "<a class='suumoTable__thText -sort -{$order}' href='{$href}'>{$lable}</a>";
 ?>
 			<th class="<?php echo esc_attr('-' . $key) ?>">
 				<?php echo ($return) ?>
