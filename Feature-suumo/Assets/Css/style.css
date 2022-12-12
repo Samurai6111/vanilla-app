@@ -275,10 +275,11 @@ a {
 .pageSuumo .suumoTableContainer {
   width: 100%;
   max-width: 100%;
-  max-height: 60rem;
+  max-height: 80vh;
   overflow: scroll;
 }
 .pageSuumo .suumoTableContainer::-webkit-scrollbar {
+  width: 0.8rem;
   height: 0.8rem;
 }
 .pageSuumo .suumoTableContainer::-webkit-scrollbar-track {
@@ -415,8 +416,8 @@ a {
 }
 .pageSuumo .suumotable__swiperWrap .suumotable__swiperMagnifiy {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 0.8rem;
+  bottom: 0.8rem;
   z-index: 10;
   width: 3rem;
   -webkit-transition: 0.3s;
