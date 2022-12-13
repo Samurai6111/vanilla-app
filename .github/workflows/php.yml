@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./
-          server-dir: /home/xs583309/woriver.net/public_html/wp-content/themes/vanilla-app
+          server-dir: /home/xs583309/woriver.net/public_html/wp-content/themes/vanilla-app/
           exclude: |
             **/.git*
             **/.git*/**
