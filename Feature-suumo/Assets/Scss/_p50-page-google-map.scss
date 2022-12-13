@@ -1,28 +1,15 @@
 @charset 'UTF-8';
 
-#map {
-	width: 100vw;
-	height: 100vh;
-}
+.pageGooglemap {
+	@include flex;
 
-.pinInfo {
-	width: 100%;
-	max-width: 30rem;
-	max-height: 15rem;
-	overflow: scroll;
+	#map {
+		width: 100%;
+		height: 100vh;
+	}
 
-	table {
-		tr {
-			td {
-				padding: 0.4rem;
-				white-space: nowrap;
-				border: 0.1rem solid $black_000;
-
-				&:first-child {
-					font-weight: 600;
-				}
-			}
-		}
+	.pinInfo {
+		word-break: keep-all;
 	}
 }
 
@@ -30,25 +17,40 @@
 // google mapのサイドバー
 //____________________________
 .sidebarGooglemap__container {
-	position: fixed;
-	top: 0;
-	left: 0;
+	$sidebar_width_pc: 27rem;
+	$sidebar_item_height_sp: 22rem;
+	position: relative;
+	// top: 0;
+	// left: 0;
 	z-index: 10;
-	width: 100%;
-	max-width: 48rem;
+	width: $sidebar_width_pc;
+	min-width: $sidebar_width_pc;
 	transition: 0.3s;
+
+	@media #{$tab} {
+		position: fixed;
+		top: calc(100% - #{$sidebar_item_height_sp});
+		left: 0;
+		width: 100%;
+		min-width: none;
+	}
 
 	//____________________________
 	// モディファイア
 	//____________________________
 	&.-closed {
-		transform: translateX(-100%);
+		margin-left: calc(-1 * #{$sidebar_width_pc});
+
+		@media #{$tab} {
+			top: 100%;
+			margin-left: 0;
+		}
 	}
 
 	.sidebarGooglemap__button {
 		@include flex;
 		position: absolute;
-		top: 1rem;
+		top: 6rem;
 		left: 100%;
 		align-items: center;
 		justify-content: center;
@@ -61,36 +63,72 @@
 			opacity: 1;
 		}
 
-		span {
+		@media #{$tab} {
+			top: auto;
+			bottom: 100%;
+			left: 1rem;
+			padding: 0.8rem 2rem;
+			border-radius: 0.8rem 0.8rem 0 0;
+		}
+
+		.sidebarGooglemap__buttonArrow {
 			color: $white_fff;
 			font-size: 1.2rem;
+
+			@media #{$tab} {
+				transform: rotate(-90deg);
+			}
 		}
 
 		&.-closed {
-			span {
+			.sidebarGooglemap__buttonArrow {
 				transform: rotate(-180deg);
+
+				@media #{$tab} {
+					transform: rotate(90deg);
+				}
 			}
 		}
 	}
 
 	.sidebarGooglemap {
+		height: 100vh;
 		max-height: 100vh;
 		overflow-y: scroll;
 		background-color: $white_fff;
 		box-shadow: 0.4rem 0 0.8rem rgba($black_000, 0.3);
 
-		.sidebarGooglemap__list {
-			padding: 0 1.6rem;
+		@media #{$tab} {
+			height: $sidebar_item_height_sp;
+			max-height: $sidebar_item_height_sp;
 		}
 
 		.sidebarGooglemap__item {
 			@include flex;
-			gap: 1.6rem;
+			position: relative;
+			flex-direction: column;
+			gap: 0.8rem;
 			padding: 1.6rem;
 			transition: 0.3s;
 
 			&:not(:last-child) {
-				border-bottom: 0.1rem solid $lightgray;
+				&::after {
+					position: absolute;
+					top: 100%;
+					left: 50%;
+					display: inline-block;
+					width: calc(100% - 3.2rem);
+					height: 0.1rem;
+					content: '';
+					background-color: $lightgray;
+					transform: translate(-50%, 0);
+				}
+			}
+
+			@media #{$tab} {
+				flex-direction: row;
+				gap: 1.2rem;
+				justify-content: center;
 			}
 
 			///____________________________
@@ -101,15 +139,56 @@
 			}
 		}
 
+		.sidebarGooglemap__mapButton {
+			position: absolute;
+			right: 1.6rem;
+			bottom: 1.6rem;
+			width: 2.4rem;
+
+			& > * {
+				pointer-events: none;
+			}
+		}
+
+		.sidebarGooglemap__figure {
+			.suumotable__swiperWrap {
+				$swiper_width_sp: 12rem;
+
+				@media #{$tab} {
+					max-width: $swiper_width_sp;
+				}
+
+				.suumotable__swiperFigure {
+					@media #{$tab} {
+						width: calc(#{$swiper_width_sp} - 2rem);
+						height: calc(#{$swiper_width_sp} - 2rem);
+					}
+				}
+			}
+		}
+
+		.sidebarGooglemap__desc {
+			padding-right: 3.2rem;
+
+			@media #{$tab} {
+				padding-right: 0;
+				padding-bottom: 3.2rem;
+			}
+		}
+
 		.sidebarGooglemap__table {
 			tr {
 				td ,
 				th {
-					padding: 0 0.8rem;
 					font-size: 1.2rem;
+
+					@media #{$tab} {
+						font-size: 1rem;
+					}
 				}
 
 				th {
+					padding-right: 0.8rem;
 					font-weight: 500;
 				}
 			}

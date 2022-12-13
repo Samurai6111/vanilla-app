@@ -587,39 +587,45 @@ a {
   font-size: clamp(1rem, vw($pc), 1.2rem);
 }
 
-#map {
-  width: 100vw;
+.pageGooglemap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+.pageGooglemap #map {
+  width: 100%;
   height: 100vh;
 }
-
-.pinInfo {
-  width: 100%;
-  max-width: 30rem;
-  max-height: 15rem;
-  overflow: scroll;
-}
-.pinInfo table tr td {
-  padding: 0.4rem;
-  white-space: nowrap;
-  border: 0.1rem solid #000000;
-}
-.pinInfo table tr td:first-child {
-  font-weight: 600;
+.pageGooglemap .pinInfo {
+  word-break: keep-all;
 }
 
 .sidebarGooglemap__container {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
   z-index: 10;
-  width: 100%;
-  max-width: 48rem;
+  width: 27rem;
+  min-width: 27rem;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
+@media only screen and (max-width:768px) {
+  .sidebarGooglemap__container {
+    position: fixed;
+    top: calc(100% - 22rem);
+    left: 0;
+    width: 100%;
+    min-width: none;
+  }
+}
 .sidebarGooglemap__container.-closed {
-  -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
+  margin-left: calc(-1 * 27rem);
+}
+@media only screen and (max-width:768px) {
+  .sidebarGooglemap__container.-closed {
+    top: 100%;
+    margin-left: 0;
+  }
 }
 .sidebarGooglemap__container .sidebarGooglemap__button {
   display: -webkit-box;
@@ -627,7 +633,7 @@ a {
   display: -webkit-flex;
   display: flex;
   position: absolute;
-  top: 1rem;
+  top: 6rem;
   left: 100%;
   -webkit-box-align: center;
   -webkit-align-items: center;
@@ -645,46 +651,135 @@ a {
 .sidebarGooglemap__container .sidebarGooglemap__button:hover {
   opacity: 1;
 }
-.sidebarGooglemap__container .sidebarGooglemap__button span {
+@media only screen and (max-width:768px) {
+  .sidebarGooglemap__container .sidebarGooglemap__button {
+    top: auto;
+    bottom: 100%;
+    left: 1rem;
+    padding: 0.8rem 2rem;
+    border-radius: 0.8rem 0.8rem 0 0;
+  }
+}
+.sidebarGooglemap__container .sidebarGooglemap__button .sidebarGooglemap__buttonArrow {
   color: #ffffff;
   font-size: 1.2rem;
 }
-.sidebarGooglemap__container .sidebarGooglemap__button.-closed span {
+@media only screen and (max-width:768px) {
+  .sidebarGooglemap__container .sidebarGooglemap__button .sidebarGooglemap__buttonArrow {
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+}
+.sidebarGooglemap__container .sidebarGooglemap__button.-closed .sidebarGooglemap__buttonArrow {
   -webkit-transform: rotate(-180deg);
           transform: rotate(-180deg);
 }
+@media only screen and (max-width:768px) {
+  .sidebarGooglemap__container .sidebarGooglemap__button.-closed .sidebarGooglemap__buttonArrow {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+}
 .sidebarGooglemap__container .sidebarGooglemap {
+  height: 100vh;
   max-height: 100vh;
   overflow-y: scroll;
   background-color: #ffffff;
   -webkit-box-shadow: 0.4rem 0 0.8rem rgba(0, 0, 0, 0.3);
           box-shadow: 0.4rem 0 0.8rem rgba(0, 0, 0, 0.3);
 }
-.sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__list {
-  padding: 0 1.6rem;
+@media only screen and (max-width:768px) {
+  .sidebarGooglemap__container .sidebarGooglemap {
+    height: 22rem;
+    max-height: 22rem;
+  }
 }
 .sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  gap: 1.6rem;
+  position: relative;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.8rem;
   padding: 1.6rem;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
-.sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__item:not(:last-child) {
-  border-bottom: 0.1rem solid #c9cfda;
+.sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__item:not(:last-child)::after {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  display: inline-block;
+  width: calc(100% - 3.2rem);
+  height: 0.1rem;
+  content: "";
+  background-color: #c9cfda;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+@media only screen and (max-width:768px) {
+  .sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__item {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    gap: 1.2rem;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 .sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__item.-active {
   background-color: rgba(219, 140, 40, 0.2);
 }
+.sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__mapButton {
+  position: absolute;
+  right: 1.6rem;
+  bottom: 1.6rem;
+  width: 2.4rem;
+}
+.sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__mapButton > * {
+  pointer-events: none;
+}
+@media only screen and (max-width:768px) {
+  .sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__figure .suumotable__swiperWrap {
+    max-width: 12rem;
+  }
+}
+@media only screen and (max-width:768px) {
+  .sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__figure .suumotable__swiperWrap .suumotable__swiperFigure {
+    width: calc(12rem - 2rem);
+    height: calc(12rem - 2rem);
+  }
+}
+.sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__desc {
+  padding-right: 3.2rem;
+}
+@media only screen and (max-width:768px) {
+  .sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__desc {
+    padding-right: 0;
+    padding-bottom: 3.2rem;
+  }
+}
 .sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__table tr td,
 .sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__table tr th {
-  padding: 0 0.8rem;
   font-size: 1.2rem;
 }
+@media only screen and (max-width:768px) {
+  .sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__table tr td,
 .sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__table tr th {
+    font-size: 1rem;
+  }
+}
+.sidebarGooglemap__container .sidebarGooglemap .sidebarGooglemap__table tr th {
+  padding-right: 0.8rem;
   font-weight: 500;
 }
 

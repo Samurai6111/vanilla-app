@@ -42,29 +42,10 @@ get_header(); ?>
 	<?php }) ?>
 
 
-	<div class="modalWrap" id="modalWrap">
-		<div class="modal__scroll js__modal__scroll">
-			<div class="modal__contentWrap ">
-				<div class="js__modal__contentHeight">
-					<div class="modal__content js__modal__content">
-						<div class="modal__targetContent" data-target-modal="suumo__form">
-							<?php Suumo_Form::suumo_url_form(); ?>
-						</div>
-
-						<div class="modal__targetContent" data-target-modal="suumotable__swiper">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</main>
 
 
 
-
-
-
+<?php require_once(get_theme_file_path() . "/Feature-suumo/c-suumo-modal.php") ?>
 
 <script src="<?php echo get_template_directory_uri(); ?>/Feature-suumo/Assets/Js/page-suumo.js"></script>
 <?php get_footer();
