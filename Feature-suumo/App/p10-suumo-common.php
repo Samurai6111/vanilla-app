@@ -87,11 +87,13 @@ function vanilla_get_approximate_initial_fee(
  * @param $suumo_url
  */
 function vanilla_suumo_url_exists($suumo_url) {
-	global $wpdb, $suumo_table_name;
+	global $wpdb, $suumo_table_name, $current_user;
 
 	$result = $wpdb->get_row(
 		"SELECT * FROM $suumo_table_name
-		WHERE link = '" . $suumo_url . "'"
+		WHERE link = {$suumo_url}
+		AND user_id = {$current_user->ID}
+		"
 	);
 
 	if ($result) {

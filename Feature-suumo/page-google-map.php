@@ -49,11 +49,11 @@ $suumo_values_json = json_encode($suumo_values_array_modified);
 		return suumo_values_array
 	}
 
+	let target_map = document.getElementById('map')
 	function initMap() {
 		// ---------- 変数 ----------
 		let geocoder = new google.maps.Geocoder();
 		let suumo_values = get_suumo_values()
-		let target = document.getElementById('map')
 		let center = {
 			lat: 35.7362707,
 			lng: 139.702632
@@ -64,7 +64,7 @@ $suumo_values_json = json_encode($suumo_values_array_modified);
 			lat: center['lat'],
 			lng: center['lng']
 		});
-		map = new google.maps.Map(target, { // #sampleに地図を埋め込む
+		map = new google.maps.Map(target_map, { // #sampleに地図を埋め込む
 			center: center_mapLatLng, // 地図の中心を指定
 			zoom: 13 // 地図のズームを指定
 		});
@@ -83,8 +83,6 @@ $suumo_values_json = json_encode($suumo_values_array_modified);
 					lat: latitude,
 					lng: longitude
 				});
-
-				console.log(google.maps.Marker)
 
 				marker[i] = new google.maps.Marker({
 					position: markerLatLng,
@@ -118,12 +116,15 @@ $suumo_values_json = json_encode($suumo_values_array_modified);
 		}
 	}
 
+	/** --------------------------------
+	* googleマップのピンをクリックしたらサイドバーがスクロールする
+	*
+	* @param sidebar_item_id
+	*/
 	function sidebar_item_scroll(sidebar_item_id) {
 		let sidebar_google_map = $('#sidebarGooglemap')
 		let target = $('#' + sidebar_item_id)
 		let position_top = target.data('position-top')
-
-
 
 			//== スクロール ========
 			sidebar_google_map.animate({
