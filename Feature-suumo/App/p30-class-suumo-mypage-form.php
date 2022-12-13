@@ -85,34 +85,16 @@ class Suumo_Mypage_Form {
 		$user_id = $current_user->ID;
 
 		$suumo_table_custom_lable_json = get_user_meta($user_id, 'suumo_table_custom_lable_json', true);
-		$suumo_table_custom_lable = json_decode($suumo_table_custom_lable_json);
-		$suumo_table_custom_lable_count = (is_array($suumo_table_custom_lable) && count($suumo_table_custom_lable)) ? count($suumo_table_custom_lable) : 0;
+		$suumo_table_custom_lables = json_decode($suumo_table_custom_lable_json);
 
-		$suumo_table_custom_value_json = get_user_meta($user_id, 'suumo_table_custom_value_json', true);
-		$suumo_table_custom_value = json_decode($suumo_table_custom_value_json);
-		$suumo_table_custom_value_count = (is_array($suumo_table_custom_value) && count($suumo_table_custom_value)) ? count($suumo_table_custom_value) : 0;
-
-
-		if (
-			$suumo_table_custom_lable_count > 0 &&
-			$suumo_table_custom_value_count > 0 &&
-			$suumo_table_custom_lable_count === $suumo_table_custom_value_count
-		) { ?>
-			<?php
+		if (!empty($suumo_table_custom_lables)) {
 			$i = 0;
-			while ($i < $suumo_table_custom_lable_count) {
-				$lable = $suumo_table_custom_lable[$i];
-				$value = $suumo_table_custom_value[$i];
+			foreach ($suumo_table_custom_lables as $lable) {
 			?>
 				<tr>
 					<td>
-						<div>
-							<input class="-reset" type="text" name="suumo_table_custom_lables[]" size="50" value="<?php echo esc_attr($lable) ?>" required>
-						</div>
-					</td>
-					<td>
 						<div class="pageMypageTable__tdHasButton">
-							<input class="-reset" type="text" name="suumo_table_custom_values[]" size="50" value="<?php echo esc_attr($value) ?>" required>
+							<input class="-reset" type="text" name="suumo_table_custom_lables[]" size="50" value="<?php echo esc_attr($lable) ?>" required>
 
 							<?php suumo_button_type1([
 								'text' => '×',
@@ -120,7 +102,6 @@ class Suumo_Mypage_Form {
 								'tag' => 'button',
 								'class' => '-color-reverse -small',
 							]) ?>
-
 						</div>
 					</td>
 				</tr>

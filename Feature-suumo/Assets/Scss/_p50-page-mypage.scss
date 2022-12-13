@@ -6,15 +6,30 @@
 	.tabSwitch {
 		@include flex;
 
+		@media #{$tab} {
+			flex-direction: column;
+		}
+
 		.tabSwitch__labels {
 			@include flex;
 			flex-direction: column;
 			max-width: 18rem;
 			border-right: 0.1rem solid $lightgray;
 
+			@media #{$tab} {
+				flex-direction: row;
+				max-width: 100%;
+				border-right: none;
+				border-bottom: 0.1rem solid $lightgray;
+			}
+
 			.tabSwitch__labelItem {
 				width: 100%;
 				background-color: transparent;
+
+				@media #{$tab} {
+					padding: 0.8rem;
+				}
 
 				&.-active {
 					background-color: $lightgray;
@@ -35,6 +50,74 @@
 		.tabSwitch__contents {
 			width: 100%;
 			padding: 2.4rem;
+		}
+	}
+
+	.pageMypageDl {
+		@include flex;
+		gap: 1.6rem;
+
+		&:not(:last-child) {
+			margin-bottom: 2.4rem;
+		}
+
+		@media #{$tab} {
+			flex-direction: column;
+			gap: 0.4rem;
+		}
+
+		dt ,
+		dd {
+			font-size: 1.6rem;
+			word-break: break-all;
+			vertical-align: middle;
+
+			@media #{$tab} {
+				font-size: 1.4rem;
+			}
+		}
+
+		dt {
+			min-width: 10rem;
+			padding-right: 2.4rem;
+			font-weight: 600;
+
+			@media #{$tab} {
+				min-width: none;
+			}
+		}
+
+		dd {
+			input {
+				display: inline-block;
+				width: 100%;
+				max-width: 32rem;
+				padding: 0.4rem 0.8rem;
+				font-size: 1.6rem;
+				background-color: rgba($white_fff, 0.9);
+				border: 0.1rem solid $lightgray;
+
+				@media #{$tab} {
+					font-size: 1.4rem;
+				}
+			}
+
+			.pageMypageTable__tdText {
+				padding: 0.4rem 0.8rem;
+			}
+
+			.pageMypageTable__tdHasButton {
+				position: relative;
+
+				.suumoButtonType1 {
+					position: absolute;
+					left: calc(100% + 0.8rem);
+					max-width: 3.2rem;
+					background-color: transparent;
+					box-shadow: none;
+					border: none;
+				}
+			}
 		}
 	}
 

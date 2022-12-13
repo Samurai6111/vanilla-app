@@ -20,11 +20,8 @@ function add_suumo_table_customize_column(e) {
     let html =
         '<tr>' +
         '<td>' +
-        '<input class="-reset" type="text" name="suumo_table_custom_lables[]" size="50" value="">' +
-        '</td>' +
-        '<td>' +
         '<div class="pageMypageTable__tdHasButton">' +
-        '<input class="-reset" type="text" name="suumo_table_custom_values[]" size="50" value="">' +
+        '<input class="-reset" type="text" name="suumo_table_custom_lables[]" size="50" value="">' +
         '<button class="suumoButtonType1 -color-reverse -small" type="button" onclick="remove_suumo_table_custom_column(event)">×</button>' +
         '</div>' +
         '</td>' +

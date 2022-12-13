@@ -8,6 +8,24 @@ a {
 	text-decoration: underline;
 }
 
+// ---------- カスタムスクロールバー ----------
+.-custom-scrolbar {
+	&::-webkit-scrollbar {
+		width: 0.8rem;
+		height: 0.8rem;
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: $lightgray;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $suumo_primary;
+		box-shadow: inset 0 0 6px rgba($black_000, 0.3);
+	}
+}
+
+// ---------- ボタン ----------
 .pageSuumo__button {
 	display: inline-block;
 	width: 100%;
@@ -26,10 +44,12 @@ a {
 	}
 }
 
+// ---------- ハンバーガーメニュー ----------
 .hamburger_wrap .hamburger {
 	background-color: $suumo_primary;
 }
 
+// ---------- モーダル ----------
 .modalWrap {
 	.modal__targetContent {
 		display: none;
@@ -43,7 +63,7 @@ a {
 
 		&[data-target-modal='suumotable__swiper'] {
 			max-width: 80rem;
-			max-height: 60rem;
+			// max-height: 60rem;
 			margin: auto;
 
 			.suumotable__swiperWrap {
@@ -82,6 +102,95 @@ a {
 						}
 					}
 				}
+			}
+		}
+	}
+}
+
+// ---------- スライダー ----------
+.suumotable__swiperWrap {
+	$swiper_width_pc: 20rem;
+	$swiper_width_sp: 10rem;
+	position: relative;
+	max-width: $swiper_width_pc;
+	overflow: hidden;
+	user-select: none;
+
+	&:hover {
+		.suumotable__swiperMagnifiy {
+			opacity: 0.8;
+		}
+	}
+
+	@media #{$tab} {
+		max-width: $swiper_width_sp;
+	}
+
+	.suumotable__swiperMagnifiy {
+		position: absolute;
+		right: 0.8rem;
+		bottom: 0.8rem;
+		z-index: 10;
+		width: 3rem;
+		transition: 0.3s;
+		cursor: pointer;
+		opacity: 0;
+
+		@media #{$tab} {
+			bottom: 0;
+			width: 2rem;
+			opacity: 0.8;
+		}
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	.swiper-slide {
+		@include flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.suumotable__swiperFigure {
+		@include flex;
+		align-items: center;
+		justify-content: center;
+		width: calc(#{$swiper_width_pc} - 4rem);
+		height: calc(#{$swiper_width_pc} - 4rem);
+
+		@media #{$tab} {
+			width: calc(#{$swiper_width_sp} - 2rem);
+			height: calc(#{$swiper_width_sp} - 2rem);
+		}
+
+		& > img {
+			max-width: 100%;
+			max-height: 100%;
+		}
+	}
+
+	.suumotable__swiperButton {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		width: auto;
+		height: auto;
+		transform: translateY(-50%);
+
+		&::before {
+			display: inline-block;
+			color: $suumo_primary;
+			content: '◀︎';
+		}
+
+		&.swiper-button-next {
+			right: 0;
+			left: auto;
+
+			&::before {
+				content: '▶︎';
 			}
 		}
 	}

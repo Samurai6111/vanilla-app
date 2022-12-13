@@ -31,6 +31,7 @@ class Suumo_Table {
 			'緯度',
 			'経度',
 		];
+		$this->table_columns = array_combine($this->colummn_slugs, $this->column_names);
 
 		if (is_admin() && current_user_can('administrator')) {
 			// メニュー追加
@@ -103,8 +104,8 @@ class Suumo_Table {
 	function get_table_columns($columns_added = []) {
 		global $wpdb;
 
-		$table_columns = array_combine($this->colummn_slugs, $this->column_names);
-		$table_columns = array_merge($table_columns, $columns_added);
+		// $table_columns = array_combine($this->colummn_slugs, $this->column_names);
+		$table_columns = array_merge($this->table_columns, $columns_added);
 
 		return $table_columns;
 	}
@@ -277,7 +278,7 @@ class Suumo_Table {
 				])
 				?>
 			</div>
-			<div class="suumoTableContainer">
+			<div class="suumoTableContainer -custom-scrolbar">
 
 				<table class="suumoTable" id="suumoTable">
 					<thead>

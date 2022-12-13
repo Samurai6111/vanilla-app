@@ -9,20 +9,6 @@
 		max-width: 100%;
 		max-height: 80vh;
 		overflow: scroll;
-
-		&::-webkit-scrollbar {
-			width: 0.8rem;
-			height: 0.8rem;
-		}
-
-		&::-webkit-scrollbar-track {
-			background-color: $lightgray;
-		}
-
-		&::-webkit-scrollbar-thumb {
-			background-color: $suumo_primary;
-			box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-		}
 	}
 
 	//____________________________
@@ -31,7 +17,6 @@
 	.classsuumoTable__actions {
 		@include flex;
 		align-items: center;
-
 		gap: 1.6rem;
 
 		select {
@@ -62,6 +47,10 @@
 					vertical-align: middle;
 					background-color: $white_fff;
 					border-bottom: none;
+
+					@media #{$tab} {
+						padding: 0.6rem;
+					}
 
 					&::before {
 						position: absolute;
@@ -130,6 +119,10 @@
 					padding: 0.6rem 2rem 0.6rem 1.4rem;
 					vertical-align: middle;
 
+					@media #{$tab} {
+						padding: 0.6rem 1.2rem 0.6rem 0.6rem;
+					}
+
 					a {
 						text-decoration: underline;
 					}
@@ -139,8 +132,40 @@
 						align-items: center;
 						justify-content: center;
 					}
+
+					//____________________________
+					// モディファイア
+					//____________________________
+					&.-images {
+						position: sticky;
+						top: auto;
+						left: 0;
+						z-index: 30;
+
+						@media #{$tab} {
+							position: static;
+						}
+
+						&::before {
+							position: absolute;
+							top: 0;
+							left: 0;
+							display: inline-block;
+							width: 100%;
+							height: 100%;
+							content: '';
+							background-color: $white_fff;
+
+							@media #{$tab} {
+								display: none;
+							}
+						}
+					}
 				}
 
+				//____________________________
+				// モディファイア
+				//____________________________
 				&.-is-favorite {
 					background-color: rgba($yellow, 0.2);
 				}
@@ -149,83 +174,12 @@
 
 		td ,
 		th {
-			font-size: responsiveValue(1.6rem, 1.2rem);
+			font-size: 1.6rem;
 			white-space: nowrap;
 			border-bottom: 0.1rem solid $lihtgray_c9c;
-		}
-	}
-
-	.suumotable__swiperWrap {
-		$swiper_width_pc: 30rem;
-		$swiper_width_sp: 18rem;
-		position: relative;
-		max-width: $swiper_width_pc;
-		overflow: hidden;
-
-		@media #{$tab} {
-			max-width: $swiper_width_sp;
-		}
-
-		.suumotable__swiperMagnifiy {
-			position: absolute;
-			right: 0.8rem;
-			bottom: 0.8rem;
-			z-index: 10;
-			width: 3rem;
-			transition: 0.3s;
-			opacity: 0.7;
-
-			&:hover {
-				cursor: pointer;
-				opacity: 1;
-			}
-		}
-
-		.swiper-slide {
-			@include flex;
-			align-items: center;
-			justify-content: center;
-		}
-
-		.suumotable__swiperFigure {
-			@include flex;
-			align-items: center;
-			justify-content: center;
-			width: calc(#{$swiper_width_pc} - 4rem);
-			height: calc(#{$swiper_width_pc} - 4rem);
 
 			@media #{$tab} {
-				width: calc(#{$swiper_width_sp} - 4rem);
-				height: calc(#{$swiper_width_sp} - 4rem);
-			}
-
-			& > img {
-				max-width: 100%;
-				max-height: 100%;
-			}
-		}
-
-		.suumotable__swiperButton {
-			position: absolute;
-			top: 50%;
-			left: 0;
-			width: auto;
-			height: auto;
-			transform: translateY(-50%);
-
-			&::before {
-				display: inline-block;
-				color: $suumo_primary;
-				content: '◀︎';
-			}
-
-			&.swiper-button-next {
-				right: 0;
-				left: auto;
-
-				&::before {
-					content: '▶︎';
-				}
+				font-size: 1.2rem;
 			}
 		}
 	}

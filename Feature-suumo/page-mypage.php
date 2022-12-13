@@ -43,30 +43,28 @@ get_header(); ?>
 						<input type="hidden" name="user_id" value="<?php echo esc_attr($user_id) ?>">
 
 						<?php suumo_mypage_title('ユーザー基本情報') ?>
-						<table class="pageMypageTable">
-							<tr>
-								<th>ユーザーID</th>
-								<td><?php echo wp_kses_post($current_user->user_login) ?></td>
-							</tr>
 
-							<tr>
-								<th>Email</th>
-								<td><?php echo wp_kses_post($current_user->user_email) ?></td>
-							</tr>
-							<tr>
+						<dl class="pageMypageDl">
+							<dt>ユーザーID</dt>
+							<dd><?php echo wp_kses_post($current_user->user_login) ?></dd>
+						</dl>
 
-								<th>パスワード</th>
-								<td>
-									<?php suumo_button_type1([
-										'text' => 'パスワードを変更する',
-										'attr' => 'type=button onclick=show_password_input(event)',
-										'tag' => 'button',
-										'class' => '-color-reverse -small',
-									]) ?>
-								</td>
+						<dl class="pageMypageDl">
+							<dt>Email</dt>
+							<dd><?php echo wp_kses_post($current_user->user_email) ?></dd>
+						</dl>
 
-							</tr>
-						</table>
+						<dl class="pageMypageDl">
+							<dt>パスワード</dt>
+							<dd>
+								<?php suumo_button_type1([
+									'text' => 'パスワードを変更する',
+									'attr' => 'type=button onclick=show_password_input(event)',
+									'tag' => 'button',
+									'class' => '-color-reverse -small',
+								]) ?>
+							</dd>
+						</dl>
 
 
 						<div class="pageMypageBreak"></div>
@@ -75,14 +73,13 @@ get_header(); ?>
 						<?php $suumo_user_google_api_key = get_user_meta($user_id, 'suumo_user_google_api_key', true); ?>
 
 						<?php suumo_mypage_title('アプリケーション') ?>
-						<table class="pageMypageTable">
-							<tr>
-								<th>APIキー</th>
-								<td>
-									<input class="-reset" type="text" name="suumo_user_google_api_key" size="50" value="<?php echo esc_attr($suumo_user_google_api_key) ?>">
-								</td>
-							</tr>
-						</table>
+
+						<dl class="pageMypageDl">
+							<dt>APIキー</dt>
+							<dd>
+								<input class="-reset" type="text" name="suumo_user_google_api_key" size="50" value="<?php echo esc_attr($suumo_user_google_api_key) ?>">
+							</dd>
+						</dl>
 
 
 						<div class="pageMypageForm__buttonWrap">
@@ -104,7 +101,6 @@ get_header(); ?>
 						<table class="pageMypageTable -suumo-table-customize" id="suumoTableCustomize">
 							<tr>
 								<th>カラム名</th>
-								<th>住所</th>
 							</tr>
 
 							<?php Suumo_Mypage_Form::the_suumo_user_table_customs() ?>
