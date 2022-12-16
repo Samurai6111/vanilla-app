@@ -517,21 +517,6 @@ a {
     position: static;
   }
 }
-.pageSuumo .suumoTable tbody tr td.-images::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  content: "";
-  background-color: #ffffff;
-}
-@media only screen and (max-width:768px) {
-  .pageSuumo .suumoTable tbody tr td.-images::before {
-    display: none;
-  }
-}
 .pageSuumo .suumoTable tbody tr.-is-favorite {
   background-color: rgba(219, 140, 40, 0.2);
 }

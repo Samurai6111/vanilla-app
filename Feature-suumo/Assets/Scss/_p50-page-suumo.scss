@@ -145,21 +145,6 @@
 						@media #{$tab} {
 							position: static;
 						}
-
-						&::before {
-							position: absolute;
-							top: 0;
-							left: 0;
-							display: inline-block;
-							width: 100%;
-							height: 100%;
-							content: '';
-							background-color: $white_fff;
-
-							@media #{$tab} {
-								display: none;
-							}
-						}
 					}
 				}
 
