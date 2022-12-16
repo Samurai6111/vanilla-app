@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: サンプル
+ * Template Name: マップ
  * @package WordPress
  * @Template Post Type: post, page,
  * @subpackage Vanilla

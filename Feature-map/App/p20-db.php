@@ -3,7 +3,7 @@
 /**
  * suumo用のデータベーステーブルを作成
  */
-function create_db_table() {
+function map_create_db_table() {
 	global $wpdb;
 
 	$table_name = $wpdb->prefix . 'suumo';
@@ -20,7 +20,7 @@ function create_db_table() {
 /**
  * suumoのメタデータ用のデータベーステーブルを作成
  */
-function create_db_meta_table() {
+function map_create_db_meta_table() {
 	global $wpdb;
 
 	$table_name = $wpdb->prefix . 'suumometa';
@@ -35,20 +35,20 @@ function create_db_meta_table() {
 }
 
 
-function execute_db_creation() {
+function map_execute_db_creation() {
 
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 	dbDelta(create_db_table());
 	dbDelta(create_db_meta_table());
 }
 
-// add_action('init', 'execute_db_creation');
+// add_action('init', 'map_execute_db_creation');
 
 
 /**
  * suumo用のデータベーステーブルにカラムを追加する
  */
-function update_table_columns() {
+function map_update_table_columns() {
 	global $wpdb;
 
 	//= カラムの追加 ====
@@ -70,7 +70,7 @@ function update_table_columns() {
 	//= 順番の変更 ====
 	$wpdb->query("ALTER TABLE {$table_name} MODIFY user_id bigint(20) after ID");
 }
-add_action('init', 'update_table_columns');
+// add_action('init', 'map_update_table_columns');
 
 
 
@@ -78,7 +78,7 @@ add_action('init', 'update_table_columns');
 /**
  * テストの値を入れる
  */
-function insert_table_value() {
+function map_insert_table_value() {
 	global $wpdb;
 
 	$table_name = $wpdb->prefix . 'suumo';
@@ -111,7 +111,7 @@ function insert_table_value() {
 		)
 	);
 }
-add_action('init', 'insert_table_value');
+// add_action('init', 'map_insert_table_value');
 
 
 
@@ -122,7 +122,7 @@ add_action('init', 'insert_table_value');
 /**
  * suumoのメタデータ用のデータベーステーブルにカラムを追加する
  */
-function add_meta_table_columns() {
+function map_add_meta_table_columns() {
 	global $wpdb;
 
 	$table_name = $wpdb->prefix . 'suumometa';
@@ -130,7 +130,7 @@ function add_meta_table_columns() {
 	$wpdb->query("ALTER TABLE {$table_name} ADD meta_key varchar(255) NULL");
 	$wpdb->query("ALTER TABLE {$table_name} ADD meta_value varchar(255) NULL");
 }
-// add_action('init', 'add_meta_table_columns');
+// add_action('init', 'map_add_meta_table_columns');
 
 /**
 * suumoのmetaデータを取得する関数
@@ -138,7 +138,7 @@ function add_meta_table_columns() {
 * @param $id
 * @param $meta_key
 */
-function get_meta($id, $meta_key) {
+function map_get_meta($id, $meta_key) {
 	global $wpdb;
 	$suumometa_table = $wpdb->prefix . 'suumometa';
 
@@ -158,7 +158,7 @@ function get_meta($id, $meta_key) {
 * @param $meta_key
 * @param $meta_value
 */
-function update_meta($id, $meta_key, $meta_value) {
+function map_update_meta($id, $meta_key, $meta_value) {
 	global $wpdb;
 	$suumometa_table = $wpdb->prefix . 'suumometa';
 

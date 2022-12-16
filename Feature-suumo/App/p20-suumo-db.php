@@ -35,14 +35,14 @@ function suumo_create_db_meta_table() {
 }
 
 
-function execute_db_creation() {
+function suumo_execute_db_creation() {
 
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 	dbDelta(suumo_create_db_table());
 	dbDelta(suumo_create_db_meta_table());
 }
 
-add_action('init', 'execute_db_creation');
+add_action('init', 'suumo_execute_db_creation');
 
 
 /**

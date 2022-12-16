@@ -1,8 +1,8 @@
 <?php
 add_action('init', function () {
 	$post_type = 'page';
-	$post_slug = 'sample';
-	$post_title = 'スーモ 物件一覧';
+	$post_slug = 'map';
+	$post_title = 'マップ';
 	$post_content = '';
 
 	if (!vanilla_the_slug_exists($post_slug)) {
@@ -20,7 +20,7 @@ add_action('init', function () {
 		);
 		$inserted_page_id = wp_insert_post($post_array);
 		// ---------- メタ情報追加 ----------
-		$inserted_page_templateFile_path = "Feature-sample/page-sample.php";
+		$inserted_page_templateFile_path = "Feature-map/page-map-form.php";
 		update_post_meta($inserted_page_id, "_wp_page_template", $inserted_page_templateFile_path);
 	}
 });
