@@ -1,0 +1,219 @@
+@charset 'UTF-8';
+
+.pageSuumo {
+	@include suumo_grd;
+
+	// background-color: $lightgray;
+	.suumoTableContainer {
+		width: 100%;
+		max-width: 100%;
+		max-height: 80vh;
+		overflow: scroll;
+	}
+
+	//____________________________
+	// suumo table
+	//____________________________
+	.classsuumoTable__actions {
+		@include flex;
+		align-items: center;
+		gap: 1.6rem;
+
+		select {
+			padding: 0.2rem 0.8rem;
+			color: $suumo_primary;
+			font-size: 1.6rem;
+			font-weight: 600;
+			border: 0.1rem solid $suumo_primary;
+			border-radius: 0.4rem;
+
+			@media #{$tab} {
+				font-size: 1.4rem;
+			}
+		}
+	}
+
+	.suumoTable {
+		width: 100%;
+
+		thead {
+			tr {
+				th {
+					position: sticky;
+					top: 0;
+					z-index: 100;
+					padding: 0.6rem 1.2rem;
+					color: $navy_000;
+					vertical-align: middle;
+					background-color: $white_fff;
+					border-bottom: none;
+
+					@media #{$tab} {
+						padding: 0.6rem;
+					}
+
+					&::before {
+						position: absolute;
+						top: 0.4rem;
+						left: 0;
+						display: inline-block;
+						width: calc(100% + 0.4rem);
+						height: 100%;
+						max-width: calc(100% + 0.4rem);
+						content: '';
+						background-color: $white_fff;
+						// box-shadow: 0 0 0.8rem rgba($black_000, 0.2);
+						border-bottom: 0.2rem solid $lightgray;
+					}
+
+					.suumoTable__sortButtonWrap {
+						button {
+							position: relative;
+						}
+					}
+
+					.suumoTable__thText {
+						position: relative;
+
+						&.-sort {
+							padding-right: 3rem;
+
+							&::after {
+								position: absolute;
+								top: 50%;
+								right: 1rem;
+								display: inline-block;
+								content: '▼';
+								font-size: 60%;
+								line-height: 1;
+								transform: translate(0, -50%);
+								opacity: 0.7;
+							}
+
+							&.-desc {
+								&::after {
+									content: '▲';
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		tbody {
+			tr {
+				transition: 0.3s;
+
+				&:first-child {
+					td {
+						padding-top: 4rem;
+					}
+				}
+
+				&.-data-inserted {
+					background-color: rgba($green_7fc, 0.3);
+				}
+
+				td {
+					padding: 0.6rem 2rem 0.6rem 1.4rem;
+					vertical-align: middle;
+
+					@media #{$tab} {
+						padding: 0.6rem 1.2rem 0.6rem 0.6rem;
+					}
+
+					a {
+						text-decoration: underline;
+					}
+
+					.suumoTable__checkboxFirst {
+						@include flex;
+						align-items: center;
+						justify-content: center;
+					}
+
+					//____________________________
+					// モディファイア
+					//____________________________
+					&.-images {
+						position: sticky;
+						top: auto;
+						left: 0;
+						z-index: 30;
+
+						@media #{$tab} {
+							position: static;
+						}
+					}
+				}
+
+				//____________________________
+				// モディファイア
+				//____________________________
+				&.-is-favorite {
+					background-color: rgba($yellow, 0.2);
+				}
+			}
+		}
+
+		td ,
+		th {
+			font-size: 1.6rem;
+			white-space: nowrap;
+			border-bottom: 0.1rem solid $lihtgray_c9c;
+
+			@media #{$tab} {
+				font-size: 1.2rem;
+			}
+		}
+	}
+
+	//____________________________
+	// suumo form
+	//____________________________
+	.suumoUrlFormContainer {
+		padding: 2rem;
+
+		.suumoUrlForm__title {
+			margin-bottom: 2rem;
+			color: $navy_0C0;
+			font-size: responsiveValue(2.4rem, 1.6rem);
+			font-weight: 600;
+			text-align: center;
+			;
+		}
+
+		.suumoUrlForm {
+			.suumoUrlForm__urlInput {
+				width: 100%;
+				font-size: responsiveValue(1.6rem, 1.2rem);
+			}
+
+			.suumoUrlForm__errorText {
+				margin-top: 0.4rem;
+				font-size: responsiveValue(1.6rem, 1.2rem);
+			}
+
+			.suumoUrlForm__buttonWrap {
+				@include flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				margin-top: responsiveValue(4rem, 2.4rem);
+			}
+
+			//____________________________
+			// モディファイア
+			//____________________________
+			&.-cancel {
+				.suumoUrlForm__buttonWrap {
+					margin-top: responsiveValue(1.6rem, 1.2rem);
+					color: rgba($black_000, 0.5);
+					font-size: responsiveValue(1.2rem, 1rem);
+					;
+				}
+			}
+		}
+	}
+}
