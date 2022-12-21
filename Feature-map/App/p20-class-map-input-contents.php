@@ -70,12 +70,25 @@ class Map_Input_Contents extends Vanilla_Form_Row_Input_Contents {
 					$name_attr = esc_attr("csv_data[{$index}][$i]");
 					$value_attr = esc_attr($value);
 					echo "<input type='hidden' name='{$name_attr}' value='{$value_attr}'>";
+
+					if (count($csv_data) === ($i + 1) && $index == 3) {
+						// $latlon_array = map_get_latlon($csv_data[$params['address_selection_index']]);
+
+					// 	$latitude_attr = esc_attr("csv_data[{$index}][latitude]");
+					// 	$latitude_value = $latlon_array["latitude"];
+					// 	$longitude_attr = esc_attr("csv_data[{$index}][longitude]");
+					// 	$longitude_value = $latlon_array["longitude"];
+
+					// 	echo "<input type='hidden' name='{$latitude_attr}' value='{$latitude_value}'>";
+					// 	echo "<input type='hidden' name='{$longitude_attr}' value='{$longitude_value}'>";
+					}
 				}
 			}
 		} else {
 			return false;
 		}
 	}
+
 
 	/**
 	 * URLパラメータ上のデータをhiddenのinputタグとして出力する

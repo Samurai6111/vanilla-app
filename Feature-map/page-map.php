@@ -11,21 +11,31 @@ get_header(); ?>
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/Feature-map/Assets/Css/style.css">
 
 <main class="pageMap -moving-bgc" id="pageMap">
-	<form action="<?php echo esc_url(home_url()); ?>" method="GET">
-		<?php
-
-		$params = vanilla_sanitize_array($_GET);
-		echo '<pre>';
-		var_dump($params[('csv_data')]);
-		echo '</pre>';
-		the_csv_hidden_input($params);
 
 
+<?php
 
-		?>
-		<button class="pageSuumo__button" type="submit">登録</button>
+function image_json_to_array($row) {
+	$row->images = json_decode($row->images);
+	return $row;
+}
 
-	</form>
+?>
+
+<div id="map"></div>
+
+
+<?php require_once(dirname(__FILE__) . "/js-page-map.php") ?>
+<?php
+global $current_user;
+$suumo_user_google_api_key = get_user_meta($current_user->ID, 'suumo_user_google_api_key', true);
+
+?>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr($suumo_user_google_api_key) ?>&callback=initMap" async defer></script>
+
+<!-- <?php require_once(get_theme_file_path() . "/Feature-suumo/c-suumo-modal.php") ?> -->
+<!-- <script src="<?php echo get_template_directory_uri(); ?>/Feature-suumo/Assets/Js/page-suumo.js"></script> -->
+
 </main>
 
 
