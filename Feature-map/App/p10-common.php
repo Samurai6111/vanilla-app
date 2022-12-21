@@ -51,11 +51,11 @@ function uploaded_csv_to_array($input_name) {
 }
 
 /**
-* 配列をURLのパラメータに変換する
-*
-* @param array $array
-* @return
-*/
+ * 配列をURLのパラメータに変換する
+ *
+ * @param array $array
+ * @return
+ */
 function array_to_url_param($array) {
 	if (is_array($array)) {
 		$result = http_build_query($array);
