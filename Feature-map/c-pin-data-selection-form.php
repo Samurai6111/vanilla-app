@@ -21,19 +21,7 @@
 
 									<?php
 
-									$latlon_array = map_get_latlon('〒859-3292 長崎県佐世保市ハウステンボス町1-1');
-
-									echo '<pre>';
-									var_dump($csv_data[$params['address_selection_index']]);
-									echo '</pre>';
-
-									echo '<pre>';
-									var_dump($latlon_array);
-									echo '</pre>';
-
 									$vanilla_form = new Vanilla_Form();
-
-
 
 									Map_Input_Contents::hidden_input('status', 'show-result');
 									Map_Input_Contents::param_hidden_input($params, 'address_selection_index');

@@ -23,7 +23,6 @@
 		$response = curl_exec($ch);
 		curl_close($ch);
 		$response_a = json_decode($response);
-		echo $response;
 
 		$lat = $response_a->results[0]->geometry->location->lat;
 		$long = $response_a->results[0]->geometry->location->lng;

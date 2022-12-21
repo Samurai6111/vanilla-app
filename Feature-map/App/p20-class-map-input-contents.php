@@ -25,7 +25,7 @@ class Map_Input_Contents extends Vanilla_Form_Row_Input_Contents {
 				</div>
 			<?php } ?>
 		</div>
-<?php
+	<?php
 	}
 
 	/**
@@ -34,7 +34,7 @@ class Map_Input_Contents extends Vanilla_Form_Row_Input_Contents {
 	function pin_data_selection() {
 		$csv_data_array = vanilla_sanitize_array($_GET)['csv_data'][0];
 		unset($csv_data_array[$_GET['address_selection_index']]);
-?>
+	?>
 		<div class="vanillaForm__inputs">
 			<?php foreach ($csv_data_array as $index => $text) { ?>
 				<div class="vanillaForm__input">
@@ -71,16 +71,16 @@ class Map_Input_Contents extends Vanilla_Form_Row_Input_Contents {
 					$value_attr = esc_attr($value);
 					echo "<input type='hidden' name='{$name_attr}' value='{$value_attr}'>";
 
-					if (count($csv_data) === ($i + 1) && $index == 3) {
-						// $latlon_array = map_get_latlon($csv_data[$params['address_selection_index']]);
+					if (count($csv_data) === ($i + 1)) {
+						$latlon_array = map_get_latlon($csv_data[$params['address_selection_index']]);
 
-					// 	$latitude_attr = esc_attr("csv_data[{$index}][latitude]");
-					// 	$latitude_value = $latlon_array["latitude"];
-					// 	$longitude_attr = esc_attr("csv_data[{$index}][longitude]");
-					// 	$longitude_value = $latlon_array["longitude"];
+						$latitude_attr = esc_attr("csv_data[{$index}][latitude]");
+						$latitude_value = $latlon_array["latitude"];
+						$longitude_attr = esc_attr("csv_data[{$index}][longitude]");
+						$longitude_value = $latlon_array["longitude"];
 
-					// 	echo "<input type='hidden' name='{$latitude_attr}' value='{$latitude_value}'>";
-					// 	echo "<input type='hidden' name='{$longitude_attr}' value='{$longitude_value}'>";
+						echo "<input type='hidden' name='{$latitude_attr}' value='{$latitude_value}'>";
+						echo "<input type='hidden' name='{$longitude_attr}' value='{$longitude_value}'>";
 					}
 				}
 			}
@@ -96,8 +96,7 @@ class Map_Input_Contents extends Vanilla_Form_Row_Input_Contents {
 	 * @param array $params csvの配列データ
 	 * @return
 	 */
-	static function param_hidden_input($params, $key)
-	{
+	static function param_hidden_input($params, $key) {
 		if (!empty($params) && isset($params[$key])) {
 			echo "<input type='hidden' name='{$key}' value='{$params[$key]}'>";
 		} else {

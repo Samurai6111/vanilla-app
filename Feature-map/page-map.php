@@ -12,15 +12,16 @@ get_header(); ?>
 
 <main class="pageMap -moving-bgc" id="pageMap">
 
-
-<?php
-
-function image_json_to_array($row) {
-	$row->images = json_decode($row->images);
-	return $row;
-}
-
-?>
+<style>
+	#map {
+		width: 100vw;
+		height: 100vh;
+	}
+	.pinInfo * {
+		word-break: keep-all;
+		white-space:nowrap;
+	}
+</style>
 
 <div id="map"></div>
 
