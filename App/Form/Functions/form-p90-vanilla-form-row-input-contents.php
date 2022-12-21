@@ -3,10 +3,39 @@
 class Vanilla_Form_Row_Input_Contents {
 
 	//--------------------------------------------------
+	// map_address_selection
+	//--------------------------------------------------
+	function map_address_selection() {
+		$csv_data_array = vanilla_sanitize_array($_GET)['csv_data'][0];
+
+?>
+		<div class="vanillaForm__inputs">
+			<?php foreach ($csv_data_array as $index => $text) { ?>
+				<div class="vanillaForm__input">
+					<?php
+
+					Vanilla_Form_Row_Input::radio(
+						[
+							'name' => 'address_selection',
+							'value' => $index,
+							'text' => $text,
+							'id' => $text,
+							'attr' => '',
+						],
+						// '-user-login'
+					);
+					?>
+				</div>
+			<?php } ?>
+		</div>
+	<?php
+	}
+
+	//--------------------------------------------------
 	// ユーザーログイン
 	//--------------------------------------------------
 	function user_login() {
-?>
+	?>
 		<div class="vanillaForm__inputs">
 			<div class="vanillaForm__input">
 				<?php Vanilla_Form_Row_Input::text(

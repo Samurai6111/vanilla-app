@@ -10,6 +10,7 @@
     //対象外とするフォルダを指定
     "**/node_modules/**",
     ".vscode/**",
-    "**/Feature-suumo/**"
+    "**/Feature-suumo/**",
+    "**/Feature-map/**",
   ],
 }
