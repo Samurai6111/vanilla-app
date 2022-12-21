@@ -129,7 +129,9 @@ $one_margin: calc(calc(100vw - #{$inner}) / 2);
 */
 
 @function responsiveValue($pc, $sp) {
-	@return clamp(#{$sp}, vw($pc), #{$pc});
+	$vw: vw($pc);
+
+	@return clamp(#{$sp}, #{$vw}, #{$pc});
 }
 
 

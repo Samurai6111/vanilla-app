@@ -895,21 +895,21 @@ body {
 
 .inner {
   width: 100%;
-  max-width: clamp(calc(37.5rem + 4rem), vw($pc), 102rem);
+  max-width: clamp(calc(37.5rem + 4rem), 79.6875vw, 102rem);
   padding-right: 2rem;
   padding-left: 2rem;
   margin: 0 auto;
 }
 .inner.-tight {
   max-width: 108.8rem;
-  max-width: clamp(calc(37.5rem + 4rem), vw($pc), 120rem);
+  max-width: clamp(calc(37.5rem + 4rem), 93.75vw, 120rem);
 }
 .inner.-wide {
   max-width: 120rem;
-  max-width: clamp(calc(37.5rem + 4rem), vw($pc), 128rem);
+  max-width: clamp(calc(37.5rem + 4rem), 100vw, 128rem);
 }
 .inner.-header {
-  max-width: clamp(calc(37.5rem + 4rem), vw($pc), 132rem);
+  max-width: clamp(calc(37.5rem + 4rem), 103.125vw, 132rem);
 }
 .inner.-no-padding {
   padding-right: 0;
@@ -1787,7 +1787,7 @@ body {
 
 .breadcrumb {
   margin-top: 1rem;
-  margin-bottom: clamp(3rem, vw($pc), 5rem);
+  margin-bottom: clamp(3rem, 3.90625vw, 5rem);
   overflow-x: scroll;
 }
 .breadcrumb .breadcrumb__list {
@@ -1846,8 +1846,8 @@ body {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: clamp(3rem, vw($pc), 4rem);
-  margin-bottom: clamp(10rem, vw($pc), 15rem);
+  gap: clamp(3rem, 3.125vw, 4rem);
+  margin-bottom: clamp(10rem, 11.71875vw, 15rem);
 }
 .vanillaForm .vanillaForm__rowList .vanillaForm__rowItem {
   display: -webkit-box;
@@ -1875,7 +1875,7 @@ body {
   }
 }
 .vanillaForm .vanillaForm__rowList .vanillaForm__rowItem .vanillaForm__label .vanillaForm__labelText {
-  font-size: clamp(1.4rem, vw($pc), 1.5rem);
+  font-size: clamp(1.4rem, 1.171875vw, 1.5rem);
   font-weight: 600;
   letter-spacing: 0.05em;
 }
@@ -1918,7 +1918,7 @@ body {
   display: inline-block;
   width: 100%;
   margin-top: 0.9rem;
-  font-size: clamp(1.4rem, vw($pc), 1.5rem);
+  font-size: clamp(1.4rem, 1.171875vw, 1.5rem);
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0;
@@ -2006,13 +2006,13 @@ body {
   border-radius: 0.4rem;
 }
 .vanillaForm .vanillaFormPrivacy .vanillaFormPrivacy__title {
-  margin-bottom: clamp(2.2rem, vw($pc), 3.6rem);
-  font-size: clamp(1.4rem, vw($pc), 1.8rem);
+  margin-bottom: clamp(2.2rem, 2.8125vw, 3.6rem);
+  font-size: clamp(1.4rem, 1.40625vw, 1.8rem);
   font-weight: 600;
   text-align: center;
 }
 .vanillaForm .vanillaFormPrivacy .vanillaFormPrivacy__text {
-  font-size: clamp(1.2rem, vw($pc), 1.4rem);
+  font-size: clamp(1.2rem, 1.09375vw, 1.4rem);
   font-weight: 500;
 }
 .vanillaForm .vanillaForm__privacyCheckboxWrap {
@@ -2030,7 +2030,7 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   margin-top: 2rem;
-  margin-bottom: clamp(5.4rem, vw($pc), 8rem);
+  margin-bottom: clamp(5.4rem, 6.25vw, 8rem);
 }
 .vanillaForm .vanillaForm__privacyCheckboxWrap .vanillaForm__inputs {
   position: relative;
@@ -2044,7 +2044,7 @@ body {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: clamp(1.2rem, vw($pc), 1.5rem);
+  font-size: clamp(1.2rem, 1.171875vw, 1.5rem);
   font-weight: 600;
   letter-spacing: 0.04em;
 }
@@ -2062,7 +2062,7 @@ body {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: clamp(1.5rem, vw($pc), 2rem);
+  gap: clamp(1.5rem, 1.5625vw, 2rem);
 }
 .vanillaForm .vanillaForm__buttonWrap > .buttonType1 {
   height: 5rem;
@@ -2076,7 +2076,7 @@ body {
   max-width: 50rem;
 }
 .vanillaForm .vanillaForm__buttonWrap > .buttonType1.-large .buttonType1__text {
-  font-size: clamp(1.4rem, vw($pc), 2rem);
+  font-size: clamp(1.4rem, 1.5625vw, 2rem);
 }
 .vanillaForm.-error .vanillaForm__rowList .vanillaForm__inputWrap .vanillaForm__inputs {
   -webkit-box-orient: vertical;
@@ -2095,12 +2095,12 @@ body {
   max-width: 79rem;
 }
 .vanillaForm.-confirm .vanillaForm__rowListCaption {
-  margin-bottom: clamp(7rem, vw($pc), 10rem);
-  font-size: clamp(1.4rem, vw($pc), 1.8rem);
+  margin-bottom: clamp(7rem, 7.8125vw, 10rem);
+  font-size: clamp(1.4rem, 1.40625vw, 1.8rem);
 }
 .vanillaForm.-confirm .vanillaForm__rowList {
   gap: 0;
-  margin-bottom: clamp(7rem, vw($pc), 9rem);
+  margin-bottom: clamp(7rem, 7.03125vw, 9rem);
   border-top: 0.1rem solid #dfe2e9;
 }
 .vanillaForm.-confirm .vanillaForm__rowList .vanillaForm__rowItem {
@@ -2122,7 +2122,7 @@ body {
   border-left: 1px solid #dfe2e9;
 }
 .vanillaForm.-confirm .vanillaForm__rowList .vanillaForm__rowItem .vanillaForm__inputWrap .vanillaForm__output {
-  font-size: clamp(1.4rem, vw($pc), 1.5rem);
+  font-size: clamp(1.4rem, 1.171875vw, 1.5rem);
   font-weight: 500;
   letter-spacing: 0.05em;
 }
@@ -2150,7 +2150,7 @@ body {
 }
 .vanillaForm.-confirm .vanillaForm__confirmText {
   margin-bottom: 3rem;
-  font-size: clamp(1.4rem, vw($pc), 1.5rem);
+  font-size: clamp(1.4rem, 1.171875vw, 1.5rem);
   font-weight: 500;
   letter-spacing: 0.03em;
 }
