@@ -1,10 +1,9 @@
-<!-- <header class="headerSuumo">
-	<figure class="headerSuumo__logoWrap">
-		<img src="" alt="" class="headerSuumo__logo">
-	</figure>
-
-</header> -->
 <?php
+
+header("Set-Cookie: cross-site-cookie=whatever; SameSite=Lax");
+
+
+
 if (!is_user_logged_in()) {
 	wp_safe_redirect('/login/?login_redirect_url=' . esc_url(get_permalink()));
 

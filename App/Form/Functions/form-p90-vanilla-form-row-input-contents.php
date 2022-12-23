@@ -6,7 +6,7 @@ class Vanilla_Form_Row_Input_Contents {
 	// ユーザーログイン
 	//--------------------------------------------------
 	function user_login() {
-?>
+	?>
 		<div class="vanillaForm__inputs">
 			<div class="vanillaForm__input">
 				<?php Vanilla_Form_Row_Input::text(

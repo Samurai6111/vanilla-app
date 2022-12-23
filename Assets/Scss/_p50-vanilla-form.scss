@@ -10,13 +10,11 @@
 	.vanillaForm__rowList {
 		@include flex;
 		flex-direction: column;
-		margin-bottom: responsiveValue(15rem, 10rem);
-
 		gap: responsiveValue(4rem, 3rem);
+		margin-bottom: responsiveValue(15rem, 10rem);
 
 		.vanillaForm__rowItem {
 			@include flex;
-
 			gap: 1rem;
 
 			@media #{$tab} {
@@ -49,7 +47,7 @@
 					select ,
 					textarea {
 						padding: 0.4rem 0.8rem;
-						border: 0.1rem solid $lightgray_ddd;
+						border: 0.1rem solid $lightgray;
 						border-radius: 0.4rem;
 					}
 
@@ -94,9 +92,8 @@
 
 					@media #{$tab} {
 						flex-direction: row-reverse;
-						justify-content: flex-end;
-
 						gap: 1.6rem;
+						justify-content: flex-end;
 					}
 
 					&::after {
@@ -142,6 +139,14 @@
 				}
 			}
 
+			&.-input-flex-aic {
+				.vanillaForm__input {
+					@include flex;
+					align-items: center;
+					gap: 0.8rem;
+				}
+			}
+
 			&.-gap-10 {
 				.vanillaForm__inputs {
 					gap: 1rem;
@@ -152,7 +157,7 @@
 
 	.vanillaFormPrivacy {
 		padding: 3.2rem 3rem;
-		border: 0.15rem solid $lightgray_ddd;
+		border: 0.15rem solid $lightgray;
 		border-radius: 0.4rem;
 
 		.vanillaFormPrivacy__title {
@@ -192,7 +197,6 @@
 		@include flex;
 		align-items: center;
 		flex-direction: column;
-
 		gap: responsiveValue(2rem, 1.5rem);
 
 		& > .buttonType1 {
@@ -244,20 +248,19 @@
 		}
 
 		.vanillaForm__rowList {
-			margin-bottom: responsiveValue(9rem, 7rem);
-			border-top: 0.1rem solid $lightgray_ddd;
-
 			gap: 0;
+			margin-bottom: responsiveValue(9rem, 7rem);
+			border-top: 0.1rem solid $lightgray;
 
 			.vanillaForm__rowItem {
 				padding: 0 3rem;
 				margin-bottom: 0;
-				border-bottom: 1px solid $lightgray_ddd;
+				border-bottom: 1px solid $lightgray;
 
 				.vanillaForm__label {
 					padding: 2.2rem 0;
 					margin-right: 0.5rem;
-					border-right: 1px solid $lightgray_ddd;
+					border-right: 1px solid $lightgray;
 
 					.vanillaForm__labelText {
 						&::after {
@@ -269,7 +272,7 @@
 				.vanillaForm__inputWrap {
 					position: relative;
 					padding: 2.2rem 5rem;
-					border-left: 1px solid $lightgray_ddd;
+					border-left: 1px solid $lightgray;
 
 					.vanillaForm__output {
 						font-size: responsiveValue(1.5rem, 1.4rem);

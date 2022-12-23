@@ -20,6 +20,7 @@ get_header(); ?>
 		</h1>
 	</div>
 
+
 	<div class="inner">
 
 		<div class="pageFrontContents">
