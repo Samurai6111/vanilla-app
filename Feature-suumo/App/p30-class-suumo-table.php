@@ -32,68 +32,8 @@ class Suumo_Table {
 			'経度',
 		];
 		$this->table_columns = array_combine($this->colummn_slugs, $this->column_names);
-
-		if (is_admin() && current_user_can('administrator')) {
-			// メニュー追加
-			add_action('admin_menu', [$this, 'set_plugin_menu']);
-			add_action('admin_init', [$this, 'save_config']);
-		}
 	}
 
-	function set_plugin_menu() {
-		add_menu_page(
-			'Summo',           /* ページタイトル*/
-			'Suumo',           /* メニュータイトル */
-			'manage_options',         /* 権限 */
-			self::MENU_SLUG,    /* ページを開いたときのURL */
-			[$this, 'suumo_setting_page'],       /* メニューに紐づく画面を描画するcallback関数 */
-			'dashicons-format-gallery', /* アイコン see: https://developer.wordpress.org/resource/dashicons/#awards */
-			99                          /* 表示位置のオフセット */
-		);
-	}
-
-	//========================
-	//設定画面の項目データベースに保存する
-	//========================
-	function save_config() {
-
-		//== nonceで設定したcredentialのチェック ========
-		if (isset($_POST[self::CREDENTIAL_NAME]) && $_POST[self::CREDENTIAL_NAME]) {
-			if (check_admin_referer(self::CREDENTIAL_ACTION, self::CREDENTIAL_NAME)) {
-
-				update_option('google_api_key', $_POST['google_api_key']);
-
-				wp_safe_redirect(menu_page_url(self::MENU_SLUG));
-			}
-		}
-	}
-
-	function suumo_setting_page() { ?>
-		<div class="wrap">
-			<h1><b>Suumo設定</b></h1>
-
-			<form action="" method='post' id="my-submenu-form">
-
-				<?php wp_nonce_field(self::CREDENTIAL_ACTION, self::CREDENTIAL_NAME) ?>
-
-				<h2>Suumo</h2>
-				<table class="form-table">
-					<tr>
-						<th>
-							<label for="google_api_key">Google Api Key</label>
-						</th>
-						<td>
-							<input type="text" name="google_api_key" id="google_api_key" value="<?php echo esc_attr(get_option('google_api_key')) ?>">
-						</td>
-					</tr>
-				</table>
-				<input type='submit' value='保存' class='button button-primary button-large'>
-				</p>
-			</form>
-		</div>
-	<?php
-
-	}
 
 	/**
 	 * wp_suumoのテーブルからカラム名を配列で取得する

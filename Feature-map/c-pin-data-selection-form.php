@@ -20,7 +20,6 @@
 								<ul class="vanillaForm__rowList">
 
 									<?php
-
 									$vanilla_form = new Vanilla_Form();
 
 									Map_Input_Contents::hidden_input('status', 'show-result');
@@ -34,15 +33,6 @@
 									);
 									?>
 								</ul>
-
-								<?php if (!empty($insert_suumo_data_validation)) { ?>
-									<p class="mapForm__errorText -color-red">
-										<?php echo esc_html($insert_suumo_data_validation['suumo_url']); ?>
-									</p>
-								<?php } else { ?>
-									<br>
-								<?php } ?>
-								<br><br>
 
 								<div class="mapForm__buttonWrap">
 									<button class="pageSuumo__button" type="submit">登録</button>
