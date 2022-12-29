@@ -68,20 +68,16 @@ class Map_Input_Contents extends Vanilla_Form_Row_Input_Contents {
 		if (!empty($params) && isset($params['csv_data'])) {
 			$csv_data_array = $params['csv_data'];
 
-			$i = -1;
 			foreach ($csv_data_array as $index => $csv_data) {
+				$i = 0;
 				foreach ($csv_data as $key => $value) {
 					++$i;
 					$name_attr = esc_attr("csv_data[{$index}][$key]");
 					$value_attr = esc_attr($value);
 					echo "<input type='hidden' name='{$name_attr}' value='{$value_attr}'>";
 
-					if (count($csv_data) === $i) {
+					if (count($csv_data) === $i && $index !== 0) {
 						$latlon_array = map_get_latlon($csv_data[$params['address_selection_index']]);
-						echo '<pre>';
-						var_dump($csv_data[$params['address_selection_index']]);
-						var_dump($latlon_array);
-						echo '</pre>';
 
 						$latitude_attr = esc_attr("csv_data[{$index}][latitude]");
 						$latitude_value = $latlon_array["latitude"];

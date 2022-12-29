@@ -39,7 +39,7 @@ function vanilla_custom_admin_menu_save_config()
 	if (isset($_POST[$credential_key]) && $_POST[$credential_key]) {
 		if (check_admin_referer($credential_action, $credential_key)) {
 
-			update_option('google_api_key', $_POST['google_api_key']);
+			update_option('vanilla_app_google_api_key', $_POST['vanilla_app_google_api_key']);
 
 			wp_safe_redirect(menu_page_url($setting_menu_slug));
 		}
@@ -61,10 +61,10 @@ function vanilla_custom_admin_page()
 			<table class="form-table">
 				<tr>
 					<th>
-						<label for="google_api_key">Google Api Key</label>
+						<label for="vanilla_app_google_api_key">Google Api Key</label>
 					</th>
 					<td>
-						<input type="text" name="google_api_key" id="google_api_key" value="<?php echo esc_attr(get_option('google_api_key')) ?>">
+						<input type="text" name="vanilla_app_google_api_key" id="vanilla_app_google_api_key" value="<?php echo esc_attr(get_option('vanilla_app_google_api_key')) ?>">
 					</td>
 				</tr>
 			</table>

@@ -8,7 +8,7 @@
 	function map_get_latlon($address) {
 		global $current_user;
 
-		$google_maps_key = get_user_meta($current_user->ID, 'suumo_user_google_api_key', true);
+		$google_maps_key = get_option('vanilla_app_google_api_key');
 		$latlon_array = array();
 		$region = 'DK';
 		$url =    'https://maps.google.com/maps/api/geocode/json?address=' . $address . '&sensor=false&region=' . $region . '&key=' . $google_maps_key;

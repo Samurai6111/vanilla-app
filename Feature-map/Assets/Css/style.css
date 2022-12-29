@@ -31,23 +31,36 @@
 *
 * @param $height 横幅100の時の縦の割合 *「%」で指定
 */
+.pinContents table {
+  margin-bottom: 0.8rem;
+}
+.pinContents table tr td,
+.pinContents table tr th {
+  vertical-align: middle;
+  padding: 0.4rem;
+}
+.pinContents .pinContent__mapUrl {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
 .mapFormContainer {
   padding: 2rem;
 }
 .mapFormContainer .mapForm__title {
   margin-bottom: 2rem;
   color: #0c0033;
-  font-size: clamp(1.6rem, vw($pc), 2.4rem);
+  font-size: clamp(1.6rem, 1.875vw, 2.4rem);
   font-weight: 600;
   text-align: center;
 }
 .mapFormContainer .mapForm .mapForm__urlInput {
   width: 100%;
-  font-size: clamp(1.2rem, vw($pc), 1.6rem);
+  font-size: clamp(1.2rem, 1.25vw, 1.6rem);
 }
 .mapFormContainer .mapForm .mapForm__errorText {
   margin-top: 0.4rem;
-  font-size: clamp(1.2rem, vw($pc), 1.6rem);
+  font-size: clamp(1.2rem, 1.25vw, 1.6rem);
 }
 .mapFormContainer .mapForm .mapForm__buttonWrap {
   display: -webkit-box;
@@ -63,10 +76,10 @@
       -ms-flex-pack: center;
           justify-content: center;
   width: 100%;
-  margin-top: clamp(2.4rem, vw($pc), 4rem);
+  margin-top: clamp(2.4rem, 3.125vw, 4rem);
 }
 .mapFormContainer .mapForm.-cancel .mapForm__buttonWrap {
-  margin-top: clamp(1.2rem, vw($pc), 1.6rem);
+  margin-top: clamp(1.2rem, 1.25vw, 1.6rem);
   color: rgba(0, 0, 0, 0.5);
-  font-size: clamp(1rem, vw($pc), 1.2rem);
+  font-size: clamp(1rem, 0.9375vw, 1.2rem);
 }
