@@ -27,7 +27,6 @@ function vanilla_custom_admin_menu()
 	);
 }
 
-// AIzaSyAYPh_8YfpapP_jLOagZApdWeLDyL88DWM
 //========================
 //設定画面の項目データベースに保存する
 //========================
