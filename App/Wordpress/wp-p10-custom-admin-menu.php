@@ -45,6 +45,7 @@ function vanilla_custom_admin_menu_save_config()
 	}
 }
 
+
 function vanilla_custom_admin_page()
 {
 	global $setting_menu_slug, $credential_action, $credential_key;
