@@ -29,15 +29,17 @@ get_header(); ?>
 <?php require_once(dirname(__FILE__) . "/js-page-map.php") ?>
 <?php
 global $current_user;
-$suumo_user_google_api_key = get_user_meta($current_user->ID, 'suumo_user_google_api_key', true);
+$google_maps_key = get_option('vanilla_app_google_api_key');
 
 ?>
-<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr($suumo_user_google_api_key) ?>&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr($google_maps_key) ?>&callback=initMap" async defer></script>
 
 <!-- <?php require_once(get_theme_file_path() . "/Feature-suumo/c-suumo-modal.php") ?> -->
 <!-- <script src="<?php echo get_template_directory_uri(); ?>/Feature-suumo/Assets/Js/page-suumo.js"></script> -->
 
 </main>
+
+
 
 
 

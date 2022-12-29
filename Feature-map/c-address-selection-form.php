@@ -16,10 +16,6 @@
 							<form action="<?php echo esc_url(vanilla_get_current_link()) ?>" class="mapForm vanillaForm" id="mapForm" method="GET">
 
 							<ul class="vanillaForm__rowList">
-
-							<input type="hidden" name="" value="">
-
-
 								<?php
 
 								$vanilla_form = new Vanilla_Form();

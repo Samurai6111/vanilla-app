@@ -1,7 +1,7 @@
 <?php
-	$params = vanilla_sanitize_array($_GET);
+$params = vanilla_sanitize_array($_GET);
 if (isset($params['csv_data'])) {
-	//= csvデータ ====
+	//= ラベルデータ ====
 	$label_array = $params['csv_data'][0];
 	$label_json = json_encode($label_array);
 
@@ -13,9 +13,9 @@ if (isset($params['csv_data'])) {
 	//= pinデータ ====
 	$pin_data_selection_index_array = $params['pin_data_selection_index_array'];
 	$pin_data_index_json = json_encode($pin_data_selection_index_array);
-?>
+	?>
 
-<script>
+	<script>
 	var map;
 	var marker = [];
 	var infoWindow = [];
@@ -31,10 +31,10 @@ if (isset($params['csv_data'])) {
 	}
 
 	/** --------------------------------
-	* URLのパラメータの値を取得する
-	*
-	* @param key
-	*/
+	 * URLのパラメータの値を取得する
+	 *
+	 * @param key
+	 */
 	function get_param(key) {
 		let current_url = '<?php echo esc_url(get_permalink()); ?>'
 		let url = new URL(current_url);
@@ -43,10 +43,10 @@ if (isset($params['csv_data'])) {
 	}
 
 	/** --------------------------------
-	* ピンでーたの配列
-	*
-	* @param
-	*/
+	 * ピンでーたの配列
+	 *
+	 * @param
+	 */
 	function get_pin_contents(value) {
 		//== csvデータ ========
 		let pin_data_index_json = '<?php echo $pin_data_index_json ?>'
@@ -55,16 +55,28 @@ if (isset($params['csv_data'])) {
 		//== ラベル ========
 		let label_json = '<?php echo $label_json ?>'
 		let label_array = JSON.parse(label_json)
-
-		let html = '<table>'
+		let html = '<div class="pinContents">'
+		html += '<table>'
 		pin_data_index_array.forEach(index => {
 			html += '<tr>' +
-			'<th>' + label_array[index] + '</th>' +
-			'<td>' + value[index] + '</td>' +
-			'</tr>'
+				'<th>' + label_array[index] + '</th>' +
+				'<td>' + value[index] + '</td>' +
+				'</tr>'
 		});
 		html += '</table>'
 
+		//== google mapで開く ========
+		let address_selection_index = 'https://www.google.co.jp/maps/dir/'
+		address_selection_index += value['latitude'] + ','
+		address_selection_index += value['longitude']
+		html += '<a href="' + address_selection_index + '" '
+		html += 'target="_blank" rel="noopener" class="pinContent__mapUrl"'
+		html += '>'
+		html +='google mapで開く'
+		html +='</a>'
+
+		//== 閉じタグ ========
+		html +='</div>'
 		return html
 	}
 
@@ -75,6 +87,7 @@ if (isset($params['csv_data'])) {
 	 * initMap
 	 */
 	function initMap() {
+
 
 		// ---------- 変数 ----------
 		let geocoder = new google.maps.Geocoder();
@@ -92,8 +105,43 @@ if (isset($params['csv_data'])) {
 		});
 
 
+		function success(position) {
+			let current_latitude = position.coords.latitude;
+			let current_longitude = position.coords.longitude;
+			let current_latLng = new google.maps.LatLng({
+				lat: current_latitude,
+				lng: current_longitude
+			});
+			let current_market = new google.maps.Marker({
+				position: current_latLng, //マーカーの位置（必須）
+				map: map, //マーカーを表示する地図
+				icon: {
+					fillColor: "#70dff3", //塗り潰し色
+					fillOpacity: 1, //塗り潰し透過率
+					path: google.maps.SymbolPath.CIRCLE, //円を指定
+					scale: 16, //円のサイズ
+					strokeColor: "#70dff3", //枠の色
+					strokeWeight: 1.0 //枠の透過率
+				},
+				label: {
+					text: '現在地', //ラベル文字
+					color: '#000', //文字の色
+					fontSize: '10px' //文字のサイズ
+				}
+			});
+		}
+
+		function fail(error) {
+			alert('位置情報の取得に失敗しました。エラーコード：' + error.code);
+		}
+		if (navigator.geolocation) {
+
+			navigator.geolocation.getCurrentPosition(success, fail);
+		}
+
+
 		// マーカー毎の処理
-		Object.keys(values).forEach(function (i) {
+		Object.keys(values).forEach(function(i) {
 			let value = values[i]
 
 			//== 緯度経度のデータ取得 ========
@@ -197,5 +245,5 @@ if (isset($params['csv_data'])) {
 		//== 吹き出し表示 ========
 		infoWindow[i].open(map, marker[i])
 	}
-</script>
+	</script>
 <?php } ?>

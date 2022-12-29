@@ -34,6 +34,8 @@ class Map_Input_Contents extends Vanilla_Form_Row_Input_Contents {
 	function pin_data_selection() {
 		$csv_data_array = vanilla_sanitize_array($_GET)['csv_data'][0];
 		unset($csv_data_array[$_GET['address_selection_index']]);
+		unset($csv_data_array['latitude']);
+		unset($csv_data_array['longitude']);
 	?>
 		<div class="vanillaForm__inputs">
 			<?php foreach ($csv_data_array as $index => $text) { ?>
@@ -65,13 +67,16 @@ class Map_Input_Contents extends Vanilla_Form_Row_Input_Contents {
 	static function csv_hidden_input($params) {
 		if (!empty($params) && isset($params['csv_data'])) {
 			$csv_data_array = $params['csv_data'];
+
 			foreach ($csv_data_array as $index => $csv_data) {
-				foreach ($csv_data as $i => $value) {
-					$name_attr = esc_attr("csv_data[{$index}][$i]");
+				$i = 0;
+				foreach ($csv_data as $key => $value) {
+					++$i;
+					$name_attr = esc_attr("csv_data[{$index}][$key]");
 					$value_attr = esc_attr($value);
 					echo "<input type='hidden' name='{$name_attr}' value='{$value_attr}'>";
 
-					if (count($csv_data) === ($i + 1)) {
+					if (count($csv_data) === $i && $index !== 0) {
 						$latlon_array = map_get_latlon($csv_data[$params['address_selection_index']]);
 
 						$latitude_attr = esc_attr("csv_data[{$index}][latitude]");
