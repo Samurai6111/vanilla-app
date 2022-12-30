@@ -13,15 +13,15 @@
 						<div class="mapFormContainer">
 							<h2 class="mapForm__title">物件URL入力フォーム</h2>
 
-							<form action="<?php echo esc_url(vanilla_get_current_link()) ?>" class="mapForm vanillaForm" id="mapForm" method="GET">
+							<form action="<?php echo esc_url(get_permalink()) ?>" class="mapForm vanillaForm" id="mapForm" method="POST" >
+
+							<?php vanilla_wp_nonce_field('address_selection') ?>
 
 							<ul class="vanillaForm__rowList">
 								<?php
-
 								$vanilla_form = new Vanilla_Form();
 
-                Map_Input_Contents::hidden_input('status', 'pin-data-selection');
-                Map_Input_Contents::csv_hidden_input($params);
+								Map_Input_Contents::hidden_input('csv_data_json', '');
 
 								$vanilla_form->row_item(
 									vanilla_form_label('住所'),
@@ -32,12 +32,12 @@
 								</ul>
 
 								<?php if (!empty($insert_suumo_data_validation)) { ?>
-									<p class="mapForm__errorText -color-red">
-										<?php echo esc_html($insert_suumo_data_validation['suumo_url']); ?>
-									</p>
-								<?php } else { ?>
-									<br>
-								<?php } ?>
+										<p class="mapForm__errorText -color-red">
+											<?php echo esc_html($insert_suumo_data_validation['suumo_url']); ?>
+										</p>
+									<?php } else { ?>
+										<br>
+									<?php } ?>
 								<br><br>
 
 								<div class="mapForm__buttonWrap">
@@ -51,4 +51,9 @@
 		</div>
 	</div>
 </div>
-</main>
+
+<script>
+	let form = $('#mapForm')
+	form.find('input[name="csv_data_json"]').val(csv_data_json)
+
+</script>

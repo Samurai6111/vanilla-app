@@ -15,7 +15,7 @@
 		;
 	}
 
-	.mapForm {
+	#mapForm {
 		.mapForm__urlInput {
 			width: 100%;
 			font-size: responsiveValue(1.6rem, 1.2rem);
@@ -32,6 +32,14 @@
 			justify-content: center;
 			width: 100%;
 			margin-top: responsiveValue(4rem, 2.4rem);
+		}
+
+		.vanillaForm__rowItem {
+			justify-content: space-between;
+			.vanillaForm__label {
+				min-width: 16rem;
+				width: 100%;
+			}
 		}
 
 		//____________________________

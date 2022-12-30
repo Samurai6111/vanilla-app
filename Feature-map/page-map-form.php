@@ -1,6 +1,6 @@
 <?php
 
-csv_redirect();
+require_once(dirname(__FILE__) . "/c-map-form-execution.php");
 
 /**
  * Template Name: マップフォーム
@@ -13,10 +13,7 @@ get_header(); ?>
 
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/Feature-map/Assets/Css/style.css">
 
-<?php 								echo '<pre>';
-								var_dump($_GET);
-								echo '</pre>'; ?>
-
+<?php require_once(dirname(__FILE__) . "/c-map-header.php") ?>
 
 <main class="pageMap -moving-bgc" id="pageMap">
 	<?php ui_frame(function () { ?>
@@ -28,7 +25,8 @@ get_header(); ?>
 				if (empty($_GET)) {
 					//= 初期画面(csvを挿入する画面) ====
 					require_once(dirname(__FILE__) . "/c-csv-form.php");
-				} else {
+				}
+				else {
 					//= 変数定義 ====
 					$params = vanilla_sanitize_array($_GET);
 					$status = $params['status'];

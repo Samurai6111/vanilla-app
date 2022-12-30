@@ -19,15 +19,16 @@
 
 								<ul class="vanillaForm__rowList">
 
+									<?//php vanilla_wp_nonce_field('pin_data_selection') ?>
+
 									<?php
 									$vanilla_form = new Vanilla_Form();
 
 									Map_Input_Contents::hidden_input('status', 'show-result');
 									Map_Input_Contents::param_hidden_input($params, 'address_selection_index');
-									Map_Input_Contents::csv_hidden_input($params);
 
 									$vanilla_form->row_item(
-										vanilla_form_label('住所'),
+										vanilla_form_label('コンテンツ'),
 										vanilla_form_input('Map_Input_Contents::pin_data_selection'),
 										'-input-vertical -input-flex-aic'
 									);
@@ -45,4 +46,3 @@
 		</div>
 	</div>
 </div>
-</main>

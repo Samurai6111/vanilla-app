@@ -44,6 +44,45 @@
   font-weight: 600;
 }
 
+#mapWrap {
+  position: relative;
+}
+#mapWrap .map__centerCurrentLocation {
+  position: absolute;
+  z-index: 100;
+  bottom: 5%;
+  right: 2.5%;
+  width: 4rem;
+  height: 4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 50%;
+  background-color: #fff;
+  border: none;
+  padding: 0;
+  -webkit-box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.4);
+}
+@media only screen and (max-width:768px) {
+  #mapWrap .map__centerCurrentLocation {
+    right: 5%;
+  }
+}
+#mapWrap .map__centerCurrentLocation > img {
+  width: 70%;
+  pointer-events: none;
+}
+
 .mapFormContainer {
   padding: 2rem;
 }
@@ -54,15 +93,15 @@
   font-weight: 600;
   text-align: center;
 }
-.mapFormContainer .mapForm .mapForm__urlInput {
+.mapFormContainer #mapForm .mapForm__urlInput {
   width: 100%;
   font-size: clamp(1.2rem, 1.25vw, 1.6rem);
 }
-.mapFormContainer .mapForm .mapForm__errorText {
+.mapFormContainer #mapForm .mapForm__errorText {
   margin-top: 0.4rem;
   font-size: clamp(1.2rem, 1.25vw, 1.6rem);
 }
-.mapFormContainer .mapForm .mapForm__buttonWrap {
+.mapFormContainer #mapForm .mapForm__buttonWrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -78,7 +117,17 @@
   width: 100%;
   margin-top: clamp(2.4rem, 3.125vw, 4rem);
 }
-.mapFormContainer .mapForm.-cancel .mapForm__buttonWrap {
+.mapFormContainer #mapForm .vanillaForm__rowItem {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.mapFormContainer #mapForm .vanillaForm__rowItem .vanillaForm__label {
+  min-width: 16rem;
+  width: 100%;
+}
+.mapFormContainer #mapForm.-cancel .mapForm__buttonWrap {
   margin-top: clamp(1.2rem, 1.25vw, 1.6rem);
   color: rgba(0, 0, 0, 0.5);
   font-size: clamp(1rem, 0.9375vw, 1.2rem);

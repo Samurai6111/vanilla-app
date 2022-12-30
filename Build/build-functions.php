@@ -232,19 +232,19 @@ function vanilla_sanitize_array($request) {
 	foreach ($request as $request_key => $request_value) {
 
 		if (!is_array($request_value)) {
-			$sanitized[$request_key] = htmlspecialchars($request_value, ENT_QUOTES, 'UTF-8');
+			$sanitized[$request_key] = sanitize_text_field($request_value, ENT_QUOTES, 'UTF-8');
 		} else {
 			$request_child = $request_value;
 
 			foreach ($request_child as $request_child_key => $request_child_value) {
 				if (!is_array($request_child_value)) {
 
-					$sanitized[$request_key][$request_child_key] = htmlspecialchars($request_child_value, ENT_QUOTES, 'UTF-8');
+					$sanitized[$request_key][$request_child_key] = sanitize_text_field($request_child_value, ENT_QUOTES, 'UTF-8');
 				} else {
 
 					$request_grandChild = $request_child_value;
 					foreach ($request_grandChild as $request_grandChild_key => $request_grandChild_value) {
-						$sanitized[$request_key][$request_child_key][$request_grandChild_key] = htmlspecialchars($request_grandChild_value, ENT_QUOTES, 'UTF-8');
+						$sanitized[$request_key][$request_child_key][$request_grandChild_key] = sanitize_text_field($request_grandChild_value, ENT_QUOTES, 'UTF-8');
 					}
 				}
 			}
@@ -260,7 +260,7 @@ function vanilla_sanitize_array($request) {
  * @param $request
  */
 function vanilla_sanitize($request) {
-	$sanitized = htmlspecialchars($request, ENT_QUOTES, 'UTF-8');
+	$sanitized = sanitize_text_field($request, ENT_QUOTES, 'UTF-8');
 	return $sanitized;
 }
 

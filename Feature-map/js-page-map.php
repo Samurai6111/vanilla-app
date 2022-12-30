@@ -31,19 +31,7 @@ if (isset($params['csv_data'])) {
 	}
 
 	/** --------------------------------
-	 * URLのパラメータの値を取得する
-	 *
-	 * @param key
-	 */
-	function get_param(key) {
-		let current_url = '<?php echo esc_url(get_permalink()); ?>'
-		let url = new URL(current_url);
-		let search_params = url.searchParams;
-		return search_params.get(key);
-	}
-
-	/** --------------------------------
-	 * ピンでーたの配列
+	 * ピンデータの配列
 	 *
 	 * @param
 	 */
