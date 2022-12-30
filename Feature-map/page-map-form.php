@@ -19,7 +19,7 @@ get_header(); ?>
 	<?php ui_frame(function () { ?>
 		<?php ui_head('Map') ?>
 
-		<div class="pageMapBody">
+		<div class="pageMapform">
 			<div class="inner -tight -no-padding">
 				<?php
 				if (empty($_GET)) {
@@ -37,11 +37,7 @@ get_header(); ?>
 					} elseif ($status === 'pin-data-selection') {
 						//= 住所と使うデータのインデックスを決めるフォーム ====
 						require_once(dirname(__FILE__) . "/c-pin-data-selection-form.php");
-
 					}
-
-					unset($params['status']);
-					$csv_json = json_encode($params);
 				}
 
 				?>

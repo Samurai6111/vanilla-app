@@ -23,7 +23,7 @@ get_header(); ?>
 
 	<div class="inner">
 
-		<div class="pageFrontContents">
+		<div class="pageFrontContents -custom-scrolbar">
 
 			<ul class="pageFront__posts -level1">
 				<li class="pageFront__post">
@@ -53,6 +53,23 @@ get_header(); ?>
 								</li>
 							</ul>
 						</li>
+
+						<?php //== 親ページ ========
+						?>
+						<li class="pageFront__post">
+							<?php sitemap_card(home_url('/suumo/'), '物件一覧', 'sitemap_suuumo_1.png') ?>
+							<ul class="pageFront__posts -level3">
+								<?php //== 子ページ ========
+								?>
+								<li class="pageFront__post">
+									<?php sitemap_card(home_url('/suumo/google-map/'), '物件 Google Map', 'sitemap_suumo_google_map_1.png') ?>
+								</li>
+								<li class="pageFront__post">
+									<?php sitemap_card(home_url('/suumo/mypage/'), '物件 マイページ', 'sitemap_suumo_mypage_1.png') ?>
+								</li>
+							</ul>
+						</li>
+					</ul>
 				</li>
 			</ul>
 		</div>

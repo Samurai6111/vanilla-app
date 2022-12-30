@@ -83,25 +83,48 @@
   pointer-events: none;
 }
 
-.mapFormContainer {
+.pageMapform .pageMapform__csvForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2.4rem;
+}
+.pageMapform .pageMapform__csvForm input[name=csvfile] {
+  max-width: 40rem;
+  width: 100%;
+}
+.pageMapform .mapFormContainer {
   padding: 2rem;
 }
-.mapFormContainer .mapForm__title {
+.pageMapform .mapFormContainer .mapForm__title {
   margin-bottom: 2rem;
   color: #0c0033;
   font-size: clamp(1.6rem, 1.875vw, 2.4rem);
   font-weight: 600;
   text-align: center;
 }
-.mapFormContainer #mapForm .mapForm__urlInput {
+.pageMapform .mapFormContainer #mapForm .vanillaForm__rowList {
+  margin-bottom: 0;
+}
+.pageMapform .mapFormContainer #mapForm .mapForm__urlInput {
   width: 100%;
   font-size: clamp(1.2rem, 1.25vw, 1.6rem);
 }
-.mapFormContainer #mapForm .mapForm__errorText {
+.pageMapform .mapFormContainer #mapForm .mapForm__errorText {
   margin-top: 0.4rem;
   font-size: clamp(1.2rem, 1.25vw, 1.6rem);
 }
-.mapFormContainer #mapForm .mapForm__buttonWrap {
+.pageMapform .mapFormContainer #mapForm .mapForm__buttonWrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -117,17 +140,17 @@
   width: 100%;
   margin-top: clamp(2.4rem, 3.125vw, 4rem);
 }
-.mapFormContainer #mapForm .vanillaForm__rowItem {
+.pageMapform .mapFormContainer #mapForm .vanillaForm__rowItem {
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-.mapFormContainer #mapForm .vanillaForm__rowItem .vanillaForm__label {
-  min-width: 16rem;
+.pageMapform .mapFormContainer #mapForm .vanillaForm__rowItem .vanillaForm__label {
   width: 100%;
+  min-width: 16rem;
 }
-.mapFormContainer #mapForm.-cancel .mapForm__buttonWrap {
+.pageMapform .mapFormContainer #mapForm.-cancel .mapForm__buttonWrap {
   margin-top: clamp(1.2rem, 1.25vw, 1.6rem);
   color: rgba(0, 0, 0, 0.5);
   font-size: clamp(1rem, 0.9375vw, 1.2rem);

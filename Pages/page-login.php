@@ -10,7 +10,7 @@ get_header(); ?>
 
 <?php require_once(get_theme_file_path() . "/vanilla-header.php") ?>
 
-<main class="pageLogin" id="pageLogin" style="background-image:url(<?php echo get_template_directory_uri() ?>/Image/page_login_mv_1.jpg);">
+<main class="pageLogin" id="pageLogin">
 	<div class="inner">
 		<div class="pageLoginForm__container">
 			<?php echo do_shortcode('[wpmem_form login]') ?>
@@ -18,12 +18,8 @@ get_header(); ?>
 	</div>
 </main>
 
-
-
 <script>
-
 	let login_redirect_url = '<?php echo $_GET['login_redirect_url'] ?>'
-	console.log(login_redirect_url)
 	if (login_redirect_url) {
 		$('input[name="login_redirect_url"]').val(login_redirect_url)
 	}

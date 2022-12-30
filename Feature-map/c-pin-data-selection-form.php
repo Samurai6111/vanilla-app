@@ -36,7 +36,7 @@
 								</ul>
 
 								<div class="mapForm__buttonWrap">
-									<button class="pageSuumo__button" type="submit">登録</button>
+									<button class="buttonType1" type="submit">登録</button>
 								</div>
 							</form>
 						</div>
