@@ -9,8 +9,6 @@
 	Map_Input_Contents::pin_data_selection();
 	?>
 
-
-
 	<br><br><br>
 	<?php button_type1(['text'=>'送信']) ?>
 

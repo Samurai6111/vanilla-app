@@ -5,7 +5,7 @@
 
 	<?php vanilla_wp_nonce_field('csv_form') ?>
 
-	<input type="file" name="csvfile">
+	<input type="file" name="csvfile" accept=".csv">
 
 	<br><br>
 	<?php button_type1(['text'=>'送信']) ?>

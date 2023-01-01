@@ -7,6 +7,7 @@
 	vanilla_wp_nonce_field('address_selection');
 	Map_Input_Contents::hidden_input('csv_data_json', '');
 	Map_Input_Contents::address_selection();
+	map_form_validation();
 	 ?>
 
 	<br><br>

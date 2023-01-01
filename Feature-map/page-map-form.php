@@ -10,6 +10,7 @@ require_once(dirname(__FILE__) . "/c-map-form-execution.php");
  */
 get_header(); ?>
 
+<?php require_once(dirname(__FILE__) . "/c-map-header.php") ?>
 
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/Feature-map/Assets/Css/style.css">
 
@@ -27,23 +28,16 @@ get_header(); ?>
 					<?php
 					$params = vanilla_sanitize_array($_GET);
 					$status = @$params['status'];
-					//= 初期画面(csvを挿入する画面) ====
+
 					if (empty($params)) {
 						require_once(dirname(__FILE__) . "/c-csv-form.php");
-					}
-					//= 住所と使うデータのインデックスを決めるフォーム ====
-					elseif ($status === 'address-selection') {
+					} elseif ($status === 'address-selection') {
 						require_once(dirname(__FILE__) . "/c-address-selection-form.php");
-					}
-					//= 住所と使うデータのインデックスを決めるフォーム ====
-					elseif ($status === 'pin-data-selection') {
+					} elseif ($status === 'pin-data-selection') {
 						require_once(dirname(__FILE__) . "/c-pin-data-selection-form.php");
 					}
-
 					?>
-
 				</div>
-
 			</div>
 		</div>
 	<?php }) ?>
