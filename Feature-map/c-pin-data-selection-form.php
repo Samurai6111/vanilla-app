@@ -10,6 +10,7 @@
 	?>
 
 
+
 	<br><br><br>
 	<?php button_type1(['text'=>'送信']) ?>
 
