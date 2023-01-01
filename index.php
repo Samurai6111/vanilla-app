@@ -23,6 +23,7 @@ get_header(); ?>
 
 	<div class="inner">
 
+
 		<div class="pageFrontContents -custom-scrolbar">
 
 			<ul class="pageFront__posts -level1">
@@ -53,7 +54,6 @@ get_header(); ?>
 								</li>
 							</ul>
 						</li>
-
 						<?php //== 親ページ ========
 						?>
 						<li class="pageFront__post">
@@ -73,7 +73,6 @@ get_header(); ?>
 				</li>
 			</ul>
 		</div>
-
 	</div>
 </main>
 

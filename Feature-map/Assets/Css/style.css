@@ -83,7 +83,17 @@
   pointer-events: none;
 }
 
-.pageMapform .pageMapform__csvForm {
+.mapFormContainer {
+  padding: 2rem;
+}
+.mapFormContainer .mapFormContainer__title {
+  margin-bottom: 2rem;
+  color: #0c0033;
+  font-size: clamp(2.4rem, 2.5vw, 3.2rem);
+  font-weight: 600;
+  text-align: center;
+}
+.mapFormContainer #mapForm {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -97,34 +107,29 @@
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 2.4rem;
 }
-.pageMapform .pageMapform__csvForm input[name=csvfile] {
+.mapFormContainer #mapForm input[name=csvfile] {
   max-width: 40rem;
   width: 100%;
 }
-.pageMapform .mapFormContainer {
-  padding: 2rem;
-}
-.pageMapform .mapFormContainer .mapForm__title {
-  margin-bottom: 2rem;
-  color: #0c0033;
-  font-size: clamp(1.6rem, 1.875vw, 2.4rem);
-  font-weight: 600;
+.mapFormContainer #mapForm .vanillaForm__text {
   text-align: center;
+  font-size: clamp(1.6rem, 1.40625vw, 1.8rem);
+  font-weight: 600;
+  margin-bottom: 2.4rem;
 }
-.pageMapform .mapFormContainer #mapForm .vanillaForm__rowList {
+.mapFormContainer #mapForm .vanillaForm__rowList {
   margin-bottom: 0;
 }
-.pageMapform .mapFormContainer #mapForm .mapForm__urlInput {
+.mapFormContainer #mapForm .mapForm__urlInput {
   width: 100%;
   font-size: clamp(1.2rem, 1.25vw, 1.6rem);
 }
-.pageMapform .mapFormContainer #mapForm .mapForm__errorText {
+.mapFormContainer #mapForm .mapForm__errorText {
   margin-top: 0.4rem;
   font-size: clamp(1.2rem, 1.25vw, 1.6rem);
 }
-.pageMapform .mapFormContainer #mapForm .mapForm__buttonWrap {
+.mapFormContainer #mapForm .mapForm__buttonWrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -140,17 +145,22 @@
   width: 100%;
   margin-top: clamp(2.4rem, 3.125vw, 4rem);
 }
-.pageMapform .mapFormContainer #mapForm .vanillaForm__rowItem {
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+.mapFormContainer #mapForm .vanillaForm__input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  gap: 0.4rem;
 }
-.pageMapform .mapFormContainer #mapForm .vanillaForm__rowItem .vanillaForm__label {
-  width: 100%;
-  min-width: 16rem;
+.mapFormContainer #mapForm .vanillaForm__inputLabel {
+  font-size: clamp(1.2rem, 1.25vw, 1.6rem);
 }
-.pageMapform .mapFormContainer #mapForm.-cancel .mapForm__buttonWrap {
+.mapFormContainer #mapForm .mapForm__backButton {
+  font-size: clamp(1.2rem, 1.25vw, 1.6rem);
+  color: rgba(60, 63, 73, 0.6);
+  margin-top: 2.4rem;
+}
+.mapFormContainer #mapForm.-cancel .mapForm__buttonWrap {
   margin-top: clamp(1.2rem, 1.25vw, 1.6rem);
   color: rgba(0, 0, 0, 0.5);
   font-size: clamp(1rem, 0.9375vw, 1.2rem);

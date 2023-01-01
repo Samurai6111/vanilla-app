@@ -3,72 +3,85 @@
 //____________________________
 // form
 //____________________________
-.pageMapform {
-	.pageMapform__csvForm {
+
+//____________________________
+// mapFormContainer
+//____________________________
+.mapFormContainer {
+	padding: 2rem;
+
+	.mapFormContainer__title {
+		margin-bottom: 2rem;
+		color: $navy;
+		font-size: responsiveValue(3.2rem, 2.4rem);
+		font-weight: 600;
+		text-align: center;
+	}
+
+	#mapForm {
 		@include flex;
 		align-items: center;
 		flex-direction: column;
-		gap: 2.4rem;
 
 		input[name="csvfile"] {
 			max-width: 40rem;
 			width: 100%;
 		}
-	}
 
-	.mapFormContainer {
-		padding: 2rem;
-
-		.mapForm__title {
-			margin-bottom: 2rem;
-			color: $navy_0C0;
-			font-size: responsiveValue(2.4rem, 1.6rem);
-			font-weight: 600;
+		.vanillaForm__text {
 			text-align: center;
-			;
+			font-size: responsiveValue(1.8rem, 1.6rem);
+			font-weight: 600;
+			margin-bottom: 2.4rem;
 		}
 
-		#mapForm {
-			.vanillaForm__rowList {
-				margin-bottom: 0;
-			}
-			.mapForm__urlInput {
-				width: 100%;
-				font-size: responsiveValue(1.6rem, 1.2rem);
-			}
+		.vanillaForm__rowList {
+			margin-bottom: 0;
+		}
 
-			.mapForm__errorText {
-				margin-top: 0.4rem;
-				font-size: responsiveValue(1.6rem, 1.2rem);
-			}
+		.mapForm__urlInput {
+			width: 100%;
+			font-size: responsiveValue(1.6rem, 1.2rem);
+		}
 
+		.mapForm__errorText {
+			margin-top: 0.4rem;
+			font-size: responsiveValue(1.6rem, 1.2rem);
+		}
+
+		.mapForm__buttonWrap {
+			@include flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			margin-top: responsiveValue(4rem, 2.4rem);
+		}
+
+		.vanillaForm__input {
+			@include flex;
+			gap: .4rem;
+		}
+
+		.vanillaForm__inputLabel {
+			font-size: responsiveValue(1.6rem, 1.2rem);
+		}
+
+		.mapForm__backButton {
+			font-size: responsiveValue(1.6rem, 1.2rem);
+			color: rgba($black, .6);
+			margin-top: 2.4rem;
+		}
+
+
+		//____________________________
+		// モディファイア
+		//____________________________
+		&.-cancel {
 			.mapForm__buttonWrap {
-				@include flex;
-				align-items: center;
-				justify-content: center;
-				width: 100%;
-				margin-top: responsiveValue(4rem, 2.4rem);
-			}
-
-			.vanillaForm__rowItem {
-				justify-content: space-between;
-
-				.vanillaForm__label {
-					width: 100%;
-					min-width: 16rem;
-				}
-			}
-
-			//____________________________
-			// モディファイア
-			//____________________________
-			&.-cancel {
-				.mapForm__buttonWrap {
-					margin-top: responsiveValue(1.6rem, 1.2rem);
-					color: rgba($black_000, 0.5);
-					font-size: responsiveValue(1.2rem, 1rem);
-					;
-				}
+				margin-top: responsiveValue(1.6rem, 1.2rem);
+				color: rgba($black_000, 0.5);
+				font-size: responsiveValue(1.2rem, 1rem);
+				;
 			}
 		}
 	}

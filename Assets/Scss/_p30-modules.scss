@@ -197,3 +197,88 @@ main {
 		font-size: 1.8rem;
 	}
 }
+
+//____________________________
+// ステップ
+//____________________________
+.uiSteps {
+	margin-bottom: responsiveValue(4rem, 2.4rem);
+	overflow: hidden;
+
+	.uiSteps__list {
+		padding: .8rem 2.4rem 4rem;
+		max-width: calc(100% - 1.6rem);
+		margin: 0 auto;
+		@include flex;
+		justify-content: space-between;
+		align-items: center;
+
+		@media #{$tab}{
+			padding: .8rem 0 4rem;
+
+		}
+
+		.uiSteps__line {
+			width: 100%;
+			height: .2rem;
+			background-color: $gray;
+			display: inline-block;
+		}
+
+		.uiSteps__item {
+			@include flex;
+			align-items: center;
+			flex-direction: column;
+			gap: .4rem;
+			position: relative;
+		}
+
+		.uiSteps__itemNumber {
+			font-size: responsiveValue(1.6rem, 1.2rem);
+			font-weight: 600;
+			@include flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+			width: 4rem;
+			height: 4rem;
+			position: relative;
+			background-color: $gray;
+			box-shadow: .2rem .2rem .8rem rgba($black, .2);
+			z-index: 10;
+
+			@media #{$tab}{
+				width: 3.2rem;
+				height: 3.2rem;
+			}
+		}
+
+		.uiSteps__itemLabel {
+			position: absolute;
+			top: calc(100% + .4rem);
+			left: 50%;
+			transform: translateX(-50%);
+			font-size: responsiveValue(1.2rem, 1rem);
+			font-weight: 600;
+			max-width: 8rem;
+			width: 8rem;
+			text-align: center;
+			line-height: 1.2;
+
+			@media #{$tab}{
+				max-width: 5.6rem;
+				width: 5.6rem;
+			}
+		}
+
+
+		//____________________________
+		// モディファイア
+		//____________________________
+		.uiSteps__line.-active,
+		.uiSteps__item.-active .uiSteps__itemNumber {
+			background-color: $blue;
+		}
+	}
+
+}

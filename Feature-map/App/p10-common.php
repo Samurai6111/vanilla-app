@@ -116,11 +116,12 @@ function csv_form_redirect() {
 function set_latlng($data) {
 	$address_selection_index = $data['address_selection_index'];
 	$csv_data_json = str_replace("\\", "", $data['csv_data_json']);
-	$csv_data_array = json_decode($csv_data_json);
+	$csv_data_array = (array)json_decode($csv_data_json);
 	$csv_data_array_new = [];
 
 	//= 緯度と軽度のデータを追加 ====
 	foreach ($csv_data_array as $i => $csv_data) {
+		$csv_data = (array)$csv_data;
 		$address = $csv_data[$address_selection_index];
 		$latlng_array = map_get_latlon($address);
 

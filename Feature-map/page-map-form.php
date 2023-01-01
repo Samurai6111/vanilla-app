@@ -21,26 +21,28 @@ get_header(); ?>
 
 		<div class="pageMapform">
 			<div class="inner -tight -no-padding">
-				<?php
-				if (empty($_GET)) {
-					//= 初期画面(csvを挿入する画面) ====
-					require_once(dirname(__FILE__) . "/c-csv-form.php");
-				}
-				else {
-					//= 変数定義 ====
-					$params = vanilla_sanitize_array($_GET);
-					$status = $params['status'];
+				<div class="mapFormContainer">
 
-					if ($status === 'address-selection') {
-						//= 住所と使うデータのインデックスを決めるフォーム ====
+					<h2 class="mapFormContainer__title">マップフォーム</h2>
+					<?php
+					$params = vanilla_sanitize_array($_GET);
+					$status = @$params['status'];
+					//= 初期画面(csvを挿入する画面) ====
+					if (empty($params)) {
+						require_once(dirname(__FILE__) . "/c-csv-form.php");
+					}
+					//= 住所と使うデータのインデックスを決めるフォーム ====
+					elseif ($status === 'address-selection') {
 						require_once(dirname(__FILE__) . "/c-address-selection-form.php");
-					} elseif ($status === 'pin-data-selection') {
-						//= 住所と使うデータのインデックスを決めるフォーム ====
+					}
+					//= 住所と使うデータのインデックスを決めるフォーム ====
+					elseif ($status === 'pin-data-selection') {
 						require_once(dirname(__FILE__) . "/c-pin-data-selection-form.php");
 					}
-				}
 
-				?>
+					?>
+
+				</div>
 
 			</div>
 		</div>
