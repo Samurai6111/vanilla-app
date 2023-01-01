@@ -119,17 +119,21 @@ function set_latlng($data) {
 	$csv_data_array = (array)json_decode($csv_data_json);
 	$csv_data_array_new = [];
 
+
 	//= 緯度と軽度のデータを追加 ====
 	foreach ($csv_data_array as $i => $csv_data) {
 		$csv_data = (array)$csv_data;
 		$address = $csv_data[$address_selection_index];
 		$latlng_array = map_get_latlon($address);
 
-		if (!empty($latlng_array)) {
+		if (isset($latlng_array['latitude']) && isset($latlng_array['longitude'])) {
 			$latitude = (isset($latlng_array['latitude'])) ? $latlng_array['latitude'] : '';
 			$longitude = (isset($latlng_array['longitude'])) ? $latlng_array['longitude'] : '';
 			$csv_data['latitude'] = $latitude;
 			$csv_data['longitude'] = $longitude;
+			$result = true;
+		} else {
+			$result = false;
 		}
 
 		$csv_data_array_new[] = $csv_data;
@@ -138,6 +142,8 @@ function set_latlng($data) {
 	//= セッションに追加 ====
 	session_start();
 	$_SESSION['csv_data_array'] = $csv_data_array_new;
+
+	return $result;
 }
 
 
@@ -148,11 +154,17 @@ function set_latlng($data) {
  * @return
  */
 function address_selection_redirect($data) {
-	set_latlng($data);
+	$result = set_latlng($data);
 
-	$address_selection_index = $data['address_selection_index'];
-	$redirect_url = "/map-form/?status=pin-data-selection";
-	$redirect_url .= "&address_selection_index={$address_selection_index}";
+	if ($result) {
+		$address_selection_index = $data['address_selection_index'];
+		$redirect_url = "/map-form/?status=pin-data-selection";
+		$redirect_url .= "&address_selection_index={$address_selection_index}";
+	} else {
+		$redirect_url = "/map-form/?status=address-selection";
+		$redirect_url .= "&validation=wrong_address";
+	}
+
 	wp_safe_redirect(home_url($redirect_url));
 	exit;
 }
