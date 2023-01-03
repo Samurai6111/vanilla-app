@@ -57,12 +57,12 @@ get_header(); ?>
 						<?php //== 親ページ ========
 						?>
 						<li class="pageFront__post">
-							<?php sitemap_card(home_url('/suumo/google-map/'), 'マップフォーム', 'sitemap_map_form_1.png') ?>
+							<?php sitemap_card(home_url('/map-form/'), 'マップフォーム', 'sitemap_map_form_1.png') ?>
 							<ul class="pageFront__posts -level3">
 								<?php //== 子ページ ========
 								?>
 								<li class="pageFront__post">
-									<?php sitemap_card(home_url('/suumo/mypage/'), 'マップ', 'sitemap_map_1.png') ?>
+									<?php sitemap_card(home_url('/map/'), 'マップ', 'sitemap_map_1.png') ?>
 								</li>
 							</ul>
 						</li>

@@ -26,8 +26,14 @@ get_header(); ?>
 	<div id="mapWrap">
 	</div>
 
-
-
+	<script>
+		//== csvのデータがなかったらリダイレクトする ========
+		if (!window.localStorage.getItem('csv_data_json')) {
+			if (window.confirm("住所データが挿入されているません。フォームページにリダイレクトします")) {
+				window.location.href = '<?php echo home_url('/map-form/'); ?>'
+			}
+		}
+	</script>
 	<?php $google_maps_key = get_option('vanilla_app_google_api_key'); ?>
 	<script src="<?php echo get_template_directory_uri(); ?>/Feature-map/Assets/Js/common.js"></script>
 	<script src="<?php echo get_template_directory_uri(); ?>/Feature-map/Assets/Js/map.js"></script>
@@ -48,25 +54,6 @@ get_header(); ?>
 				function() {});
 		}
 	</script>
-
-
 </main>
-
-
-
-
-
-<script>
-	// let ls_csv_json = window.localStorage.getItem('csv_json')
-	// if (!ls_csv_json) {
-	// 	let csv_json = '<?php echo $csv_json ?>'
-	// 	window.localStorage.setItem('csv_json', csv_json)
-	// } else {
-	// 	let csv_array = JSON.parse(ls_csv_json)
-	// 	// console.log(csv_array)
-
-	// }
-</script>
-
 
 <?php get_footer(); ?>
