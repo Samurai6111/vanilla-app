@@ -14,9 +14,9 @@ get_header(); ?>
 
 <main class="pageMap -moving-bgc" id="pageMap">
 
-	<aside class="pageGooglemapSidebar" id="pageGooglemapSidebar">
+	<!-- <aside class="pageGooglemapSidebar" id="pageGooglemapSidebar">
 		<?php require_once(get_theme_file_path() . "/Feature-map/sidebar-google-map.php") ?>
-	</aside>
+	</aside> -->
 
 	<div id="map"></div>
 

@@ -24,28 +24,3 @@
 		</ul>
 	</div>
 </div>
-
-<!-- <script>
-	$('#sidebarGooglemap__button').on('click', function() {
-		$(this).toggleClass('-closed')
-		$('.sidebarGooglemap__container').toggleClass('-closed')
-	})
-
-	function set_sidebar_item_position() {
-		let sidebar_google_map = $('#sidebarGooglemap')
-		let item = sidebar_google_map.find('.sidebarGooglemap__item')
-
-		item.each(function() {
-			let position_top = $(this).position().top
-			$(this).data('position-top', position_top)
-		})
-	}
-	set_sidebar_item_position()
-
-	new Swiper('.suumotable__swiper', {
-		navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev',
-		},
-	});
-</script> -->
