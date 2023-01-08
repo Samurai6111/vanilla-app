@@ -1,4 +1,6 @@
 <?php
+
+require_once(get_theme_file_path() . "/vendor/autoload.php");
 /*--------------------------------------------------
 /* /App内の全てのコアファイル
 /*------------------------------------------------*/
@@ -10,3 +12,4 @@ require_once(get_theme_file_path() . "/App/Form/App-form.php");
 // ---------- feature機能 ----------
 require_once(get_theme_file_path() . "/Feature-suumo/App-suumo.php");
 require_once(get_theme_file_path() . "/Feature-map/App-map.php");
+require_once(get_theme_file_path() . "/Feature-pixel-art/App-pixel-art.php");

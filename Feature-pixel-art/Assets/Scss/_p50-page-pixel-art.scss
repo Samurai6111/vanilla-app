@@ -1,0 +1,11 @@
+@charset 'UTF-8';
+
+.pagePixelart {
+	.pagePixelart__buttonWrap {
+		margin-top: 8rem;
+		@include flex;
+		justify-content: center;
+		gap: 2.4rem;
+
+	}
+}

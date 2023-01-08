@@ -55,7 +55,7 @@ class Map_Input_Contents extends Vanilla_Form_Row_Input_Contents {
 				let item = csv_data_labels[i]
 				let input_wrap =
 					`<div class="vanillaForm__input">
-							<input id="${item}" type="checkbox" placeholder="" name="pin_data_selection_index_array[]" value="${i}">
+							<input id="${item}" type="checkbox" placeholder="" name="pin_data_selection_index_array[]" value="${i}" checked>
 							<label for="${item}" class="vanillaForm__inputLabel">${item}</label>
 							</div>`
 				wrap.append(input_wrap)

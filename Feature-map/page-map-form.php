@@ -14,8 +14,6 @@ get_header(); ?>
 
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/Feature-map/Assets/Css/style.css">
 
-<?php require_once(dirname(__FILE__) . "/c-map-header.php") ?>
-
 <main class="pageMap -moving-bgc" id="pageMap">
 	<?php ui_frame(function () { ?>
 		<?php ui_head('Map') ?>
@@ -41,6 +39,7 @@ get_header(); ?>
 			</div>
 		</div>
 	<?php }) ?>
+</main>
 
 
-	<?php get_footer(); ?>
+<?php get_footer(); ?>

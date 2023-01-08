@@ -1,0 +1,106 @@
+@charset 'UTF-8';
+
+//____________________________
+// ピクセルアートの色選択
+//____________________________
+.pixelartColorsContainer {
+	.pixelartColors__text {
+		margin-bottom: 1.6rem;
+		font-weight: 600;
+		text-align: center;
+	}
+
+	.pixelartColors {
+		margin-bottom: 4rem;
+		@include flex;
+		position: relative;
+		justify-content: space-between;
+		gap: 1.6rem;
+		padding: 0 1.6rem;
+	}
+
+	.pixelartColor__input {
+		position: absolute;
+		opacity: 0;
+	}
+
+	.pixelartColor__label {
+		width: 25%;
+		height: 4rem;
+		border-radius: 0.4rem;
+		position: relative;
+		border: .3rem solid $white;
+
+		&::after {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			display: inline-block;
+			font-weight: 600;
+			color: $white;
+		}
+	}
+
+	.pixelartColor__input:checked +
+	.pixelartColor__label {
+		border: .3rem solid $blue;
+		&::after {
+			content: "選択中";
+		}
+
+	}
+}
+
+//____________________________
+// ピクセルアートのテーブル
+//____________________________
+.pixelartTableContainer {
+	max-width: 100%;
+	padding: 1.6rem;
+	overflow: scroll;
+	background-color: $github_bg;
+
+	.pixelartTable {
+		@include flex;
+		gap: 0.4rem;
+	}
+
+	.pixelartTable__row {
+		@include flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.pixelartTable__cell {
+		width: 3rem;
+		height: 3rem;
+		background-color: $lightgray;
+		border-radius: 0.4rem;
+
+		&:hover {
+			box-shadow: 0 0 0.4rem rgba($gray, 0.4);
+			cursor: pointer;
+		}
+
+		&[data-contribution-count='0'] {
+			background-color: $commit0;
+		}
+
+		&[data-contribution-count='1'] {
+			background-color: $commit1;
+		}
+
+		&[data-contribution-count='2'] {
+			background-color: $commit2;
+		}
+
+		&[data-contribution-count='3'] {
+			background-color: $commit3;
+		}
+
+		&[data-contribution-count='4'] {
+			background-color: $commit4;
+		}
+	}
+}
