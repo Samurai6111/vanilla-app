@@ -2,10 +2,17 @@
 
 .pagePixelart {
 	.pagePixelart__buttonWrap {
-		margin-top: 8rem;
 		@include flex;
-		justify-content: center;
 		gap: 2.4rem;
+		justify-content: center;
+		margin-top: 8rem;
+	}
 
+	.pixelart__currentDate {
+		height: 2em;
+	}
+
+	textarea {
+		width: 100%;
 	}
 }

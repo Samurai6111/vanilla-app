@@ -17,6 +17,10 @@ get_header(); ?>
 		<?php ui_head('Pixel Art') ?>
 
 		<?php the_pixel_art_colors() ?>
+
+		<p class="pixelart__currentDate -tac" id="pixelartCurrentDate"></p>
+		<br>
+
 		<?php the_pixel_art_table() ?>
 
 		<div class="pagePixelart__buttonWrap">
@@ -33,11 +37,14 @@ get_header(); ?>
 				'text' => 'git コマンド生成'
 			]) ?>
 		</div>
+		<br><br>
+
+		<div class="pagePixelart__textAreaWrap">
+			<textarea name="" id="" cols="30" rows="10"></textarea>
+		</div>
 	<?php }) ?>
 
-	<div class="pagePixelart__textAreaWrap">
-		<textarea name="" id="" cols="30" rows="10"></textarea>
-	</div>
+
 </main>
 
 

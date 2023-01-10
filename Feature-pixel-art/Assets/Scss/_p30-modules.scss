@@ -17,6 +17,11 @@
 		justify-content: space-between;
 		padding: 0 1.6rem;
 		margin-bottom: 4rem;
+
+		@media #{$tab} {
+			flex-wrap: wrap;
+			gap: 0;
+		}
 	}
 
 	.pixelartColor__input {
@@ -30,6 +35,10 @@
 		height: 4rem;
 		border: 0.3rem solid $white;
 		border-radius: 0.4rem;
+
+		@media #{$tab} {
+			width: 48%;
+		}
 
 		&::after {
 			position: absolute;
@@ -124,5 +133,6 @@
 		background-color: $white;
 		border-radius: 0.4rem;
 		transform: translateX(-50%);
+		pointer-events: none;
 	}
 }

@@ -234,6 +234,14 @@ a {
   padding: 0 1.6rem;
   margin-bottom: 4rem;
 }
+@media only screen and (max-width:768px) {
+  .pixelartColorsContainer .pixelartColors {
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    gap: 0;
+  }
+}
 .pixelartColorsContainer .pixelartColor__input {
   position: absolute;
   opacity: 0;
@@ -244,6 +252,11 @@ a {
   height: 4rem;
   border: 0.3rem solid #f9f9fa;
   border-radius: 0.4rem;
+}
+@media only screen and (max-width:768px) {
+  .pixelartColorsContainer .pixelartColor__label {
+    width: 48%;
+  }
 }
 .pixelartColorsContainer .pixelartColor__label::after {
   position: absolute;
@@ -333,17 +346,24 @@ a {
   border-radius: 0.4rem;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
+  pointer-events: none;
 }
 
 .pagePixelart .pagePixelart__buttonWrap {
-  margin-top: 8rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  gap: 2.4rem;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  gap: 2.4rem;
+  margin-top: 8rem;
+}
+.pagePixelart .pixelart__currentDate {
+  height: 2em;
+}
+.pagePixelart textarea {
+  width: 100%;
 }

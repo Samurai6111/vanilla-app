@@ -67,10 +67,8 @@ function the_pixel_art_table() {
 			?>
 				<?php echo ($i === 1 || $i % 7 === 1) ? '<div class="pixelartTable__row">' : '' ?>
 
-				<div class="pixelartTable__cell <?php echo $hidden_class ?>" data-contribution-count="0" data-date-command="<?php echo $formatted_date ?>">
-					<p class="pixelartTable__cellDate">
-						<?php echo $date->copy()->format('Y/m/d') ?>
-					</p>
+				<div class="pixelartTable__cell <?php echo $hidden_class ?>" data-contribution-count="0" data-date-command="<?php echo $formatted_date ?>"
+				data-date="<?php echo $date->copy()->format('Y/m/d') ?>">
 				</div>
 
 				<?php echo ($i % 7 === 0) ? '</div>' : '' ?>
