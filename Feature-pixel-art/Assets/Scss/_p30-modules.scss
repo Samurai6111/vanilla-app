@@ -11,12 +11,12 @@
 	}
 
 	.pixelartColors {
-		margin-bottom: 4rem;
 		@include flex;
 		position: relative;
-		justify-content: space-between;
 		gap: 1.6rem;
+		justify-content: space-between;
 		padding: 0 1.6rem;
+		margin-bottom: 4rem;
 	}
 
 	.pixelartColor__input {
@@ -25,30 +25,29 @@
 	}
 
 	.pixelartColor__label {
+		position: relative;
 		width: 25%;
 		height: 4rem;
+		border: 0.3rem solid $white;
 		border-radius: 0.4rem;
-		position: relative;
-		border: .3rem solid $white;
 
 		&::after {
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			transform: translate(-50%,-50%);
 			display: inline-block;
-			font-weight: 600;
 			color: $white;
+			font-weight: 600;
+			transform: translate(-50%, -50%);
 		}
 	}
 
-	.pixelartColor__input:checked +
-	.pixelartColor__label {
-		border: .3rem solid $blue;
-		&::after {
-			content: "選択中";
-		}
+	.pixelartColor__input:checked + .pixelartColor__label {
+		border: 0.3rem solid $blue;
 
+		&::after {
+			content: '選択中';
+		}
 	}
 }
 
@@ -57,7 +56,7 @@
 //____________________________
 .pixelartTableContainer {
 	max-width: 100%;
-	padding: 1.6rem;
+	padding: 4rem;
 	overflow: scroll;
 	background-color: $github_bg;
 
@@ -73,6 +72,7 @@
 	}
 
 	.pixelartTable__cell {
+		position: relative;
 		width: 3rem;
 		height: 3rem;
 		background-color: $lightgray;
@@ -81,6 +81,10 @@
 		&:hover {
 			box-shadow: 0 0 0.4rem rgba($gray, 0.4);
 			cursor: pointer;
+
+			.pixelartTable__cellDate {
+				display: block !important;
+			}
 		}
 
 		&[data-contribution-count='0'] {
@@ -102,5 +106,23 @@
 		&[data-contribution-count='4'] {
 			background-color: $commit4;
 		}
+
+		&.-hidden {
+			opacity: 0;
+			pointer-events: none;
+		}
+	}
+
+	.pixelartTable__cellDate {
+		position: absolute;
+		bottom: 100%;
+		left: 50%;
+		z-index: 10;
+		display: none;
+		max-width: 10rem;
+		padding: 0.4rem;
+		background-color: $white;
+		border-radius: 0.4rem;
+		transform: translateX(-50%);
 	}
 }
