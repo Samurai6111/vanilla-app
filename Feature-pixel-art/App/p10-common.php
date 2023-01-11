@@ -14,6 +14,9 @@ function get_pixel_art_start_date() {
 	return $start_date;
 }
 
+
+
+
 /**
  * 取得した日付をgit commandのformatに整える
  *
