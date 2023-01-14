@@ -1,6 +1,31 @@
 @charset 'UTF-8';
 
 //____________________________
+// ピクセルアートの年選択
+//____________________________
+.pixelartdateFormContainer {
+	margin-bottom: 4rem;
+
+	.pixelartdateForm {
+		@include flex;
+		justify-content: center;
+	}
+
+	.pixelartdateForm__text {
+		margin-bottom: 1.6rem;
+		font-weight: 600;
+	}
+
+	.ulSelectWrap {
+		.pixelartdateForm__select {
+			padding: 0.4rem 0.8rem;
+			padding-right: 0;
+			font-size: 1.6rem;
+		}
+	}
+}
+
+//____________________________
 // ピクセルアートの色選択
 //____________________________
 .pixelartColorsContainer {
@@ -14,13 +39,13 @@
 		@include flex;
 		position: relative;
 		gap: 1.6rem;
-		justify-content: space-between;
 		padding: 0 1.6rem;
 		margin-bottom: 4rem;
 
 		@media #{$tab} {
 			flex-wrap: wrap;
 			gap: 0;
+			margin-bottom: 2.4rem;
 		}
 	}
 
@@ -37,7 +62,7 @@
 		border-radius: 0.4rem;
 
 		@media #{$tab} {
-			width: 48%;
+			width: 32%;
 		}
 
 		&::after {

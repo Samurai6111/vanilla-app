@@ -136,3 +136,20 @@ function generate_git_command() {
 
     $('textarea').val(git_commands)
 }
+
+
+/** --------------------------------
+ * コマンドをクリップボードにコピーする
+ *
+ * @param
+ */
+function copy_git_command() {
+    let text = $('#pagePixelart__textarea').val()
+    let figure = $('.pagePixelart__textAreaFigure')
+    navigator.clipboard.writeText(text).then(() => {
+        figure.addClass('-copied')
+        setTimeout(function() {
+            figure.removeClass('-copied')
+        }, 1000);
+    }, () => {});
+}

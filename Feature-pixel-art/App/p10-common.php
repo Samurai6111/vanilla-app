@@ -8,8 +8,16 @@ use Carbon\Carbon;
  * @return $start_date
  */
 function get_pixel_art_start_date() {
-	$today = new Carbon('today');
-	$start_date = $today->copy()->startOfYear()->subYears(17);
+	$param = vanilla_sanitize_array($_GET);
+	$target_date_GET = @$param['target-date'] . "-01-01";
+
+	if ($target_date_GET) {
+		$target_date = new Carbon($target_date_GET);
+		$start_date = $target_date->copy();
+	} else {
+		$target_date = new Carbon('today');
+		$start_date = $target_date->copy()->startOfYear()->subYears(18);
+	}
 
 	return $start_date;
 }

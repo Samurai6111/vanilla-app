@@ -16,6 +16,7 @@ get_header(); ?>
 	<?php ui_frame(function () { ?>
 		<?php ui_head('Pixel Art') ?>
 
+		<?php the_pixel_set_date_form() ?>
 		<?php the_pixel_art_colors() ?>
 
 		<p class="pixelart__currentDate -tac" id="pixelartCurrentDate"></p>
@@ -26,21 +27,32 @@ get_header(); ?>
 		<div class="pagePixelart__buttonWrap">
 			<?php button_type1([
 				'attr' => 'type=button onclick=reset_pixel_art_table(event)',
-				'text' => 'リセット'
+				'text' => 'リセット',
+				'class' => '-color-reverse -reset-command',
 			]) ?>
 			<?php button_type1([
 				'attr' => 'type=button onclick=save_pixel_art_table(event)',
-				'text' => '保存する'
+				'text' => '保存する',
+				'class' => '-save-command'
 			]) ?>
+		</div>
+		<br><br><br><br>
+
+		<div class="pagePixelart__buttonWrap">
 			<?php button_type1([
 				'attr' => 'type=button onclick=generate_git_command(event)',
-				'text' => 'git コマンド生成'
+				'text' => 'git コマンド生成',
+				'class' => '-show-command'
 			]) ?>
 		</div>
 		<br><br>
 
 		<div class="pagePixelart__textAreaWrap">
-			<textarea name="" id="" cols="30" rows="10"></textarea>
+			<figre class="pagePixelart__textAreaFigure">
+				<img id="pagePixelart__textAreaCopy" src="<?php echo get_template_directory_uri() . "/Feature-pixel-art/images/icon_copy_lightgray.svg" ?>" alt="" onclick="copy_git_command()">
+			</figre>
+
+			<textarea class="pagePixelart__textarea" id="pagePixelart__textarea" cols="30" rows="10"></textarea>
 		</div>
 	<?php }) ?>
 

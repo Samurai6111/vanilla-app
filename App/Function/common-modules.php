@@ -80,10 +80,8 @@ function ui_head($text) {
 function ui_frame(callable $func) {
 ?>
 	<div class="uiFrame" id="uiFrame">
-		<div class="inner -wide">
-			<div class="uiFrameContainer">
-				<?php echo $func() ?>
-			</div>
+		<div class="uiFrameContainer">
+			<?php echo $func() ?>
 		</div>
 	</div>
 <?php

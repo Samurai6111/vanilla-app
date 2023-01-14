@@ -22,10 +22,7 @@ get_header(); ?>
 
 
 	<div class="inner">
-
-
 		<div class="pageFrontContents -custom-scrolbar">
-
 			<ul class="pageFront__posts -level1">
 				<li class="pageFront__post">
 					<?php sitemap_card(home_url(), 'サイトトップ', 'sitemap_index_1.png') ?>
@@ -33,18 +30,22 @@ get_header(); ?>
 
 				<li class="pageFront__post">
 					<ul class="pageFront__posts -level2">
-						<?php //== 親ページ ========
+						<?php
+						//== 親ページ ========
 						?>
 						<li class="pageFront__post">
 							<?php sitemap_card(home_url('/login/'), 'ログイン', 'sitemap_login_1.png') ?>
 						</li>
 
-						<?php //== 親ページ ========
+						<?php
+						//== 親ページ ========
 						?>
 						<li class="pageFront__post">
 							<?php sitemap_card(home_url('/suumo/'), '物件一覧', 'sitemap_suuumo_1.png') ?>
 							<ul class="pageFront__posts -level3">
-								<?php //== 子ページ ========
+
+								<?php
+								//== 子ページ ========
 								?>
 								<li class="pageFront__post">
 									<?php sitemap_card(home_url('/suumo/google-map/'), '物件 Google Map', 'sitemap_suumo_google_map_1.png') ?>
@@ -54,17 +55,27 @@ get_header(); ?>
 								</li>
 							</ul>
 						</li>
-						<?php //== 親ページ ========
+
+						<?php
+						//== 親ページ ========
 						?>
 						<li class="pageFront__post">
 							<?php sitemap_card(home_url('/map-form/'), 'マップフォーム', 'sitemap_map_form_1.png') ?>
 							<ul class="pageFront__posts -level3">
+
 								<?php //== 子ページ ========
 								?>
 								<li class="pageFront__post">
 									<?php sitemap_card(home_url('/map/'), 'マップ', 'sitemap_map_1.png') ?>
 								</li>
 							</ul>
+						</li>
+
+						<?php
+						//== 親ページ ========
+						?>
+						<li class="pageFront__post">
+							<?php sitemap_card(home_url('/pixel-art/'), 'Pixel Art', 'sitemap_pixel_art_1.png') ?>
 						</li>
 					</ul>
 				</li>

@@ -5,6 +5,55 @@ use Carbon\Carbon;
 /* モジュール
 /*------------------------------------------------*/
 
+/**
+ * 日付選択のフォーム
+ *
+ * @param
+ * @return
+ */
+function the_pixel_set_date_form() {
+	$param = vanilla_sanitize_array($_GET);
+	$today = new Carbon('today');
+	$y = $today->copy()->year;
+	$stop = $today->copy()->subYears('30')->year;
+	$target_date_GET = @$param['target-date'];$pieces = $target_year = @explode("-", $target_date_GET)[0];
+?>
+	<div class="pixelartdateFormContainer">
+		<p class="pixelartdateForm__text -tac">
+			年を選択してください
+		</p>
+
+		<form action="" method="GET" class="pixelartdateForm" id="pixelartdateForm">
+
+			<div class="ulSelectWrap">
+				<select name="target-date" class="pixelartdateForm__select" id="pixelartdateForm__select">
+				<?php
+				$y = $y + 1;
+					while ($y >= $stop) {
+					--$y;
+
+					$selected = ($target_year == $y) ? 'selected' : '';
+					 ?>
+						<option value="<?php echo esc_attr($y) ?>" <?php echo esc_attr($selected) ?>>
+							<?php echo esc_html($y) ?>
+						</option>
+					<?php } ?>
+				</select>
+			</div>
+		</form>
+	</div>
+
+	<script>
+
+		$('#pixelartdateForm__select').on('change', function() {
+			$('#pixelartdateForm').submit()
+
+		})
+
+	</script>
+<?php
+
+}
 
 /**
  * 塗りつぶしのカラーパレット
@@ -67,8 +116,7 @@ function the_pixel_art_table() {
 			?>
 				<?php echo ($i === 1 || $i % 7 === 1) ? '<div class="pixelartTable__row">' : '' ?>
 
-				<div class="pixelartTable__cell <?php echo $hidden_class ?>" data-contribution-count="0" data-date-command="<?php echo $formatted_date ?>"
-				data-date="<?php echo $date->copy()->format('Y/m/d') ?>">
+				<div class="pixelartTable__cell <?php echo $hidden_class ?>" data-contribution-count="0" data-date-command="<?php echo $formatted_date ?>" data-date="<?php echo $date->copy()->format('Y/m/d') ?>">
 				</div>
 
 				<?php echo ($i % 7 === 0) ? '</div>' : '' ?>
