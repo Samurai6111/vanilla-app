@@ -217,7 +217,6 @@ function vanilla_paged() {
 	} else {
 		$paged = 1;
 	}
-
 	return $paged;
 }
 
