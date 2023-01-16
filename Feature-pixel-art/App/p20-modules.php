@@ -35,7 +35,7 @@ function the_pixel_set_date_form() {
 					$selected = ($target_year == $y) ? 'selected' : '';
 					 ?>
 						<option value="<?php echo esc_attr($y) ?>" <?php echo esc_attr($selected) ?>>
-							<?php echo esc_html($y) ?>
+							<?php echo esc_html($y . "年") ?>
 						</option>
 					<?php } ?>
 				</select>
