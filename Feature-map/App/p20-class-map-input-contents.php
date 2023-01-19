@@ -15,7 +15,6 @@ class Map_Input_Contents extends Vanilla_Form_Row_Input_Contents {
 			let csv_data_object = JSON.parse(csv_data_json)
 			let csv_data_labels = csv_data_object[0]
 
-			// csv_data_labels.forEach(function(item, index) {
 				let index = -1
 			for (let k in csv_data_labels) {
 				if (k === 'latitude' || k === 'longitude') {continue;}
