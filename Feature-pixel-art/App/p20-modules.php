@@ -16,7 +16,8 @@ function the_pixel_set_date_form() {
 	$today = new Carbon('today');
 	$y = $today->copy()->year;
 	$stop = $today->copy()->subYears('30')->year;
-	$target_date_GET = @$param['target-date'];$pieces = $target_year = @explode("-", $target_date_GET)[0];
+	$target_date_GET = @$param['target-date'];
+	$target_year = @explode("-", $target_date_GET)[0];
 ?>
 	<div class="pixelartdateFormContainer">
 		<p class="pixelartdateForm__text -tac">
