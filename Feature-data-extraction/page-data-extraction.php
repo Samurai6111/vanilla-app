@@ -1,6 +1,25 @@
 <?php
 // require_once(dirname(__FILE__) . "/data-extract-form-execution.php");
 
+$API_KEY = get_option('vanilla_google_custom_search_api_key');
+$cx = "検索エンジンID";
+
+$client = new Google\Client();
+$client->setApplicationName("AppName");
+$client->setDeveloperKey($API_KEY);
+$service = new Google\Service\CustomSearchAPI($client);
+
+$param = array(
+    'q'                     =>   '猫',
+    'searchType'     => 'image',
+    'cx'                    => $cx,
+    'num'                => '10',
+);
+
+$results = $service->cse->listCse($param);
+
+print_r($results);
+
 /**
  * Template Name: データ抽出
  * @Template Post Type: post, page,

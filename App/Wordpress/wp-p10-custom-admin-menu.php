@@ -73,6 +73,7 @@ function vanilla_custom_admin_page() {
 
 				<?php vaniila_admin_table_row('Google Api Key', 'vanilla_app_google_api_key') ?>
 				<?php vaniila_admin_table_row('Google Custom Search API', 'vanilla_google_custom_search_api_key') ?>
+				<?php vaniila_admin_table_row('Google Custom Search CX', 'vanilla_google_custom_search_cx_key') ?>
 			</table>
 			<input type='submit' value='保存' class='button button-primary button-large'>
 			</p>

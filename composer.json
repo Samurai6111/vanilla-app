@@ -2,5 +2,10 @@
     "require": {
         "nesbot/carbon": "^2.57",
         "google/cloud": "^0.195.0"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4.1"
+        }
     }
 }
