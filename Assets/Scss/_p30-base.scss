@@ -66,7 +66,6 @@ pre {
 	background-color: lightgray;
 }
 
-
 //____________________________
 // 文字系
 //____________________________
@@ -83,7 +82,7 @@ span ,
 th {
 	font-size: 1.6rem;
 
-	@media #{$tab}{
+	@media #{$tab} {
 		font-size: 1.2rem;
 	}
 }

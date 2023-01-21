@@ -117,7 +117,7 @@ function vanilla_get_googlemap_url($address) {
 
 
 function test($url) {
-	require_once(get_theme_file_path() . "/Feature-suumo/Library/phpQuery-onefile.php");
+	require_once(get_theme_file_path() . "/External-library/phpQuery-onefile.php");
 
 
 	$html = file_get_contents($url);

@@ -90,7 +90,7 @@ class Suumo_Form {
 	function get_suumo_data_by_url($suumo_url) {
 
 		//= ファイル読み込み ====
-		require_once(get_theme_file_path() . "/Feature-suumo/Library/phpQuery-onefile.php");
+		require_once(get_theme_file_path() . "/External-library/phpQuery-onefile.php");
 
 		$suumo_data_array = [];
 

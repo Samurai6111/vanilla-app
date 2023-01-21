@@ -13,3 +13,4 @@ require_once(get_theme_file_path() . "/App/Form/App-form.php");
 require_once(get_theme_file_path() . "/Feature-suumo/App-suumo.php");
 require_once(get_theme_file_path() . "/Feature-map/App-map.php");
 require_once(get_theme_file_path() . "/Feature-pixel-art/App-pixel-art.php");
+require_once(get_theme_file_path() . "/Feature-data-extraction/App-data-extraction.php");
