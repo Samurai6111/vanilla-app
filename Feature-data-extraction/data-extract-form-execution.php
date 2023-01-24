@@ -8,8 +8,8 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 	}
 
 	if ($result) {
-		// wp_safe_redirect(home_url('/data-extraction?result=success'));
-		// exit;
+		wp_safe_redirect(home_url('/data-extraction?result=success'));
+		exit;
 	}
 
 }

@@ -26,17 +26,29 @@ get_header(); ?>
 			<form action="<?php echo get_permalink(); ?>" class="suumoUrlForm" id="suumoUrlForm" method="POST">
 
 				<?php vanilla_wp_nonce_field('data_extraction') ?>
-				<select name="device">
-					<option value="mobile">mobile</option>
-					<option value="desktop">desktop</option>
-					<option value="tablet">tablet</option>
+				<div class="flex justify-center gap-6 ">
+					<input class="border-gray-300 border-2 w-80 p-4 mb-10" type="text" name="q" placeholder="検索キーワード">
 
-				</select>
-				<input class="suumoUrlForm__urlInput" type="text" name="q" value="お金 借りる">
+					<select name="device" class="border-gray-300 border-2 w-48 text-center p-4 mb-10">
+						<option value="mobile">mobile</option>
+						<option value="desktop">desktop</option>
+						<option value="tablet">tablet</option>
+					</select>
 
-				<div class="suumoUrlForm__buttonWrap">
-					<button class="pageSuumo__button" type="submit">登録</button>
 				</div>
+
+				<div class="flex justify-center ">
+					<button class="w-48 text-center p-4 text-2xl bg-indigo-900 text-white" type="submit">登録</button>
+				</div>
+
+				<?php if ($_GET['result'] === "success") { ?>
+					<br> <br>
+					<p class="text-center underline">
+						<a href="https://docs.google.com/spreadsheets/d/14cq8GP8vSOjc-sdNL-Z2RUiRAkLGqATvnexE20KwvsU/edit#gid=0" target="_blank" rel="noopener">
+							スプレッドシートを見る
+						</a>
+					</p>
+				<?php } ?>
 			</form>
 		</div>
 	<?php }) ?>
