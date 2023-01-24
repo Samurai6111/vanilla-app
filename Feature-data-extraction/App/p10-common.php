@@ -1,52 +1,116 @@
 <?php
-function execute_data_extraction($url = '') {
-		//= ファイル読み込み ====
-		require_once(get_theme_file_path() . "/External-library/phpQuery-onefile.php");
+use Carbon\Carbon;
 
-		$suumo_data_array = [];
+/**
+ * スプレッドシートのインスタンス
+ *
+ * @param
+ * @return
+ */
+class GoogleSheet {
+	public static function instance() {
 
-		$html = file_get_contents('https://www.google.com/search?q=apex+legends&oq=apex+legends&aqs=chrome..69i57j69i59j35i39j0i131i433i512l2j0i433i512j0i512j69i61.5237j0j4&sourceid=chrome&ie=UTF-8');
+		$credentials_path =  get_theme_file_path() . "/Assets/Json/confidential.json";
+		$client = new \Google_Client();
+		$client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
+		$client->setAuthConfig($credentials_path);
+		return new Google_Service_Sheets($client);
+	}
+}
 
-		$document = phpQuery::newDocument($html);
-	// $elements = $document->find('#cheatsheet > section.ch-section.ch-section_css > div.ch-section__content > section:nth-child(1) > dl:nth-child(2) > dt')[0];
-	$elements = $document->find('#kp-wp-tab-overview > div.TzHB6b.cLjAic.K7khPe.LMRCfc > div > div > div > div > div > div.Z26q7c.UK95Uc.jGGQ5e.VGXe8 > div > a > h3')->text();
+/**
+ * スプレッドシートに値を追加する関数
+ *
+ * @param $data
+ * @return
+ */
+function insert_sheet_values($data) {
+	$sheets = GoogleSheet::instance();
+	$sheet_id =  get_option('sheet_id');
+	$values = new \Google_Service_Sheets_ValueRange();
+	$values->setValues([
+		'values' => $data
+	]);
+	$params = ['valueInputOption' => 'USER_ENTERED'];
+	$sheets->spreadsheets_values->append(
+		$sheet_id,
+		'A2',
+		$values,
+		$params
+	);
+}
 
-	echo '<pre>';
-	var_dump($elements);
-	echo '</pre>';
-	// $elements = $document['td'];
-	// echo '<pre>';
-	// var_dump(count($elements));
-	// echo '</pre>';
-	// foreach ($elements as $element) {
-	// 	$text = pq($element)->find('dt')->text();
-		// echo '<pre>';
-		// var_dump($element);
-		// echo '</pre>';
-	// }
-	// if (is_array($elements)) {
-	// 	echo 'asdfadf';
+/**
+ * googleの検索結果を配列で取得する関数
+ *
+ * @param $q
+ * @return $result
+ */
+function get_search_values($data) {
+	require_once(get_theme_file_path() . "/External-library/google-search-results.php");
+	require_once(get_theme_file_path() . "/External-library/restclient.php");
 
-	// }
-	$selectors = [
-		// '#cheatsheet > section.ch-section.ch-section_css > div.ch-section__content > section:nth-child(1) > dl:nth-child(2) > dt',
-		'h1',
+	$query = [
+		"engine" => "google",
+		"q" => $data['q'],
+		"location" => "Japan",
+		"google_domain" => "google.co.jp",
+		"gl" => "jp",
+		"hl" => "ja",
+		"nfpr" => "1",
+		"safe" => "active",
+		"device" => $data['device'] // mobile, desktop, tablet
+
 	];
 
-		// echo '<pre>';
-		// var_dump($elements);
-		// echo '</pre>';
-		// exit;
+	$serp_api_key = get_option('serp_api_key');
+	$search = new GoogleSearch($serp_api_key);
+	$result = $search->get_json($query);
+	// $result = json_decode($json);
 
-	// // document.querySelector("#cheatsheet > section.ch-section.ch-section_css > div.ch-section__content > section:nth-child(1) > dl:nth-child(2) > dt")
-	// foreach ($selectors as $key => $selector) {
+	$value_arrays = [];
+	$value_arrays['ads'] = ($result->ads) ? $result->ads : [];
+	$value_arrays['organic_results'] = ($result->organic_results) ? $result->organic_results : [];
 
-	// 	// $elements = $html->find($selector);
-
-	// 	// $data = ($elements->text()) ? sanitize_text_field($elements->text()) : '-';
-
-	// 	// $data_array[] = $elements->text();
-	// }
-
-	return $data_array;
+	return $value_arrays;
 }
+
+
+function execute_insertion($data) {
+	$now = new Carbon('now');
+	$now = $now->copy()->format('Y-m-d H:i:s');
+	$type_ja = [
+		'ads' => '広告',
+		'organic_results' => '通常',
+	];
+	$value_arrays = get_search_values($data);
+
+	if (!empty($value_arrays)) {
+		foreach ($value_arrays as $type => $array) {
+			foreach ($array as $index => $values) {
+				$data_to_insert = [
+					"サイトタイトル" => $values->title,
+					"サイトURL" => $values->link,
+					"タイプ" => $type_ja[$type],
+					"デバイス" => $data['device'],
+					"検索キーワード" => $data['q'],
+					"日付" => $now,
+				];
+
+				$data_to_insert = array_values($data_to_insert);
+				insert_sheet_values($data_to_insert);
+			}
+		}
+
+		$rtn = true;
+	} else {
+		$rtn = false;
+	}
+
+	return $rtn;
+}
+
+// echo '<pre>';
+// var_dump(get_search_values('プログラミング'));
+// echo '</pre>';
+// exit;

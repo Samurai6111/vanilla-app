@@ -37,8 +37,11 @@ function vanilla_custom_admin_menu_save_config() {
 	if (isset($data[$credential_key]) && $data[$credential_key]) {
 		if (check_admin_referer($credential_action, $credential_key)) {
 
+			update_option('sheet_id', $data['sheet_id']);
+			update_option('serp_api_key', $data['serp_api_key']);
 			update_option('vanilla_app_google_api_key', $data['vanilla_app_google_api_key']);
 			update_option('vanilla_google_custom_search_api_key', $data['vanilla_google_custom_search_api_key']);
+			update_option('vanilla_google_custom_search_cx_key', $data['vanilla_google_custom_search_cx_key']);
 
 			wp_safe_redirect(menu_page_url($setting_menu_slug));
 		}
@@ -74,6 +77,9 @@ function vanilla_custom_admin_page() {
 				<?php vaniila_admin_table_row('Google Api Key', 'vanilla_app_google_api_key') ?>
 				<?php vaniila_admin_table_row('Google Custom Search API', 'vanilla_google_custom_search_api_key') ?>
 				<?php vaniila_admin_table_row('Google Custom Search CX', 'vanilla_google_custom_search_cx_key') ?>
+
+				<?php vaniila_admin_table_row('Serp Api Key', 'serp_api_key') ?>
+				<?php vaniila_admin_table_row('スプレッドシートのID', 'sheet_id') ?>
 			</table>
 			<input type='submit' value='保存' class='button button-primary button-large'>
 			</p>

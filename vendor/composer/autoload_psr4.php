@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'phpseclib3\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Symfony\\Polyfill\\Php81\\' => array($vendorDir . '/symfony/polyfill-php81'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
@@ -19,6 +20,7 @@ return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
     'Psr\\Http\\Client\\' => array($vendorDir . '/psr/http-client/src'),
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
+    'ParagonIE\\ConstantTime\\' => array($vendorDir . '/paragonie/constant_time_encoding/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
@@ -27,6 +29,7 @@ return array(
     'Grpc\\' => array($vendorDir . '/grpc/grpc/src/lib'),
     'Grafeas\\' => array($vendorDir . '/google/cloud/Grafeas/src'),
     'Google\\Type\\' => array($vendorDir . '/google/common-protos/src/Type'),
+    'Google\\Service\\' => array($vendorDir . '/google/apiclient-services/src'),
     'Google\\Rpc\\' => array($vendorDir . '/google/common-protos/src/Rpc'),
     'Google\\Protobuf\\' => array($vendorDir . '/google/protobuf/src/Google/Protobuf'),
     'Google\\LongRunning\\' => array($vendorDir . '/google/cloud/LongRunning/src/LongRunning'),
@@ -177,6 +180,7 @@ return array(
     'Google\\ApiCore\\' => array($vendorDir . '/google/gax/src'),
     'Google\\Analytics\\Data\\' => array($vendorDir . '/google/cloud/AnalyticsData/src'),
     'Google\\Analytics\\Admin\\' => array($vendorDir . '/google/cloud/AnalyticsAdmin/src'),
+    'Google\\' => array($vendorDir . '/google/apiclient/src'),
     'GPBMetadata\\Grafeas\\' => array($vendorDir . '/google/cloud/Grafeas/metadata'),
     'GPBMetadata\\Google\\Type\\' => array($vendorDir . '/google/common-protos/metadata/Type'),
     'GPBMetadata\\Google\\Storagetransfer\\' => array($vendorDir . '/google/cloud/StorageTransfer/metadata'),

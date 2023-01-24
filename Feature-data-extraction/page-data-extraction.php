@@ -1,24 +1,6 @@
 <?php
-// require_once(dirname(__FILE__) . "/data-extract-form-execution.php");
+require_once(dirname(__FILE__) . "/data-extract-form-execution.php");
 
-$API_KEY = get_option('vanilla_google_custom_search_api_key');
-$cx = "検索エンジンID";
-
-$client = new Google\Client();
-$client->setApplicationName("AppName");
-$client->setDeveloperKey($API_KEY);
-$service = new Google\Service\CustomSearchAPI($client);
-
-$param = array(
-    'q'                     =>   '猫',
-    'searchType'     => 'image',
-    'cx'                    => $cx,
-    'num'                => '10',
-);
-
-$results = $service->cse->listCse($param);
-
-print_r($results);
 
 /**
  * Template Name: データ抽出
@@ -44,15 +26,19 @@ get_header(); ?>
 			<form action="<?php echo get_permalink(); ?>" class="suumoUrlForm" id="suumoUrlForm" method="POST">
 
 				<?php vanilla_wp_nonce_field('data_extraction') ?>
-				<input class="suumoUrlForm__urlInput" type="text" name="url" value="https://docs.emmet.io/cheat-sheet/">
+				<select name="device">
+					<option value="mobile">mobile</option>
+					<option value="desktop">desktop</option>
+					<option value="tablet">tablet</option>
+
+				</select>
+				<input class="suumoUrlForm__urlInput" type="text" name="q" value="お金 借りる">
 
 				<div class="suumoUrlForm__buttonWrap">
 					<button class="pageSuumo__button" type="submit">登録</button>
 				</div>
 			</form>
 		</div>
-
-
 	<?php }) ?>
 </main>
 <?php get_footer();
