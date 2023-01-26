@@ -11,5 +11,4 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 		wp_safe_redirect(home_url('/data-extraction?result=success'));
 		exit;
 	}
-
 }
