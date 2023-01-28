@@ -7,7 +7,7 @@
     }
   ],
   "liveSassCompile.settings.excludeList": [
-    //対象外とするフォルダを指定
+  
     "**/node_modules/**",
     ".vscode/**",
     "**/Feature-suumo/**",
