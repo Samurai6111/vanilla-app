@@ -1,0 +1,100 @@
+@charset 'UTF-8';
+//____________________________
+// 変数系, mixin, メディはクエリの格納ファイル
+// mixinは無許可に追加厳禁 *必要な場合はディレクターに相談
+//____________________________
+
+// ---------- メディアクエリ ----------
+$msp: 'only screen and (max-width:374px)';
+$sp: 'only screen and (max-width:480px)';
+$tab: 'only screen and (max-width:768px)';
+$pc: 'only screen and (max-width:1280px)';
+// ---------- インナー ----------
+$inner_padding: 2rem;
+$sp_inner: calc(37.5rem + #{$inner_padding * 2});
+$inner: 1356px;
+// ---------- フレックス ----------
+@mixin flex {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+// ---------- 背景画像 ----------
+@mixin bgi {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+// ---------- フォント（追記変更可能） ----------
+@mixin noto_sans {
+	font-family: 'Noto Sans JP', sans-serif;
+}
+
+// ---------- 縁取り ----------
+@mixin textShadow($color, $size: 2px) {
+	text-shadow: $color $size 0,
+	$color calc(#{$size} / 2 * -1) 0,
+	$color 0 calc(#{$size} / 2 * -1),
+	$color 0 $size,
+	$color $size $size,
+	$color calc(#{$size} / 2 * -1) $size,
+	$color $size calc(#{$size} / 2 * -1),
+	$color calc(#{$size} / 2 * -1) calc(#{$size} / 2 * -1),
+	$color calc(#{$size / 2}) $size,
+	$color calc(#{$size} / 2 * -1) $size,
+	$color calc(#{$size / 2}) calc(#{$size} / 2 * -1),
+	$color calc(#{$size} / 2 * -1) calc(#{$size} / 2 * -1),
+	$color $size calc(#{$size / 2}),
+	$color calc(#{$size} / 2 * -1) calc(#{$size / 2}),
+	$color $size calc(#{$size} / 2 * -1),
+	$color calc(#{$size} / 2 * -1) calc(#{$size} / 2 * -1);
+}
+
+/** --------------------------------
+* 引数で指定した色の明るさに応じて白か黒を出力する関数
+*
+* @param $color カラーコード
+*/
+
+@function set_color($color) {
+	@if (lightness($color) > 50) {
+		@return $black_000;
+	}
+
+	@else {
+		@return $white_fff;
+	}
+}
+
+
+
+/** --------------------------------
+* 画像の縦横比を指定する関数  figureタグに付与
+*
+* @param $height 横幅100の時の縦の割合 *「%」で指定
+*/
+
+@mixin img_aspect_ratio($height) {
+	position: relative;
+	width: 100%;
+
+	&::before {
+		display: block;
+		padding-top: $height;
+		content: '';
+	}
+
+	& > * {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		margin: auto;
+		object-fit: cover;
+	}
+}

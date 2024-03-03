@@ -1,0 +1,404 @@
+$primary-color: #333333;
+$highlight-color: #ffffff;
+
+@mixin comic {
+  font-family: "Comic Sans MS", cursive, sans-serif; // 遊び心のあるフォント
+}
+
+@mixin tsukimi {
+  font-family: "Tsukimi Rounded", sans-serif;
+}
+@mixin hiragino {
+  font-family: "ヒラギノ丸ゴ ProN W4", "Hiragino Maru Gothic Pro",
+    "Yu Gothic UI", "メイリオ", Meiryo, sans-serif;
+}
+
+$page-background: #f0f8ff; // 明るい青空の色
+$button-color: #ff69b4; // 明るいピンク色
+$button-hover-color: darken($button-color, 10%); // ホバー時は少し暗く
+$title-color: #ffa07a; // サーモンピンク色
+
+.pageHousechoreSimulation {
+  background-color: $page-background;
+	background-position:center;
+	position: relative;
+	z-index: 10;
+
+	&::before {
+		z-index: -1;
+		filter: blur(10px);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		transform: translate();
+		display: inline-block;
+		content: "";
+		background-size:cover;
+		background-position:center;
+		background-repeat:no-repeat;
+		background-image:url(../../Image/housechore-simulation/img_housechore_simulation_bg_1.jpg);
+	}
+
+
+  .inner {
+    max-width: 1356px;
+  }
+
+  .-jouge-sauu-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .-jouge-sauu-center-absolute {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    max-width: 90vh;
+    left: 50%;
+    width: 80%;
+    padding: 2rem;
+    transform: translate(-50%, -50%);
+  }
+
+  .-comic {
+    @include comic;
+  }
+
+  * {
+    @include hiragino;
+  }
+
+	.-box {
+
+		background-color: rgba($page-background , .7);
+		border-radius: 1rem;
+		box-shadow: .5rem .5rem .5rem rgba(black, .2);
+		padding: 4rem;
+	}
+
+
+  .pageHousechoreSimulationContent {
+    padding: 4rem;
+    min-height: 100vh;
+  }
+
+
+  .pageHousechoreSimulation__mainTitle {
+    color: $title-color;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    text-align: center;
+    @include comic;
+    * {
+      font-size: 120%;
+    }
+  }
+
+  .pageHousechoreSimulation__button {
+    background-color: $button-color;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+
+    border-radius: 5px;
+    border: 1px solid $button-color;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: $button-hover-color;
+    }
+
+    //____________________________
+    // モディファイア
+    //____________________________
+    &.-reset {
+      border: 1px solid #333333;
+      color: #333333;
+      background-color: transparent;
+    }
+  }
+
+  .pageHousechoreSimulationRoulette__content {
+		padding-bottom: 8rem;
+    #startRoulette,
+    #toResult,
+    #toSummary {
+      position: absolute;
+      bottom: 2.4rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #toSummary {
+      transform: translate(-50%, 100%);
+    }
+  }
+
+  .pageHousechoreSimulationRoulette__pList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 80rem;
+  }
+
+  .pageHousechoreSimulationRoulette__player {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #fff0f5; // 薄いピンク色
+    padding: 2rem 4rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    //____________________________
+    // モディファイア
+    //____________________________
+    &.-selected {
+      background-color: #ffcc00; // 明るい黄色
+      color: #333333; // 暗めの文字色で読みやすさを保持
+      border: 3px dashed #ff69b4; // 明るいピンクのボーダー
+
+      .pageHousechoreSimulationRoulette__playerName,
+      .pageHousechoreSimulationRoulette__playerAka {
+        color: #333333;
+      }
+    }
+
+    &.-determined {
+      background-color: #333333; // 暗めの文字色で読みやすさを保持
+      border: 3px sloid #000; // 明るいピンクのボーダー
+      .pageHousechoreSimulationRoulette__playerName,
+      .pageHousechoreSimulationRoulette__playerAka {
+        color: lightgray;
+      }
+    }
+
+    &.-grd-animation {
+      background-color: #ffcc00;
+      border: 3px dashed #ff69b4;
+      background-image: linear-gradient(
+        60deg,
+        #ffcc00,
+        #ff69b4,
+        #ffcc00,
+        #ff69b4
+      );
+      background-size: 300% 300%;
+      animation: gradientAnimation 1s ease infinite;
+      transform: scale(1.1);
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+        transform: scale(1.1);
+      }
+      50% {
+        background-position: 100% 50%;
+        transform: scale(1.2);
+      }
+      100% {
+        background-position: 0% 50%;
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .pageHousechoreSimulationRoulette__playerName {
+    color: #ff4500; // オレンジレッド色
+  }
+
+  .pageHousechoreSimulationRoulette__playerAka {
+    color: #708090; // スレートグレイ色
+  }
+
+  .pageHousechoreSimulationResult {
+    text-align: center;
+  }
+
+  .pageHousechoreSimulation__mainTitle {
+
+		.targetHousechoreName {
+			color: #ff69b4; // 明るいピンク色
+      // color: #ffbf00; // 明るい黄色
+			// text-shadow:  0 0 0.4rem rgba(black, .2);
+    }
+  }
+
+  .pageHousechoreSimulationResult__selectedPlayer {
+    font-size: 2.4rem;
+    color: #333333;
+    margin-top: 20px;
+    font-weight: bold;
+    * {
+      font-size: 4rem;
+    }
+  }
+
+  .pageHousechoreSimulationSummary {
+    width: 100%;
+  }
+
+  .pageHousechoreSimulationResult__figure,
+  .pageHousechoreSimulationSummary__figure {
+    margin: 20px 0;
+    @include img_aspect_ratio(54%);
+  }
+
+  .pageHousechoreSimulationResult__video,
+  .pageHousechoreSimulationSummary__video {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  .pageHousechoreSimulationSummary {
+    padding: 20px;
+  }
+
+  .pageHousechoreSimulationSummary__list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .pageHousechoreSimulationSummary__item {
+    margin-bottom: 30px;
+    padding: 15px;
+    position: relative;
+    border-radius: 10px;
+    width: 48%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 4%;
+		border-radius: 1rem;
+
+    z-index: 10;
+
+    &:not(:nth-child(2n)) {
+      margin-right: 4%;
+    }
+
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-position: center;
+      width: 10rem;
+			z-index: 20;
+      aspect-ratio: 1;
+      transform: rotate(-20deg) translate(-10%, -20%);
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      border-radius: 50%;
+      filter: drop-shadow(5px 5px 5px rgba(black, 0.4));
+
+      content: "";
+    }
+
+    $alpha: 0.8;
+    //____________________________
+    // モディファイア
+    //____________________________
+    &.-chore1 {
+      background: rgba(gold, $alpha);
+
+      &::after {
+        width: 15rem;
+        transform: rotate(-20deg) translate(-20%, -40%);
+        background-image: url(../../Image/housechore-simulation/icon_ranking_1.svg);
+      }
+    }
+
+    &.-chore2 {
+      background: rgba(silver, $alpha);
+
+      &::after {
+        background-image: url(../../Image/housechore-simulation/icon_ranking_2.svg);
+      }
+    }
+
+    &.-chore3 {
+      background: rgba(#cd7f32, $alpha);
+      &::after {
+        background-image: url(../../Image/housechore-simulation/icon_ranking_3.svg);
+      }
+    }
+
+    &.-chore4 {
+      background: rgba(#003856, $alpha);
+
+      &::after {
+        background-image: url(../../Image/housechore-simulation/icon_ranking_4.svg);
+      }
+    }
+  }
+
+  .pageHousechoreSimulationSummary__itemGrd {
+    position: absolute;
+    z-index: 10;
+		border-radius: 1rem;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 20%,
+        rgba(255, 255, 255, 0.4) 100%
+      );
+      animation: highlight 2s infinite;
+    }
+
+    @keyframes highlight {
+      0%,
+      100% {
+        left: -80%;
+      }
+      50% {
+        left: 0;
+      }
+    }
+  }
+
+  .pageHousechoreSimulationSummary__playerChore {
+    text-align: center;
+    margin-bottom: 1.6rem;
+    font-size: 3.2rem;
+  }
+
+  .pageHousechoreSimulationSummary__playerName {
+    font-size: 2.4rem;
+    color: #ff4500; // オレンジレッド色
+    text-align: center;
+    margin: 0 0 5px 0;
+  }
+
+  .pageHousechoreSimulationSummary__playerAka {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #708090; // スレートグレイ色
+    margin: 0;
+  }
+}

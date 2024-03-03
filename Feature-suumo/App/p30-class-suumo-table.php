@@ -31,7 +31,14 @@ class Suumo_Table {
 			'緯度',
 			'経度',
 		];
-		$this->table_columns = array_combine($this->colummn_slugs, $this->column_names);
+
+		if (count($this->colummn_slugs) === count($this->column_names)) {
+
+			$this->table_columns = array_combine($this->colummn_slugs, $this->column_names);
+		} else {
+			$this->table_columns = [];
+
+		}
 	}
 
 

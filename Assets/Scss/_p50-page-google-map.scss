@@ -1,0 +1,248 @@
+@charset 'UTF-8';
+
+.pageMap {
+	@include flex;
+	position: relative;
+
+	.pinInfo * {
+		word-break: keep-all;
+		white-space: nowrap;
+	}
+
+	#map {
+		width: 100%;
+		height: 100vh;
+	}
+
+
+	.map__centerCurrentLocation {
+		@include flex;
+		position: absolute;
+		right: 2.5%;
+		bottom: 5%;
+		align-items: center;
+		justify-content: center;
+		z-index: 100;
+		width: 4rem;
+		height: 4rem;
+		padding: 0;
+		background-color: #ffffff;
+		box-shadow: 0 0 0.8rem rgba($black_000, 0.4);
+		border: none;
+		border-radius: 50%;
+
+		@media #{$tab} {
+			right: 5%;
+		}
+
+		& > img {
+			width: 70%;
+			pointer-events: none;
+		}
+	}
+}
+
+//____________________________
+// google mapのサイドバー
+//____________________________
+.sidebarGooglemap__container {
+	$sidebar_width_pc: 27rem;
+	$sidebar_item_height_sp: 22rem;
+	position: relative;
+	// top: 0;
+	// left: 0;
+	z-index: 10;
+	width: $sidebar_width_pc;
+	min-width: $sidebar_width_pc;
+	transition: 0.3s;
+
+	@media #{$tab} {
+		position: fixed;
+		top: calc(100% - #{$sidebar_item_height_sp});
+		left: 0;
+		width: 100%;
+		min-width: none;
+	}
+
+	//____________________________
+	// モディファイア
+	//____________________________
+	&.-closed {
+		margin-left: calc(-1 * #{$sidebar_width_pc});
+
+		@media #{$tab} {
+			top: 100%;
+			margin-left: 0;
+		}
+	}
+
+	.sidebarGooglemap__button {
+		@include flex;
+		position: absolute;
+		top: 6rem;
+		left: 100%;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem 0.8rem;
+		line-height: 1;
+		background-color: $navy;
+		border-radius: 0 0.8rem 0.8rem 0;
+
+		&:hover {
+			opacity: 1;
+		}
+
+		@media #{$tab} {
+			top: auto;
+			bottom: 100%;
+			left: 1rem;
+			padding: 0.8rem 2rem;
+			border-radius: 0.8rem 0.8rem 0 0;
+		}
+
+		.sidebarGooglemap__buttonArrow {
+			color: $white_fff;
+			font-size: 1.2rem;
+
+			@media #{$tab} {
+				transform: rotate(-90deg);
+			}
+		}
+
+		&.-closed {
+			.sidebarGooglemap__buttonArrow {
+				transform: rotate(-180deg);
+
+				@media #{$tab} {
+					transform: rotate(90deg);
+				}
+			}
+		}
+	}
+
+	.sidebarGooglemap {
+		height: 100vh;
+		max-height: 100vh;
+		overflow-y: scroll;
+		background-color: $white_fff;
+		box-shadow: 0.4rem 0 0.8rem rgba($black_000, 0.3);
+
+		@media #{$tab} {
+			height: $sidebar_item_height_sp;
+			max-height: $sidebar_item_height_sp;
+		}
+
+		.sidebarGooglemap__item {
+			@include flex;
+			position: relative;
+			flex-direction: column;
+			gap: 0.8rem;
+			padding: 1.6rem;
+			transition: 0.3s;
+
+			&:not(:last-child) {
+				&::after {
+					position: absolute;
+					top: 100%;
+					left: 50%;
+					display: inline-block;
+					width: calc(100% - 3.2rem);
+					height: 0.1rem;
+					content: '';
+					background-color: $lightgray;
+					transform: translate(-50%, 0);
+				}
+			}
+
+			@media #{$tab} {
+				flex-direction: row;
+				justify-content: center;
+				gap: 1.2rem;
+			}
+
+			///____________________________
+			// モディファイア
+			//____________________________
+			&.-active {
+				background-color: rgba($yellow, 0.2);
+			}
+		}
+
+		.sidebarGooglemap__mapButton {
+			position: absolute;
+			right: 1.6rem;
+			bottom: 1.6rem;
+			width: 2.4rem;
+
+			& > * {
+				pointer-events: none;
+			}
+		}
+
+		.sidebarGooglemap__figure {
+			.suumotable__swiperWrap {
+				$swiper_width_sp: 12rem;
+
+				@media #{$tab} {
+					max-width: $swiper_width_sp;
+				}
+
+				.suumotable__swiperFigure {
+					@media #{$tab} {
+						width: calc(#{$swiper_width_sp} - 2rem);
+						height: calc(#{$swiper_width_sp} - 2rem);
+					}
+				}
+			}
+		}
+
+		.sidebarGooglemap__desc {
+			padding-right: 3.2rem;
+
+			@media #{$tab} {
+				padding-right: 0;
+				padding-bottom: 3.2rem;
+			}
+		}
+
+		.sidebarGooglemap__table {
+			tr {
+				td ,
+				th {
+					font-size: 1.2rem;
+
+					@media #{$tab} {
+						font-size: 1rem;
+					}
+				}
+
+				th {
+					padding-right: 0.8rem;
+					font-weight: 500;
+				}
+			}
+		}
+	}
+}
+
+//____________________________
+// google mapのピンのコンテンツ
+//____________________________
+.pinContents {
+	table {
+		margin-bottom: 0.8rem;
+
+		tr {
+			td ,
+			th {
+				padding: 0.4rem;
+				vertical-align: middle;
+			}
+		}
+	}
+
+	.pinContent__mapUrl {
+		font-weight: 600;
+		text-decoration: underline;
+	}
+}

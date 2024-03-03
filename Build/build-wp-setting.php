@@ -77,8 +77,8 @@ function vanilla_load_css() {
   /* css読み込み
   /* /Assets/css ディレクトリより下のcssを全て読み込む
   /*------------------------------------------------*/
-	$css_file_path = get_template_directory_uri() . '/Assets/Css/style.css';
-	wp_enqueue_style('style.css', $css_file_path, [], '1.0.3');
+	wp_enqueue_style('style.css', get_template_directory_uri() . '/Assets/Css/style.css', [], '1.0.3');
+	wp_enqueue_style('reset.css', get_template_directory_uri() . '/Assets/Css/reset.css', [], '1.0.3');
 }
 add_action('wp_enqueue_scripts', 'vanilla_load_css');
 

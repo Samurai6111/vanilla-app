@@ -1,0 +1,260 @@
+$primary-color: #333333;
+$highlight-color: #ffffff;
+
+@mixin tsukimi {
+	font-family: 'Tsukimi Rounded', sans-serif;
+}
+
+#pageRoulette {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	min-height: 100vh;
+	padding: 8rem 2rem;
+
+	* {
+		@include tsukimi;
+	}
+
+	#roulette-container {
+		position: relative;
+		width: 480px;
+		height: 480px;
+		margin: auto;
+		border-radius: 50%;
+	}
+
+	#roulette {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		margin-bottom: 8rem;
+		border-radius: 50%;
+		transition: transform 4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+
+		&::before ,
+		&::after {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			display: inline-block;
+			width: 100%;
+			height: 2px;
+			content: '';
+			background-color: $primary-color;
+			transform: translate(-50%,-50%);
+		}
+
+		&::after {
+			transform: translate(-50%,-50%) rotate(90deg);
+		}
+	}
+
+	.sector {
+		position: absolute;
+		width: 50%;
+		height: 50%;
+		line-height: 140px;
+		text-align: center;
+		border: 2px solid $primary-color;
+
+		// .sectorText {
+		// 	position: absolute;
+		// }
+
+		.sectorText {
+			align-items: center;
+			justify-content: center;
+			display: flex;
+			width: 100%;
+			height: 100%;
+			font-size: 3.2rem;
+		}
+
+		&:nth-of-type(1) {
+			top: 0;
+			right: 50%;
+			border-right: none;
+			border-bottom: none;
+			border-radius: 100% 0 0 0;
+
+			.sectorText {
+				transform: translate(10%, 10%) rotate(45deg);
+			}
+		}
+
+		&:nth-of-type(2) {
+			top: 0;
+			left: 50%;
+			border-bottom: none;
+			border-left: none;
+			border-radius: 0 100% 0 0;
+
+			.sectorText {
+				transform: translate(-10%, 10%) rotate(-45deg);
+			}
+		}
+
+		&:nth-of-type(3) {
+			right: 50%;
+			bottom: 0;
+			border-top: none;
+			border-right: none;
+			border-radius: 0  0 0 100%;
+
+			.sectorText {
+				transform: translate(10%, -10%) rotate(-45deg);
+			}
+		}
+
+		&:nth-of-type(4) {
+			bottom: 0;
+			left: 50%;
+			border-top: none;
+			border-left: none;
+			border-radius: 0 0 100% 0;
+
+			.sectorText {
+				transform: translate(-10%, -10%) rotate(45deg);
+			}
+		}
+
+		//____________________________
+		// モディファイア
+		//____________________________
+		&.champion {
+			z-index: 100;
+			color: black; // 文字色は黒にする
+			background-color: gold; // 優勝者に金色の背景
+			transform-origin: right top;
+			animation: pulse 1s infinite;
+		}
+
+		@keyframes pulse {
+			0% {
+				background-color: gold;
+				transform: scale(1.1);
+				opacity: 1;
+			}
+
+			50% {
+				background-color: darkgoldenrod; // アニメーション中に色を変更
+				transform: scale(1.2);
+				opacity: 1;
+			}
+
+			100% {
+				background-color: gold;
+				transform: scale(1.1);
+				opacity: 1;
+			}
+		}
+
+		&.loser {
+			color: #ffffff;
+			background-color: #12639f;
+			// color: #333333; // 文字色は濃い灰色にする
+			transform-origin: left bottom;
+			animation: slump 1s ease-in-out forwards; // 一度だけ実行して終了の位置に留まる
+		}
+
+		@keyframes slump {
+			0% {
+				transform: scale(1);
+			}
+
+			100% {
+				transform: scale(0.8);
+			}
+		}
+	}
+
+	.member {
+		position: absolute;
+		width: 100%;
+		max-width: 200px;
+		font-size: 2.4rem;
+
+		&:nth-of-type(1) {
+			right: 90%;
+			bottom: 90%;
+		}
+
+		&:nth-of-type(2) {
+			bottom: 90%;
+			left: 90%;
+			border-radius: 0 100% 0 0;
+		}
+
+		&:nth-of-type(3) {
+			top: 90%;
+			right: 90%;
+			max-width: 400px;
+			border-radius: 0  0 0 100%;
+		}
+
+		&:nth-of-type(4) {
+			top: 90%;
+			left: 90%;
+			border-radius: 0 0 100% 0;
+		}
+
+		img {
+		}
+	}
+
+	#spin {
+		align-items: center;
+		justify-content: center;
+		display: flex;
+		padding: 10px 20px;
+		padding: 0.2rem 1.2rem;
+		margin: 8rem auto;
+		color: $highlight-color;
+		font-size: 6rem;
+		white-space: nowrap;
+		background-color: $primary-color;
+		border: none;
+		cursor: pointer;
+
+		span {
+			padding: 0.2rem 8rem;
+		}
+	}
+
+	// 既存のSCSSに続けて
+	.modal {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		display: none; // デフォルトでは非表示
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(0,0,0); // 背景色
+		background-color: rgba(0,0,0,0.4); // 背景色の透明度
+	}
+
+	.modal-content {
+		width: 80%;
+		padding: 20px;
+		margin: 15% auto;
+		background-color: #fefefe;
+		border: 1px solid #888888;
+	}
+
+	.close {
+		float: right;
+		color: #aaaaaa;
+		font-size: 28px;
+		font-weight: bold;
+	}
+
+	.close:hover ,
+	.close:focus {
+		color: black;
+		text-decoration: none;
+		cursor: pointer;
+	}
+}

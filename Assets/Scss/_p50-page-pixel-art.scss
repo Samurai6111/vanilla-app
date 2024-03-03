@@ -1,0 +1,75 @@
+@charset 'UTF-8';
+
+.pagePixelart {
+	.pagePixelart__buttonWrap {
+		@include flex;
+		gap: 2.4rem;
+		justify-content: center;
+		margin-top: 2.4rem;
+	}
+
+	.pixelart__currentDate {
+		height: 2em;
+	}
+
+	.pagePixelart__textarea {
+		width: 100%;
+		color: $commit4;
+		border: none;
+	}
+
+	.buttonType1 {
+		&.-save-command ,
+		&.-reset-command {
+			max-width: 10rem;
+		}
+
+		&.-save-command {
+			background-color: $github_bg;
+			border-color: $github_bg;
+		}
+
+		&.-show-command {
+			background-color: $commit4;
+			border-color: $commit4;
+		}
+	}
+
+	.pagePixelart__textAreaWrap {
+		position: relative;
+		background-color: $github_bg;
+	}
+
+	.pagePixelart__textAreaFigure {
+		@include flex;
+		position: absolute;
+		top: 0.8rem;
+		right: 0.8rem;
+		justify-content: flex-end;
+
+		&::after {
+			position: absolute;
+			right: -0.8rem;
+			bottom: calc(100% + 0.8rem);
+			display: none;
+			padding: 0.8rem;
+			color: $commit4;
+			content: 'Copied!';
+			font-size: 1.2rem;
+			line-height: 1;
+			background-color: $github_bg;
+			border: 0.1rem;
+		}
+
+		&.-copied {
+			&::after {
+				display: inline-block;
+			}
+		}
+	}
+
+	#pagePixelart__textAreaCopy {
+		width: 2.4rem;
+		cursor: pointer;
+	}
+}

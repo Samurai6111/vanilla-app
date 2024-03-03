@@ -68,7 +68,7 @@
 		// ---------- モーダルコンテンツ ----------
 		.modal__targetContent {
 			display: none;
-			width: min(48rem, 90vw);
+			width: unquote('min(48rem, 90vw)');
 			padding: 1.6rem;
 			margin: 0 auto;
 			background-color: $white_fff;
